@@ -1,0 +1,8 @@
+<ModuleDefinition
+	ModuleId="ClientServer"
+	VersionId="1"
+	Description="Default module for the game."
+	CreateFunction="create"
+	DestroyFunction="destroy"
+	Group="Game">
+</ModuleDefinition>

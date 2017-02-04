@@ -1,0 +1,4 @@
+
+datablock ParticleData(newParticle : DefaultParticle)
+{
+};

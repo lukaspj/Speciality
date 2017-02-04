@@ -1,0 +1,29 @@
+# CMake generation dependency list for this directory.
+C:/Speciale/Game/Torque3D/Tools/CMake/CMakeLists.txt
+C:/Speciale/Game/Torque3D/Tools/CMake/basics.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/torque3d.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/libvorbis.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/libogg.cmake
+C:/Program Files/CMake/share/cmake-3.6/Modules/CheckIncludeFiles.cmake
+C:/Speciale/Game/Torque3D/Engine/lib/libogg/include/ogg/config_types.h.in
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/libtheora.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/modules/module_bullet.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/modules/module_hydra.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/modules/module_navigation.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/recast.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/modules/module_oculusVR.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/modules/module_openvr.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/modules/module_testing.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/torqueConfig.h.in
+C:/Speciale/Game/Torque3D/Templates/Full/game/main.cs.in
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/lmng.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/lpng.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/lungif.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/ljpeg.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/zlib.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/tinyxml.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/opcode.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/squish.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/collada.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/pcre.cmake
+C:/Speciale/Game/Torque3D/Tools/CMake/libraries/convexDecomp.cmake

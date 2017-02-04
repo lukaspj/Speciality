@@ -802,7 +802,7 @@ bool SimObject::isMethod( const char* methodName )
    if( !methodName || !methodName[0] )
       return false;
 
-   if (CInterface::GetCInterface().isMethod(mNameSpace->getName(), methodName))
+   if (CInterface::GetCInterface().isMethod(getName() == NULL ? (mNameSpace == NULL ? NULL : mNameSpace->getName()) : getName(), methodName))
       return true;
 
    StringTableEntry stname = StringTable->insert( methodName );
@@ -2122,7 +2122,7 @@ bool SimObject::setProtectedName(void *obj, const char *index, const char *data)
 {   
    SimObject *object = static_cast<SimObject*>(obj);
    
-   if ( object->isProperlyAdded() )
+   if ( object->isProperlyAdded() || true )
       object->assignName( data );   
 
    // always return false because we assign the name here

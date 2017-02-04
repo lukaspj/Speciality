@@ -57,7 +57,7 @@ const char* CInterface::CallFunction(const char* nameSpace, const char* name, co
 
 const char* CInterface::CallMethod(SimObject* obj, const char* name, const char **argv, int argc, bool *res)
 {
-   return GetCInterface()._CallMethod(obj->getClassName(), obj->getId(), name, argv, argc, res);
+   return GetCInterface()._CallMethod(obj->getClassName(), obj->getClassNamespace(), obj->getId(), name, argv, argc, res);
 }
 
 void CInterface::CallMain(bool *res)
@@ -82,10 +82,10 @@ const char* CInterface::_CallFunction(const char* nameSpace, const char* name, c
    return NULL;
 }
 
-const char* CInterface::_CallMethod(const char* className, U32 object, const char* name, const char **argv, int argc, bool *res)
+const char* CInterface::_CallMethod(const char* className, const char* classNamespace, U32 object, const char* name, const char **argv, int argc, bool *res)
 {
    if (mMethodCallback)
-      return mMethodCallback(className, object, name, argv, argc, res);
+      return mMethodCallback(className, classNamespace, object, name, argv, argc, res);
 
    *res = false;
    return NULL;

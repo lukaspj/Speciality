@@ -67,13 +67,13 @@ class CInterface {
    typedef bool(*IsMethodCallback)(const char* className, const char* methodName);
    typedef void(*CallMainCallback)();
    typedef const char* (*CallFunctionCallback)(const char* nameSpace, const char* name, const char **argv, int argc, bool *result);
-   typedef const char* (*CallMethodCallback)(const char* className, U32 object, const char* name, const char **argv, int argc, bool *result);
+   typedef const char* (*CallMethodCallback)(const char* className, const char* classNamespace, U32 object, const char* name, const char **argv, int argc, bool *result);
    IsMethodCallback mIsMethodCallback;
    CallFunctionCallback mFunctionCallback;
    CallMethodCallback mMethodCallback;
    CallMainCallback mMainCallback;
    const char* _CallFunction(const char* nameSpace, const char* name, const char **argv, int argc, bool *result);
-   const char* _CallMethod(const char* className, U32 object, const char* name, const char **argv, int argc, bool *res);
+   const char* _CallMethod(const char* className, const char* classNamespace, U32 object, const char* name, const char **argv, int argc, bool *res);
    void _CallMain(bool *res);
    bool _isMethod(const char* className, const char* methodName);
 public:

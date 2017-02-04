@@ -1,0 +1,1836 @@
+The system is: Windows - 10.0.14393 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+0
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:40.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\3.6.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdC.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdC.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue CMakeCCompilerId.c
+  CMakeCCompilerId.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
+  CompilerIdC.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\3.6.1\CompilerIdC\.\CompilerIdC.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_C_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdC.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\3.6.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.74
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+
+The C compiler identification is MSVC, found in "C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/3.6.1/CompilerIdC/CompilerIdC.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+0
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:42.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\3.6.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdCXX.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdCXX.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue CMakeCXXCompilerId.cpp
+  CMakeCXXCompilerId.cpp
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
+  CompilerIdCXX.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\3.6.1\CompilerIdCXX\.\CompilerIdCXX.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_CXX_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdCXX.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\3.6.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.65
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+
+The CXX compiler identification is MSVC, found in "C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/3.6.1/CompilerIdCXX/CompilerIdCXX.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_60bf4.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:43.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_60bf4.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_60bf4.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_60bf4.dir\Debug\cmTC_60bf4.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_60bf4.dir\Debug\cmTC_60bf4.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_60bf4.dir\Debug\\" /Fd"cmTC_60bf4.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\testCCompiler.c"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_60bf4.dir\Debug\\" /Fd"cmTC_60bf4.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\testCCompiler.c"
+  
+  testCCompiler.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_60bf4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_60bf4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_60bf4.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_60bf4.dir\Debug\testCCompiler.obj
+  cmTC_60bf4.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_60bf4.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_60bf4.dir\Debug\cmTC_60bf4.tlog\unsuccessfulbuild".
+  Touching "cmTC_60bf4.dir\Debug\cmTC_60bf4.tlog\cmTC_60bf4.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_60bf4.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.90
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8a88e.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:44.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8a88e.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_8a88e.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_8a88e.dir\Debug\cmTC_8a88e.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_8a88e.dir\Debug\cmTC_8a88e.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_8a88e.dir\Debug\\" /Fd"cmTC_8a88e.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCCompilerABI.c"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_8a88e.dir\Debug\\" /Fd"cmTC_8a88e.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCCompilerABI.c"
+  
+  CMakeCCompilerABI.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_8a88e.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_8a88e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_8a88e.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8a88e.dir\Debug\CMakeCCompilerABI.obj
+  cmTC_8a88e.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_8a88e.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_8a88e.dir\Debug\cmTC_8a88e.tlog\unsuccessfulbuild".
+  Touching "cmTC_8a88e.dir\Debug\cmTC_8a88e.tlog\cmTC_8a88e.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8a88e.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_b21df.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:45.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b21df.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_b21df.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_b21df.dir\Debug\cmTC_b21df.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_b21df.dir\Debug\cmTC_b21df.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_b21df.dir\Debug\\" /Fd"cmTC_b21df.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_b21df.dir\Debug\\" /Fd"cmTC_b21df.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  
+  testCXXCompiler.cxx
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_b21df.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_b21df.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_b21df.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_b21df.dir\Debug\testCXXCompiler.obj
+  cmTC_b21df.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_b21df.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_b21df.dir\Debug\cmTC_b21df.tlog\unsuccessfulbuild".
+  Touching "cmTC_b21df.dir\Debug\cmTC_b21df.tlog\cmTC_b21df.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b21df.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.59
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_2c995.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:46.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_2c995.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_2c995.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_2c995.dir\Debug\cmTC_2c995.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_2c995.dir\Debug\cmTC_2c995.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_2c995.dir\Debug\\" /Fd"cmTC_2c995.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_2c995.dir\Debug\\" /Fd"cmTC_2c995.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"
+  
+  CMakeCXXCompilerABI.cpp
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_2c995.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_2c995.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_2c995.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_2c995.dir\Debug\CMakeCXXCompilerABI.obj
+  cmTC_2c995.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_2c995.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_2c995.dir\Debug\cmTC_2c995.tlog\unsuccessfulbuild".
+  Touching "cmTC_2c995.dir\Debug\cmTC_2c995.tlog\cmTC_2c995.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_2c995.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+
+
+
+Detecting CXX [] compiler features compiled with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_e44a7.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:47.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e44a7.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_e44a7.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_e44a7.dir\Debug\cmTC_e44a7.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_e44a7.dir\Debug\cmTC_e44a7.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_e44a7.dir\Debug\\" /Fd"cmTC_e44a7.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\feature_tests.cxx"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_e44a7.dir\Debug\\" /Fd"cmTC_e44a7.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\feature_tests.cxx"
+  
+  feature_tests.cxx
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_e44a7.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_e44a7.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_e44a7.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_e44a7.dir\Debug\feature_tests.obj
+  cmTC_e44a7.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_e44a7.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_e44a7.dir\Debug\cmTC_e44a7.tlog\unsuccessfulbuild".
+  Touching "cmTC_e44a7.dir\Debug\cmTC_e44a7.tlog\cmTC_e44a7.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e44a7.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_73710.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:48.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_73710.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_73710.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_73710.dir\Debug\cmTC_73710.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_73710.dir\Debug\cmTC_73710.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_73710.dir\Debug\\" /Fd"cmTC_73710.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_73710.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_73710.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_73710.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_73710.dir\Debug\CheckIncludeFile.obj
+  cmTC_73710.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_73710.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_73710.dir\Debug\cmTC_73710.tlog\unsuccessfulbuild".
+  Touching "cmTC_73710.dir\Debug\cmTC_73710.tlog\cmTC_73710.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_73710.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.61
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_e35f7.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:49.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e35f7.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_e35f7.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_e35f7.dir\Debug\cmTC_e35f7.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_e35f7.dir\Debug\cmTC_e35f7.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_e35f7.dir\Debug\\" /Fd"cmTC_e35f7.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_e35f7.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_e35f7.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_e35f7.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_e35f7.dir\Debug\CheckIncludeFile.obj
+  cmTC_e35f7.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_e35f7.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_e35f7.dir\Debug\cmTC_e35f7.tlog\unsuccessfulbuild".
+  Touching "cmTC_e35f7.dir\Debug\cmTC_e35f7.tlog\cmTC_e35f7.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e35f7.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_f555b.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:49.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_f555b.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_f555b.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_f555b.dir\Debug\cmTC_f555b.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_f555b.dir\Debug\cmTC_f555b.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_f555b.dir\Debug\\" /Fd"cmTC_f555b.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_f555b.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_f555b.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_f555b.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_f555b.dir\Debug\CheckIncludeFile.obj
+  cmTC_f555b.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_f555b.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_f555b.dir\Debug\cmTC_f555b.tlog\unsuccessfulbuild".
+  Touching "cmTC_f555b.dir\Debug\cmTC_f555b.tlog\cmTC_f555b.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_f555b.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.65
+
+
+Determining size of long passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_5ef3e.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:50.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5ef3e.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_5ef3e.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_5ef3e.dir\Debug\cmTC_5ef3e.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_5ef3e.dir\Debug\cmTC_5ef3e.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_5ef3e.dir\Debug\\" /Fd"cmTC_5ef3e.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c"
+  SIZEOF_LONG.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_5ef3e.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_5ef3e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_5ef3e.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_5ef3e.dir\Debug\SIZEOF_LONG.obj
+  cmTC_5ef3e.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_5ef3e.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_5ef3e.dir\Debug\cmTC_5ef3e.tlog\unsuccessfulbuild".
+  Touching "cmTC_5ef3e.dir\Debug\cmTC_5ef3e.tlog\cmTC_5ef3e.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5ef3e.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+
+Determining size of long long passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_5c894.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:51.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5c894.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_5c894.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_5c894.dir\Debug\cmTC_5c894.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_5c894.dir\Debug\cmTC_5c894.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_5c894.dir\Debug\\" /Fd"cmTC_5c894.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c"
+  SIZEOF_LONG_LONG.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_5c894.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_5c894.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_5c894.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_5c894.dir\Debug\SIZEOF_LONG_LONG.obj
+  cmTC_5c894.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_5c894.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_5c894.dir\Debug\cmTC_5c894.tlog\unsuccessfulbuild".
+  Touching "cmTC_5c894.dir\Debug\cmTC_5c894.tlog\cmTC_5c894.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5c894.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.69
+
+
+Performing C SOURCE FILE Test HAVE_INLINE succeeded with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_25dcd.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:55.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_25dcd.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_25dcd.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_25dcd.dir\Debug\cmTC_25dcd.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_25dcd.dir\Debug\cmTC_25dcd.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D HAVE_INLINE /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_25dcd.dir\Debug\\" /Fd"cmTC_25dcd.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\src.c"
+  src.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_25dcd.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_25dcd.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_25dcd.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_25dcd.dir\Debug\src.obj
+  cmTC_25dcd.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_25dcd.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_25dcd.dir\Debug\cmTC_25dcd.tlog\unsuccessfulbuild".
+  Touching "cmTC_25dcd.dir\Debug\cmTC_25dcd.tlog\cmTC_25dcd.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_25dcd.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.61
+
+Source file was:
+inline void foo(void) { }
+                             int main() {return 0;}
+Performing C SOURCE FILE Test HAVE_STRUCT_TIMESPEC succeeded with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_d2934.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:56.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_d2934.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_d2934.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_d2934.dir\Debug\cmTC_d2934.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_d2934.dir\Debug\cmTC_d2934.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D HAVE_STRUCT_TIMESPEC /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_d2934.dir\Debug\\" /Fd"cmTC_d2934.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\src.c"
+  src.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_d2934.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_d2934.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_d2934.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_d2934.dir\Debug\src.obj
+  cmTC_d2934.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_d2934.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_d2934.dir\Debug\cmTC_d2934.tlog\unsuccessfulbuild".
+  Touching "cmTC_d2934.dir\Debug\cmTC_d2934.tlog\cmTC_d2934.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_d2934.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.64
+
+Source file was:
+
+#include <time.h>
+
+int main()
+{
+   (void)sizeof(((struct timespec *)0)->tv_sec);
+   return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_C99_BOOL succeeded with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_5383c.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:41:58.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5383c.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_5383c.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_5383c.dir\Debug\cmTC_5383c.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_5383c.dir\Debug\cmTC_5383c.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D HAVE_C99_BOOL /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_5383c.dir\Debug\\" /Fd"cmTC_5383c.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\src.c"
+  src.c
+C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\src.c(1): warning C4100: 'argv': unreferenced formal parameter [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5383c.vcxproj]
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_5383c.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_5383c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_5383c.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_5383c.dir\Debug\src.obj
+  cmTC_5383c.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_5383c.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_5383c.dir\Debug\cmTC_5383c.tlog\unsuccessfulbuild".
+  Touching "cmTC_5383c.dir\Debug\cmTC_5383c.tlog\cmTC_5383c.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5383c.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5383c.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\src.c(1): warning C4100: 'argv': unreferenced formal parameter [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_5383c.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.64
+
+Source file was:
+int main(int argc, char *argv[])
+ {
+     volatile _Bool ret;
+     ret = (argc > 1) ? 1 : 0;
+     return ret ? -1 : 0;
+ }
+Determining if the include file stdbool.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_a1e4e.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:01.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_a1e4e.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_a1e4e.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_a1e4e.dir\Debug\cmTC_a1e4e.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_a1e4e.dir\Debug\cmTC_a1e4e.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_a1e4e.dir\Debug\\" /Fd"cmTC_a1e4e.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_a1e4e.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_a1e4e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_a1e4e.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_a1e4e.dir\Debug\CheckIncludeFile.obj
+  cmTC_a1e4e.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_a1e4e.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_a1e4e.dir\Debug\cmTC_a1e4e.tlog\unsuccessfulbuild".
+  Touching "cmTC_a1e4e.dir\Debug\cmTC_a1e4e.tlog\cmTC_a1e4e.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_a1e4e.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+
+Determining if the include file malloc.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_0d86e.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:02.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_0d86e.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_0d86e.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_0d86e.dir\Debug\cmTC_0d86e.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_0d86e.dir\Debug\cmTC_0d86e.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_0d86e.dir\Debug\\" /Fd"cmTC_0d86e.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_0d86e.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_0d86e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_0d86e.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_0d86e.dir\Debug\CheckIncludeFile.obj
+  cmTC_0d86e.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_0d86e.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_0d86e.dir\Debug\cmTC_0d86e.tlog\unsuccessfulbuild".
+  Touching "cmTC_0d86e.dir\Debug\cmTC_0d86e.tlog\cmTC_0d86e.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_0d86e.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+
+Determining if the include file intrin.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_fefcf.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:05.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_fefcf.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_fefcf.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_fefcf.dir\Debug\cmTC_fefcf.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_fefcf.dir\Debug\cmTC_fefcf.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_fefcf.dir\Debug\\" /Fd"cmTC_fefcf.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_fefcf.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_fefcf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_fefcf.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_fefcf.dir\Debug\CheckIncludeFile.obj
+  cmTC_fefcf.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_fefcf.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_fefcf.dir\Debug\cmTC_fefcf.tlog\unsuccessfulbuild".
+  Touching "cmTC_fefcf.dir\Debug\cmTC_fefcf.tlog\cmTC_fefcf.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_fefcf.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.69
+
+
+Determining if the include file fenv.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_995d8.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:06.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_995d8.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_995d8.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_995d8.dir\Debug\cmTC_995d8.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_995d8.dir\Debug\cmTC_995d8.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_995d8.dir\Debug\\" /Fd"cmTC_995d8.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_995d8.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_995d8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_995d8.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_995d8.dir\Debug\CheckIncludeFile.obj
+  cmTC_995d8.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_995d8.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_995d8.dir\Debug\cmTC_995d8.tlog\unsuccessfulbuild".
+  Touching "cmTC_995d8.dir\Debug\cmTC_995d8.tlog\cmTC_995d8.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_995d8.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+
+Determining if the include file float.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_3572d.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:07.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3572d.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_3572d.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_3572d.dir\Debug\cmTC_3572d.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_3572d.dir\Debug\cmTC_3572d.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_3572d.dir\Debug\\" /Fd"cmTC_3572d.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_3572d.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_3572d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_3572d.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_3572d.dir\Debug\CheckIncludeFile.obj
+  cmTC_3572d.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_3572d.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_3572d.dir\Debug\cmTC_3572d.tlog\unsuccessfulbuild".
+  Touching "cmTC_3572d.dir\Debug\cmTC_3572d.tlog\cmTC_3572d.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3572d.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.66
+
+
+Determining if the include file guiddef.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_51034.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:08.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_51034.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_51034.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_51034.dir\Debug\cmTC_51034.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_51034.dir\Debug\cmTC_51034.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_51034.dir\Debug\\" /Fd"cmTC_51034.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_51034.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_51034.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_51034.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_51034.dir\Debug\CheckIncludeFile.obj
+  cmTC_51034.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_51034.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_51034.dir\Debug\cmTC_51034.tlog\unsuccessfulbuild".
+  Touching "cmTC_51034.dir\Debug\cmTC_51034.tlog\cmTC_51034.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_51034.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.67
+
+
+Performing C SOURCE FILE Test HAVE_CPUID_INTRINSIC succeeded with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_71ac9.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:11.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_71ac9.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_71ac9.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_71ac9.dir\Debug\cmTC_71ac9.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_71ac9.dir\Debug\cmTC_71ac9.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D HAVE_CPUID_INTRINSIC /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_71ac9.dir\Debug\\" /Fd"cmTC_71ac9.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\src.c"
+  src.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_71ac9.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_71ac9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_71ac9.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_71ac9.dir\Debug\src.obj
+  cmTC_71ac9.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_71ac9.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_71ac9.dir\Debug\cmTC_71ac9.tlog\unsuccessfulbuild".
+  Touching "cmTC_71ac9.dir\Debug\cmTC_71ac9.tlog\cmTC_71ac9.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_71ac9.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.65
+
+Source file was:
+#include <intrin.h>
+        int main()
+        {
+            int regs[4];
+            __cpuid(regs, 0);
+            return regs[0];
+        }
+Determining if the _aligned_malloc exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_14812.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:13.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_14812.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_14812.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_14812.dir\Debug\cmTC_14812.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_14812.dir\Debug\cmTC_14812.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_14812.dir\Debug\\" /Fd"cmTC_14812.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'void *(__cdecl *)(std::size_t,std::size_t)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_14812.vcxproj]
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_14812.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_14812.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_14812.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_14812.dir\Debug\CheckSymbolExists.obj
+  cmTC_14812.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_14812.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_14812.dir\Debug\cmTC_14812.tlog\unsuccessfulbuild".
+  Touching "cmTC_14812.dir\Debug\cmTC_14812.tlog\cmTC_14812.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_14812.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_14812.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'void *(__cdecl *)(std::size_t,std::size_t)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_14812.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <malloc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _aligned_malloc
+  return ((int*)(&_aligned_malloc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the lrintf exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8d5ac.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:13.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8d5ac.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_8d5ac.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_8d5ac.dir\Debug\cmTC_8d5ac.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_8d5ac.dir\Debug\cmTC_8d5ac.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_8d5ac.dir\Debug\\" /Fd"cmTC_8d5ac.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'long (__cdecl *)(float)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8d5ac.vcxproj]
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_8d5ac.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_8d5ac.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_8d5ac.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8d5ac.dir\Debug\CheckSymbolExists.obj
+  cmTC_8d5ac.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_8d5ac.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_8d5ac.dir\Debug\cmTC_8d5ac.tlog\unsuccessfulbuild".
+  Touching "cmTC_8d5ac.dir\Debug\cmTC_8d5ac.tlog\cmTC_8d5ac.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8d5ac.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8d5ac.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'long (__cdecl *)(float)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8d5ac.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef lrintf
+  return ((int*)(&lrintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the modff exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_b505e.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:14.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b505e.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_b505e.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_b505e.dir\Debug\cmTC_b505e.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_b505e.dir\Debug\cmTC_b505e.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_b505e.dir\Debug\\" /Fd"cmTC_b505e.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'float (__cdecl *)(float,float *)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b505e.vcxproj]
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_b505e.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_b505e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_b505e.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_b505e.dir\Debug\CheckSymbolExists.obj
+  cmTC_b505e.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_b505e.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_b505e.dir\Debug\cmTC_b505e.tlog\unsuccessfulbuild".
+  Touching "cmTC_b505e.dir\Debug\cmTC_b505e.tlog\cmTC_b505e.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b505e.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b505e.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'float (__cdecl *)(float,float *)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b505e.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.65
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef modff
+  return ((int*)(&modff))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the alloca exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_52f64.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:15.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_52f64.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_52f64.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_52f64.dir\Debug\cmTC_52f64.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_52f64.dir\Debug\cmTC_52f64.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_52f64.dir\Debug\\" /Fd"cmTC_52f64.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_52f64.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_52f64.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_52f64.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_52f64.dir\Debug\CheckSymbolExists.obj
+  cmTC_52f64.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_52f64.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_52f64.dir\Debug\cmTC_52f64.tlog\unsuccessfulbuild".
+  Touching "cmTC_52f64.dir\Debug\cmTC_52f64.tlog\cmTC_52f64.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_52f64.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.68
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <malloc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef alloca
+  return ((int*)(&alloca))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the _controlfp exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_3440c.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:16.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3440c.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_3440c.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_3440c.dir\Debug\cmTC_3440c.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_3440c.dir\Debug\cmTC_3440c.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_3440c.dir\Debug\\" /Fd"cmTC_3440c.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'unsigned int (__cdecl *)(unsigned int,unsigned int)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3440c.vcxproj]
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_3440c.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_3440c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_3440c.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_3440c.dir\Debug\CheckSymbolExists.obj
+  cmTC_3440c.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_3440c.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_3440c.dir\Debug\cmTC_3440c.tlog\unsuccessfulbuild".
+  Touching "cmTC_3440c.dir\Debug\cmTC_3440c.tlog\cmTC_3440c.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3440c.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3440c.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'unsigned int (__cdecl *)(unsigned int,unsigned int)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3440c.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.65
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _controlfp
+  return ((int*)(&_controlfp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the __control87_2 exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_e6f19.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:17.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e6f19.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_e6f19.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_e6f19.dir\Debug\cmTC_e6f19.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_e6f19.dir\Debug\cmTC_e6f19.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_e6f19.dir\Debug\\" /Fd"cmTC_e6f19.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'int (__cdecl *)(unsigned int,unsigned int,unsigned int *,unsigned int *)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e6f19.vcxproj]
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_e6f19.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_e6f19.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_e6f19.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_e6f19.dir\Debug\CheckSymbolExists.obj
+  cmTC_e6f19.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_e6f19.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_e6f19.dir\Debug\cmTC_e6f19.tlog\unsuccessfulbuild".
+  Touching "cmTC_e6f19.dir\Debug\cmTC_e6f19.tlog\cmTC_e6f19.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e6f19.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e6f19.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'int (__cdecl *)(unsigned int,unsigned int,unsigned int *,unsigned int *)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_e6f19.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __control87_2
+  return ((int*)(&__control87_2))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function stat exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_3ece4.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:17.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3ece4.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_3ece4.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_3ece4.dir\Debug\cmTC_3ece4.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_3ece4.dir\Debug\cmTC_3ece4.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D CHECK_FUNCTION_EXISTS=stat /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_3ece4.dir\Debug\\" /Fd"cmTC_3ece4.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CheckFunctionExists.c"
+  CheckFunctionExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_3ece4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_3ece4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_3ece4.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_3ece4.dir\Debug\CheckFunctionExists.obj
+  cmTC_3ece4.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_3ece4.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_3ece4.dir\Debug\cmTC_3ece4.tlog\unsuccessfulbuild".
+  Touching "cmTC_3ece4.dir\Debug\cmTC_3ece4.tlog\cmTC_3ece4.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_3ece4.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.58
+
+
+Determining if the function strtof exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_dbc21.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:18.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_dbc21.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_dbc21.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_dbc21.dir\Debug\cmTC_dbc21.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_dbc21.dir\Debug\cmTC_dbc21.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D CHECK_FUNCTION_EXISTS=strtof /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_dbc21.dir\Debug\\" /Fd"cmTC_dbc21.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CheckFunctionExists.c"
+  CheckFunctionExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_dbc21.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_dbc21.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_dbc21.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_dbc21.dir\Debug\CheckFunctionExists.obj
+  cmTC_dbc21.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_dbc21.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_dbc21.dir\Debug\cmTC_dbc21.tlog\unsuccessfulbuild".
+  Touching "cmTC_dbc21.dir\Debug\cmTC_dbc21.tlog\cmTC_dbc21.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_dbc21.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+
+Determining if the function _stricmp exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_76bef.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:20.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_76bef.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_76bef.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_76bef.dir\Debug\cmTC_76bef.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_76bef.dir\Debug\cmTC_76bef.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D CHECK_FUNCTION_EXISTS=_stricmp /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_76bef.dir\Debug\\" /Fd"cmTC_76bef.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CheckFunctionExists.c"
+  CheckFunctionExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_76bef.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_76bef.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_76bef.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_76bef.dir\Debug\CheckFunctionExists.obj
+  cmTC_76bef.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_76bef.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_76bef.dir\Debug\cmTC_76bef.tlog\unsuccessfulbuild".
+  Touching "cmTC_76bef.dir\Debug\cmTC_76bef.tlog\cmTC_76bef.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_76bef.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+
+Determining if the function _strnicmp exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_25956.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:21.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_25956.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_25956.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_25956.dir\Debug\cmTC_25956.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_25956.dir\Debug\cmTC_25956.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D CHECK_FUNCTION_EXISTS=_strnicmp /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_25956.dir\Debug\\" /Fd"cmTC_25956.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CheckFunctionExists.c"
+  CheckFunctionExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_25956.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_25956.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_25956.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_25956.dir\Debug\CheckFunctionExists.obj
+  cmTC_25956.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_25956.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_25956.dir\Debug\cmTC_25956.tlog\unsuccessfulbuild".
+  Touching "cmTC_25956.dir\Debug\cmTC_25956.tlog\cmTC_25956.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_25956.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.61
+
+
+Determining if the strnlen exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_fff35.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:22.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_fff35.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_fff35.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_fff35.dir\Debug\cmTC_fff35.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_fff35.dir\Debug\cmTC_fff35.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_fff35.dir\Debug\\" /Fd"cmTC_fff35.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'size_t (__cdecl *)(const char *,std::size_t)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_fff35.vcxproj]
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_fff35.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_fff35.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_fff35.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_fff35.dir\Debug\CheckSymbolExists.obj
+  cmTC_fff35.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_fff35.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_fff35.dir\Debug\cmTC_fff35.tlog\unsuccessfulbuild".
+  Touching "cmTC_fff35.dir\Debug\cmTC_fff35.tlog\cmTC_fff35.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_fff35.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_fff35.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'size_t (__cdecl *)(const char *,std::size_t)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_fff35.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.61
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strnlen
+  return ((int*)(&strnlen))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the snprintf exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_d0533.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:23.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_d0533.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_d0533.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_d0533.dir\Debug\cmTC_d0533.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_d0533.dir\Debug\cmTC_d0533.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_d0533.dir\Debug\\" /Fd"cmTC_d0533.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'int (__cdecl *)(char *const ,const std::size_t,const char *const ,...)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_d0533.vcxproj]
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_d0533.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_d0533.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_d0533.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_d0533.dir\Debug\CheckSymbolExists.obj
+  cmTC_d0533.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_d0533.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_d0533.dir\Debug\cmTC_d0533.tlog\unsuccessfulbuild".
+  Touching "cmTC_d0533.dir\Debug\cmTC_d0533.tlog\cmTC_d0533.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_d0533.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_d0533.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): warning C4054: 'type cast': from function pointer 'int (__cdecl *)(char *const ,const std::size_t,const char *const ,...)' to data pointer 'int *' [C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_d0533.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.66
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef snprintf
+  return ((int*)(&snprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the isfinite exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_b41e6.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:24.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b41e6.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_b41e6.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_b41e6.dir\Debug\cmTC_b41e6.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_b41e6.dir\Debug\cmTC_b41e6.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_b41e6.dir\Debug\\" /Fd"cmTC_b41e6.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_b41e6.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_b41e6.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_b41e6.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_b41e6.dir\Debug\CheckSymbolExists.obj
+  cmTC_b41e6.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_b41e6.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_b41e6.dir\Debug\cmTC_b41e6.tlog\unsuccessfulbuild".
+  Touching "cmTC_b41e6.dir\Debug\cmTC_b41e6.tlog\cmTC_b41e6.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_b41e6.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.61
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isfinite
+  return ((int*)(&isfinite))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the isnan exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_566bf.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:24.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_566bf.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_566bf.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_566bf.dir\Debug\cmTC_566bf.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_566bf.dir\Debug\cmTC_566bf.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_566bf.dir\Debug\\" /Fd"cmTC_566bf.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_566bf.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_566bf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_566bf.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_566bf.dir\Debug\CheckSymbolExists.obj
+  cmTC_566bf.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_566bf.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_566bf.dir\Debug\cmTC_566bf.tlog\unsuccessfulbuild".
+  Touching "cmTC_566bf.dir\Debug\cmTC_566bf.tlog\cmTC_566bf.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_566bf.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.61
+
+File C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isnan
+  return ((int*)(&isnan))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the include file windows.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_28eaa.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:25.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_28eaa.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_28eaa.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_28eaa.dir\Debug\cmTC_28eaa.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_28eaa.dir\Debug\cmTC_28eaa.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _WIN32_WINNT=0x0502 /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_28eaa.dir\Debug\\" /Fd"cmTC_28eaa.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_28eaa.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_28eaa.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_28eaa.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_28eaa.dir\Debug\CheckIncludeFile.obj
+  cmTC_28eaa.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_28eaa.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_28eaa.dir\Debug\cmTC_28eaa.tlog\unsuccessfulbuild".
+  Touching "cmTC_28eaa.dir\Debug\cmTC_28eaa.tlog\cmTC_28eaa.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_28eaa.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.53
+
+
+Determining if the include file xmmintrin.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_7136f.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:27.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_7136f.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_7136f.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_7136f.dir\Debug\cmTC_7136f.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_7136f.dir\Debug\cmTC_7136f.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_7136f.dir\Debug\\" /Fd"cmTC_7136f.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_7136f.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_7136f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_7136f.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_7136f.dir\Debug\CheckIncludeFile.obj
+  cmTC_7136f.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_7136f.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_7136f.dir\Debug\cmTC_7136f.tlog\unsuccessfulbuild".
+  Touching "cmTC_7136f.dir\Debug\cmTC_7136f.tlog\cmTC_7136f.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_7136f.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+
+Determining if the include file emmintrin.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_15026.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:28.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_15026.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_15026.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_15026.dir\Debug\cmTC_15026.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_15026.dir\Debug\cmTC_15026.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_15026.dir\Debug\\" /Fd"cmTC_15026.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_15026.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_15026.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_15026.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_15026.dir\Debug\CheckIncludeFile.obj
+  cmTC_15026.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_15026.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_15026.dir\Debug\cmTC_15026.tlog\unsuccessfulbuild".
+  Touching "cmTC_15026.dir\Debug\cmTC_15026.tlog\cmTC_15026.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_15026.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.69
+
+
+Determining if the include file pmmintrin.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_09df3.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:28.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_09df3.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_09df3.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_09df3.dir\Debug\cmTC_09df3.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_09df3.dir\Debug\cmTC_09df3.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_09df3.dir\Debug\\" /Fd"cmTC_09df3.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_09df3.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_09df3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_09df3.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_09df3.dir\Debug\CheckIncludeFile.obj
+  cmTC_09df3.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_09df3.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_09df3.dir\Debug\cmTC_09df3.tlog\unsuccessfulbuild".
+  Touching "cmTC_09df3.dir\Debug\cmTC_09df3.tlog\cmTC_09df3.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_09df3.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+
+Determining if the include file smmintrin.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_31bc4.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:29.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_31bc4.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_31bc4.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_31bc4.dir\Debug\cmTC_31bc4.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_31bc4.dir\Debug\cmTC_31bc4.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_31bc4.dir\Debug\\" /Fd"cmTC_31bc4.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_31bc4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_31bc4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_31bc4.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_31bc4.dir\Debug\CheckIncludeFile.obj
+  cmTC_31bc4.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_31bc4.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_31bc4.dir\Debug\cmTC_31bc4.tlog\unsuccessfulbuild".
+  Touching "cmTC_31bc4.dir\Debug\cmTC_31bc4.tlog\cmTC_31bc4.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_31bc4.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.65
+
+
+Determining if files windows.h;mmsystem.h exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_73b5c.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:31.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_73b5c.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_73b5c.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_73b5c.dir\Debug\cmTC_73b5c.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_73b5c.dir\Debug\cmTC_73b5c.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_73b5c.dir\Debug\\" /Fd"cmTC_73b5c.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFiles.c"
+  CheckIncludeFiles.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_73b5c.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_73b5c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_73b5c.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_73b5c.dir\Debug\CheckIncludeFiles.obj
+  cmTC_73b5c.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_73b5c.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_73b5c.dir\Debug\cmTC_73b5c.tlog\unsuccessfulbuild".
+  Touching "cmTC_73b5c.dir\Debug\cmTC_73b5c.tlog\cmTC_73b5c.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_73b5c.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.91
+
+
+Determining if the include file mmdeviceapi.h exists passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_14d69.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:33.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_14d69.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_14d69.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_14d69.dir\Debug\cmTC_14d69.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_14d69.dir\Debug\cmTC_14d69.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _LARGEFILE_SOURCE /D _LARGE_FILES /D restrict= /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_14d69.dir\Debug\\" /Fd"cmTC_14d69.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_14d69.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_14d69.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_14d69.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_14d69.dir\Debug\CheckIncludeFile.obj
+  cmTC_14d69.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_14d69.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_14d69.dir\Debug\cmTC_14d69.tlog\unsuccessfulbuild".
+  Touching "cmTC_14d69.dir\Debug\cmTC_14d69.tlog\cmTC_14d69.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_14d69.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.97
+
+
+Determining if files inttypes.h exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8ece8.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:35.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8ece8.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_8ece8.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_8ece8.dir\Debug\cmTC_8ece8.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_8ece8.dir\Debug\cmTC_8ece8.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_8ece8.dir\Debug\\" /Fd"cmTC_8ece8.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFiles.c"
+  CheckIncludeFiles.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_8ece8.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_8ece8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_8ece8.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8ece8.dir\Debug\CheckIncludeFiles.obj
+  cmTC_8ece8.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_8ece8.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_8ece8.dir\Debug\cmTC_8ece8.tlog\unsuccessfulbuild".
+  Touching "cmTC_8ece8.dir\Debug\cmTC_8ece8.tlog\cmTC_8ece8.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_8ece8.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+
+Determining if files stdint.h exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_889be.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:35.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_889be.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_889be.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_889be.dir\Debug\cmTC_889be.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_889be.dir\Debug\cmTC_889be.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_889be.dir\Debug\\" /Fd"cmTC_889be.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFiles.c"
+  CheckIncludeFiles.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_889be.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_889be.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_889be.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_889be.dir\Debug\CheckIncludeFiles.obj
+  cmTC_889be.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_889be.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_889be.dir\Debug\cmTC_889be.tlog\unsuccessfulbuild".
+  Touching "cmTC_889be.dir\Debug\cmTC_889be.tlog\cmTC_889be.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_889be.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.62
+
+
+Determining if files sys/types.h exist passed with the following output:
+Change Dir: C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_64996.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 01-02-2017 09:42:36.
+Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_64996.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_64996.dir\Debug\".
+  Creating directory "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_64996.dir\Debug\cmTC_64996.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_64996.dir\Debug\cmTC_64996.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /MP /Od /Ob0 /Oi /Ot /Oy /GT /D WIN32 /D _WINDOWS /D WIN32 /D _WINDOWS /D UNICODE /D _UNICODE /D _CRT_SECURE_NO_WARNINGS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /GF /Gm- /EHsc /RTC1 /MDd /GS- /Gy- /Qpar- /arch:SSE2 /fp:fast /fp:except- /Zc:wchar_t- /Zc:forScope /Zc:inline /GR /Fo"cmTC_64996.dir\Debug\\" /Fd"cmTC_64996.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\CheckIncludeFiles.c"
+  CheckIncludeFiles.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_64996.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_64996.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Speciale/Game/Torque3D/My Projects/Empty/buildFiles/CMake/CMakeFiles/CMakeTmp/Debug/cmTC_64996.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_64996.dir\Debug\CheckIncludeFiles.obj
+  cmTC_64996.vcxproj -> C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\Debug\cmTC_64996.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_64996.dir\Debug\cmTC_64996.tlog\unsuccessfulbuild".
+  Touching "cmTC_64996.dir\Debug\cmTC_64996.tlog\cmTC_64996.lastbuildstate".
+Done Building Project "C:\Speciale\Game\Torque3D\My Projects\Empty\buildFiles\CMake\CMakeFiles\CMakeTmp\cmTC_64996.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.61
+
+
