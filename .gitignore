@@ -183,6 +183,4 @@ Project Manager.exe
 projects.xml
 Qt*.dll
 
-My Projects/buildFiles/CMake*
-My Projects/buildFiles/CMake/
-My Projects/buildFiles/CMake/*
+My Projects/Empty/buildFiles/CMake
