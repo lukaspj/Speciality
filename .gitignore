@@ -184,3 +184,14 @@ projects.xml
 Qt*.dll
 
 My Projects/Empty/buildFiles/CMake
+/.idea
+/My Projects/Empty/game/art
+/My Projects/Empty/game/core
+/My Projects/Empty/game/data
+/My Projects/Empty/game/levels
+/My Projects/Empty/game/scripts
+/My Projects/Empty/game/shaders
+/My Projects/Empty/game/tools/gui
+/My Projects/Empty/game/tools/materialEditor/gui
+/My Projects/Empty/game/tools/worldEditor/scripts
+/My Projects/Empty/game/web

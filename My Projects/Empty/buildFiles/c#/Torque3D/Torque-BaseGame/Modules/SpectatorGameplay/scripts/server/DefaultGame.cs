@@ -162,8 +162,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Set the control object to the default camera
          if (!Global.isObject(client.getFieldValue("camera")))
          {
-       int camObjId = Global.spawnObject("Camera", "Observer");
-       client.setFieldValue("camera", camObjId.ToString());
+            Observer obs = new Observer(true);
+            int id = obs.getId();
+            //int camObjId = Global.spawnObject("Camera", "Observer");
+            //client.setFieldValue("camera", camObjId.ToString());
+            client.setFieldValue("camera", id.ToString());
          }
 
          string camera = client.getFieldValue("camera");

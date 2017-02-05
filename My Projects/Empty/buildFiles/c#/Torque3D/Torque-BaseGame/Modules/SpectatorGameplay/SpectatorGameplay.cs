@@ -23,7 +23,7 @@ namespace Game.Modules.ClientServer
       public void create()
       {
          //server scripts
-         Global.exec("data/SpectatorGameplay/scripts/server/camera.cs");
+         //Global.exec("data/SpectatorGameplay/scripts/server/camera.cs");
          //Global.exec("data/SpectatorGameplay/scripts/server/DefaultGame.cs");
          Global.exec("data/SpectatorGameplay/scripts/server/VolumetricFog.cs");
 
