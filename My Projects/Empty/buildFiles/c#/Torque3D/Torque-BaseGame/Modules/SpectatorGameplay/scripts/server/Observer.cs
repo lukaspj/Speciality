@@ -16,6 +16,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       
       public Observer(bool pRegister) : base(pRegister)
       {
+         //Default Speed 40.0 * 0.75 = 30.0
+         setSpeedMultiplier(0.75f);
       }
 
       [ConsoleFunction]
@@ -25,13 +27,19 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          GameBaseData data = Sim.FindObjectById<GameBaseData>((uint)obj.getDataBlock());
          if (!state)
             return;
+
+         // Default player triggers: 0=fire 1=altFire 2=jump
+
          GameConnectionToClient client = Sim.FindObjectById<GameConnectionToClient>((uint)obj.getControllingClient());
-         
          switch (data.getFieldValue("mode")){
             case "Observer":
+               // Do something interesting.
                break;
             case "Corpse":
+               // Viewing dead corpse, so we probably want to respawn.
                client.call("spawnPlayer");
+               // Set the camera back into observer mode, since in
+               // debug mode we like to switch to it.
                setMode(obj, "Observer");
                break;
          }
@@ -44,9 +52,12 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          switch (mode)
          {
             case "Observer":
+               // Let the player fly around
                obj.setFlyMode();
                break;
             case "Corpse":
+               // Lock the camera down in orbit around the corpse,
+               // which should be arg1
                TransformF trans = args[1].getTransform();
                obj.setOrbitMode(args[1], trans, 0.5f, 4.5f, 4.5f);
                break;
@@ -62,6 +73,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
          GameBaseData data = Sim.FindObjectById<GameBaseData>((uint)obj.getDataBlock());
          Camera cam = obj.As<Camera>();
+         // Default start mode
          setMode(cam, data.getFieldValue("mode"));
 
          return true;

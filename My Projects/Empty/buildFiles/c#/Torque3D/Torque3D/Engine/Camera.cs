@@ -9,7 +9,8 @@ namespace Torque3D
 {
 	public unsafe class Camera : ShapeBase
 	{
-		public Camera(bool pRegister = false)
+      #region Constructors
+      public Camera(bool pRegister = false)
 			: base(pRegister)
 		{
 		}
@@ -41,7 +42,9 @@ namespace Torque3D
 		{
 		}
 
-		protected override void CreateSimObjectPtr()
+      #endregion
+
+      protected override void CreateSimObjectPtr()
 		{
 			ObjectPtr = InternalUnsafeMethods.Camera_create();
 		}
