@@ -428,6 +428,7 @@
     <Compile Include="Engine\UndoManager.cs" />
     <Compile Include="Engine\UndoScriptAction.cs" />
     <Compile Include="Engine\Util\EngineExtensions.cs" />
+    <Compile Include="Engine\Util\Enums\ObjectTypes.cs" />
     <Compile Include="Engine\Util\Text.cs" />
     <Compile Include="Engine\Vehicle.cs" />
     <Compile Include="Engine\VehicleBlocker.cs" />

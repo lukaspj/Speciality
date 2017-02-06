@@ -68,6 +68,11 @@ namespace Torque3D.Util
             z = Z
          };
       }
+
+      public String ToString()
+      {
+         return X + " " + Y + " " + Z;
+      }
    }
 
    public class VectorF : Point3F

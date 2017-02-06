@@ -44,13 +44,6 @@ namespace Game.Core
       // The following functions override the GuiCanvas defaults that involve changing the content
       // of the Canvas. Basically, all we are doing is adding a call to checkCursor to each one.
       //---------------------------------------------------------------------------------------------
-      public void setContent(string ctrl)
-      {
-         base.setContent(Sim.FindObjectByName<GuiControl>(ctrl));
-         //Parent::setContent(%this, %ctrl);
-         checkCursor();
-      }
-
       public void setContent(GuiControl ctrl)
       {
          base.setContent(ctrl);

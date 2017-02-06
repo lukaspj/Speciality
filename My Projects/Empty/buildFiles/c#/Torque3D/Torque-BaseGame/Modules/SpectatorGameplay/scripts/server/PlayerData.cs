@@ -34,7 +34,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          }
       }
 
-      public void onCollision(tPlayer obj, SceneObject col)
+      public void onCollision(tPlayer obj, SceneObject col, VectorF vec, float len)
       {
          if(!Global.isObject(col.Name) || obj.getState() == "Dead")
          {
@@ -47,6 +47,10 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             obj.call("pickup", col.Name);
             return;
          }
+         if(col.getClassName() == "StaticShape") {
+            obj.setVelocity(new Point3F(0, 0, 0));
+         }
+         
       }
 
    }
