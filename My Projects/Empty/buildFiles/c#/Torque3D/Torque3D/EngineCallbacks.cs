@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Torque3D.Engine;
 
 namespace Torque3D
 {
@@ -58,31 +60,7 @@ namespace Torque3D
          found = true;
          MethodInfo methodInfo = FunctionDictionary[pFunctionName];
 
-         ParameterInfo[] parameterInfos = methodInfo.GetParameters();
-         object[] _args = new object[parameterInfos.Length];
-         for (int i = 0; i < _args.Length; i++)
-         {
-            if (parameterInfos[i].GetCustomAttributes(typeof(ParamArrayAttribute), false).Length > 0)
-            {
-               string[] parms = new string[Math.Max(args.Length - i, 0)];
-               for (int j = 0; j < args.Length - i; j++)
-               {
-                  parms[j] = (string)args[i + j];
-               }
-               _args[i] = parms;
-               break;
-            }
-            if (i < args.Length) _args[i] = args[i];
-            else if (parameterInfos[i].HasDefaultValue) _args[i] = parameterInfos[i].DefaultValue;
-            else throw new ArgumentException("Not enough arguments provided");
-         }
-
-         if (methodInfo.ReturnType == typeof(bool))
-            return (bool)methodInfo.Invoke(null, _args) ? "1" : "0";
-         if (methodInfo.ReturnType == typeof(string))
-            return (string)methodInfo.Invoke(null, _args);
-         methodInfo.Invoke(null, _args);
-         return null;
+         return InvokeMethod(methodInfo, null, args);
       }
 
       public static string CallScriptMethod(string className, string classNamespace, SimObject objectWrapper, string methodName, object[] args, out bool found)
@@ -123,49 +101,74 @@ namespace Torque3D
          MethodInfo callbackMethod = namespaceClass.GetMethod(methodName);
          if (callbackMethod != null)
          {
-            foreach (ParameterInfo parameterInfo in callbackMethod.GetParameters())
-            {
-               if ((parameterInfo.ParameterType.IsArray && parameterInfo.ParameterType.GetElementType() != typeof(string)) || parameterInfo.ParameterType != typeof(string))
-               {
-                  found = false;
-                  return null;
-               }
-            }
-            found = true;
-
-            ParameterInfo[] parameterInfos = callbackMethod.GetParameters();
-            object[] _args = new object[parameterInfos.Length];
-            for (int i = 0; i < _args.Length; i++)
-            {
-               if (parameterInfos[i].GetCustomAttributes(typeof(ParamArrayAttribute), false).Length > 0)
-               {
-                  string[] parms = new string[Math.Max(args.Length - i, 0)];
-                  for (int j = 0; j < args.Length - i; j++)
-                  {
-                     parms[j] = (string)args[i + j];
-                  }
-                  _args[i] = parms;
-                  break;
-               }
-               if (i < args.Length) _args[i] = args[i];
-               else if (parameterInfos[i].HasDefaultValue) _args[i] = parameterInfos[i].DefaultValue;
-               else throw new ArgumentException("Not enough arguments provided");
-            }
-
-            object simObj = null;
+            SimObject simObj = null;
             if (!callbackMethod.IsStatic)
-               simObj = SimDictionary.CreateInstance(namespaceClass, objectWrapper);
-            if (callbackMethod.ReturnType == typeof(bool))
-               return (bool)callbackMethod.Invoke(simObj, _args) ? "1" : "0";
-            if (callbackMethod.ReturnType == typeof(string))
-               return (string)callbackMethod.Invoke(simObj, _args);
-            else if(callbackMethod.ReturnType != typeof(void))
-               return callbackMethod.Invoke(simObj, _args).ToString();
-            callbackMethod.Invoke(simObj, _args);
-            return null;
+               simObj = (SimObject)SimDictionary.CreateInstance(namespaceClass, objectWrapper);
+            string res = InvokeMethod(callbackMethod, simObj, args);
+            found = res != null;
+            return res;
          }
          found = false;
          return null;
+      }
+
+      private static string InvokeMethod(MethodInfo callbackMethod, SimObject obj, object[] args)
+      {
+         if (obj != null 
+            && !callbackMethod.DeclaringType.GetCustomAttributes<ConsoleClassAttribute>().Any())
+            return null;
+
+         foreach (ParameterInfo parameterInfo in callbackMethod.GetParameters())
+         {
+            break;
+            if ((parameterInfo.ParameterType.IsArray && parameterInfo.ParameterType.GetElementType() != typeof(string)) || parameterInfo.ParameterType != typeof(string))
+            {
+               return null;
+            }
+         }
+
+         ParameterInfo[] parameterInfos = callbackMethod.GetParameters();
+         object[] _args = new object[parameterInfos.Length];
+         for (int i = 0; i < _args.Length; i++)
+         {
+            if (parameterInfos[i].GetCustomAttributes(typeof(ParamArrayAttribute), false).Length > 0)
+            {
+               string[] parms = new string[Math.Max(args.Length - i, 0)];
+               for (int j = 0; j < args.Length - i; j++)
+               {
+                  parms[j] = (string)args[i + j];
+               }
+               _args[i] = parms;
+               break;
+            }
+            if (i < args.Length)
+            {
+               _args[i] = ConvertArgFromString(parameterInfos[i].ParameterType, (string)args[i]);
+            }
+            else if (parameterInfos[i].HasDefaultValue) _args[i] = parameterInfos[i].DefaultValue;
+            else throw new ArgumentException("Not enough arguments provided");
+         }
+         
+         if (callbackMethod.ReturnType == typeof(bool))
+            return (bool)callbackMethod.Invoke(obj, _args) ? "1" : "0";
+         if (callbackMethod.ReturnType == typeof(string))
+            return (string)callbackMethod.Invoke(obj, _args);
+         else if (callbackMethod.ReturnType != typeof(void))
+            return callbackMethod.Invoke(obj, _args).ToString();
+         callbackMethod.Invoke(obj, _args);
+         return null;
+
+      }
+
+      private static object ConvertArgFromString(Type objType, string obj)
+      {
+         if (typeof(SimObject).IsAssignableFrom(objType))
+         {
+            return Sim.FindObject<SimObject>(obj).As(objType);
+         }
+         if (objType == typeof(int)) return int.Parse(obj);
+
+         return obj;
       }
 
       public static bool IsMethod(string className, string methodName)

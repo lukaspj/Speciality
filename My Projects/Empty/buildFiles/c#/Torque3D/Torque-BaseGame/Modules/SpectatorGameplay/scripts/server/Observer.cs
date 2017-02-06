@@ -11,16 +11,8 @@ using Game.Modules.ClientServer.Server;
 namespace Game.Modules.SpectatorGameplay.scripts.server
 {
    [ConsoleClass]
-   class Observer : Camera
+   class Observer : CameraData
    {
-      
-      public Observer(bool pRegister) : base(pRegister)
-      {
-         //Default Speed 40.0 * 0.75 = 30.0
-         setSpeedMultiplier(0.75f);
-      }
-
-      [ConsoleFunction]
       public void onTrigger(Camera obj, int trigger, bool state)
       {
          // state = 0 means that a trigger key was released
@@ -46,7 +38,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       }
 
-      [ConsoleFunction]
       private void setMode(Camera obj, string mode, params GameBase[] args)
       {
          switch (mode)

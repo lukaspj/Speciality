@@ -55,8 +55,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             obj.call("pickup", col.Name);
             return;
          }
-
-         if(col.getType() == TypeMask)
       }
 
    }
