@@ -118,15 +118,6 @@ namespace Torque3D
             && !callbackMethod.DeclaringType.GetCustomAttributes<ConsoleClassAttribute>().Any())
             return null;
 
-         foreach (ParameterInfo parameterInfo in callbackMethod.GetParameters())
-         {
-            break;
-            if ((parameterInfo.ParameterType.IsArray && parameterInfo.ParameterType.GetElementType() != typeof(string)) || parameterInfo.ParameterType != typeof(string))
-            {
-               return null;
-            }
-         }
-
          ParameterInfo[] parameterInfos = callbackMethod.GetParameters();
          object[] _args = new object[parameterInfos.Length];
          for (int i = 0; i < _args.Length; i++)
@@ -167,6 +158,12 @@ namespace Torque3D
             return Sim.FindObject<SimObject>(obj).As(objType);
          }
          if (objType == typeof(int)) return int.Parse(obj);
+         if (objType == typeof(uint)) return uint.Parse(obj);
+         if (objType == typeof(float)) return float.Parse(obj);
+         if (objType == typeof(double)) return double.Parse(obj);
+
+         ConstructorInfo cinfo = objType.GetConstructor(new[] {typeof(string)});
+         if (cinfo != null) return cinfo.Invoke(new object[] {obj});
 
          return obj;
       }
