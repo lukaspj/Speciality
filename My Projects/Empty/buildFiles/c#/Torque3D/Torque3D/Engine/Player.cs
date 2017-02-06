@@ -47,7 +47,7 @@ namespace Torque3D
 		}
 
       #region UnsafeNativeMethods
-      
+
       new internal struct InternalUnsafeMethods
       {
       

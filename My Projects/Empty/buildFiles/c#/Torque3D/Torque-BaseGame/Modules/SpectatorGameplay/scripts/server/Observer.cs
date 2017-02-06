@@ -13,8 +13,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
    [ConsoleClass]
    class Observer : CameraData
    {
+<<<<<<< HEAD
 
       [ConsoleFunction]
+=======
+>>>>>>> 1fbf73ef9e5c3148334a6bbb1deba172735edd29
       public void onTrigger(Camera obj, int trigger, bool state)
       {
          // state = 0 means that a trigger key was released
@@ -40,7 +43,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       }
 
-      [ConsoleFunction]
       private void setMode(Camera obj, string mode, params GameBase[] args)
       {
          switch (mode)

@@ -57,7 +57,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       // Called for each client after it's finished downloading the mission and is
       // ready to start playing.
       //-----------------------------------------------------------------------------
-      public void onClientEnterGame(string client)
+      public void onClientEnterGame(GameConnectionToClient client)
       {
          // This function currently relies on some helper functions defined in
          // core/scripts/spawn.cs. For custom spawn behaviors one can either
@@ -74,7 +74,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          gClient.setControlObject(player);
 
          // Spawn a camera for this client using the found %spawnPoint
+<<<<<<< HEAD
          spawnCamera(cameraSpawnPoint, gClient);
+=======
+         spawnCamera(cameraSpawnPoint, client);
+>>>>>>> 1fbf73ef9e5c3148334a6bbb1deba172735edd29
       }
 
       //-----------------------------------------------------------------------------
@@ -165,29 +169,39 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public void spawnCamera(TransformF spawnPoint, GameConnectionToClient client)
       {
+         Camera camera = null;
          // Set the control object to the default camera
          if (!Global.isObject(client.getFieldValue("camera")))
          {
+<<<<<<< HEAD
            
             int camObjId = Global.spawnObject("Camera", "Observer");
             client.setFieldValue("camera", camObjId.ToString());
             //client.setFieldValue("camera", id.ToString());
+=======
+            camera = new Camera(true)
+            {
+               DataBlock = Sim.FindObject<Observer>("Observer")
+            };
+
+            client.setFieldValue("camera", camera.getId().ToString());
+>>>>>>> 1fbf73ef9e5c3148334a6bbb1deba172735edd29
          }
 
-         string camera = client.getFieldValue("camera");
+         if(camera == null)
+            camera = Sim.FindObject<Camera>(client.getFieldValue("camera"));
 
          // If we have a camera then set up some properties
-         if (Global.isObject(camera))
+         if (camera != null)
          {
-            Camera cameraObj = Sim.FindObject<Camera>(camera);
-            Sim.FindObject<SimSet>("MissionCleanup").add(Sim.FindObject<Camera>(camera));
-            cameraObj.scopeToClient(client);
+            Sim.FindObject<SimSet>("MissionCleanup").add(camera);
+            camera.scopeToClient(client);
 
-            client.setControlObject(cameraObj);
+            client.setControlObject(camera);
 
             if (spawnPoint != null)
             {
-               cameraObj.setTransform(spawnPoint);
+               camera.setTransform(spawnPoint);
             }
          }
       }

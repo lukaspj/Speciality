@@ -80,6 +80,10 @@ namespace Torque3D.Util
       {
       }
 
+      public VectorF(string data) : base(data)
+      {
+      }
+
       internal VectorF(InternalPoint3FStruct point3FStruct) : base(point3FStruct)
       {
       }

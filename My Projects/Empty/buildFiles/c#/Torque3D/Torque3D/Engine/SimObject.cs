@@ -66,6 +66,13 @@ namespace Torque3D
 			return Activator.CreateInstance(typeof(T), this) as T;
 		}
 
+      public SimObject As(Type t)
+		{
+         if (!typeof(SimObject).IsAssignableFrom(t)) return null;
+
+         return (SimObject)Activator.CreateInstance(t, this);
+		}
+
 		public bool IsDead()
 		{
 			return SimDictionary.IsDead(ObjectPtr);
@@ -1325,9 +1332,24 @@ namespace Torque3D
          	get { return getFieldValue("PersistentId"); }
          	set { setFieldValue("PersistentId", value); }
          }
-      
-      
+
+
       #endregion
 
-	}
+	   #region Implicits and operators
+
+	   public static bool operator ==(SimObject obj, string str)
+	   {
+	      if (str == null) return ReferenceEquals(obj, null);
+	      if (ReferenceEquals(obj, null)) return false;
+	      return obj.Name == str || obj.getId().ToString().Equals(str);
+	   }
+
+	   public static bool operator !=(SimObject obj, string str)
+	   {
+	      return !(obj == str);
+	   }
+
+	   #endregion
+   }
 }
