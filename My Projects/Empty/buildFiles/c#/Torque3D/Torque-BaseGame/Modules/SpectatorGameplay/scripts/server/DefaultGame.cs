@@ -63,12 +63,18 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // core/scripts/spawn.cs. For custom spawn behaviors one can either
          // override the properties on the SpawnSphere's or directly override the
          // functions themselves.
-
+         Player player = new Player(true)
+         {
+            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
+            Position = new Point3F(0,0,1)
+         };
          // Find a spawn point for the camera
          var cameraSpawnPoint = pickCameraSpawnPoint(Globals.GetString("Game::DefaultCameraSpawnGroups"));
+         GameConnectionToClient gClient = Sim.FindObject<GameConnectionToClient>(client);
+         gClient.setControlObject(player);
 
          // Spawn a camera for this client using the found %spawnPoint
-         spawnCamera(cameraSpawnPoint, Sim.FindObject<GameConnectionToClient>(client));
+         spawnCamera(cameraSpawnPoint, gClient);
       }
 
       //-----------------------------------------------------------------------------
@@ -162,11 +168,10 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Set the control object to the default camera
          if (!Global.isObject(client.getFieldValue("camera")))
          {
-            Observer obs = new Observer(true);
-            int id = obs.getId();
-            //int camObjId = Global.spawnObject("Camera", "Observer");
-            //client.setFieldValue("camera", camObjId.ToString());
-            client.setFieldValue("camera", id.ToString());
+           
+            int camObjId = Global.spawnObject("Camera", "Observer");
+            client.setFieldValue("camera", camObjId.ToString());
+            //client.setFieldValue("camera", id.ToString());
          }
 
          string camera = client.getFieldValue("camera");

@@ -26,6 +26,7 @@ namespace Game.Modules.ClientServer
          //Global.exec("data/SpectatorGameplay/scripts/server/camera.cs");
          //Global.exec("data/SpectatorGameplay/scripts/server/DefaultGame.cs");
          Global.exec("data/SpectatorGameplay/scripts/server/VolumetricFog.cs");
+         
 
          //add DBs
          if (Global.isObject("DatablockFilesList"))
@@ -43,6 +44,7 @@ namespace Game.Modules.ClientServer
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/markers.cs");
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/ribbons.cs");
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/sounds.cs");
+            DatablockFilesList.add("data/SpectatorGameplay/scripts/datablocks/player.cs");
          }
 
          if (Global.isObject("LevelFilesList"))
