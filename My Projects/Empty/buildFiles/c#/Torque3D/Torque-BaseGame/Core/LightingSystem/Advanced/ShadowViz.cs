@@ -56,7 +56,7 @@ namespace Game.Core.LightingSystem.Advanced
          if (AL_ShadowVizOverlayCtrl.isAwake())
          {
             Global.setShadowVizLight("0");
-            Canvas.GameCanvas.popDialog("AL_ShadowVizOverlayCtrl");
+            Canvas.GameCanvas.popDialog(AL_ShadowVizOverlayCtrl);
          }
          else
          {

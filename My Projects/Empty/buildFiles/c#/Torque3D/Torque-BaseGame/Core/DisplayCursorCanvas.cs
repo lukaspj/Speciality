@@ -58,20 +58,15 @@ namespace Game.Core
          checkCursor();
       }
 
-      public void pushDialog(string ctrl, string layer="0", string center="false")
-      {
-         pushDialog(ctrl, int.Parse(layer), bool.Parse(center));
-      }
-
       public void pushDialog(string ctrl, int layer=0, bool center=false)
       {
          base.pushDialog(ctrl, layer, center);
          checkCursor();
       }
 
-      public void popDialog(string ctrl)
+      public void popDialog(GuiControl ctrl = null)
       {
-         base.popDialog(Sim.FindObjectByName<GuiControl>(ctrl));
+         base.popDialog(ctrl);
          checkCursor();
       }
 

@@ -41,7 +41,8 @@ namespace Torque3D
 
          int id = obj.getId();
 
-         if (!ObjectDictionary.ContainsKey(id))
+         if (!ObjectDictionary.ContainsKey(id)
+            || ObjectDictionary[id].GetType().IsInstanceOfType(obj))
          {
             ObjectDictionary[id] = obj;
          }

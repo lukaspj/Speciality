@@ -23,11 +23,11 @@ namespace Game.Core.Console
             if (Core.Console.Console.ConsoleDlg.isAwake())
             {
                // Deactivate the console
-               Core.Canvas.GameCanvas.popDialog(Core.Console.Console.ConsoleDlg.Name);
+               Core.Canvas.GameCanvas.popDialog(Console.ConsoleDlg);
             }
             else
             {
-               Core.Canvas.GameCanvas.pushDialog(Core.Console.Console.ConsoleDlg.Name, 99);
+               Core.Canvas.GameCanvas.pushDialog(Console.ConsoleDlg.Name, 99);
             }
          }
       }

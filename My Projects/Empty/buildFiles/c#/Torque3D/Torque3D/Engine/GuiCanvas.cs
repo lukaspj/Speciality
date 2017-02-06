@@ -771,7 +771,7 @@ namespace Torque3D
       
          public virtual void popDialog(GuiControl gui = null)
          {
-            InternalUnsafeMethods.popDialog(ObjectPtr, gui.ObjectPtr);
+            InternalUnsafeMethods.popDialog(ObjectPtr, gui == null ? IntPtr.Zero : gui.ObjectPtr );
          }
       
          public virtual void popLayer(int layer = 0)
