@@ -12,7 +12,7 @@ using tPlayerData = Torque3D.PlayerData;
 
 namespace Game.Modules.SpectatorGameplay.scripts.server
 {
-
+   [ConsoleClass]
    class PlayerData : tPlayerData
    {
       private int corpseTimeoutValue = 40 * 100;
@@ -20,8 +20,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public void onAdd(tPlayer obj)
       {
-         
-
+         Console.WriteLine("Hello World");
       }
 
       public void onRemove(tPlayer obj)

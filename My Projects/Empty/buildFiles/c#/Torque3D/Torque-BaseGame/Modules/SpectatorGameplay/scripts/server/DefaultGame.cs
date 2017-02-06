@@ -2,6 +2,7 @@
 using Torque3D;
 using Torque3D.Engine;
 using Torque3D.Util;
+using PlayerData = Game.Modules.SpectatorGameplay.scripts.server.PlayerData;
 
 namespace Game.Modules.SpectatorGameplay.scripts.server
 {
@@ -63,28 +64,26 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // core/scripts/spawn.cs. For custom spawn behaviors one can either
          // override the properties on the SpawnSphere's or directly override the
          // functions themselves.
-         Player player = new Player(true)
+         Player player = new Player()
          {
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
             Position = new Point3F(0,0,1)
          };
+         player.registerObject();
          // Find a spawn point for the camera
          var cameraSpawnPoint = pickCameraSpawnPoint(Globals.GetString("Game::DefaultCameraSpawnGroups"));
-         GameConnectionToClient gClient = Sim.FindObject<GameConnectionToClient>(client);
-         gClient.setControlObject(player);
+
+         client.setControlObject(player);
 
          // Spawn a camera for this client using the found %spawnPoint
-<<<<<<< HEAD
-         spawnCamera(cameraSpawnPoint, gClient);
-=======
-         spawnCamera(cameraSpawnPoint, client);
->>>>>>> 1fbf73ef9e5c3148334a6bbb1deba172735edd29
+
+         //spawnCamera(cameraSpawnPoint, client);
       }
 
       //-----------------------------------------------------------------------------
       // Clean up the client's control objects
       //-----------------------------------------------------------------------------
-      public void onClientLeaveGame(string client)
+      public void onClientLeaveGame(GameConnectionToClient client)
       {
          // Cleanup the camera
          camera?.delete();
@@ -173,19 +172,17 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Set the control object to the default camera
          if (!Global.isObject(client.getFieldValue("camera")))
          {
-<<<<<<< HEAD
            
-            int camObjId = Global.spawnObject("Camera", "Observer");
-            client.setFieldValue("camera", camObjId.ToString());
             //client.setFieldValue("camera", id.ToString());
-=======
-            camera = new Camera(true)
+
+            camera = new Camera()
             {
                DataBlock = Sim.FindObject<Observer>("Observer")
             };
+            camera.registerObject();
 
             client.setFieldValue("camera", camera.getId().ToString());
->>>>>>> 1fbf73ef9e5c3148334a6bbb1deba172735edd29
+
          }
 
          if(camera == null)

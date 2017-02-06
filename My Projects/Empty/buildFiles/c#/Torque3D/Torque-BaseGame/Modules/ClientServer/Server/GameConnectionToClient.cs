@@ -260,7 +260,7 @@ namespace Game.Modules.ClientServer.Server
       {
          Torque3D.LevelInfo theLevelInfo = Sim.FindObject<Torque3D.LevelInfo>("TheLevelInfo");
          if (Globals.GetBool("missionRunning"))
-            theLevelInfo.call("onClientLeaveGame");
+            theLevelInfo.call("onClientLeaveGame", this.getId().ToString());
 
          Server.removeFromServerGuidList(Guid);
 
