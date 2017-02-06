@@ -87,8 +87,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       private Point3F PlayerSpawnPoint()
       {
          Random rand = new Random();
-         rand.Next(-(int)GameSizeX / 2, (int)GameSizeX / 2);
-         Point3F spawnPoint = new Point3F(rand.Next(-(int)(GameSizeX / 2), (int)(GameSizeX / 2)), rand.Next(-(int)(GameSizeY / 2), (int)(GameSizeY / 2)), 0);
+         //rand.Next(-(int)GameSizeX / 2, (int)GameSizeX / 2);
+         //Point3F spawnPoint = new Point3F(rand.Next(-(int)(GameSizeX / 2), (int)(GameSizeX / 2)), rand.Next(-(int)(GameSizeY / 2), (int)(GameSizeY / 2)), 0);
                   
          /*Global.initContainerRadiusSearch(spawnPoint, 1, (uint)ObjectTypes.StaticShapeObjectType);
          while(Global.containerSearchNext() != null)
@@ -97,7 +97,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             Global.initContainerRadiusSearch(spawnPoint, 1, (uint)ObjectTypes.StaticShapeObjectType);
          }*/
         
-         return spawnPoint;
+         return new Point3F(0,0,0);
       }
 
       private void createBoundingBox(float x, float y)
