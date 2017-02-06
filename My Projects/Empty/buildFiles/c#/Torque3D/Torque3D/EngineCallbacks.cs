@@ -161,6 +161,7 @@ namespace Torque3D
          if (objType == typeof(uint)) return uint.Parse(obj);
          if (objType == typeof(float)) return float.Parse(obj);
          if (objType == typeof(double)) return double.Parse(obj);
+         if (objType == typeof(bool)) return GenericMarshal.StringToBool(obj);
 
          ConstructorInfo cinfo = objType.GetConstructor(new[] {typeof(string)});
          if (cinfo != null) return cinfo.Invoke(new object[] {obj});
