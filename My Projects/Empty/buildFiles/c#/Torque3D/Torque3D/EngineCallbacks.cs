@@ -60,11 +60,13 @@ namespace Torque3D
          found = true;
          MethodInfo methodInfo = FunctionDictionary[pFunctionName];
 
-         return InvokeMethod(methodInfo, null, args);
+         return InvokeMethod(methodInfo, null, args, out found);
       }
 
       public static string CallScriptMethod(string className, string classNamespace, SimObject objectWrapper, string methodName, object[] args, out bool found)
       {
+         if (methodName.Equals("pushDialog"))
+            methodName = methodName;
          Type type;
          string objectName = objectWrapper.getName();
          if (objectName != null && ClassTypeDictionary.ContainsKey(objectName))
@@ -78,6 +80,10 @@ namespace Torque3D
          else if (ClassTypeDictionary.ContainsKey(className))
          {
             type = ClassTypeDictionary[className];
+         }
+         else if (SimDictionary.Find(objectWrapper.Name) != null)
+         {
+            type = SimDictionary.Find(objectWrapper.Name).GetType();
          }
          else if (SimDictionary.Find(objectWrapper.getId()) != null)
          {
@@ -104,19 +110,20 @@ namespace Torque3D
             SimObject simObj = null;
             if (!callbackMethod.IsStatic)
                simObj = (SimObject)SimDictionary.CreateInstance(namespaceClass, objectWrapper);
-            string res = InvokeMethod(callbackMethod, simObj, args);
-            found = res != null;
-            return res;
+            return InvokeMethod(callbackMethod, simObj, args, out found);
          }
          found = false;
          return null;
       }
 
-      private static string InvokeMethod(MethodInfo callbackMethod, SimObject obj, object[] args)
+      private static string InvokeMethod(MethodInfo callbackMethod, SimObject obj, object[] args, out bool found)
       {
-         if (obj != null 
-            && !callbackMethod.DeclaringType.GetCustomAttributes<ConsoleClassAttribute>().Any())
+         if (obj != null
+             && !callbackMethod.DeclaringType.GetCustomAttributes<ConsoleClassAttribute>().Any())
+         {
+            found = false;
             return null;
+         }
 
          ParameterInfo[] parameterInfos = callbackMethod.GetParameters();
          object[] _args = new object[parameterInfos.Length];
@@ -139,7 +146,9 @@ namespace Torque3D
             else if (parameterInfos[i].HasDefaultValue) _args[i] = parameterInfos[i].DefaultValue;
             else throw new ArgumentException("Not enough arguments provided");
          }
-         
+
+         found = true;
+
          if (callbackMethod.ReturnType == typeof(bool))
             return (bool)callbackMethod.Invoke(obj, _args) ? "1" : "0";
          if (callbackMethod.ReturnType == typeof(string))
