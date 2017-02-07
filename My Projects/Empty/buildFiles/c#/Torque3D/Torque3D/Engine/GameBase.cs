@@ -166,7 +166,7 @@ namespace Torque3D
          public GameBaseData DataBlock
          {
          	get { return Sim.FindObject<GameBaseData>(getFieldValue("DataBlock")); }
-         	set { setFieldValue("DataBlock", value.getName()); }
+         	set { setFieldValue("DataBlock", value.Name); }
          }
       
       

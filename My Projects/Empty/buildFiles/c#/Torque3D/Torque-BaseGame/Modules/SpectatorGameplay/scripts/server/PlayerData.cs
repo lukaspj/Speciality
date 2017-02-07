@@ -7,31 +7,23 @@ using Torque3D.Engine;
 using Torque3D;
 using Torque3D.Util;
 using Game.Modules.ClientServer.Server;
-
+using tPlayer = Torque3D.Player;
+using tPlayerData = Torque3D.PlayerData;
 
 namespace Game.Modules.SpectatorGameplay.scripts.server
 {
-   class GamePlayer : Player
+   [ConsoleClass]
+   class PlayerData : tPlayerData
    {
       private int corpseTimeoutValue = 40 * 100;
       
-      public GamePlayer(bool bRegister) : base(bRegister)
-      {
 
+      public void onAdd(tPlayer obj)
+      {
+         Console.WriteLine("Hello World");
       }
 
-      public void onAdd(Player obj)
-      {
-         // Vehicle timeout
-         obj.setFieldValue("mountVehicle", "true");
-
-         // Default dynamic armor stats
-         obj.setRechargeRate(float.Parse(obj.getFieldValue("rechargeRate")));
-         obj.setRepairRate(0);
-
-      }
-
-      public void onRemove(Player obj)
+      public void onRemove(tPlayer obj)
       {
          int clientid = obj.getControllingClient();
          GameConnectionToClient client = Sim.FindObjectById<GameConnectionToClient>((uint)clientid);
@@ -42,7 +34,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          }
       }
 
-      public void onCollision(Player obj, GameBase col)
+      public void onCollision(tPlayer obj, SceneObject col, VectorF vec, float len)
       {
          if(!Global.isObject(col.Name) || obj.getState() == "Dead")
          {
@@ -55,6 +47,10 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             obj.call("pickup", col.Name);
             return;
          }
+         if(col.getClassName() == "StaticShape") {
+            obj.setVelocity(new Point3F(0, 0, 0));
+         }
+         
       }
 
    }
