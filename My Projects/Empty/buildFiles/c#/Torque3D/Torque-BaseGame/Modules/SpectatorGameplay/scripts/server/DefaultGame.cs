@@ -165,10 +165,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Set the control object to the default camera
          if (!Global.isObject(client.getFieldValue("camera")))
          {
-            camera = new Camera(true)
+            camera = new Camera()
             {
                DataBlock = Sim.FindObject<Observer>("Observer")
             };
+            camera.registerObject();
 
             client.setFieldValue("camera", camera.getId().ToString());
          }

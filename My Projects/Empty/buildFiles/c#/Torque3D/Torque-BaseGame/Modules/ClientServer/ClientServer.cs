@@ -103,7 +103,7 @@ namespace Game.Modules.ClientServer
          // Show the loading screen immediately.
          if (Global.isObject("LoadingGui"))
          {
-            Core.Canvas.GameCanvas.setContent("LoadingGui");
+            Core.Canvas.GameCanvas.setContent(Sim.FindObject<GuiControl>("LoadingGui"));
             GuiProgressBitmapCtrl LoadingProgress = Sim.FindObject<GuiProgressBitmapCtrl>("LoadingProgress");
             GuiTextCtrl LoadingProgressTxt = Sim.FindObject<GuiTextCtrl>("LoadingProgressTxt");
             LoadingProgress.setValue("1");
@@ -123,7 +123,7 @@ namespace Game.Modules.ClientServer
          // rest of displayed info.
          if (Global.setServerInfo(serverIndex))
          {
-            Core.Canvas.GameCanvas.setContent("LoadingGui");
+            Core.Canvas.GameCanvas.setContent(Sim.FindObject<GuiControl>("LoadingGui"));
             LoadingProgress.setValue("1");
             LoadingProgressTxt.setValue("WAITING FOR SERVER");
             Core.Canvas.GameCanvas.repaint();
