@@ -103,7 +103,6 @@ namespace Game.Modules.ClientServer
          // Show the loading screen immediately.
          if (Global.isObject("LoadingGui"))
          {
-            
             Core.Canvas.GameCanvas.setContent(Sim.FindObject<GuiControl>("LoadingGui"));
             GuiProgressBitmapCtrl LoadingProgress = Sim.FindObject<GuiProgressBitmapCtrl>("LoadingProgress");
             GuiTextCtrl LoadingProgressTxt = Sim.FindObject<GuiTextCtrl>("LoadingProgressTxt");

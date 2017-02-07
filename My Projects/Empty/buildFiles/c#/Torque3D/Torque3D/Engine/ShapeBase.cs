@@ -1658,7 +1658,7 @@ namespace Torque3D
             return new VectorF(InternalUnsafeMethods.getVelocity(ObjectPtr));
          }
       
-         public virtual bool setVelocity(Point3F vel)
+         public virtual bool setVelocity(VectorF vel)
          {
             return InternalUnsafeMethods.setVelocity(ObjectPtr, vel.ToStruct());
          }

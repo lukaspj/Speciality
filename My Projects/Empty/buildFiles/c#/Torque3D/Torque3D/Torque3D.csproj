@@ -66,7 +66,10 @@
     <Compile Include="Engine\AssetTagsManifest.cs" />
     <Compile Include="Engine\BasicClouds.cs" />
     <Compile Include="Engine\Camera.cs" />
+    <Compile Include="Engine\FeatureVector.cs" />
     <Compile Include="Engine\CameraBookmark.cs" />
+    <Compile Include="Engine\SimplePlayer.cs" />
+    <Compile Include="Engine\SimplePlayerData.cs" />
     <Compile Include="Engine\CameraData.cs" />
     <Compile Include="Engine\CloudLayer.cs" />
     <Compile Include="Engine\ComponentAsset.cs" />
@@ -429,6 +432,7 @@
     <Compile Include="Engine\UndoScriptAction.cs" />
     <Compile Include="Engine\Util\EngineExtensions.cs" />
     <Compile Include="Engine\Util\Enums\ObjectTypes.cs" />
+    <Compile Include="Engine\Util\Enums\SimplePlayerActions.cs" />
     <Compile Include="Engine\Util\Text.cs" />
     <Compile Include="Engine\Vehicle.cs" />
     <Compile Include="Engine\VehicleBlocker.cs" />

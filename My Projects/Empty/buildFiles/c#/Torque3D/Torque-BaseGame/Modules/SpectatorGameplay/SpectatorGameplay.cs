@@ -45,6 +45,7 @@ namespace Game.Modules.ClientServer
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/markers.cs");
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/ribbons.cs");
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/sounds.cs");
+            DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/simplePlayer.cs");
             DatablockFilesList.add("data/SpectatorGameplay/scripts/datablocks/player.cs");
             DatablockFilesList.add("data/SpectatorGameplay/scripts/datablocks/obstacle.cs");
          }
