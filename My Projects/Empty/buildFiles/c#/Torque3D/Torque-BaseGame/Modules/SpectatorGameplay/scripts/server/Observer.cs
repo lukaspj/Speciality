@@ -44,7 +44,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          {
             case "Observer":
                // Let the player fly around
-               obj.setFlyMode();
+               obj.setFieldValue("cameraMode", "Overhead");
                break;
             case "Corpse":
                // Lock the camera down in orbit around the corpse,

@@ -80,6 +80,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             Position = bord.PickPlayerSpawn()
          };
          player.registerObject();
+         player.setSkinName("PlayerMaterial");
          client.setControlObject(player);
 
          // Spawn a camera for this client using the found %spawnPoint
