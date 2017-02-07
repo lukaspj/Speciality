@@ -1,5 +1,25 @@
+singleton Material(Red_PlayerMaterial) {
+   diffuseColor[0] = "Red";
+   mapTo = "red_PlayerTexture";
+};
+
+singleton Material(Blue_PlayerMaterial) {
+   diffuseColor[0] = "Blue";
+   mapTo = "blue_PlayerTexture";
+};
+
+singleton Material(DarkGreen_PlayerMaterial) {
+   diffuseColor[0] = "DarkGreen";
+   mapTo = "darkgreen_PlayerTexture";
+};
+
+singleton Material(Pink_PlayerMaterial) {
+   diffuseColor[0] = "Pink";
+   mapTo = "pink_PlayerTexture";
+};
+
 datablock SimplePlayerData(SPD) {
-  shapeFile = "data/spectatorGameplay/art/shapes/simplecone.dts";
+  shapeFile = "data/spectatorGameplay/art/GameShapes/player.dts";
   moveSpeed = 3;
 };
 
@@ -9,4 +29,11 @@ function createSP() {
     position = "0 0 1";
     ThinkFunction = "SPThink";
   };
+
+  %availableSkins = "red blue darkgreen pink";
+
+  %count = getWordCount(%availableSkins);
+  %skin = getWord(%availableSkins, getRandom(%count) );
+  echo("PlayerTexture=" @ %skin @ "_PlayerTexture");
+  SP.setSkinName("PlayerTexture=" @ %skin @ "_PlayerTexture");
 }
