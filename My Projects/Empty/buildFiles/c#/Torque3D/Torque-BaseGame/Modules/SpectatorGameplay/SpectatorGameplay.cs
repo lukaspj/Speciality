@@ -43,6 +43,7 @@ namespace Game.Modules.ClientServer
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/markers.cs");
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/ribbons.cs");
             DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/sounds.cs");
+            DatablockFilesList.add("data/spectatorGameplay/scripts/datablocks/simplePlayer.cs");
          }
 
          if (Global.isObject("LevelFilesList"))

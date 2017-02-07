@@ -1,6 +1,8 @@
-﻿using Game.Modules.ClientServer.Server;
+﻿using System;
+using Game.Modules.ClientServer.Server;
 using Torque3D;
 using Torque3D.Engine;
+using Torque3D.Engine.Util.Enums;
 using Torque3D.Util;
 
 namespace Game.Modules.SpectatorGameplay.scripts.server
@@ -187,6 +189,25 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                camera.setTransform(spawnPoint);
             }
          }
+      }
+
+      private static int c = 0;
+
+      [ConsoleFunction]
+      public static PlayerAction SPThink(SimplePlayer player)
+      {
+         c++;
+         player.MovingLeft = false;
+         player.MovingRight = false;
+         player.MovingForward = false;
+         player.MovingBackward = false;
+         if (c < 150) return PlayerAction.MoveForward;
+         if (c < 300) return PlayerAction.MoveLeft;
+         if (c < 450) return PlayerAction.MoveBackward;
+         if (c < 600) return PlayerAction.MoveRight;
+         c %= 600;
+
+         return PlayerAction.None;
       }
    }
 }
