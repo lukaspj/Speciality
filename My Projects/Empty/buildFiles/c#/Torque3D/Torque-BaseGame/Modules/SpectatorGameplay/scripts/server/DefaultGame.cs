@@ -14,8 +14,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public Camera camera { get; set; }
 
-      private float GameSizeX = 100;
-      private float GameSizeY = 100;
+      private GameBord bord;
+
       //-----------------------------------------------------------------------------
       // What kind of "player" is spawned is either controlled directly by the
       // SpawnSphere or it defaults back to the values set here. This also controls
@@ -25,6 +25,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       //-----------------------------------------------------------------------------
       public void initGameVars()
       {
+
+         bord = new GameBord(100,100);
          // Leave $Game::defaultPlayerClass and $Game::defaultPlayerDataBlock as empty strings ("")
          // to spawn a the $Game::defaultCameraClass as the control object.
          Globals.SetString("Game::DefaultPlayerClass", "");
@@ -71,11 +73,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
          // Find a spawn point for the camera
          var cameraSpawnPoint = pickCameraSpawnPoint(Globals.GetString("Game::DefaultCameraSpawnGroups"));
-         //Point3F playerpos = PlayerSpawnPoint();
+         
          Player player = new Player()
          {
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(0,0,0)
+            Position = bord.PickPlayerSpawn()
          };
          player.registerObject();
          client.setControlObject(player);
@@ -83,84 +85,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Spawn a camera for this client using the found %spawnPoint
 
          //spawnCamera(cameraSpawnPoint, client);
-      }
-      private Point3F PlayerSpawnPoint()
-      {
-         Random rand = new Random();
-         rand.Next(-(int)GameSizeX / 2, (int)GameSizeX / 2);
-         Point3F spawnPoint = new Point3F(rand.Next(-(int)(GameSizeX / 2), (int)(GameSizeX / 2)), rand.Next(-(int)(GameSizeY / 2), (int)(GameSizeY / 2)), 0);
-                  
-         /*Global.initContainerRadiusSearch(spawnPoint, 1, (uint)ObjectTypes.StaticShapeObjectType);
-         while(Global.containerSearchNext() != null)
-         {
-            spawnPoint = new Point3F(rand.Next(-(int)GameSizeX / 2, (int)GameSizeX / 2), rand.Next(-(int)GameSizeY / 2, (int)GameSizeY / 2), 0);
-            Global.initContainerRadiusSearch(spawnPoint, 1, (uint)ObjectTypes.StaticShapeObjectType);
-         }*/
-        
-         return spawnPoint;
-      }
-
-      private void createBoundingBox(float x, float y)
-      {
-         float rightWallPos = x / 2;
-         float leftWallPos = -x / 2;
-         float frontWallpos = y / 2;
-         float backWallPos = -y / 2;
-
-         TSStatic RightWall = new TSStatic()
-         {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(rightWallPos, 0, 1),
-            CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(1, y, 0.5f)
-         };
-         TSStatic LeftWall = new TSStatic()
-         {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(leftWallPos, 0, 1),
-            CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(1, y, 0.5f)
-         };
-         TSStatic FrontWall = new TSStatic()
-         {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(0, frontWallpos, 1),
-            CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(x, 1, 0.5f)
-         };
-         TSStatic BackWall = new TSStatic()
-         {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(0, backWallPos, 1),
-            CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(x, 1, 0.5f)
-         };
-         RightWall.registerObject();
-         LeftWall.registerObject();
-         FrontWall.registerObject();
-         BackWall.registerObject();
-
-      }
-
-      private void generateRandomObstacles(int count)
-      {
-
-         Random rand = new Random();
-         for (int i = 0; i < count; i++)
-         {
-            float xpos = (float)rand.Next(-(int)(GameSizeX/2),(int)(GameSizeX/2));
-            float ypos = (float)rand.Next(-(int)(GameSizeY/2), (int)(GameSizeY/2));
-            float xscale = (float)rand.Next(0, 10);
-            float yscale = (float)rand.Next(0, 10);
-            TSStatic obstacle = new TSStatic()
-            {
-               ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-               Position = new Point3F(xpos, ypos, 1),
-               CollisionType = TSMeshType.Bounds,
-               Scale = new Point3F(xscale, yscale, 0.5f)
-            };
-            obstacle.registerObject();
-         }
       }
 
       //-----------------------------------------------------------------------------
@@ -179,8 +103,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          //set up the game and game variables
          initGameVars();
-         createBoundingBox(GameSizeX, GameSizeY);
-         //generateRandomObstacles(10);
+         bord.CreateBoundingBox();
+         bord.GenerateRandomObstacles(50);
          Globals.SetInt("Game::Duration", duration);
       }
 
