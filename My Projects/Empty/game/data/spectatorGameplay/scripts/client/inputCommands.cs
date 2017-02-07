@@ -66,7 +66,7 @@ function movebackward(%val)
 function moveup(%val)
 {
    %object = ServerConnection.getControlObject();
-   
+
    if(%object.isInNamespaceHierarchy("Camera"))
       $mvUpAction = %val * $movementSpeed;
 }
@@ -74,7 +74,7 @@ function moveup(%val)
 function movedown(%val)
 {
    %object = ServerConnection.getControlObject();
-   
+
    if(%object.isInNamespaceHierarchy("Camera"))
       $mvDownAction = %val * $movementSpeed;
 }
@@ -102,25 +102,25 @@ function panDown( %val )
 function getVerticalMouseAdjustAmount(%val)
 {
    %sensitivity = $pref::Input::VertMouseSensitivity;
-   
+
    // based on a default camera FOV of 90'
    if(ServerConnection.zoomed)
       %sensitivity = $pref::Input::ZoomVertMouseSensitivity;
-      
+
    if($pref::Input::invertVerticalMouse)
       %sensitivity *= -1;
-      
+
    return(%val * ($cameraFov / 90) * 0.01) * %sensitivity;
 }
 
 function getHorizontalMouseAdjustAmount(%val)
 {
    %sensitivity = $pref::Input::HorzMouseSensitivity;
-   
+
    // based on a default camera FOV of 90'
    if(ServerConnection.zoomed)
       %sensitivity = $pref::Input::ZoomHorzMouseSensitivity;
-      
+
    return(%val * ($cameraFov / 90) * 0.01) * %sensitivity;
 }
 
@@ -231,7 +231,7 @@ function mouseFire(%val)
 function altTrigger(%val)
 {
    $mvTriggerCount1++;
-   
+
    toggleZoom(%val);
 }
 
@@ -354,6 +354,18 @@ function toggleCamera(%val)
 {
    if (%val)
       commandToServer('ToggleCamera');
+}
+
+function mouseZoom(%val)
+{
+   if(%val > 0)
+   {
+      commandToServer('adjustCamera', -1);
+   }
+   else
+   {
+      commandToServer('adjustCamera', 1);
+   }
 }
 
 //------------------------------------------------------------------------------

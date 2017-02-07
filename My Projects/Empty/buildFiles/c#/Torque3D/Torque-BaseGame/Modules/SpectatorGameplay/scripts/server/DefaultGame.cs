@@ -82,28 +82,13 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             Position = bord.PickPlayerSpawn()
          };
          player.registerObject();
-         player.setSkinName("PlayerMaterial");
+         client.setFieldValue("player", player.getId().ToString());
+         //player.setSkinName("PlayerMaterial");
          client.setControlObject(player);
 
          // Spawn a camera for this client using the found %spawnPoint
 
-         //spawnCamera(cameraSpawnPoint, client);
-      }
-
-      private Point3F PlayerSpawnPoint()
-      {
-         Random rand = new Random();
-         //rand.Next(-(int)GameSizeX / 2, (int)GameSizeX / 2);
-         //Point3F spawnPoint = new Point3F(rand.Next(-(int)(GameSizeX / 2), (int)(GameSizeX / 2)), rand.Next(-(int)(GameSizeY / 2), (int)(GameSizeY / 2)), 0);
-                  
-         /*Global.initContainerRadiusSearch(spawnPoint, 1, (uint)ObjectTypes.StaticShapeObjectType);
-         while(Global.containerSearchNext() != null)
-         {
-            spawnPoint = new Point3F(rand.Next(-(int)GameSizeX / 2, (int)GameSizeX / 2), rand.Next(-(int)GameSizeY / 2, (int)GameSizeY / 2), 0);
-            Global.initContainerRadiusSearch(spawnPoint, 1, (uint)ObjectTypes.StaticShapeObjectType);
-         }*/
-        
-         return new Point3F(0,0,0);
+         spawnCamera(cameraSpawnPoint, client);
       }
 
       //-----------------------------------------------------------------------------
@@ -222,7 +207,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
             if (spawnPoint != null)
             {
-               camera.setTransform(spawnPoint);
+               camera.setTransform(new TransformF(spawnPoint.Position + new Point3F(0,0,50), spawnPoint.Orientation));
             }
          }
       }

@@ -26,7 +26,8 @@ namespace Game.Modules.ClientServer
          //Global.exec("data/SpectatorGameplay/scripts/server/camera.cs");
          //Global.exec("data/SpectatorGameplay/scripts/server/DefaultGame.cs");
          Global.exec("data/SpectatorGameplay/scripts/server/VolumetricFog.cs");
-         
+         Global.exec("data/SpectatorGameplay/scripts/server/cameraToggle.cs");
+
 
          //add DBs
          if (Global.isObject("DatablockFilesList"))

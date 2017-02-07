@@ -3,3 +3,8 @@ datablock PlayerData(BoxPlayer){
   cameraMaxDist = 5;
   jumpDelay = 0;
 };
+
+singleton Material(PlayerMaterial){
+  diffuseColor[0] = "1 0 0";
+  mapTo = "PlayerTexture";
+};

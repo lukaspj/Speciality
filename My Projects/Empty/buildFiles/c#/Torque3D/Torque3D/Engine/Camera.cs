@@ -635,7 +635,7 @@ namespace Torque3D
             return new VectorF(InternalUnsafeMethods.getVelocity(ObjectPtr));
          }
       
-         public virtual void setVelocity(VectorF velocity)
+         public virtual void setVelocity(Point3F velocity)
          {
             InternalUnsafeMethods.setVelocity(ObjectPtr, velocity.ToStruct());
          }
