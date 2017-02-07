@@ -22,7 +22,7 @@
 
 if ( isObject( moveMap ) )
    moveMap.delete();
-   
+
 new ActionMap(moveMap);
 
 //------------------------------------------------------------------------------
@@ -49,6 +49,7 @@ moveMap.bind( keyboard, c, movedown );
 moveMap.bind( keyboard, space, jump );
 moveMap.bind( mouse, xaxis, yaw );
 moveMap.bind( mouse, yaxis, pitch );
+moveMap.bind( mouse, zaxis, mouseZoom );
 
 moveMap.bind( gamepad, thumbrx, "D", "-0.23 0.23", gamepadYaw );
 moveMap.bind( gamepad, thumbry, "D", "-0.23 0.23", gamepadPitch );

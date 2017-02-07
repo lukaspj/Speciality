@@ -80,94 +80,14 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             Position = bord.PickPlayerSpawn()
          };
          player.registerObject();
-         player.setSkinName("PlayerMaterial");
+         client.setFieldValue("player", player.getId().ToString());
+         //player.setSkinName("PlayerMaterial");
          client.setControlObject(player);
 
          // Spawn a camera for this client using the found %spawnPoint
 
-         //spawnCamera(cameraSpawnPoint, client);
+         spawnCamera(cameraSpawnPoint, client);
       }
-<<<<<<< HEAD
-=======
-      private Point3F PlayerSpawnPoint()
-      {
-         Random rand = new Random();
-         //rand.Next(-(int)GameSizeX / 2, (int)GameSizeX / 2);
-         //Point3F spawnPoint = new Point3F(rand.Next(-(int)(GameSizeX / 2), (int)(GameSizeX / 2)), rand.Next(-(int)(GameSizeY / 2), (int)(GameSizeY / 2)), 0);
-                  
-         /*Global.initContainerRadiusSearch(spawnPoint, 1, (uint)ObjectTypes.StaticShapeObjectType);
-         while(Global.containerSearchNext() != null)
-         {
-            spawnPoint = new Point3F(rand.Next(-(int)GameSizeX / 2, (int)GameSizeX / 2), rand.Next(-(int)GameSizeY / 2, (int)GameSizeY / 2), 0);
-            Global.initContainerRadiusSearch(spawnPoint, 1, (uint)ObjectTypes.StaticShapeObjectType);
-         }*/
-        
-         return new Point3F(0,0,0);
-      }
-
-      private void createBoundingBox(float x, float y)
-      {
-         float rightWallPos = x / 2;
-         float leftWallPos = -x / 2;
-         float frontWallpos = y / 2;
-         float backWallPos = -y / 2;
-
-         TSStatic RightWall = new TSStatic()
-         {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(rightWallPos, 0, 1),
-            CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(1, y, 0.5f)
-         };
-         TSStatic LeftWall = new TSStatic()
-         {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(leftWallPos, 0, 1),
-            CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(1, y, 0.5f)
-         };
-         TSStatic FrontWall = new TSStatic()
-         {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(0, frontWallpos, 1),
-            CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(x, 1, 0.5f)
-         };
-         TSStatic BackWall = new TSStatic()
-         {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(0, backWallPos, 1),
-            CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(x, 1, 0.5f)
-         };
-         RightWall.registerObject();
-         LeftWall.registerObject();
-         FrontWall.registerObject();
-         BackWall.registerObject();
-
-      }
-
-      private void generateRandomObstacles(int count)
-      {
-
-         Random rand = new Random();
-         for (int i = 0; i < count; i++)
-         {
-            float xpos = (float)rand.Next(-(int)(GameSizeX/2),(int)(GameSizeX/2));
-            float ypos = (float)rand.Next(-(int)(GameSizeY/2), (int)(GameSizeY/2));
-            float xscale = (float)rand.Next(0, 10);
-            float yscale = (float)rand.Next(0, 10);
-            TSStatic obstacle = new TSStatic()
-            {
-               ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-               Position = new Point3F(xpos, ypos, 1),
-               CollisionType = TSMeshType.Bounds,
-               Scale = new Point3F(xscale, yscale, 0.5f)
-            };
-            obstacle.registerObject();
-         }
-      }
->>>>>>> d4bfc58d5737bd37e2ffe70dbbeda79bb1cd1589
 
       //-----------------------------------------------------------------------------
       // Clean up the client's control objects
@@ -288,7 +208,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
             if (spawnPoint != null)
             {
-               camera.setTransform(spawnPoint);
+               camera.setTransform(new TransformF(spawnPoint.Position + new Point3F(0,0,50), spawnPoint.Orientation));
             }
          }
       }

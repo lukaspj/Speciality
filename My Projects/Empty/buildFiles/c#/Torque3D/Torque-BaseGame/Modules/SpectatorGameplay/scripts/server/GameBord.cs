@@ -16,11 +16,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public int GameSizeX => _gameSizeX;
       public int GameSizeY => _gameSizeY;
       private bool[,] gameBord;
-      
+      private string shape = "data/spectatorGameplay/art/GameShapes/player.dts";
       public GameBord(int sizeX, int sizeY)
       {
-         _gameSizeX = sizeX;
-         _gameSizeY = sizeY;
+         _gameSizeX = sizeX % 2 == 0 ? ++sizeX : sizeX;
+         _gameSizeY = sizeY % 2 == 0 ? ++sizeY : sizeY;
          gameBord = new bool[_gameSizeX, _gameSizeY];
          for (int x = 0; x < _gameSizeX; x++)
          {
@@ -31,18 +31,23 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          }
       }
 
-      private int pointToX(Point3F point)
+      private int PointToX(Point3F point)
       {
          return (int)point.X + _gameSizeX / 2;
       }
-      private int pointToY(Point3F point)
+      private int PointToY(Point3F point)
       {
          return (int)point.Y + _gameSizeY / 2;
       }
+
+      private Point3F XYToPoint(int x, int y)
+      {
+         return new Point3F(x - _gameSizeX /2, y - _gameSizeY / 2, 1);
+      }
       public bool IsOccupied(Point3F point)
       {
-         int x = pointToX(point);
-         int y = pointToY(point);
+         int x = PointToX(point);
+         int y = PointToY(point);
          if (x >= _gameSizeX || x < 0 || y >= _gameSizeY || y < 0)
             return true;
          else return gameBord[x, y];
@@ -53,11 +58,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          Point3F point = shape.Position;
          Point3F scale = shape.Scale;
-         int xPos = pointToX(point);
-         int yPos = pointToY(point);
-         for (int x = xPos - (int) scale.X / 2; x < xPos + (int) scale.X / 2; x++)
+         int xPos = PointToX(point);
+         int yPos = PointToY(point);
+         for (int x = xPos - (int) (scale.X / 2); x <= xPos + (int) (scale.X / 2); x++)
          {
-            for (int y = yPos - (int) scale.Y / 2; y < yPos + (int) scale.Y / 2; y++)
+            for (int y = yPos - (int) (scale.Y / 2); y <= yPos + (int) (scale.Y / 2); y++)
             {
                if (x >= _gameSizeX || x < 0 || y >= _gameSizeY || y < 0)
                {
@@ -72,16 +77,16 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          int x = _gameSizeX /2;
          int y = _gameSizeY /2;
-         while (!gameBord[x, y])
+         while (gameBord[x, y])
          {
             y = (y + 1) % (_gameSizeY-1);
             if (y == 0)
             {
-               x = (x + 1) % (_gameSizeX -1);
+               x = (x + 1) % (_gameSizeX-1);
             }
          }
 
-         return new Point3F(x-_gameSizeX / 2 - 0.6f ,y-_gameSizeY / 2 - 0.6f,0);
+         return XYToPoint(x,y);
       }
 
       public void CreateBoundingBox()
@@ -93,29 +98,29 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
          TSStatic rightWall = new TSStatic()
          {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(rightWallPos, 0, 1),
+            ShapeName = shape,
+            Position = XYToPoint(_gameSizeX-1,(_gameSizeY-1)/2),
             CollisionType = TSMeshType.Bounds,
             Scale = new Point3F(1, _gameSizeY, 0.5f)
          };
          TSStatic leftWall = new TSStatic()
          {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(leftWallPos, 0, 1),
+            ShapeName = shape,
+            Position = XYToPoint(0,(_gameSizeY-1)/2),
             CollisionType = TSMeshType.Bounds,
             Scale = new Point3F(1, GameSizeY, 0.5f)
          };
          TSStatic frontWall = new TSStatic()
          {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(0, frontWallpos, 1),
+            ShapeName = shape,
+            Position = XYToPoint((_gameSizeX-1)/2, 0),
             CollisionType = TSMeshType.Bounds,
             Scale = new Point3F(_gameSizeX, 1, 0.5f)
          };
          TSStatic backWall = new TSStatic()
          {
-            ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-            Position = new Point3F(0, backWallPos, 1),
+            ShapeName = shape,
+            Position = XYToPoint((_gameSizeX-1)/2,_gameSizeY-1),
             CollisionType = TSMeshType.Bounds,
             Scale = new Point3F(_gameSizeX, 1, 0.5f)
          };
@@ -136,16 +141,14 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Random rand = new Random();
          for (int i = 0; i < count; i++)
          {
-            int xpos = rand.Next(-_gameSizeX / 2, _gameSizeX / 2);
-            int ypos = rand.Next(-_gameSizeX / 2, _gameSizeY / 2);
-            int x;
-            int xscale = (x = rand.Next(0, 5)) == 0 ? 1 : x *2;
-            int y;
-            int yscale = (y = rand.Next(0, 5)) == 0 ? 1 : y *2;
+            int xpos = rand.Next(0, _gameSizeX-1);
+            int ypos = rand.Next(0, _gameSizeY-1);
+            int xscale = rand.Next(1, 10);
+            int yscale =  rand.Next(1, 10);
             TSStatic obstacle = new TSStatic()
             {
-               ShapeName = "data/spectatorGameplay/art/GameShapes/player.dts",
-               Position = new Point3F(xpos, ypos, 1),
+               ShapeName = shape,
+               Position = XYToPoint(xpos,ypos),
                CollisionType = TSMeshType.Bounds,
                Scale = new Point3F(xscale, yscale, 0.5f)
             };
