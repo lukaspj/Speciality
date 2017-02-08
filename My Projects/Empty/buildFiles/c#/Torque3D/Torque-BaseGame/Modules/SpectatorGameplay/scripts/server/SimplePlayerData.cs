@@ -23,6 +23,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public void onAdd(SimplePlayer obj)
       {
+         setFieldValue("currentHealth", getFieldValue("maxHealth"));
       }
 
       public void onRemove(SimplePlayer obj)
@@ -55,15 +56,13 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
       }
 
-<<<<<<< HEAD:My Projects/Empty/buildFiles/c#/Torque3D/Torque-BaseGame/Modules/SpectatorGameplay/scripts/server/PlayerData.cs
-      public static List<Player> searchForPlayers(Player obj, GameBord bord)
-=======
-      public static SimplePlayer searchForPlayers(SimplePlayer obj, GameBord bord)
->>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da:My Projects/Empty/buildFiles/c#/Torque3D/Torque-BaseGame/Modules/SpectatorGameplay/scripts/server/SimplePlayerData.cs
+
+      public static List<SimplePlayer> searchForPlayers(SimplePlayer obj, GameBord bord)
       {
-         List<Player> players = new List<Player>();
-         float x = (float)(obj.Position.X + bord.GameSizeX * Math.Cos(obj.Rotation.Z));
-         float y = (float)(obj.Position.Y + bord.GameSizeY * Math.Sin(obj.Rotation.Z));
+         Point3F rotation = obj.GetEulerRotation();
+         List<SimplePlayer> players = new List<SimplePlayer>();
+         float x = (float)(obj.Position.X + bord.GameSizeX * Math.Cos(rotation.Z));
+         float y = (float)(obj.Position.Y + bord.GameSizeY * Math.Sin(rotation.Z));
          float yExtend = bord.GameSizeY;
          float xExtend = bord.GameSizeX ;
          
@@ -75,7 +74,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          while (player != "")
          {
             Console.WriteLine(player);
-            Player foundPlayer = Sim.FindObject<Player>(player);
+            SimplePlayer foundPlayer = Sim.FindObject<SimplePlayer>(player);
             //Same player that we search with
             if (foundPlayer.getId().ToString() == obj.getId().ToString())
             {
@@ -84,7 +83,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             }
             // angle from line of sight alpha is greater than half of FOV
             Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
-            float objZRoation = obj.Rotation.Z;
+            float objZRoation = rotation.Z;
             Point2F otherPoint = new Point2F(foundPlayer.Position.X, foundPlayer.Position.Y);
             double alpha = objZRoation - Math.Atan((otherPoint.Y - objPoint.Y) / (otherPoint.X - objPoint.X));
             if (alpha > (obj.getCameraFov() / 2))
@@ -106,16 +105,15 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          return players;
       }
 
-      public double GetKillPropability(SimplePlayer obj, SimplePlayer other)
+      public static double GetDamagePropability(SimplePlayer obj, SimplePlayer other)
       {
          Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
-         float objZRoation = obj.Rotation.Z;
+         float objZRoation = obj.GetEulerRotation().Z;
          Point2F otherPoint = new Point2F(other.Position.X,other.Position.Y);
          double alpha = objZRoation - Math.Atan((otherPoint.Y - objPoint.Y) / (otherPoint.X - objPoint.X));
          double distance = Point2F.Distance(objPoint, otherPoint);
          double distanceFromLOS = distance * Math.Sin(alpha);
-         
-         Normal dist = new Normal(0, float.Parse(getFieldValue("variance")));
+         Normal dist = new Normal(0, float.Parse(obj.DataBlock.getFieldValue("variance")));
          double max = dist.Maximum;
          double normalizingMult = 1 / max;
          double killProp = dist.Density(distanceFromLOS) * normalizingMult;

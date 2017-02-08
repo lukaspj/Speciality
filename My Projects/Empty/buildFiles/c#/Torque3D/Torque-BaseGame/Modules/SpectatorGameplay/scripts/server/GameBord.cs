@@ -33,11 +33,16 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       private int PointToX(Point3F point)
       {
-         return (int)point.X + _gameSizeX / 2;
+
+         int pointToX = (int)point.X + _gameSizeX / 2;
+         return pointToX;
+       
       }
       private int PointToY(Point3F point)
       {
-         return (int)point.Y + _gameSizeY / 2;
+         int pointToY = (int)point.Y + _gameSizeY / 2;
+         return pointToY;
+         
       }
 
       private Point3F XYToPoint(int x, int y)
@@ -48,10 +53,15 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          int x = PointToX(point);
          int y = PointToY(point);
+         return IsOccupied(x, y);
+      }
+
+      public bool IsOccupied(int x, int y)
+      {
          if (x >= _gameSizeX || x < 0 || y >= _gameSizeY || y < 0)
             return true;
          else return gameBord[x, y];
-      } 
+      }
 
       //I use that the shape is has unit size in x and y
       public void AddShape(TSStatic shape)
@@ -73,20 +83,41 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          } 
       }
 
-      public Point3F PickPlayerSpawn()
+      public Point3F PickPlayerSpawn(Point3F point)
       {
-         int x = _gameSizeX /2;
-         int y = _gameSizeY /2;
-         while (gameBord[x, y])
-         {
-            y = (y + 1) % (_gameSizeY-1);
-            if (y == 0)
-            {
-               x = (x + 1) % (_gameSizeX-1);
-            }
-         }
 
-         return XYToPoint(x,y);
+         int x = PointToX(point);
+         int y = PointToY(point);
+         int i_step = 1;
+         bool isAdding = true;
+         if (!IsOccupied(x, y))
+         {
+            gameBord[x, y] = true;
+
+            return XYToPoint(x, y);
+         }
+         while (true)
+         {
+            for (int i = 0; i < i_step; i++)
+            {
+               if (!IsOccupied(isAdding ? ++x : --x, y))
+               {
+                  gameBord[x, y] = true;
+
+                  return XYToPoint(x, y);
+               }
+            }
+            for (int i = 0; i < i_step; i++)
+            {
+               if (!IsOccupied(x, isAdding ? ++y : --y)) 
+               {
+                  gameBord[x, y] = true;
+
+                  return XYToPoint(x, y);
+               }
+            }
+            i_step++;
+         }
       }
 
       public void CreateBoundingBox()

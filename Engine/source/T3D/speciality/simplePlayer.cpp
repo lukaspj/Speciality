@@ -346,6 +346,11 @@ DefineEngineMethod(SimplePlayer, CanSee, bool, (SceneObject* other), , "")
    return frustum.isCulled(other->getObjBox());
 }
 
+DefineEngineMethod(SimplePlayer, GetEulerRotation, Point3F, (), , "")
+{
+   return object->getTransform().toEuler();
+}
+
 FeatureVector::FeatureVector()
 {
 }

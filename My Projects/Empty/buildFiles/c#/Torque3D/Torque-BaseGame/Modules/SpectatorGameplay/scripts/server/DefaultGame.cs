@@ -78,65 +78,48 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
          SimplePlayer player = new SimplePlayer()
          {
-<<<<<<< HEAD
-            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(0,0,0)
-=======
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(0,0,1),
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
             ThinkFunction = "SPThink"
->>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
 
          SimplePlayer player2 = new SimplePlayer()
          {
-<<<<<<< HEAD
-            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(50,0,0)
-=======
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(50,0,1),
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,0)),
             ThinkFunction = "SPThink"
->>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
          SimplePlayer player3 = new SimplePlayer()
          {
-<<<<<<< HEAD
-            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(-50, 0,0)
-=======
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(-50, 0,1),
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
             ThinkFunction = "SPThink"
->>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
          SimplePlayer player4 = new SimplePlayer()
          {
-<<<<<<< HEAD
-            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(0,50,0)
-=======
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(0,50,1),
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
             ThinkFunction = "SPThink"
->>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
          SimplePlayer player5 = new SimplePlayer()
          {
-<<<<<<< HEAD
-            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(0,-50,0)
-=======
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(0,-50,1),
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
             ThinkFunction = "SPThink"
->>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
 
          player.registerObject();
          player2.registerObject();
+         player2.setSkinName("pink");
          player3.registerObject();
+         player3.setSkinName("blue");
          player4.registerObject();
+         player4.setSkinName("darkgreen");
          player5.registerObject();
          SimplePlayerData.searchForPlayers(player,bord);
          client.setFieldValue("player", player.getId().ToString());
