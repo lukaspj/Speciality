@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
+using Microsoft.SqlServer.Server;
 
 namespace Torque3D.Util
 {
@@ -26,6 +28,14 @@ namespace Torque3D.Util
       {
          Axis = axis;
          Angle = a;
+      }
+
+      public AngAxisF(string data)
+      {
+         string[] split = data.Split(' ');
+         if (split.Length != 4) throw new ArgumentException("AngAxisF always takes exactly 4 parameters");
+         Axis = new Point3F(float.Parse(split[0]) , float.Parse(split[1]) , float.Parse(split[2]));
+         Angle = float.Parse(split[4]);
       }
 
       internal AngAxisF(InternalAngAxisFStruct angAxisFStruct)

@@ -9,6 +9,7 @@ namespace Torque3D
 {
 	public unsafe class SimplePlayer : ShapeBase
 	{
+
 		public SimplePlayer(bool pRegister = false)
 			: base(pRegister)
 		{
@@ -67,9 +68,9 @@ namespace Torque3D
 
          [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
          [return:MarshalAs(UnmanagedType.I1)]
-         private delegate bool _SimplePlayer_CanSee(IntPtr other);
+         private delegate bool _SimplePlayer_CanSee(IntPtr obj, IntPtr other);
          private static _SimplePlayer_CanSee _SimplePlayer_CanSeeFunc;
-         internal static bool SimplePlayer_CanSee(IntPtr other)
+         internal static bool SimplePlayer_CanSee(IntPtr obj,IntPtr other)
          {
          	if (_SimplePlayer_CanSeeFunc == null)
          	{
@@ -78,29 +79,49 @@ namespace Torque3D
                      "fnSimplePlayer_CanSee"), typeof(_SimplePlayer_CanSee));
          	}
          
-         	return _SimplePlayer_CanSeeFunc(other);
+         	return _SimplePlayer_CanSeeFunc(obj,other);
          }
-      
+
+         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+         private delegate InternalPoint3FStruct _SimplePlayer_GetEulerRotation(IntPtr other);
+         private static _SimplePlayer_GetEulerRotation _SimplePlayer_GetEulerRotationFunc;
+         internal static InternalPoint3FStruct SimplePlayer_GetEulerRotation(IntPtr other)
+         {
+            if (_SimplePlayer_GetEulerRotationFunc == null)
+            {
+               _SimplePlayer_GetEulerRotationFunc =
+                  (_SimplePlayer_GetEulerRotation)Marshal.GetDelegateForFunctionPointer(Torque3D.DllLoadUtils.GetProcAddress(Torque3D.Torque3DLibHandle,
+                     "fnSimplePlayer_GetEulerRotation"), typeof(_SimplePlayer_GetEulerRotation));
+            }
+
+            return _SimplePlayer_GetEulerRotationFunc(other);
+         }
+
+
       }
-      
+
       #endregion
 
 
       #region Functions
 
-	   public bool CanSee(SimplePlayer other)
+      public bool CanSee(SimplePlayer other)
+      {
+         return InternalUnsafeMethods.SimplePlayer_CanSee(ObjectPtr,other.ObjectPtr);
+      }
+
+	   public Point3F GetEulerRotation()
 	   {
-	      return InternalUnsafeMethods.SimplePlayer_CanSee(other.ObjectPtr);
+	      return new Point3F(InternalUnsafeMethods.SimplePlayer_GetEulerRotation(ObjectPtr)); 
 	   }
-      
-      
+
       #endregion
 
 
       #region Properties
-      
-      
-         public bool MovingRight
+
+
+      public bool MovingRight
          {
          	get { return GenericMarshal.StringToBool(getFieldValue("MovingRight")); }
          	set { setFieldValue("MovingRight", value ? "1" : "0"); }

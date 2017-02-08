@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -22,6 +23,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public void onAdd(SimplePlayer obj)
       {
+         setFieldValue("currentHealth", getFieldValue("maxHealth"));
       }
 
       public void onRemove(SimplePlayer obj)
@@ -54,39 +56,63 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
       }
 
-      public static SimplePlayer searchForPlayers(SimplePlayer obj, GameBord bord)
+
+      public static List<SimplePlayer> searchForPlayers(SimplePlayer obj, GameBord bord)
       {
-         Point3F boxSearchMid = new Point3F(obj.Position.X + bord.GameSizeX, obj.Position.Y + bord.GameSizeY, 2);
+         Point3F rotation = obj.GetEulerRotation();
+         List<SimplePlayer> players = new List<SimplePlayer>();
+         float x = (float)(obj.Position.X + bord.GameSizeX * Math.Cos(rotation.Z));
+         float y = (float)(obj.Position.Y + bord.GameSizeY * Math.Sin(rotation.Z));
+         float yExtend = bord.GameSizeY;
+         float xExtend = bord.GameSizeX ;
+         
+         Point3F boxSearchMid = new Point3F(x,y, 2);
          string player = Global.containerFindFirst((uint) ObjectTypes.PlayerObjectType, boxSearchMid,
-            new Point3F(bord.GameSizeX, bord.GameSizeY, 2));
+            new Point3F(xExtend, yExtend, 2));
 
          
          while (player != "")
          {
             Console.WriteLine(player);
-            Player foundPlayer = Sim.FindObject<Player>(player);
+            SimplePlayer foundPlayer = Sim.FindObject<SimplePlayer>(player);
+            //Same player that we search with
             if (foundPlayer.getId().ToString() == obj.getId().ToString())
             {
                player = Global.containerFindNext();
                continue;
             }
+            // angle from line of sight alpha is greater than half of FOV
+            Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
+            float objZRoation = rotation.Z;
+            Point2F otherPoint = new Point2F(foundPlayer.Position.X, foundPlayer.Position.Y);
+            double alpha = objZRoation - Math.Atan((otherPoint.Y - objPoint.Y) / (otherPoint.X - objPoint.X));
+            if (alpha > (obj.getCameraFov() / 2))
+            {
+               player = Global.containerFindNext();
+               continue;
+            }
 
+            // Cast a ray between the players reporting if we hit something other than a player
             string stuck = Global.containerRayCast(obj.Position, foundPlayer.Position, (uint) ObjectTypes.StaticObjectType);
-            Console.WriteLine(stuck);
+            if (stuck != "")
+            {
+               player = Global.containerFindNext();
+               continue;
+            }
+            players.Add(foundPlayer);
             player = Global.containerFindNext();
          }
-         return null;
+         return players;
       }
 
-      public static double GetKillPropability(SimplePlayer obj, SimplePlayer other)
+      public static double GetDamagePropability(SimplePlayer obj, SimplePlayer other)
       {
          Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
-         float objZRoation = obj.Rotation.Z;
+         float objZRoation = obj.GetEulerRotation().Z;
          Point2F otherPoint = new Point2F(other.Position.X,other.Position.Y);
-         double distance = Point2F.Distance(objPoint, otherPoint);
          double alpha = objZRoation - Math.Atan((otherPoint.Y - objPoint.Y) / (otherPoint.X - objPoint.X));
+         double distance = Point2F.Distance(objPoint, otherPoint);
          double distanceFromLOS = distance * Math.Sin(alpha);
-         
          Normal dist = new Normal(0, float.Parse(obj.DataBlock.getFieldValue("variance")));
          double max = dist.Maximum;
          double normalizingMult = 1 / max;

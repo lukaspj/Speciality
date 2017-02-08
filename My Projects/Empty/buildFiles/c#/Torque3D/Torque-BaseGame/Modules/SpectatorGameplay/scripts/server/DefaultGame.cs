@@ -78,45 +78,48 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
          SimplePlayer player = new SimplePlayer()
          {
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(0,0,1),
-            ThinkFunction = "SPThink",
-            RenderFrustum = true
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
+            ThinkFunction = "SPThink"
          };
 
          SimplePlayer player2 = new SimplePlayer()
          {
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(50,0,1),
-            ThinkFunction = "SPThink",
-            RenderFrustum = true
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,0)),
+            ThinkFunction = "SPThink"
          };
          SimplePlayer player3 = new SimplePlayer()
          {
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(-50, 0,1),
-            ThinkFunction = "SPThink",
-            RenderFrustum = true
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
+            ThinkFunction = "SPThink"
          };
          SimplePlayer player4 = new SimplePlayer()
          {
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(0,50,1),
-            ThinkFunction = "SPThink",
-            RenderFrustum = true
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
+            ThinkFunction = "SPThink"
          };
          SimplePlayer player5 = new SimplePlayer()
          {
+
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = new Point3F(0,-50,1),
-            ThinkFunction = "SPThink",
-            RenderFrustum = true
+            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
+            ThinkFunction = "SPThink"
          };
 
          player.registerObject();
          player2.registerObject();
+         player2.setSkinName("pink");
          player3.registerObject();
+         player3.setSkinName("blue");
          player4.registerObject();
+         player4.setSkinName("darkgreen");
          player5.registerObject();
          SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
 

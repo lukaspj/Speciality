@@ -592,9 +592,9 @@ namespace Torque3D
          	set { setFieldValue("Position", value.ToString()); }
          }
       
-         public Point3F Rotation
+         public AngAxisF Rotation
          {
-         	get { return new Point3F(getFieldValue("Rotation")); }
+         	get { return new AngAxisF(getFieldValue("Rotation")); }
          	set { setFieldValue("Rotation", value.ToString()); }
          }
       
