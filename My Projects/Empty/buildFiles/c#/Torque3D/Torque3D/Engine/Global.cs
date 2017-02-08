@@ -9806,7 +9806,7 @@ namespace Torque3D
       
          public static string containerRayCast(Point3F start, Point3F end, uint mask, SceneObject pExempt = null, bool useClientContainer = false)
          {
-            return Marshal.PtrToStringUni(InternalUnsafeMethods.containerRayCast(start.ToStruct(), end.ToStruct(), mask, pExempt.ObjectPtr, useClientContainer));
+            return Marshal.PtrToStringUni(InternalUnsafeMethods.containerRayCast(start.ToStruct(), end.ToStruct(), mask, pExempt == null ? IntPtr.Zero : pExempt.ObjectPtr, useClientContainer));
          }
       
          public static void sceneDumpZoneStates(bool updateFirst = true)

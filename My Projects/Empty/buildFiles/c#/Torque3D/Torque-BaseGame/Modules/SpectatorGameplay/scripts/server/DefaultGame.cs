@@ -79,9 +79,36 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Player player = new Player()
          {
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = bord.PickPlayerSpawn()
+            Position = new Point3F(0,0,1)
          };
+
+         Player player2 = new Player()
+         {
+            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
+            Position = new Point3F(50,0,1)
+         };
+         Player player3 = new Player()
+         {
+            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
+            Position = new Point3F(-50, 0,1)
+         };
+         Player player4 = new Player()
+         {
+            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
+            Position = new Point3F(0,50,1)
+         };
+         Player player5 = new Player()
+         {
+            DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
+            Position = new Point3F(0,-50,1)
+         };
+
          player.registerObject();
+         player2.registerObject();
+         player3.registerObject();
+         player4.registerObject();
+         player5.registerObject();
+         PlayerData.searchForPlayers(player,bord);
          client.setFieldValue("player", player.getId().ToString());
          //player.setSkinName("PlayerMaterial");
          client.setControlObject(player);
