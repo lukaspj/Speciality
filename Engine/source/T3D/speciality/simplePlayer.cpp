@@ -228,7 +228,7 @@ void SimplePlayer::doThink()
          mMovingRight = true;
          break;
       case TurnRight:
-         mRot += 5;
+         mRot += mDataBlock->getTurnSpeed();
          break;
       default:
          break;
