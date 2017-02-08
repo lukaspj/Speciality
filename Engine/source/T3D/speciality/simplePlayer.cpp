@@ -11,6 +11,7 @@ IMPLEMENT_CONOBJECT(FeatureVector);
 SimplePlayerData::SimplePlayerData()
 {
    mMoveSpeed = 1.0f;
+   mTurnSpeed = 1.0f;
    mFriction = 0.1f;
 
    mFOV = 70.0f;
@@ -27,6 +28,8 @@ SimplePlayerData::~SimplePlayerData()
 void SimplePlayerData::initPersistFields()
 {
    addField("MoveSpeed", TYPEID< F32 >(), Offset(mMoveSpeed, SimplePlayerData),
+            "");
+   addField("TurnSpeed", TYPEID< F32 >(), Offset(mTurnSpeed, SimplePlayerData),
             "");
    addField("Friction", TYPEID< F32 >(), Offset(mFriction, SimplePlayerData),
             "");
@@ -58,6 +61,11 @@ void SimplePlayerData::packData(BitStream* stream)
    Parent::packData(stream);
    stream->writeInt(mMoveSpeed*1000.0f, 28);
    stream->writeInt(mFriction*1000.0f, 28);
+   stream->write(mTurnSpeed);
+   stream->write(mFOV);
+   stream->write(mAspectRatio);
+   stream->write(mNearDist);
+   stream->write(mFarDist);
 }
 
 void SimplePlayerData::unpackData(BitStream* stream)
@@ -65,6 +73,11 @@ void SimplePlayerData::unpackData(BitStream* stream)
    Parent::unpackData(stream);
    mMoveSpeed = stream->readInt(28)/1000.0f;
    mFriction = stream->readInt(28)/1000.0f;
+   stream->read(&mTurnSpeed);
+   stream->read(&mFOV);
+   stream->read(&mAspectRatio);
+   stream->read(&mNearDist);
+   stream->read(&mFarDist);
 }
 
 
@@ -76,9 +89,12 @@ SimplePlayer::SimplePlayer()
    mMovingForward = false;
    mMovingBackward = false;
 
+   mRot = 0.0f;
+
    mRenderFrustum = false;
 
    mTickCount = 0;
+   mThinkFunction = NULL;
 
    CollisionMoveMask = (TerrainObjectType | PlayerObjectType |
       StaticShapeObjectType | VehicleObjectType |
@@ -173,6 +189,17 @@ void SimplePlayer::processTick(const Move* move)
    doThink();
 }
 
+
+ImplementEnumType(SimplePlayerActions, "")
+{
+   SimplePlayer::MoveLeft, "MoveLeft", "\n"
+},
+{ SimplePlayer::MoveRight,     "MoveRight", "\n" },
+{ SimplePlayer::MoveForward,     "MoveForward", "\n" },
+{ SimplePlayer::MoveBackward,     "MoveBackward", "\n" },
+{ SimplePlayer::TurnRight,     "TurnRight", "\n" }
+   EndImplementEnumType;
+
 void SimplePlayer::doThink()
 {
    if (isServerObject() && mThinkFunction)
@@ -200,6 +227,9 @@ void SimplePlayer::doThink()
       case MoveRight:
          mMovingRight = true;
          break;
+      case TurnRight:
+         mRot += 5;
+         break;
       default:
          break;
       }
@@ -213,6 +243,10 @@ void SimplePlayer::updatePosition(const F32 travelTime)
    newPos = _move(travelTime);
 
    setPosition(newPos);
+   MatrixF mat;
+   mat.set(EulerF(0.0f, 0.0f, mRot));
+   mat.setColumn(3, newPos);
+   setTransform(mat);
    setMaskBits(TransformMask);
 }
 
@@ -252,13 +286,6 @@ bool SimplePlayer::standingOnGround()
    return getContainer()->castRay(getPosition(), target, collisionMask, &rInfo);
 }
 
-ImplementEnumType(SimplePlayerActions, "")
-   { SimplePlayer::MoveLeft,     "MoveLeft", "\n" },
-   { SimplePlayer::MoveRight,     "MoveRight", "\n" },
-   { SimplePlayer::MoveForward,     "MoveForward", "\n" },
-   { SimplePlayer::MoveBackward,     "MoveBackward", "\n" }
-EndImplementEnumType;
-
 bool SimplePlayer::onNewDataBlock(GameBaseData* dptr, bool reload)
 {
    mDataBlock = dynamic_cast< SimplePlayerData* >(dptr);
@@ -273,10 +300,16 @@ U32 SimplePlayer::packUpdate(NetConnection* conn, U32 mask, BitStream* stream)
 {
    U32 retMask = Parent::packUpdate(conn, mask, stream);
 
+   if(stream->writeFlag(mask & InitialUpdateMask))
+   {
+      stream->writeString(mThinkFunction);
+   }
+
    if(stream->writeFlag(mask & TransformMask))
    {
       mathWrite(*stream, getTransform());
       mathWrite(*stream, getScale());
+      stream->write(mRot);
    }
    
    return retMask;
@@ -288,14 +321,29 @@ void SimplePlayer::unpackUpdate(NetConnection* conn, BitStream* stream)
 
    if(stream->readFlag())
    {
+      char buffer[256];
+      stream->readString(buffer);
+      mThinkFunction = buffer;
+   }
+
+   if(stream->readFlag())
+   {
       MatrixF temp;
       Point3F tempScale;
       mathRead(*stream, &temp);
       mathRead(*stream, &tempScale);
+      stream->read(&mRot);
 
       setScale(tempScale);
       setTransform(temp);
    }
+}
+
+DefineEngineMethod(SimplePlayer, CanSee, bool, (SceneObject* other), , "")
+{
+   Frustum frustum;
+   frustum.set(false, object->getDataBlock()->getFOV(), object->getDataBlock()->getAspectRatio(), object->getDataBlock()->getNearDist(), object->getDataBlock()->getFarDist(), object->getTransform());
+   return frustum.isCulled(other->getObjBox());
 }
 
 FeatureVector::FeatureVector()
@@ -441,11 +489,4 @@ Point3F SimplePlayer::_move(const F32 travelTime)
    }
 
    return start;
-}
-
-DefineEngineMethod(SimplePlayer, CanSee, bool, (SceneObject* other),, "")
-{
-   Frustum frustum;
-   frustum.set(false, object->getDataBlock()->getFOV(), object->getDataBlock()->getAspectRatio(), object->getDataBlock()->getNearDist(), object->getDataBlock()->getFarDist(), object->getTransform());
-   return frustum.isCulled(other->getObjBox());
 }

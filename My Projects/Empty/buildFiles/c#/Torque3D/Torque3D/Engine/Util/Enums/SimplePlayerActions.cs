@@ -6,6 +6,7 @@
       MoveLeft,
       MoveRight,
       MoveForward,
-      MoveBackward
+      MoveBackward,
+      TurnRight
    };
 }

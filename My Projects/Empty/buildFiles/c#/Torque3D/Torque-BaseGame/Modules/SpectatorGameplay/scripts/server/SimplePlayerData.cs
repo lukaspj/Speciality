@@ -8,24 +8,23 @@ using Torque3D.Engine;
 using Torque3D;
 using Torque3D.Util;
 using Game.Modules.ClientServer.Server;
-using tPlayer = Torque3D.Player;
-using tPlayerData = Torque3D.PlayerData;
+using tSimplePlayerData = Torque3D.SimplePlayerData;
 using MathNet.Numerics.Distributions;
 using Torque3D.Engine.Util.Enums;
 
 namespace Game.Modules.SpectatorGameplay.scripts.server
 {
    [ConsoleClass]
-   class PlayerData : tPlayerData
+   class SimplePlayerData : tSimplePlayerData
    {
       private int corpseTimeoutValue = 40 * 100;
       
 
-      public void onAdd(tPlayer obj)
+      public void onAdd(SimplePlayer obj)
       {
       }
 
-      public void onRemove(tPlayer obj)
+      public void onRemove(SimplePlayer obj)
       {
          int clientid = obj.getControllingClient();
          GameConnectionToClient client = Sim.FindObjectById<GameConnectionToClient>((uint)clientid);
@@ -36,9 +35,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          }
       }
 
-      public void onCollision(tPlayer obj, SceneObject col, VectorF vec, float len)
+      public void onCollision(SimplePlayer obj, SceneObject col, VectorF vec, float len)
       {
-         if(!Global.isObject(col.Name) || obj.getState() == "Dead")
+         if(!Global.isObject(col.Name)/* || obj.getState() == "Dead"*/)
          {
             return;
          }
@@ -55,7 +54,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
       }
 
-      public static Player searchForPlayers(Player obj, GameBord bord)
+      public static SimplePlayer searchForPlayers(SimplePlayer obj, GameBord bord)
       {
          Point3F boxSearchMid = new Point3F(obj.Position.X + bord.GameSizeX, obj.Position.Y + bord.GameSizeY, 2);
          string player = Global.containerFindFirst((uint) ObjectTypes.PlayerObjectType, boxSearchMid,
@@ -79,7 +78,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          return null;
       }
 
-      public double GetKillPropability(Player obj, Player other)
+      public double GetKillPropability(SimplePlayer obj, SimplePlayer other)
       {
          Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
          float objZRoation = obj.Rotation.Z;

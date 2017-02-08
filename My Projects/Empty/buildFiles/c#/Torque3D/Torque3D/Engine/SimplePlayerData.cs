@@ -86,6 +86,12 @@ namespace Torque3D
          set { setFieldValue("MoveSpeed", value.ToString()); }
       }
 
+      public float TurnSpeed
+      {
+         get { return float.Parse(getFieldValue("TurnSpeed")); }
+         set { setFieldValue("TurnSpeed", value.ToString()); }
+      }
+
       public float Friction
       {
          get { return float.Parse(getFieldValue("Friction")); }
