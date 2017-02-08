@@ -9,6 +9,9 @@ namespace Torque3D
 {
 	public unsafe class SimplePlayer : GameBase
 	{
+
+	   private float maxHealth;
+	   private float currentHealth;
 		public SimplePlayer(bool pRegister = false)
 			: base(pRegister)
 		{

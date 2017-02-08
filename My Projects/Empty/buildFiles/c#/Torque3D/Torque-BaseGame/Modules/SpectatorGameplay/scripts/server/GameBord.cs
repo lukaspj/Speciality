@@ -42,7 +42,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       private Point3F XYToPoint(int x, int y)
       {
-         return new Point3F(x - _gameSizeX /2, y - _gameSizeY / 2, 1);
+         return new Point3F(x - _gameSizeX /2, y - _gameSizeY / 2, 0);
       }
       public bool IsOccupied(Point3F point)
       {

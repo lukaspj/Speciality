@@ -79,28 +79,28 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Player player = new Player()
          {
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(0,0,1)
+            Position = new Point3F(0,0,0)
          };
 
          Player player2 = new Player()
          {
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(50,0,1)
+            Position = new Point3F(50,0,0)
          };
          Player player3 = new Player()
          {
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(-50, 0,1)
+            Position = new Point3F(-50, 0,0)
          };
          Player player4 = new Player()
          {
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(0,50,1)
+            Position = new Point3F(0,50,0)
          };
          Player player5 = new Player()
          {
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
-            Position = new Point3F(0,-50,1)
+            Position = new Point3F(0,-50,0)
          };
 
          player.registerObject();

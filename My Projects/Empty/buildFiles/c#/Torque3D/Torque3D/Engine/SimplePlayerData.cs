@@ -74,7 +74,6 @@ namespace Torque3D
       #region Functions
 
 
-
       #endregion
 
 
