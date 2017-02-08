@@ -46,6 +46,7 @@ public:
    void unpackData(BitStream* stream) override;
 
    F32 getMoveSpeed() const { return mMoveSpeed; }
+   F32 getTurnSpeed() const { return mTurnSpeed; }
    F32 getFriction() const { return mFriction; }
    F32 getFOV() const { return mFOV; }
    F32 getAspectRatio() const { return mAspectRatio; }
@@ -54,6 +55,7 @@ public:
 
 private:
    F32 mMoveSpeed;
+   F32 mTurnSpeed;
    F32 mFriction;
 
    F32 mFOV;
@@ -102,6 +104,7 @@ private:
    bool mMovingRight;
    bool mMovingForward;
    bool mMovingBackward;
+   F32 mRot;
 
    bool mRenderFrustum;
 
@@ -123,7 +126,8 @@ public:
       MoveLeft,
       MoveRight,
       MoveForward,
-      MoveBackward
+      MoveBackward,
+      TurnRight
    };
 
    // Collision

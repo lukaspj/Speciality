@@ -76,31 +76,61 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Find a spawn point for the camera
          var cameraSpawnPoint = pickCameraSpawnPoint(Globals.GetString("Game::DefaultCameraSpawnGroups"));
          
-         Player player = new Player()
+         SimplePlayer player = new SimplePlayer()
          {
+<<<<<<< HEAD
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
             Position = new Point3F(0,0,0)
+=======
+            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
+            Position = new Point3F(0,0,1),
+            ThinkFunction = "SPThink"
+>>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
 
-         Player player2 = new Player()
+         SimplePlayer player2 = new SimplePlayer()
          {
+<<<<<<< HEAD
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
             Position = new Point3F(50,0,0)
+=======
+            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
+            Position = new Point3F(50,0,1),
+            ThinkFunction = "SPThink"
+>>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
-         Player player3 = new Player()
+         SimplePlayer player3 = new SimplePlayer()
          {
+<<<<<<< HEAD
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
             Position = new Point3F(-50, 0,0)
+=======
+            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
+            Position = new Point3F(-50, 0,1),
+            ThinkFunction = "SPThink"
+>>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
-         Player player4 = new Player()
+         SimplePlayer player4 = new SimplePlayer()
          {
+<<<<<<< HEAD
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
             Position = new Point3F(0,50,0)
+=======
+            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
+            Position = new Point3F(0,50,1),
+            ThinkFunction = "SPThink"
+>>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
-         Player player5 = new Player()
+         SimplePlayer player5 = new SimplePlayer()
          {
+<<<<<<< HEAD
             DataBlock = Sim.FindObject<PlayerData>("BoxPlayer"),
             Position = new Point3F(0,-50,0)
+=======
+            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
+            Position = new Point3F(0,-50,1),
+            ThinkFunction = "SPThink"
+>>>>>>> 777c4b121f6ad92fb9088bff70cb40f34773f7da
          };
 
          player.registerObject();
@@ -108,7 +138,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          player3.registerObject();
          player4.registerObject();
          player5.registerObject();
-         PlayerData.searchForPlayers(player,bord);
+         SimplePlayerData.searchForPlayers(player,bord);
          client.setFieldValue("player", player.getId().ToString());
          //player.setSkinName("PlayerMaterial");
          client.setControlObject(player);
@@ -253,7 +283,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          if (c < 300) return PlayerAction.MoveLeft;
          if (c < 450) return PlayerAction.MoveBackward;
          if (c < 600) return PlayerAction.MoveRight;
-         c %= 600;
+         if (c < 750) return PlayerAction.TurnRight;
+         c %= 750;
 
          return PlayerAction.None;
       }

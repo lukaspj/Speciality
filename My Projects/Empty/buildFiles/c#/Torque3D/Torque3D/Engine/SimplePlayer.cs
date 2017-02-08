@@ -7,7 +7,7 @@ using Torque3D.Util;
 
 namespace Torque3D
 {
-	public unsafe class SimplePlayer : GameBase
+	public unsafe class SimplePlayer : ShapeBase
 	{
 
 	   private float maxHealth;
@@ -135,6 +135,13 @@ namespace Torque3D
          {
          	get { return GenericMarshal.StringToBool(getFieldValue("RenderFrustum")); }
          	set { setFieldValue("RenderFrustum", value ? "1" : "0"); }
+         }
+      
+      
+         public string ThinkFunction
+         {
+         	get { return getFieldValue("ThinkFunction"); }
+         	set { setFieldValue("ThinkFunction", value); }
          }
       
       
