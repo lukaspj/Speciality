@@ -26,6 +26,8 @@
 #ifndef _SHAPEBASE_H_
 #include "T3D/shapeBase.h"
 #endif
+#include "T3D/physics/physicsBody.h"
+#include "simplePlayerCollision.h"
 
 class SimplePlayerData : public ShapeBaseData {
    typedef ShapeBaseData Parent;
@@ -45,10 +47,19 @@ public:
 
    F32 getMoveSpeed() const { return mMoveSpeed; }
    F32 getFriction() const { return mFriction; }
+   F32 getFOV() const { return mFOV; }
+   F32 getAspectRatio() const { return mAspectRatio; }
+   F32 getNearDist() const { return mNearDist; }
+   F32 getFarDist() const { return mFarDist; }
 
 private:
    F32 mMoveSpeed;
    F32 mFriction;
+
+   F32 mFOV;
+   F32 mAspectRatio;
+   F32 mNearDist;
+   F32 mFarDist;
 };
 
 class SimplePlayer : public ShapeBase {
@@ -67,8 +78,8 @@ public:
    void onRemove() override;
 
    void advanceTime(F32 dt) override;
-   void doCollision(Point3F* new_pos);
    void doThink();
+   void updatePosition(const F32 travelTime);
    void processTick(const Move* move) override;
 
    bool onNewDataBlock(GameBaseData* dptr, bool reload) override;
@@ -76,7 +87,14 @@ public:
    U32 packUpdate(NetConnection* conn, U32 mask, BitStream* stream) override;
    void unpackUpdate(NetConnection* conn, BitStream* stream) override;
 
+   Point3F getVelocity() const override { return mVelocity; }
+
+   SimplePlayerData* getDataBlock() { return mDataBlock; }
+
    bool standingOnGround();
+
+   void prepRenderImage(SceneRenderState* state) override;
+   void debugRenderDelegate(ObjectRenderInst *ri, SceneRenderState *state, BaseMatInstance* overrideMat);
 
 private:
    VectorF mVelocity;
@@ -84,6 +102,8 @@ private:
    bool mMovingRight;
    bool mMovingForward;
    bool mMovingBackward;
+
+   bool mRenderFrustum;
 
    S32 mTickCount;
 
@@ -105,6 +125,15 @@ public:
       MoveForward,
       MoveBackward
    };
+
+   // Collision
+private:
+   SimplePlayerCollision mCollision;
+   
+   Point3F _move(const F32 travelTime);
+public:
+   U32 CollisionMoveMask;
+   void handleCollision(Collision &col, VectorF velocity);
 };
 
 typedef SimplePlayer::Actions SimplePlayerActions;

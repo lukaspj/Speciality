@@ -1,6 +1,8 @@
 #include "simplePlayer.h"
 #include "core/stream/bitStream.h"
 #include "math/mathIO.h"
+#include "materials/baseMatInstance.h"
+#include "gfx/gfxDrawUtil.h"
 
 IMPLEMENT_CO_NETOBJECT_V1(SimplePlayer);
 IMPLEMENT_CO_DATABLOCK_V1(SimplePlayerData);
@@ -10,6 +12,11 @@ SimplePlayerData::SimplePlayerData()
 {
    mMoveSpeed = 1.0f;
    mFriction = 0.1f;
+
+   mFOV = 70.0f;
+   mAspectRatio = 1.0f;
+   mNearDist = 0.5f;
+   mFarDist = 200.0f;
 }
 
 SimplePlayerData::~SimplePlayerData()
@@ -20,9 +27,18 @@ SimplePlayerData::~SimplePlayerData()
 void SimplePlayerData::initPersistFields()
 {
    addField("MoveSpeed", TYPEID< F32 >(), Offset(mMoveSpeed, SimplePlayerData),
-      "");
+            "");
    addField("Friction", TYPEID< F32 >(), Offset(mFriction, SimplePlayerData),
-      "");
+            "");
+
+   addField("FOV", TYPEID< F32 >(), Offset(mFOV, SimplePlayerData),
+            "");
+   addField("AspectRatio", TYPEID< F32 >(), Offset(mAspectRatio, SimplePlayerData),
+            "");
+   addField("NearDist", TYPEID< F32 >(), Offset(mNearDist, SimplePlayerData),
+            "");
+   addField("FarDist", TYPEID< F32 >(), Offset(mFarDist, SimplePlayerData),
+            "");
 
    Parent::initPersistFields();
 }
@@ -60,7 +76,13 @@ SimplePlayer::SimplePlayer()
    mMovingForward = false;
    mMovingBackward = false;
 
+   mRenderFrustum = false;
+
    mTickCount = 0;
+
+   CollisionMoveMask = (TerrainObjectType | PlayerObjectType |
+      StaticShapeObjectType | VehicleObjectType |
+      VehicleBlockerObjectType | DynamicShapeObjectType | StaticObjectType | EntityObjectType | TriggerObjectType);
 }
 
 SimplePlayer::~SimplePlayer()
@@ -71,13 +93,15 @@ SimplePlayer::~SimplePlayer()
 void SimplePlayer::initPersistFields()
 {
    addField("MovingForward", TYPEID< bool >(), Offset(mMovingForward, SimplePlayer),
-      "");
+            "");
    addField("MovingBackward", TYPEID< bool >(), Offset(mMovingBackward, SimplePlayer),
-      "");
+            "");
    addField("MovingRight", TYPEID< bool >(), Offset(mMovingRight, SimplePlayer),
-      "");
+            "");
    addField("MovingLeft", TYPEID< bool >(), Offset(mMovingLeft, SimplePlayer),
-      "");
+            "");
+   addField("RenderFrustum", TYPEID< bool >(), Offset(mRenderFrustum, SimplePlayer),
+            "");
    addField("ThinkFunction", TypeCaseString, Offset(mThinkFunction, SimplePlayer), "");
 
    Parent::initPersistFields();
@@ -110,6 +134,8 @@ bool SimplePlayer::onAdd()
       scriptOnAdd();
    }
 
+   if (isServerObject())
+      mCollision.prepCollision(this);
 
    return true;
 }
@@ -118,38 +144,13 @@ void SimplePlayer::onRemove()
 {
    Parent::onRemove();
    removeFromScene();
+   mCollision.safeDelete();
+   disableCollision();
 }
 
 void SimplePlayer::advanceTime(F32 dt)
 {
 }
-
-void SimplePlayer::doCollision(Point3F* newPos)
-{
-   Point3F currPos = getPosition();
-   VectorF dir = *newPos - currPos;
-
-   if (dir.magnitudeSafe() != 0.0f)
-   {
-      dir.normalizeSafe();
-      Point3F extent = *newPos + dir * mObjBox.maxExtents;
-
-      F32 totalDist = Point3F(extent - currPos).magnitudeSafe();
-      F32 moveDist = Point3F(*newPos - currPos).magnitudeSafe();
-      F32 movePercent = (moveDist / totalDist);
-
-      RayInfo rInfo;
-      U32 collisionMask = TerrainObjectType | StaticShapeObjectType | StaticObjectType;
-
-      if (getContainer()->castRay(currPos, extent, collisionMask, &rInfo))
-      {
-         *newPos = currPos + dir * rInfo.t * movePercent;
-         mVelocity -= mVelocity * rInfo.normal;
-      }
-   }
-}
-
-#define StokesDrag
 
 void SimplePlayer::processTick(const Move* move)
 {
@@ -160,18 +161,14 @@ void SimplePlayer::processTick(const Move* move)
 
    mVelocity += moveAcceleration * TickSec - mVelocity * mDataBlock->getFriction();
 
-   if (standingOnGround())
+   if(standingOnGround())
    {
-      mVelocity.z = 0;
+      mVelocity.z = 0.0f;
    }
 
-   Point3F currPos = getPosition();
-   Point3F newPos = currPos + mVelocity * TickSec;
 
-   doCollision(&newPos);
-
-   setPosition(newPos);
-   setMaskBits(TransformMask);
+   mCollision.update();
+   updatePosition(TickSec);
 
    doThink();
 }
@@ -207,6 +204,52 @@ void SimplePlayer::doThink()
          break;
       }
    }
+}
+
+void SimplePlayer::updatePosition(const F32 travelTime)
+{
+   Point3F newPos;
+
+   newPos = _move(travelTime);
+
+   setPosition(newPos);
+   setMaskBits(TransformMask);
+}
+
+void SimplePlayer::prepRenderImage(SceneRenderState* state)
+{
+   ObjectRenderInst *ori = state->getRenderPass()->allocInst<ObjectRenderInst>();
+   ori->renderDelegate.bind(this, &SimplePlayer::debugRenderDelegate);
+   ori->type = RenderPassManager::RIT_Editor;
+   state->getRenderPass()->addInst(ori);
+
+   Parent::prepRenderImage(state);
+}
+
+void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* state, BaseMatInstance* overrideMat)
+{
+   if(mRenderFrustum)
+   {
+      MatrixF trans;
+      getEyeTransform(&trans);
+
+      Frustum frustum;
+      frustum.set(false, getDataBlock()->getFOV(), getDataBlock()->getAspectRatio(), getDataBlock()->getNearDist(), getDataBlock()->getFarDist(), trans);
+
+      GFXDrawUtil* du = GFX->getDrawUtil();
+      du->drawFrustum(frustum, ColorI(200, 70, 50, 150));
+   }
+}
+
+bool SimplePlayer::standingOnGround()
+{
+   RayInfo rInfo;
+   U32 collisionMask = TerrainObjectType | StaticShapeObjectType | StaticObjectType;
+
+   Point3F target = getPosition();
+   target.z -= mObjBox.maxExtents.z + 0.005;
+
+   return getContainer()->castRay(getPosition(), target, collisionMask, &rInfo);
 }
 
 ImplementEnumType(SimplePlayerActions, "")
@@ -255,17 +298,6 @@ void SimplePlayer::unpackUpdate(NetConnection* conn, BitStream* stream)
    }
 }
 
-bool SimplePlayer::standingOnGround()
-{
-   RayInfo rInfo;
-   U32 collisionMask = TerrainObjectType | StaticShapeObjectType | StaticObjectType;
-
-   Point3F target = getPosition();
-   target.z -= mObjBox.maxExtents.z + 0.005;
-
-   return getContainer()->castRay(getPosition(), target, collisionMask, &rInfo);
-}
-
 FeatureVector::FeatureVector()
 {
 }
@@ -279,5 +311,141 @@ void FeatureVector::initPersistFields()
    addField("TickCount", TypeS32, Offset(mTickCount, FeatureVector), "");
 }
 
+///////////////////////////////////////////////////////////////////////////////////
+//  COLLISION  ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 
 
+void SimplePlayer::handleCollision(Collision& col, VectorF velocity)
+{
+   if (col.object && (mCollision.getContactInfo().contactObject == NULL ||
+      col.object->getId() != mCollision.getContactInfo().contactObject->getId()))
+   {
+      queueCollision(col.object, velocity - col.object->getVelocity());
+
+      //do the callbacks to script for this collision
+      if (isMethod("onCollision"))
+      {
+         S32 matId = col.material != NULL ? col.material->getMaterial()->getId() : 0;
+         Con::executef(this, "onCollision", col.object, col.normal, col.point, matId, velocity);
+      }
+
+      if (isMethod("onCollisionEvent"))
+      {
+         S32 matId = col.material != NULL ? col.material->getMaterial()->getId() : 0;
+         Con::executef(this, "onCollisionEvent", col.object, col.normal, col.point, matId, velocity);
+      }
+   }
+}
+
+Point3F SimplePlayer::_move(const F32 travelTime)
+{
+
+   // Try and move to new pos
+   F32 totalMotion = 0.0f;
+
+   Point3F start;
+   Point3F initialPosition;
+   getTransform().getColumn(3, &start);
+   initialPosition = start;
+
+   VectorF firstNormal(0.0f, 0.0f, 0.0f);
+   F32 time = travelTime;
+   U32 count = 0;
+   S32 sMoveRetryCount = 5;
+
+   mCollision.getCollisionList().clear();
+
+   for (; count < sMoveRetryCount; count++)
+   {
+      F32 speed = mVelocity.len();
+      if (!speed)
+         break;
+
+      Point3F end = start + mVelocity * time;
+
+      bool collided = mCollision.checkCollisions(time, &mVelocity, start);
+
+      if (mCollision.getCollisionList().getCount() != 0 && mCollision.getCollisionList().getTime() < 1.0f)
+      {
+         // Set to collision point
+         F32 velLen = mVelocity.len();
+
+         F32 dt = time * getMin(mCollision.getCollisionList().getTime(), 1.0f);
+         start += mVelocity * dt;
+         time -= dt;
+
+         totalMotion += velLen * dt;
+
+         // Back off...
+         if (velLen > 0.f)
+         {
+            F32 newT = getMin(0.01f / velLen, dt);
+            start -= mVelocity * newT;
+            totalMotion -= velLen * newT;
+         }
+
+         const Collision *collision = &mCollision.getCollisionList()[0];
+         const Collision *cp = collision + 1;
+         const Collision *ep = collision + mCollision.getCollisionList().getCount();
+         for (; cp != ep; cp++)
+         {
+            if (cp->faceDot > collision->faceDot)
+               collision = cp;
+         }
+
+         F32 bd = -mDot(mVelocity, collision->normal);
+
+         // Subtract out velocity
+         F32 sNormalElasticity = 0.01f;
+         VectorF dv = collision->normal * (bd + sNormalElasticity);
+         mVelocity += dv;
+         if (count == 0)
+         {
+            firstNormal = collision->normal;
+         }
+         else
+         {
+            if (count == 1)
+            {
+               // Re-orient velocity along the crease.
+               if (mDot(dv, firstNormal) < 0.0f &&
+                  mDot(collision->normal, firstNormal) < 0.0f)
+               {
+                  VectorF nv;
+                  mCross(collision->normal, firstNormal, &nv);
+                  F32 nvl = nv.len();
+                  if (nvl)
+                  {
+                     if (mDot(nv, mVelocity) < 0.0f)
+                        nvl = -nvl;
+                     nv *= mVelocity.len() / nvl;
+                     mVelocity = nv;
+                  }
+               }
+            }
+         }
+      }
+      else
+      {
+         start = end;
+         break;
+      }
+   }
+
+   if (count == sMoveRetryCount)
+   {
+      // Failed to move
+      start = initialPosition;
+      mVelocity.set(0.0f, 0.0f, 0.0f);
+   }
+
+   return start;
+}
+
+DefineEngineMethod(SimplePlayer, CanSee, bool, (SceneObject* other),, "")
+{
+   Frustum frustum;
+   frustum.set(false, object->getDataBlock()->getFOV(), object->getDataBlock()->getAspectRatio(), object->getDataBlock()->getNearDist(), object->getDataBlock()->getFarDist(), object->getTransform());
+   return frustum.isCulled(other->getObjBox());
+}

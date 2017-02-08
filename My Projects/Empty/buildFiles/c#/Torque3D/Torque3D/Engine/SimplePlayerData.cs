@@ -92,6 +92,30 @@ namespace Torque3D
          set { setFieldValue("Friction", value.ToString()); }
       }
 
+      public float FOV
+      {
+         get { return float.Parse(getFieldValue("FOV")); }
+         set { setFieldValue("FOV", value.ToString()); }
+      }
+
+      public float AspectRatio
+      {
+         get { return float.Parse(getFieldValue("AspectRatio")); }
+         set { setFieldValue("AspectRatio", value.ToString()); }
+      }
+
+      public float NearDist
+      {
+         get { return float.Parse(getFieldValue("NearDist")); }
+         set { setFieldValue("NearDist", value.ToString()); }
+      }
+
+      public float FarDist
+      {
+         get { return float.Parse(getFieldValue("FarDist")); }
+         set { setFieldValue("FarDist", value.ToString()); }
+      }
+
       #endregion
 
    }

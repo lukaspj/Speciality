@@ -480,6 +480,7 @@ class SceneObject : public NetObject, private SceneContainer::Link, public Proce
 
       /// Returns the bounding box for this object in local coordinates.
       const Box3F& getObjBox() const { return mObjBox; }
+      void setObjBox(Box3F objBox)  { mObjBox = objBox; }
 
       /// Returns the bounding box for this object in world coordinates.
       const Box3F& getWorldBox() const { return mWorldBox; }

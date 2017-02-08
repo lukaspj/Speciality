@@ -64,6 +64,22 @@ namespace Torque3D
          
          	return  _SimplePlayer_createFunc();
          }
+
+         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+         [return:MarshalAs(UnmanagedType.I1)]
+         private delegate bool _SimplePlayer_CanSee(IntPtr other);
+         private static _SimplePlayer_CanSee _SimplePlayer_CanSeeFunc;
+         internal static bool SimplePlayer_CanSee(IntPtr other)
+         {
+         	if (_SimplePlayer_CanSeeFunc == null)
+         	{
+               _SimplePlayer_CanSeeFunc =
+         			(_SimplePlayer_CanSee)Marshal.GetDelegateForFunctionPointer(Torque3D.DllLoadUtils.GetProcAddress(Torque3D.Torque3DLibHandle,
+                     "fnSimplePlayer_CanSee"), typeof(_SimplePlayer_CanSee));
+         	}
+         
+         	return _SimplePlayer_CanSeeFunc(other);
+         }
       
       }
       
@@ -71,7 +87,11 @@ namespace Torque3D
 
 
       #region Functions
-      
+
+	   public bool CanSee(SimplePlayer other)
+	   {
+	      return InternalUnsafeMethods.SimplePlayer_CanSee(other.ObjectPtr);
+	   }
       
       
       #endregion
@@ -105,6 +125,13 @@ namespace Torque3D
          {
          	get { return GenericMarshal.StringToBool(getFieldValue("MovingBackward")); }
          	set { setFieldValue("MovingBackward", value ? "1" : "0"); }
+         }
+      
+      
+         public bool RenderFrustum
+         {
+         	get { return GenericMarshal.StringToBool(getFieldValue("RenderFrustum")); }
+         	set { setFieldValue("RenderFrustum", value ? "1" : "0"); }
          }
       
       

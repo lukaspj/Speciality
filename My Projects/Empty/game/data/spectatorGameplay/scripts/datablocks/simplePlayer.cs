@@ -26,14 +26,14 @@ datablock SimplePlayerData(SPD) {
 function createSP() {
   new SimplePlayer(SP) {
     datablock = SPD;
-    position = "0 0 1";
+    position = "2 2 1";
     ThinkFunction = "SPThink";
   };
 
-  %availableSkins = "red blue darkgreen pink";
+  %availableSkins = "blue red darkgreen pink";
 
   %count = getWordCount(%availableSkins);
-  %skin = getWord(%availableSkins, getRandom(%count) );
+  %skin = getWord(%availableSkins, getRandom(%count) - 1 );
   echo("PlayerTexture=" @ %skin @ "_PlayerTexture");
   SP.setSkinName("PlayerTexture=" @ %skin @ "_PlayerTexture");
 }
