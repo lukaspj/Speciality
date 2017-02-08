@@ -52,6 +52,7 @@ public:
    F32 getAspectRatio() const { return mAspectRatio; }
    F32 getNearDist() const { return mNearDist; }
    F32 getFarDist() const { return mFarDist; }
+   S32 getShootDelay() const { return mShootDelay; }
 
 private:
    F32 mMoveSpeed;
@@ -62,6 +63,8 @@ private:
    F32 mAspectRatio;
    F32 mNearDist;
    F32 mFarDist;
+
+   S32 mShootDelay;
 };
 
 class SimplePlayer : public ShapeBase {
@@ -80,6 +83,7 @@ public:
    void onRemove() override;
 
    void advanceTime(F32 dt) override;
+   F32 getDistanceToObstacleInFront();
    void doThink();
    void updatePosition(const F32 travelTime);
    void processTick(const Move* move) override;
@@ -105,10 +109,24 @@ private:
    bool mMovingForward;
    bool mMovingBackward;
    F32 mRot;
+   F32 mHealth;
+
+   bool mPrepared;
+   F32 mLastRot;
+   F32 mLastPosX;
+   F32 mLastPosY;
+
+   F32 mLastHealth;
+
+   S32 mTickCount;
+   S32 mTimeSawEnemy;
+   S32 mTimeTookDamage;
+   S32 mShootDelay;
+   bool mHasThoughtOnce;
+
 
    bool mRenderFrustum;
 
-   S32 mTickCount;
 
    StringTableEntry mThinkFunction;
 
@@ -127,8 +145,13 @@ public:
       MoveRight,
       MoveForward,
       MoveBackward,
-      TurnRight
+      TurnRight,
+      TurnLeft,
+      Shoot,
+      Prepare
    };
+
+   DECLARE_CALLBACK(void, Shoot, ());
 
    // Collision
 private:
@@ -156,7 +179,20 @@ public:
 
    static void initPersistFields();
 
+   F32 mDeltaRot;
+   F32 mDeltaMovedX;
+   F32 mDeltaMovedY;
+   F32 mVelX;
+   F32 mVelY;
+
+   F32 mKillProb;
+   F32 mDistanceToObstacle;
+   F32 mHealth;
+
    S32 mTickCount;
+   S32 mTicksSinceObservedEnemy;
+   S32 mTicksSinceDamage;
+   S32 mShootDelay;
 };
 
 #endif // _SIMPLEPLAYER_H_

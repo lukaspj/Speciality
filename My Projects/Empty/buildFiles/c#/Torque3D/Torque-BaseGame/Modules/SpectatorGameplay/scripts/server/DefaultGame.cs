@@ -80,32 +80,37 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          {
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
             Position = new Point3F(0,0,1),
-            ThinkFunction = "SPThink"
+            ThinkFunction = "SPThink",
+            RenderFrustum = true
          };
 
          SimplePlayer player2 = new SimplePlayer()
          {
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
             Position = new Point3F(50,0,1),
-            ThinkFunction = "SPThink"
+            ThinkFunction = "SPThink",
+            RenderFrustum = true
          };
          SimplePlayer player3 = new SimplePlayer()
          {
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
             Position = new Point3F(-50, 0,1),
-            ThinkFunction = "SPThink"
+            ThinkFunction = "SPThink",
+            RenderFrustum = true
          };
          SimplePlayer player4 = new SimplePlayer()
          {
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
             Position = new Point3F(0,50,1),
-            ThinkFunction = "SPThink"
+            ThinkFunction = "SPThink",
+            RenderFrustum = true
          };
          SimplePlayer player5 = new SimplePlayer()
          {
             DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
             Position = new Point3F(0,-50,1),
-            ThinkFunction = "SPThink"
+            ThinkFunction = "SPThink",
+            RenderFrustum = true
          };
 
          player.registerObject();
@@ -113,6 +118,20 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          player3.registerObject();
          player4.registerObject();
          player5.registerObject();
+         SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
+
+         if (playersGroup == null)
+         {
+            playersGroup = new SimGroup("Players", true);
+            Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
+         }
+
+         playersGroup.add(player);
+         playersGroup.add(player2);
+         playersGroup.add(player3);
+         playersGroup.add(player4);
+         playersGroup.add(player5);
+
          SimplePlayerData.searchForPlayers(player,bord);
          client.setFieldValue("player", player.getId().ToString());
          //player.setSkinName("PlayerMaterial");

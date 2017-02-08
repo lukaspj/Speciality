@@ -18,6 +18,8 @@ SimplePlayerData::SimplePlayerData()
    mAspectRatio = 1.0f;
    mNearDist = 0.5f;
    mFarDist = 200.0f;
+
+   mShootDelay = 15;
 }
 
 SimplePlayerData::~SimplePlayerData()
@@ -43,6 +45,9 @@ void SimplePlayerData::initPersistFields()
    addField("FarDist", TYPEID< F32 >(), Offset(mFarDist, SimplePlayerData),
             "");
 
+   addField("ShootDelay", TYPEID< F32 >(), Offset(mShootDelay, SimplePlayerData),
+            "");
+
    Parent::initPersistFields();
 }
 
@@ -66,6 +71,7 @@ void SimplePlayerData::packData(BitStream* stream)
    stream->write(mAspectRatio);
    stream->write(mNearDist);
    stream->write(mFarDist);
+   stream->write(mShootDelay);
 }
 
 void SimplePlayerData::unpackData(BitStream* stream)
@@ -78,6 +84,7 @@ void SimplePlayerData::unpackData(BitStream* stream)
    stream->read(&mAspectRatio);
    stream->read(&mNearDist);
    stream->read(&mFarDist);
+   stream->read(&mShootDelay);
 }
 
 
@@ -90,6 +97,18 @@ SimplePlayer::SimplePlayer()
    mMovingBackward = false;
 
    mRot = 0.0f;
+   mHealth = 20.0f;
+
+   mPrepared = false;
+   mLastRot = 0.0f;
+   mLastPosX = 0.0f;
+   mLastPosY = 0.0f;
+
+   mLastHealth = 20.0f;
+
+   mTimeSawEnemy = S32_MIN;
+   mTimeTookDamage = S32_MIN;
+   mShootDelay = S32_MIN;
 
    mRenderFrustum = false;
 
@@ -168,6 +187,33 @@ void SimplePlayer::advanceTime(F32 dt)
 {
 }
 
+F32 SimplePlayer::getDistanceToObstacleInFront()
+{
+
+   F32 width = mObjBox.maxExtents.x;
+   F32 depth = mObjBox.maxExtents.y;
+   F32 height = mObjBox.maxExtents.z;
+   MatrixF mat = getTransform();
+   Point3F leftPoint = Point3F(-width / 2, depth / 2, height / 2);
+   Point3F rightPoint = Point3F(width / 2, depth / 2, height / 2);
+   mat.mulP(leftPoint);
+   mat.mulP(rightPoint);
+
+   Point3F dir = getTransform().getForwardVector();
+   RayInfo rInfo;
+
+   F32 dist1 = 0.0f, dist2 = 0.0f;
+
+   disableCollision();
+   if (getContainer()->castRay(leftPoint, leftPoint + (dir * 100), CollisionMoveMask, &rInfo))
+      dist1 = rInfo.distance;
+   if (getContainer()->castRay(rightPoint, rightPoint + (dir * 100), CollisionMoveMask, &rInfo))
+      dist2 = rInfo.distance;
+   enableCollision();
+
+   return dist1 > dist2 ? dist2 : dist1;
+}
+
 void SimplePlayer::processTick(const Move* move)
 {
    // apply gravity
@@ -191,28 +237,77 @@ void SimplePlayer::processTick(const Move* move)
 
 
 ImplementEnumType(SimplePlayerActions, "")
-{
-   SimplePlayer::MoveLeft, "MoveLeft", "\n"
-},
+{ SimplePlayer::MoveLeft, "MoveLeft", "\n" },
 { SimplePlayer::MoveRight,     "MoveRight", "\n" },
 { SimplePlayer::MoveForward,     "MoveForward", "\n" },
 { SimplePlayer::MoveBackward,     "MoveBackward", "\n" },
-{ SimplePlayer::TurnRight,     "TurnRight", "\n" }
-   EndImplementEnumType;
+{ SimplePlayer::TurnRight,     "TurnRight", "\n" },
+{ SimplePlayer::TurnLeft,     "TurnLeft", "\n" },
+{ SimplePlayer::Shoot,     "Shoot", "\n" },
+{ SimplePlayer::Prepare,     "Prepare", "\n" }
+EndImplementEnumType;
 
 void SimplePlayer::doThink()
 {
    if (isServerObject() && mThinkFunction)
    {
+      if (!mHasThoughtOnce)
+      {
+         mHasThoughtOnce = true;
+         mLastRot = mRot;
+         mLastPosX = getPosition().x;
+         mLastPosY = getPosition().y;
+      }
+
+      F32 killProb = 0.0f; // todo Support more players?
+
+      SimGroup *playersGroup = static_cast<SimGroup*>(Sim::findObject("Players"));
+      for(int i = 0; i < playersGroup->size(); i++)
+      {
+         SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
+         if (player == this) continue;
+
+         killProb = Con::executef("GetKillPropability", this, player).getFloatValue();
+      }
+
       FeatureVector *features = new FeatureVector();
       features->registerObject();
+
+      features->mDeltaRot = mLastRot - mRot;
+      features->mDeltaMovedX = mLastPosX - getPosition().x;
+      features->mDeltaMovedY = mLastPosY - getPosition().y;
+      features->mVelX = getVelocity().x;
+      features->mVelY = getVelocity().y;
+
+      features->mKillProb = killProb;
+      features->mDistanceToObstacle = getDistanceToObstacleInFront();
+      features->mHealth = mHealth;
+
       features->mTickCount = ++mTickCount;
+      features->mTicksSinceDamage = mTickCount - mTimeTookDamage;
+      features->mTicksSinceObservedEnemy = mTickCount - mTimeSawEnemy;
+      features->mShootDelay = mShootDelay;
       Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
       features->safeDeleteObject();
+
+      mLastRot = mRot;
+      mLastPosX = getPosition().x;
+      mLastPosY = getPosition().y;
+      mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
+      if(mHealth != mLastHealth)
+      {
+         mTimeTookDamage = mTickCount;
+      }
+
       mMovingLeft = false;
       mMovingRight = false;
       mMovingForward = false;
       mMovingBackward = false;
+      if (mPrepared)
+      {
+         mPrepared = false;
+         doThink();
+      }
       switch (action)
       {
       case MoveForward:
@@ -230,11 +325,24 @@ void SimplePlayer::doThink()
       case TurnRight:
          mRot += mDataBlock->getTurnSpeed();
          break;
+      case TurnLeft:
+         mRot -= mDataBlock->getTurnSpeed();
+         break;
+      case Shoot:
+         Shoot_callback();
+         mShootDelay = mDataBlock->getShootDelay();
+         break;
+      case Prepare:
+         mPrepared = true;
+         break;
       default:
          break;
       }
    }
 }
+
+IMPLEMENT_CALLBACK(SimplePlayer, Shoot, void, (), (),
+   "");
 
 void SimplePlayer::updatePosition(const F32 travelTime)
 {
@@ -262,6 +370,7 @@ void SimplePlayer::prepRenderImage(SceneRenderState* state)
 
 void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* state, BaseMatInstance* overrideMat)
 {
+   GFXDrawUtil* du = GFX->getDrawUtil();
    if(mRenderFrustum)
    {
       MatrixF trans;
@@ -270,7 +379,6 @@ void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* s
       Frustum frustum;
       frustum.set(false, getDataBlock()->getFOV(), getDataBlock()->getAspectRatio(), getDataBlock()->getNearDist(), getDataBlock()->getFarDist(), trans);
 
-      GFXDrawUtil* du = GFX->getDrawUtil();
       du->drawFrustum(frustum, ColorI(200, 70, 50, 150));
    }
 }
@@ -278,12 +386,11 @@ void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* s
 bool SimplePlayer::standingOnGround()
 {
    RayInfo rInfo;
-   U32 collisionMask = TerrainObjectType | StaticShapeObjectType | StaticObjectType;
 
    Point3F target = getPosition();
    target.z -= mObjBox.maxExtents.z + 0.005;
 
-   return getContainer()->castRay(getPosition(), target, collisionMask, &rInfo);
+   return getContainer()->castRay(getPosition(), target, CollisionMoveMask, &rInfo);
 }
 
 bool SimplePlayer::onNewDataBlock(GameBaseData* dptr, bool reload)
@@ -303,6 +410,7 @@ U32 SimplePlayer::packUpdate(NetConnection* conn, U32 mask, BitStream* stream)
    if(stream->writeFlag(mask & InitialUpdateMask))
    {
       stream->writeString(mThinkFunction);
+      stream->writeFlag(mRenderFrustum);
    }
 
    if(stream->writeFlag(mask & TransformMask))
@@ -324,6 +432,7 @@ void SimplePlayer::unpackUpdate(NetConnection* conn, BitStream* stream)
       char buffer[256];
       stream->readString(buffer);
       mThinkFunction = buffer;
+      mRenderFrustum = stream->readFlag();
    }
 
    if(stream->readFlag())
@@ -346,6 +455,11 @@ DefineEngineMethod(SimplePlayer, CanSee, bool, (SceneObject* other), , "")
    return frustum.isCulled(other->getObjBox());
 }
 
+DefineEngineMethod(SimplePlayer, GetEulerRotation, Point3F, (), , "")
+{
+   return object->getTransform().toEuler();
+}
+
 FeatureVector::FeatureVector()
 {
 }
@@ -356,7 +470,22 @@ FeatureVector::~FeatureVector()
 
 void FeatureVector::initPersistFields()
 {
+   addField("DeltaRot", TypeS32, Offset(mDeltaRot, FeatureVector), "");
+   addField("DeltaMovedX", TypeS32, Offset(mDeltaMovedX, FeatureVector), "");
+   addField("DeltaMovedY", TypeS32, Offset(mDeltaMovedY, FeatureVector), "");
+   addField("VelX", TypeS32, Offset(mVelX, FeatureVector), "");
+   addField("VelY", TypeS32, Offset(mVelY, FeatureVector), "");
+
+   addField("KillProb", TypeS32, Offset(mKillProb, FeatureVector), "");
+   addField("DistanceToObstacle", TypeS32, Offset(mDistanceToObstacle, FeatureVector), "");
+   addField("Health", TypeS32, Offset(mHealth, FeatureVector), "");
+
    addField("TickCount", TypeS32, Offset(mTickCount, FeatureVector), "");
+   addField("TicksSinceObservedEnemy", TypeS32, Offset(mTicksSinceObservedEnemy, FeatureVector), "");
+   addField("TicksSinceDamage", TypeS32, Offset(mTicksSinceDamage, FeatureVector), "");
+   addField("ShootDelay", TypeS32, Offset(mShootDelay, FeatureVector), "");
+   
+   Parent::initPersistFields();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

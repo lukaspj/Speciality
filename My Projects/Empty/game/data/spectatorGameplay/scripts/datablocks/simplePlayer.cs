@@ -21,6 +21,7 @@ singleton Material(Pink_PlayerMaterial) {
 datablock SimplePlayerData(SPD) {
   shapeFile = "data/spectatorGameplay/art/GameShapes/player.dts";
   moveSpeed = 3;
+  farDist = 100;
 };
 
 function createSP() {

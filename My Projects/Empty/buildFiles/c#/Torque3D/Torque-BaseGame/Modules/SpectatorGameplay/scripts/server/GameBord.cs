@@ -101,28 +101,28 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             ShapeName = shape,
             Position = XYToPoint(_gameSizeX-1,(_gameSizeY-1)/2),
             CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(1, _gameSizeY, 0.5f)
+            Scale = new Point3F(1, _gameSizeY, 0.7f)
          };
          TSStatic leftWall = new TSStatic()
          {
             ShapeName = shape,
             Position = XYToPoint(0,(_gameSizeY-1)/2),
             CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(1, GameSizeY, 0.5f)
+            Scale = new Point3F(1, GameSizeY, 0.7f)
          };
          TSStatic frontWall = new TSStatic()
          {
             ShapeName = shape,
             Position = XYToPoint((_gameSizeX-1)/2, 0),
             CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(_gameSizeX, 1, 0.5f)
+            Scale = new Point3F(_gameSizeX, 1, 0.7f)
          };
          TSStatic backWall = new TSStatic()
          {
             ShapeName = shape,
             Position = XYToPoint((_gameSizeX-1)/2,_gameSizeY-1),
             CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(_gameSizeX, 1, 0.5f)
+            Scale = new Point3F(_gameSizeX, 1, 0.7f)
          };
          rightWall.registerObject();
          leftWall.registerObject();
@@ -132,7 +132,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          AddShape(leftWall);
          AddShape(frontWall);
          AddShape(backWall);
-
       }
 
       public void GenerateRandomObstacles(int count)
@@ -150,7 +149,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                ShapeName = shape,
                Position = XYToPoint(xpos,ypos),
                CollisionType = TSMeshType.Bounds,
-               Scale = new Point3F(xscale, yscale, 0.5f)
+               Scale = new Point3F(xscale, yscale, 0.7f)
             };
             obstacle.registerObject();
             AddShape(obstacle);

@@ -78,7 +78,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          return null;
       }
 
-      public double GetKillPropability(SimplePlayer obj, SimplePlayer other)
+      public static double GetKillPropability(SimplePlayer obj, SimplePlayer other)
       {
          Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
          float objZRoation = obj.Rotation.Z;
@@ -87,7 +87,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          double alpha = objZRoation - Math.Atan((otherPoint.Y - objPoint.Y) / (otherPoint.X - objPoint.X));
          double distanceFromLOS = distance * Math.Sin(alpha);
          
-         Normal dist = new Normal(0, float.Parse(getFieldValue("variance")));
+         Normal dist = new Normal(0, float.Parse(obj.DataBlock.getFieldValue("variance")));
          double max = dist.Maximum;
          double normalizingMult = 1 / max;
          double killProp = dist.Density(distanceFromLOS) * normalizingMult;
