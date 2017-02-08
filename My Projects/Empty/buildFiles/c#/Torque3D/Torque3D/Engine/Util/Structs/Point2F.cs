@@ -41,6 +41,13 @@ namespace Torque3D.Util
          X = point2FStruct.x;
          Y = point2FStruct.y;
       }
+      /**
+       * Distance from point p1 to p2
+       * */
+      public static double Distance(Point2F p1, Point2F p2)
+      {
+         return Math.Sqrt(Math.Pow((p2.X - p1.X), 2) + Math.Pow((p2.Y - p1.Y), 2));
+      }
 
       public static Point2F operator +(Point2F p1, Point2F p2)
       {

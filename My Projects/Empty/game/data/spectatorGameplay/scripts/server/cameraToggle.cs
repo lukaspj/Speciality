@@ -34,6 +34,6 @@ function serverCmdadjustCamera(%client, %adjustment)
    }
    if(%client.camera.controlMode $= "Overhead")
    {
-      %client.camera.setVelocity("0 0" SPC %adjustment);
+      %client.camera.position = VectorAdd(%client.camera.position, "0 0 " @ %adjustment);
    }
 }
