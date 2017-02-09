@@ -24,7 +24,7 @@ SimplePlayerData::SimplePlayerData()
 
 SimplePlayerData::~SimplePlayerData()
 {
-   
+
 }
 
 void SimplePlayerData::initPersistFields()
@@ -122,7 +122,7 @@ SimplePlayer::SimplePlayer()
 
 SimplePlayer::~SimplePlayer()
 {
-   
+
 }
 
 void SimplePlayer::initPersistFields()
@@ -267,7 +267,7 @@ void SimplePlayer::doThink()
          SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
          if (player == this) continue;
 
-         killProb = Con::executef("GetKillPropability", this, player).getFloatValue();
+         //killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
       }
 
       FeatureVector *features = new FeatureVector();
@@ -419,7 +419,7 @@ U32 SimplePlayer::packUpdate(NetConnection* conn, U32 mask, BitStream* stream)
       mathWrite(*stream, getScale());
       stream->write(mRot);
    }
-   
+
    return retMask;
 }
 
@@ -484,7 +484,7 @@ void FeatureVector::initPersistFields()
    addField("TicksSinceObservedEnemy", TypeS32, Offset(mTicksSinceObservedEnemy, FeatureVector), "");
    addField("TicksSinceDamage", TypeS32, Offset(mTicksSinceDamage, FeatureVector), "");
    addField("ShootDelay", TypeS32, Offset(mShootDelay, FeatureVector), "");
-   
+
    Parent::initPersistFields();
 }
 

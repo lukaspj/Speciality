@@ -17,8 +17,13 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public int GameSizeY => _gameSizeY;
       private bool[,] gameBord;
       private string shape = "data/spectatorGameplay/art/GameShapes/player.dts";
+      private SimGroup obstacleGroup;
       public GameBord(int sizeX, int sizeY)
       {
+
+         obstacleGroup = new SimGroup("Obstacles", true);
+         Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
+
          _gameSizeX = sizeX % 2 == 0 ? ++sizeX : sizeX;
          _gameSizeY = sizeY % 2 == 0 ? ++sizeY : sizeY;
          gameBord = new bool[_gameSizeX, _gameSizeY];
@@ -117,6 +122,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                }
             }
             i_step++;
+            isAdding = !isAdding;
          }
       }
 
@@ -126,7 +132,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          float leftWallPos = -_gameSizeX / 2;
          float frontWallpos = _gameSizeY / 2;
          float backWallPos = -_gameSizeY / 2;
-
          TSStatic rightWall = new TSStatic()
          {
             ShapeName = shape,
@@ -163,11 +168,15 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          AddShape(leftWall);
          AddShape(frontWall);
          AddShape(backWall);
+         obstacleGroup.add(leftWall);
+         obstacleGroup.add(rightWall);
+         obstacleGroup.add(frontWall);
+         obstacleGroup.add(backWall);
       }
 
       public void GenerateRandomObstacles(int count)
       {
-
+         
          Random rand = new Random();
          for (int i = 0; i < count; i++)
          {
@@ -184,6 +193,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             };
             obstacle.registerObject();
             AddShape(obstacle);
+            obstacleGroup.add(obstacle);
          }
       }
 

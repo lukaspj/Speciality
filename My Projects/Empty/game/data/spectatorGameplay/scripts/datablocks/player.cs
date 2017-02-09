@@ -5,9 +5,12 @@ datablock PlayerData(BoxPlayer){
   variance = 0.2;
   maxHealth = 20;
   damage = 1;
+  killScore = 10;
+  respawnTime = 3000; //ms
+  winningScore = 100;
 };
 
 singleton Material(PlayerMaterial){
   diffuseColor[0] = "1 0 0";
   mapTo = "PlayerTexture";
-}; C:\Users\Gomer\Speciality\Engine\source\T3D\speciality\simplePlayer.cpp
+};

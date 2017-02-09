@@ -4,8 +4,6 @@ using Torque3D;
 using Torque3D.Engine;
 using Torque3D.Engine.Util.Enums;
 using Torque3D.Util;
-using Torque3D.Engine.Util.Enums;
-using System;
 
 namespace Game.Modules.SpectatorGameplay.scripts.server
 {
@@ -29,6 +27,31 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
 
          bord = new GameBord(100,100);
+         //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
+         SimGroup playersGroup = new SimGroup("Players", true);
+         Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
+
+         bord.CreateBoundingBox();
+         bord.GenerateRandomObstacles(50);
+         for (int i = 0; i < 25; i++)
+         {
+            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F(0, 0, 1));
+            SimplePlayer player = new SimplePlayer()
+            {
+
+               DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
+               Position = playerSpawn,
+               ThinkFunction = "SPThink"
+            };
+            player.DataBlock.setFieldValue("spawn", playerSpawn.ToString());
+
+            player.registerObject();
+
+            playersGroup.add(player);
+         
+         }
+
+
          // Leave $Game::defaultPlayerClass and $Game::defaultPlayerDataBlock as empty strings ("")
          // to spawn a the $Game::defaultCameraClass as the control object.
          Globals.SetString("Game::DefaultPlayerClass", "");
@@ -49,7 +72,13 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Global movement speed that affects all Cameras
          Globals.SetInt("Camera::MovementSpeed", 30);
       }
-
+      [ConsoleFunction]
+      public void ResetGame()
+      {
+         Sim.FindObject<SimGroup>("Players").delete();
+         Sim.FindObject<SimGroup>("Obstacles").delete();
+         initGameVars();
+      }
       //-----------------------------------------------------------------------------
       // DefaultGame manages the communication between the server's world and the
       // client's simulation. These functions are responsible for maintaining the
@@ -75,70 +104,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
          // Find a spawn point for the camera
          var cameraSpawnPoint = pickCameraSpawnPoint(Globals.GetString("Game::DefaultCameraSpawnGroups"));
-         
-         SimplePlayer player = new SimplePlayer()
-         {
 
-            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
-            ThinkFunction = "SPThink"
-         };
-
-         SimplePlayer player2 = new SimplePlayer()
-         {
-
-            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = bord.PickPlayerSpawn(new Point3F(0,0,0)),
-            ThinkFunction = "SPThink"
-         };
-         SimplePlayer player3 = new SimplePlayer()
-         {
-
-            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
-            ThinkFunction = "SPThink"
-         };
-         SimplePlayer player4 = new SimplePlayer()
-         {
-
-            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
-            ThinkFunction = "SPThink"
-         };
-         SimplePlayer player5 = new SimplePlayer()
-         {
-
-            DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-            Position = bord.PickPlayerSpawn(new Point3F(0,0,1)),
-            ThinkFunction = "SPThink"
-         };
-
-         player.registerObject();
-         player2.registerObject();
-         player2.setSkinName("pink");
-         player3.registerObject();
-         player3.setSkinName("blue");
-         player4.registerObject();
-         player4.setSkinName("darkgreen");
-         player5.registerObject();
          SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
-
-         if (playersGroup == null)
-         {
-            playersGroup = new SimGroup("Players", true);
-            Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
-         }
-
-         playersGroup.add(player);
-         playersGroup.add(player2);
-         playersGroup.add(player3);
-         playersGroup.add(player4);
-         playersGroup.add(player5);
-
-         SimplePlayerData.searchForPlayers(player,bord);
-         client.setFieldValue("player", player.getId().ToString());
-         //player.setSkinName("PlayerMaterial");
-         client.setControlObject(player);
+         SimplePlayer p1 = playersGroup.getRandom().As<SimplePlayer>();
+         SimplePlayerData.searchForPlayers(p1, bord);
+         client.setFieldValue("player", p1.getId().ToString());
 
          // Spawn a camera for this client using the found %spawnPoint
 
@@ -161,8 +131,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          //set up the game and game variables
          initGameVars();
-         bord.CreateBoundingBox();
-         bord.GenerateRandomObstacles(50);
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -178,7 +146,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Called by resetMission(), after all the temporary mission objects
          // have been deleted.
          initGameVars();
-
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -221,7 +188,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             // Add it to the MissionCleanup group so that it
             // doesn't get saved to the Mission (and gets cleaned
             // up of course)
-            Sim.FindObject<SimSet>("MissionCleanup").add(spawn);
+            //Sim.FindObject<SimSet>("MissionCleanup").add(spawn);
          }
 
          return Sim.FindObject<SpawnSphere>("DefaultCameraSpawnSphere");
@@ -254,7 +221,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // If we have a camera then set up some properties
          if (camera != null)
          {
-            Sim.FindObject<SimSet>("MissionCleanup").add(camera);
+            //Sim.FindObject<SimSet>("MissionCleanup").add(camera);
             camera.scopeToClient(client);
 
             client.setControlObject(camera);
