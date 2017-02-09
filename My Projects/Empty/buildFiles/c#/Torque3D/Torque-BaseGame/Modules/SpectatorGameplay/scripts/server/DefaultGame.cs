@@ -236,13 +236,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       private static int c = 0;
 
       [ConsoleFunction]
-      public static PlayerAction SPThink(SimplePlayer player)
+      public static PlayerAction SPThink(FeatureVector vector)
       {
          c++;
-         player.MovingLeft = false;
-         player.MovingRight = false;
-         player.MovingForward = false;
-         player.MovingBackward = false;
          if (c < 150) return PlayerAction.MoveForward;
          if (c < 300) return PlayerAction.MoveLeft;
          if (c < 450) return PlayerAction.MoveBackward;

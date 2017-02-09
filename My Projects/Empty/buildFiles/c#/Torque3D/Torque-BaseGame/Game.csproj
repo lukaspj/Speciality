@@ -107,6 +107,7 @@
     <Compile Include="Modules\ClientServer\Server\LevelLoad.cs" />
     <Compile Include="Modules\ClientServer\Server\Message.cs" />
     <Compile Include="Modules\ClientServer\Server\Server.cs" />
+    <Compile Include="Modules\SpectatorGameplay\scripts\server\FeatureVector.cs" />
     <Compile Include="Modules\SpectatorGameplay\scripts\server\GameBord.cs" />
     <Compile Include="Modules\SpectatorGameplay\scripts\server\Observer.cs" />
     <Compile Include="Modules\SpectatorGameplay\scripts\server\DefaultGame.cs" />

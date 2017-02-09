@@ -22,6 +22,14 @@ datablock SimplePlayerData(SPD) {
   shapeFile = "data/spectatorGameplay/art/GameShapes/player.dts";
   moveSpeed = 3;
   farDist = 100;
+  cameraMaxDist = 5;
+  jumpDelay = 0;
+  variance = 0.2;
+  maxHealth = 20;
+  damage = 1;
+  killScore = 10;
+  respawnTime = 3000; //ms
+  winningScore = 100;
 };
 
 function createSP() {
