@@ -20,6 +20,8 @@ SimplePlayerData::SimplePlayerData()
    mFarDist = 200.0f;
 
    mShootDelay = 15;
+
+   mHealth = 100;
 }
 
 SimplePlayerData::~SimplePlayerData()
@@ -48,6 +50,9 @@ void SimplePlayerData::initPersistFields()
    addField("ShootDelay", TYPEID< F32 >(), Offset(mShootDelay, SimplePlayerData),
             "");
 
+   addField("Health", TYPEID< F32 >(), Offset(mHealth, SimplePlayerData),
+            "");
+
    Parent::initPersistFields();
 }
 
@@ -72,6 +77,7 @@ void SimplePlayerData::packData(BitStream* stream)
    stream->write(mNearDist);
    stream->write(mFarDist);
    stream->write(mShootDelay);
+   stream->write(mHealth);
 }
 
 void SimplePlayerData::unpackData(BitStream* stream)
@@ -85,6 +91,7 @@ void SimplePlayerData::unpackData(BitStream* stream)
    stream->read(&mNearDist);
    stream->read(&mFarDist);
    stream->read(&mShootDelay);
+   stream->read(&mHealth);
 }
 
 
@@ -143,6 +150,7 @@ void SimplePlayer::initPersistFields()
    addField("RenderDistance", TYPEID< bool >(), Offset(mRenderDistance, SimplePlayer),
             "");
    addField("ThinkFunction", TypeCaseString, Offset(mThinkFunction, SimplePlayer), "");
+   addField("Health", TypeF32, Offset(mHealth, SimplePlayer), "");
 
    Parent::initPersistFields();
 }
@@ -280,7 +288,7 @@ void SimplePlayer::doThink()
          SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
          if (player == this) continue;
 
-         //killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
+         killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
       }
 
       FeatureVector *features = new FeatureVector();
@@ -433,6 +441,8 @@ bool SimplePlayer::onNewDataBlock(GameBaseData* dptr, bool reload)
    mDataBlock = dynamic_cast< SimplePlayerData* >(dptr);
    if (!mDataBlock || !Parent::onNewDataBlock(dptr, reload))
       return false;
+
+   mHealth = mDataBlock->getHealth();
 
    scriptOnNewDataBlock();
    return true;

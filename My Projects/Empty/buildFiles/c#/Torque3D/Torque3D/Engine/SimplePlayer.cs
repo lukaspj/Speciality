@@ -170,6 +170,13 @@ namespace Torque3D
          }
       
       
+         public float Health
+         {
+         	get { return float.Parse(getFieldValue("Health")); }
+         	set { setFieldValue("Health", value.ToString()); }
+         }
+      
+      
       #endregion
 
 	}

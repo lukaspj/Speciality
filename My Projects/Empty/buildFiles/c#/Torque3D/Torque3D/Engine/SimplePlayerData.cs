@@ -120,6 +120,12 @@ namespace Torque3D
          get { return float.Parse(getFieldValue("FarDist")); }
          set { setFieldValue("FarDist", value.ToString()); }
       }
+      
+      public float Health
+      {
+         get { return float.Parse(getFieldValue("Health")); }
+         set { setFieldValue("Health", value.ToString()); }
+      }
 
       #endregion
 

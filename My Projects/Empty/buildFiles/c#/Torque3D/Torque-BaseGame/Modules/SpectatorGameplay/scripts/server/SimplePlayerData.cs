@@ -23,7 +23,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public void onAdd(SimplePlayer obj)
       {
-         setFieldValue("currentHealth", getFieldValue("maxHealth"));
       }
 
       public void onRemove(SimplePlayer obj)

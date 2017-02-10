@@ -53,6 +53,7 @@ public:
    F32 getNearDist() const { return mNearDist; }
    F32 getFarDist() const { return mFarDist; }
    S32 getShootDelay() const { return mShootDelay; }
+   S32 getHealth() const { return mHealth; }
 
 private:
    F32 mMoveSpeed;
@@ -65,6 +66,8 @@ private:
    F32 mFarDist;
 
    S32 mShootDelay;
+   
+   F32 mHealth;
 };
 
 class SimplePlayer : public ShapeBase {
