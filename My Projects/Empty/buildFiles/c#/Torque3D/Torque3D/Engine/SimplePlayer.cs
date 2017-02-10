@@ -156,6 +156,13 @@ namespace Torque3D
          }
       
       
+         public bool RenderDistance
+         {
+         	get { return GenericMarshal.StringToBool(getFieldValue("RenderDistance")); }
+         	set { setFieldValue("RenderDistance", value ? "1" : "0"); }
+         }
+      
+      
          public string ThinkFunction
          {
          	get { return getFieldValue("ThinkFunction"); }

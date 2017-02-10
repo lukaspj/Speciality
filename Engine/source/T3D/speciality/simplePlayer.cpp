@@ -90,6 +90,8 @@ void SimplePlayerData::unpackData(BitStream* stream)
 
 SimplePlayer::SimplePlayer()
 {
+   mTypeMask |= PlayerObjectType;
+
    mVelocity = VectorF(0, 0, 0);
    mMovingLeft = false;
    mMovingRight = false;
@@ -111,6 +113,7 @@ SimplePlayer::SimplePlayer()
    mShootDelay = S32_MIN;
 
    mRenderFrustum = false;
+   mRenderDistance = false;
 
    mTickCount = 0;
    mThinkFunction = NULL;
@@ -136,6 +139,8 @@ void SimplePlayer::initPersistFields()
    addField("MovingLeft", TYPEID< bool >(), Offset(mMovingLeft, SimplePlayer),
             "");
    addField("RenderFrustum", TYPEID< bool >(), Offset(mRenderFrustum, SimplePlayer),
+            "");
+   addField("RenderDistance", TYPEID< bool >(), Offset(mRenderDistance, SimplePlayer),
             "");
    addField("ThinkFunction", TypeCaseString, Offset(mThinkFunction, SimplePlayer), "");
 
@@ -189,13 +194,12 @@ void SimplePlayer::advanceTime(F32 dt)
 
 F32 SimplePlayer::getDistanceToObstacleInFront()
 {
-
    F32 width = mObjBox.maxExtents.x;
    F32 depth = mObjBox.maxExtents.y;
    F32 height = mObjBox.maxExtents.z;
    MatrixF mat = getTransform();
-   Point3F leftPoint = Point3F(-width / 2, depth / 2, height / 2);
-   Point3F rightPoint = Point3F(width / 2, depth / 2, height / 2);
+   Point3F leftPoint = Point3F(-width, depth, height / 2);
+   Point3F rightPoint = Point3F(width, depth, height / 2);
    mat.mulP(leftPoint);
    mat.mulP(rightPoint);
 
@@ -219,9 +223,18 @@ void SimplePlayer::processTick(const Move* move)
    // apply gravity
    Point3F force = Point3F(0, 0, -9.81);
 
-   Point3F moveAcceleration = Point3F(mMovingRight - mMovingLeft, mMovingForward - mMovingBackward, 0) * mDataBlock->getMoveSpeed() + force;
+   Point3F moveAcceleration = Point3F(mMovingRight - mMovingLeft, mMovingForward - mMovingBackward, 0) * mDataBlock->getMoveSpeed();
 
-   mVelocity += moveAcceleration * TickSec - mVelocity * mDataBlock->getFriction();
+   MatrixF trans = getTransform();
+   MatrixF mat;
+   AngAxisF::RotateZ(mRot, &mat);
+   mat.mulV(moveAcceleration);
+   trans.mul(mat);
+   setTransform(trans);
+
+   VectorF acceleration = moveAcceleration + force;
+
+   mVelocity += acceleration * TickSec - mVelocity * mDataBlock->getFriction();
 
    if(standingOnGround())
    {
@@ -381,6 +394,28 @@ void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* s
 
       du->drawFrustum(frustum, ColorI(200, 70, 50, 150));
    }
+
+   if(mRenderDistance)
+   {
+      F32 width = mObjBox.maxExtents.x;
+      F32 depth = mObjBox.maxExtents.y;
+      F32 height = mObjBox.maxExtents.z;
+      MatrixF mat = getTransform();
+      Point3F leftPoint = Point3F(-width, depth, height / 2);
+      Point3F rightPoint = Point3F(width, depth, height / 2);
+      mat.mulP(leftPoint);
+      mat.mulP(rightPoint);
+
+      Point3F dir = getTransform().getForwardVector();
+      RayInfo rInfo;
+
+      disableCollision();
+      if (getContainer()->castRay(leftPoint, leftPoint + (dir * 100), CollisionMoveMask, &rInfo))
+         du->drawLine(leftPoint, rInfo.point, ColorI::GREEN);
+      if (getContainer()->castRay(rightPoint, rightPoint + (dir * 100), CollisionMoveMask, &rInfo))
+         du->drawLine(rightPoint, rInfo.point, ColorI::GREEN);
+      enableCollision();
+   }
 }
 
 bool SimplePlayer::standingOnGround()
@@ -411,6 +446,7 @@ U32 SimplePlayer::packUpdate(NetConnection* conn, U32 mask, BitStream* stream)
    {
       stream->writeString(mThinkFunction);
       stream->writeFlag(mRenderFrustum);
+      stream->writeFlag(mRenderDistance);
    }
 
    if(stream->writeFlag(mask & TransformMask))
@@ -433,6 +469,7 @@ void SimplePlayer::unpackUpdate(NetConnection* conn, BitStream* stream)
       stream->readString(buffer);
       mThinkFunction = buffer;
       mRenderFrustum = stream->readFlag();
+      mRenderDistance = stream->readFlag();
    }
 
    if(stream->readFlag())
@@ -470,15 +507,15 @@ FeatureVector::~FeatureVector()
 
 void FeatureVector::initPersistFields()
 {
-   addField("DeltaRot", TypeS32, Offset(mDeltaRot, FeatureVector), "");
-   addField("DeltaMovedX", TypeS32, Offset(mDeltaMovedX, FeatureVector), "");
-   addField("DeltaMovedY", TypeS32, Offset(mDeltaMovedY, FeatureVector), "");
-   addField("VelX", TypeS32, Offset(mVelX, FeatureVector), "");
-   addField("VelY", TypeS32, Offset(mVelY, FeatureVector), "");
+   addField("DeltaRot", TypeF32, Offset(mDeltaRot, FeatureVector), "");
+   addField("DeltaMovedX", TypeF32, Offset(mDeltaMovedX, FeatureVector), "");
+   addField("DeltaMovedY", TypeF32, Offset(mDeltaMovedY, FeatureVector), "");
+   addField("VelX", TypeF32, Offset(mVelX, FeatureVector), "");
+   addField("VelY", TypeF32, Offset(mVelY, FeatureVector), "");
 
-   addField("KillProb", TypeS32, Offset(mKillProb, FeatureVector), "");
-   addField("DistanceToObstacle", TypeS32, Offset(mDistanceToObstacle, FeatureVector), "");
-   addField("Health", TypeS32, Offset(mHealth, FeatureVector), "");
+   addField("KillProb", TypeF32, Offset(mKillProb, FeatureVector), "");
+   addField("DistanceToObstacle", TypeF32, Offset(mDistanceToObstacle, FeatureVector), "");
+   addField("Health", TypeF32, Offset(mHealth, FeatureVector), "");
 
    addField("TickCount", TypeS32, Offset(mTickCount, FeatureVector), "");
    addField("TicksSinceObservedEnemy", TypeS32, Offset(mTicksSinceObservedEnemy, FeatureVector), "");

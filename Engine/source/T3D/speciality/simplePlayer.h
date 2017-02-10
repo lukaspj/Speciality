@@ -126,6 +126,7 @@ private:
 
 
    bool mRenderFrustum;
+   bool mRenderDistance;
 
 
    StringTableEntry mThinkFunction;

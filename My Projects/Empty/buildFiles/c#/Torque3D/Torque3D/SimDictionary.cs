@@ -136,7 +136,7 @@ namespace Torque3D
       public static unsafe bool IsDead(IntPtr objectPtr)
       {
          if (!ObjectWrapperDictionary.ContainsKey(objectPtr)) return true;
-         return ((IntPtr)((Sim.SimObjectPtr*)ObjectWrapperDictionary[objectPtr])->RefPtr) == IntPtr.Zero;
+         return ((IntPtr)((Sim.SimObjectPtr*)ObjectWrapperDictionary[objectPtr])->RefPtr->ObjPtr) == IntPtr.Zero;
       }
 
       public static void Shutdown()

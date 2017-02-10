@@ -7,6 +7,9 @@
       MoveRight,
       MoveForward,
       MoveBackward,
-      TurnRight
+      TurnRight,
+      TurnLeft,
+      Shoot,
+      Prepare
    };
 }

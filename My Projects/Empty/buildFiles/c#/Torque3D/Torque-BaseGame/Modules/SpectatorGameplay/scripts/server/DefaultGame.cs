@@ -33,16 +33,21 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
          bord.CreateBoundingBox();
          bord.GenerateRandomObstacles(50);
-         for (int i = 0; i < 25; i++)
+         int numPlayers = 2;
+         for (int i = 0; i < numPlayers; i++)
          {
-            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F(0, 0, 1));
+            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2*i)) * (bord.GameSizeX / 4) - (bord.GameSizeX/2), (1 + (2*i)) * (bord.GameSizeY / 4) - (bord.GameSizeY/2), 1));
             SimplePlayer player = new SimplePlayer()
             {
 
                DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
                Position = playerSpawn,
-               ThinkFunction = "SPThink"
+               ThinkFunction = "SPThink",
+               RenderDistance = true,
+               RenderFrustum = true
             };
+            string skin = "blue";
+            player.setSkinName("PlayerTexture=" + skin + "_PlayerTexture");
             player.DataBlock.setFieldValue("spawn", playerSpawn.ToString());
 
             player.registerObject();
