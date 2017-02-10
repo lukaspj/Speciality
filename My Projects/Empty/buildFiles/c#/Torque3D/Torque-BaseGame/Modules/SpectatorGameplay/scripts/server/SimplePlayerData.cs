@@ -58,50 +58,17 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public static List<SimplePlayer> searchForPlayers(SimplePlayer obj, GameBord bord)
       {
-         Point3F rotation = obj.GetEulerRotation();
-         List<SimplePlayer> players = new List<SimplePlayer>();
-         float x = (float)(obj.Position.X + bord.GameSizeX * Math.Cos(rotation.Z));
-         float y = (float)(obj.Position.Y + bord.GameSizeY * Math.Sin(rotation.Z));
-         float yExtend = bord.GameSizeY;
-         float xExtend = bord.GameSizeX ;
-         
-         Point3F boxSearchMid = new Point3F(x,y, 2);
-         string player = Global.containerFindFirst((uint) ObjectTypes.PlayerObjectType, boxSearchMid,
-            new Point3F(xExtend, yExtend, 2));
+         SimGroup Players = Sim.FindObject<SimGroup>("Players");
+         if (Players == null) return null;
 
-         
-         while (player != "")
+         List<SimplePlayer> retList = new List<SimplePlayer>();
+         for (uint i = 0; i < Players.getCount(); i++)
          {
-            Console.WriteLine(player);
-            SimplePlayer foundPlayer = Sim.FindObject<SimplePlayer>(player);
-            //Same player that we search with
-            if (foundPlayer.getId().ToString() == obj.getId().ToString())
-            {
-               player = Global.containerFindNext();
-               continue;
-            }
-            // angle from line of sight alpha is greater than half of FOV
-            Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
-            float objZRoation = rotation.Z;
-            Point2F otherPoint = new Point2F(foundPlayer.Position.X, foundPlayer.Position.Y);
-            double alpha = objZRoation - Math.Atan((otherPoint.Y - objPoint.Y) / (otherPoint.X - objPoint.X));
-            if (alpha > (obj.getCameraFov() / 2))
-            {
-               player = Global.containerFindNext();
-               continue;
-            }
-
-            // Cast a ray between the players reporting if we hit something other than a player
-            string stuck = Global.containerRayCast(obj.Position, foundPlayer.Position, (uint) ObjectTypes.StaticObjectType);
-            if (stuck != "")
-            {
-               player = Global.containerFindNext();
-               continue;
-            }
-            players.Add(foundPlayer);
-            player = Global.containerFindNext();
+            SimplePlayer other = Players.getObject(i).As<SimplePlayer>();
+            if (obj == other) continue;
+            if(obj.CanSee(other)) retList.Add(other);
          }
-         return players;
+         return retList;
       }
 
       public static double GetDamagePropability(SimplePlayer obj, SimplePlayer other)

@@ -1348,8 +1348,28 @@ namespace Torque3D
 	   public static bool operator !=(SimObject obj, string str)
 	   {
 	      return !(obj == str);
-	   }
+      }
 
-	   #endregion
+      public static bool operator ==(SimObject obj, object other)
+      {
+         if (ReferenceEquals(other, null)) return ReferenceEquals(obj, null);
+         if (ReferenceEquals(obj, null)) return false;
+         string str = other as string;
+         if (str != null)
+         {
+            return obj.Name == str || obj.getId().ToString().Equals(str);
+         }
+         SimObject sobj = other as SimObject;
+         if(sobj != null)
+            return obj.ObjectPtr == sobj.ObjectPtr;
+         return obj.Equals(other);
+      }
+
+      public static bool operator !=(SimObject obj, object other)
+      {
+         return !(obj == other);
+      }
+
+      #endregion
    }
 }
