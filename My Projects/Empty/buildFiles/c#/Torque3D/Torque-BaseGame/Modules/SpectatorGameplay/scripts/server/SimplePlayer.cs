@@ -54,14 +54,14 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
        */
       public bool OnDamage(int val)
       {
-         int curenthealth = int.Parse(getFieldValue("currentHealth"));
-         int newHealth = curenthealth - val;
+         float curenthealth = Health;
+         float newHealth = curenthealth - val;
          if (newHealth <= 0)
          {
             OnDeath();
             return true;
          }
-         setFieldValue("curentHealth", newHealth.ToString());
+         Health = newHealth;
          return false;
       }
 
