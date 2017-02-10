@@ -242,8 +242,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          }
       }
 
-      private static int c = 0;
-
       [ConsoleFunction]
       public static PlayerAction SPThink(FeatureVector vector)
       {
