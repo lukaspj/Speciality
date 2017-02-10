@@ -83,6 +83,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          return retList;
       }
 
+      [ConsoleFunction]
       public static double GetDamagePropability(SimplePlayer obj, SimplePlayer other)
       {
          Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
@@ -92,8 +93,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          double distance = Point2F.Distance(objPoint, otherPoint);
          double distanceFromLOS = distance * Math.Sin(alpha);
          Normal dist = new Normal(0, float.Parse(obj.DataBlock.getFieldValue("variance")));
-         double max = dist.Maximum;
-         double normalizingMult = 1 / max;
+         double normalizingMult = 1 / dist.Density(dist.Median);
          double killProp = dist.Density(distanceFromLOS) * normalizingMult;
          return killProp;
       }
