@@ -57,8 +57,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       }
 
 
-      public static List<SimplePlayer> searchForPlayers(SimplePlayer obj, GameBord bord)
+      public static List<SimplePlayer> searchForPlayers(SimplePlayer obj)
       {
+         GameBord bord = GameBord.GetGameBord();
          Point3F rotation = obj.GetEulerRotation();
          List<SimplePlayer> players = new List<SimplePlayer>();
          float x = (float)(obj.Position.X + bord.GameSizeX * Math.Cos(rotation.Z));

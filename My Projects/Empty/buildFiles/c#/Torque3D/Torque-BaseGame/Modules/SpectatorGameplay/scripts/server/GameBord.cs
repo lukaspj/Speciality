@@ -11,9 +11,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 {
    class GameBord
    {
-      private int _gameSizeX;
-      private int _gameSizeY;
-      public int GameSizeX => _gameSizeX;
+      public static int _gameSizeX;
+      public static int _gameSizeY;
+      public  int GameSizeX => _gameSizeX;
       public int GameSizeY => _gameSizeY;
       private bool[,] gameBord;
       private string shape = "data/spectatorGameplay/art/GameShapes/player.dts";
@@ -34,6 +34,16 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                gameBord[x, y] = false;
             }
          }
+      }
+
+      private static GameBord _gameBord = null;
+      public static GameBord GetGameBord(int sizeX = 10, int sizeY = 10)
+      {
+         if (_gameBord == null)
+         {
+            _gameBord = new GameBord(sizeX,sizeY);
+         }
+         return _gameBord;
       }
 
       private int PointToX(Point3F point)
