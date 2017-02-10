@@ -23,8 +23,14 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
       }
 
-      public void Shoot(SimplePlayer other)
+      public void Shoot()
       {
+         List<SimplePlayer> others = SimplePlayerData.searchForPlayers(this);
+         if (others.Count == 0)
+         {
+            return;
+         }
+         SimplePlayer other = others[0];
          Random rand = new Random();
          
          double damagePropability = SimplePlayerData.GetDamagePropability(this, other);
@@ -52,7 +58,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          float newHealth = curenthealth - val;
          if (newHealth <= 0)
          {
-            Respawn();
+            OnDeath();
             return true;
          }
          Health = newHealth;
@@ -61,7 +67,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       private void OnDeath()
       {
-         Respawn();
+         delete();
       }
 
       private void Respawn()

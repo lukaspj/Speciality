@@ -7,7 +7,7 @@ datablock PlayerData(BoxPlayer){
   damage = 1;
   killScore = 10;
   respawnTime = 3000; //ms
-  winningScore = 100;
+  winningScore = 10;
 };
 
 singleton Material(PlayerMaterial){

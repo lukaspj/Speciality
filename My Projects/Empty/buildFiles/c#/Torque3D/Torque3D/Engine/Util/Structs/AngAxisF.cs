@@ -43,6 +43,10 @@ namespace Torque3D.Util
          Axis = new Point3F(angAxisFStruct.pointX, angAxisFStruct.pointY, angAxisFStruct.pointZ);
          Angle = angAxisFStruct.angle;
       }
+      public string ToString()
+      {
+         return $"{Axis.X} {Axis.Y} {Axis.Z} {Angle}";
+      }
 
       public float[] ToArray()
       {

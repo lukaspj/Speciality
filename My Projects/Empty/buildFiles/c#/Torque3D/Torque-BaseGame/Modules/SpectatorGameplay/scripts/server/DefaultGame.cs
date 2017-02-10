@@ -26,7 +26,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public void initGameVars()
       {
 
-         bord = new GameBord(100,100);
+         bord = GameBord.GetGameBord(100, 100);
          //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
          SimGroup playersGroup = new SimGroup("Players", true);
          Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
@@ -37,6 +37,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          for (int i = 0; i < numPlayers; i++)
          {
             Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2*i)) * (bord.GameSizeX / 4) - (bord.GameSizeX/2), (1 + (2*i)) * (bord.GameSizeY / 4) - (bord.GameSizeY/2), 1));
+            //Point3F playerSpawn = new Point3F(0, 0, 1);
             SimplePlayer player = new SimplePlayer()
             {
 
@@ -44,7 +45,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                Position = playerSpawn,
                ThinkFunction = "SPThink",
                RenderDistance = true,
-               RenderFrustum = true
+               RenderFrustum = true,
+               Rotation = new AngAxisF(0, 0, 1, 0)
             };
             string skin = "blue";
             player.setSkinName("PlayerTexture=" + skin + "_PlayerTexture");
@@ -53,7 +55,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             player.registerObject();
 
             playersGroup.add(player);
-         
+
          }
 
 
@@ -77,6 +79,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Global movement speed that affects all Cameras
          Globals.SetInt("Camera::MovementSpeed", 30);
       }
+
       [ConsoleFunction]
       public void ResetGame()
       {
@@ -84,6 +87,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Sim.FindObject<SimGroup>("Obstacles").delete();
          initGameVars();
       }
+
       //-----------------------------------------------------------------------------
       // DefaultGame manages the communication between the server's world and the
       // client's simulation. These functions are responsible for maintaining the
@@ -106,13 +110,13 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // core/scripts/spawn.cs. For custom spawn behaviors one can either
          // override the properties on the SpawnSphere's or directly override the
          // functions themselves.
-         
+
          // Find a spawn point for the camera
          var cameraSpawnPoint = pickCameraSpawnPoint(Globals.GetString("Game::DefaultCameraSpawnGroups"));
 
          SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
          SimplePlayer p1 = playersGroup.getRandom().As<SimplePlayer>();
-         SimplePlayerData.searchForPlayers(p1, bord);
+         SimplePlayerData.searchForPlayers(p1);
          client.setFieldValue("player", p1.getId().ToString());
 
          // Spawn a camera for this client using the found %spawnPoint
@@ -220,7 +224,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
          }
 
-         if(camera == null)
+         if (camera == null)
             camera = Sim.FindObject<Camera>(client.getFieldValue("camera"));
 
          // If we have a camera then set up some properties
@@ -233,7 +237,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
             if (spawnPoint != null)
             {
-               camera.setTransform(new TransformF(spawnPoint.Position + new Point3F(0,0,50), spawnPoint.Orientation));
+               camera.setTransform(new TransformF(spawnPoint.Position + new Point3F(0, 0, 50), spawnPoint.Orientation));
             }
          }
       }
@@ -243,15 +247,41 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       [ConsoleFunction]
       public static PlayerAction SPThink(FeatureVector vector)
       {
-         c++;
-         if (c < 150) return PlayerAction.MoveForward;
-         if (c < 300) return PlayerAction.MoveLeft;
-         if (c < 450) return PlayerAction.MoveBackward;
-         if (c < 600) return PlayerAction.MoveRight;
-         if (c < 750) return PlayerAction.TurnRight;
-         c %= 750;
 
-         return PlayerAction.None;
+         Random rand = new Random();
+         if (vector.DistanceToObstacle < 10)
+         {
+            if (rand.NextDouble() <= 0.5)
+            {
+               return PlayerAction.TurnLeft;
+            }
+            else
+            {
+               return PlayerAction.TurnRight;
+            }
+         }
+         if (vector.ShootDelay == 0 && vector.TicksSinceObservedEnemy < 5 && vector.KillProb > 50)
+         {
+            return PlayerAction.Shoot;
+         }
+         double next = rand.NextDouble();
+         if (next <= 0.75)
+         {
+            return PlayerAction.MoveForward;
+         }
+         if (next > 0.75 && next <= 0.8)
+         {
+            return PlayerAction.MoveBackward;
+         }
+         if (next > 0.8 && next <= 0.85)
+         {
+            return PlayerAction.MoveLeft;
+         }
+         if (next > 0.9)
+         {
+            return PlayerAction.MoveRight;
+         }
+         return PlayerAction.Prepare;
       }
    }
 }
