@@ -115,9 +115,9 @@ SimplePlayer::SimplePlayer()
 
    mLastHealth = 20.0f;
 
-   mTimeSawEnemy = S32_MIN;
-   mTimeTookDamage = S32_MIN;
-   mShootDelay = S32_MIN;
+   mTimeSawEnemy = S32_MAX;
+   mTimeTookDamage = S32_MAX;
+   mShootDelay = 0;
 
    mRenderFrustum = false;
    mRenderDistance = false;
@@ -226,6 +226,31 @@ F32 SimplePlayer::getDistanceToObstacleInFront()
    return dist1 > dist2 ? dist2 : dist1;
 }
 
+bool SimplePlayer::canSee(SceneObject* other)
+{
+   Frustum frustum;
+   frustum.set(false, getDataBlock()->getFOV(), getDataBlock()->getAspectRatio(), getDataBlock()->getNearDist(), getDataBlock()->getFarDist(), getTransform());
+   return !frustum.isCulled(other->getWorldBox());
+}
+
+bool SimplePlayer::trySetRotation(F32 rot)
+{
+   MatrixF oldTrans = getTransform();
+   MatrixF trans = getTransform();
+   MatrixF mat;
+   AngAxisF::RotateZ(rot, &mat);
+   trans.mul(mat);
+   setTransform(trans);
+   Point3F vel = Point3F::Zero;
+   bool collidingAfter = mCollision.checkCollisions(TickMs, &vel, getPosition());
+   if (collidingAfter)
+   {
+      setTransform(oldTrans);
+      return false;
+   }
+   return true;
+}
+
 void SimplePlayer::processTick(const Move* move)
 {
    // apply gravity
@@ -278,6 +303,7 @@ void SimplePlayer::doThink()
          mLastRot = mRot;
          mLastPosX = getPosition().x;
          mLastPosY = getPosition().y;
+         mLastHealth = mHealth;
       }
 
       F32 killProb = 0.0f; // todo Support more players?
@@ -287,7 +313,7 @@ void SimplePlayer::doThink()
       {
          SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
          if (player == this) continue;
-
+         if (!canSee(player)) continue;
          killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
       }
 
@@ -305,8 +331,8 @@ void SimplePlayer::doThink()
       features->mHealth = mHealth;
 
       features->mTickCount = ++mTickCount;
-      features->mTicksSinceDamage = mTickCount - mTimeTookDamage;
-      features->mTicksSinceObservedEnemy = mTickCount - mTimeSawEnemy;
+      features->mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
+      features->mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
       features->mShootDelay = mShootDelay;
       Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
       features->safeDeleteObject();
@@ -319,6 +345,7 @@ void SimplePlayer::doThink()
       {
          mTimeTookDamage = mTickCount;
       }
+      mLastHealth = mHealth;
 
       mMovingLeft = false;
       mMovingRight = false;
@@ -329,6 +356,7 @@ void SimplePlayer::doThink()
          mPrepared = false;
          doThink();
       }
+      bool collidingNow = mCollision.checkCollisions(TickMs, &mVelocity, getPosition());
       switch (action)
       {
       case MoveForward:
@@ -344,7 +372,9 @@ void SimplePlayer::doThink()
          mMovingRight = true;
          break;
       case TurnRight:
-         mRot += mDataBlock->getTurnSpeed();
+         //bool collidingNow = mCollision.checkCollisions(TickMs, &mVelocity, getPosition());
+         
+         if (trySetRotation(mRot + mDataBlock->getTurnSpeed())) mRot += mDataBlock->getTurnSpeed();
          break;
       case TurnLeft:
          mRot -= mDataBlock->getTurnSpeed();
@@ -424,6 +454,24 @@ void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* s
          du->drawLine(rightPoint, rInfo.point, ColorI::GREEN);
       enableCollision();
    }
+
+   if(true)
+   {
+
+      F32 killProb = 0.0f; // todo Support more players?
+
+      SimGroup *playersGroup = static_cast<SimGroup*>(Sim::findObject("Players"));
+      for (int i = 0; i < playersGroup->size(); i++)
+      {
+         SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
+         if (player == this) continue;
+         if (!canSee(player)) continue;
+         killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
+
+         ColorI color = ColorI(256 * (1 - killProb), 256 * killProb, 0);
+         du->drawLine(getWorldBox().getCenter(), player->getWorldBox().getCenter(), color);
+      }
+   }
 }
 
 bool SimplePlayer::standingOnGround()
@@ -497,9 +545,7 @@ void SimplePlayer::unpackUpdate(NetConnection* conn, BitStream* stream)
 
 DefineEngineMethod(SimplePlayer, CanSee, bool, (SceneObject* other), , "")
 {
-   Frustum frustum;
-   frustum.set(false, object->getDataBlock()->getFOV(), object->getDataBlock()->getAspectRatio(), object->getDataBlock()->getNearDist(), object->getDataBlock()->getFarDist(), object->getTransform());
-   return frustum.isCulled(other->getObjBox());
+   return object->canSee(other);
 }
 
 DefineEngineMethod(SimplePlayer, GetEulerRotation, Point3F, (), , "")

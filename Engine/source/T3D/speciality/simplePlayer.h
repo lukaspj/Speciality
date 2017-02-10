@@ -87,6 +87,8 @@ public:
 
    void advanceTime(F32 dt) override;
    F32 getDistanceToObstacleInFront();
+   bool canSee(SceneObject* other);
+   bool trySetRotation(F32 rot);
    void doThink();
    void updatePosition(const F32 travelTime);
    void processTick(const Move* move) override;

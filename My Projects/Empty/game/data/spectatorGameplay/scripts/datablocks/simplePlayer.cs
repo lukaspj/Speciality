@@ -27,7 +27,7 @@ datablock SimplePlayerData(SPD) {
 
 
   cameraMaxDist = 5;
-  variance = 0.2;
+  variance = 5.0;
   maxHealth = 20;
   damage = 1;
   killScore = 10;
