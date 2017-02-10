@@ -44,8 +44,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
                Position = playerSpawn,
                ThinkFunction = "SPThink",
-               RenderDistance = true,
-               RenderFrustum = true,
                Rotation = new AngAxisF(0, 0, 1, 0)
             };
             string skin = "blue";
@@ -245,7 +243,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       [ConsoleFunction]
       public static PlayerAction SPThink(FeatureVector vector)
       {
-
          Random rand = new Random();
          if (vector.DistanceToObstacle < 10)
          {

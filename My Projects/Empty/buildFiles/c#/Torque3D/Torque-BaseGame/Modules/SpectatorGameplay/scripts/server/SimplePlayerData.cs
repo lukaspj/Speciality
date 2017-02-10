@@ -58,22 +58,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public static List<SimplePlayer> searchForPlayers(SimplePlayer obj)
       {
-<<<<<<< HEAD
-         GameBord bord = GameBord.GetGameBord();
-         Point3F rotation = obj.GetEulerRotation();
-         List<SimplePlayer> players = new List<SimplePlayer>();
-         float x = (float)(obj.Position.X + bord.GameSizeX * Math.Cos(rotation.Z));
-         float y = (float)(obj.Position.Y + bord.GameSizeY * Math.Sin(rotation.Z));
-         float yExtend = bord.GameSizeY;
-         float xExtend = bord.GameSizeX ;
-         
-         Point3F boxSearchMid = new Point3F(x,y, 2);
-         string player = Global.containerFindFirst((uint) ObjectTypes.PlayerObjectType, boxSearchMid,
-            new Point3F(xExtend, yExtend, 2));
-=======
          SimGroup Players = Sim.FindObject<SimGroup>("Players");
          if (Players == null) return null;
->>>>>>> 153ec9db7f161bd8e17105180f5d8e6de7300aad
 
          List<SimplePlayer> retList = new List<SimplePlayer>();
          for (uint i = 0; i < Players.getCount(); i++)

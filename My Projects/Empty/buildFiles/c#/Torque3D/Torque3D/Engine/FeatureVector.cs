@@ -84,7 +84,7 @@ namespace Torque3D
          set { setFieldValue("DeltaRot", value.ToString()); }
       }
       /// <summary>
-      /// Difference in movement in the X direction since lanst tick
+      /// Difference in movement in the X direction since last tick
       /// </summary>
       public float DeltaMovedX
       {
@@ -92,7 +92,7 @@ namespace Torque3D
          set { setFieldValue("DeltaMovedX", value.ToString()); }
       }
       /// <summary>
-      /// Difference in movement in the Y direction since lanst tick
+      /// Difference in movement in the Y direction since last tick
       /// </summary>
       public float DeltaMovedY
       {
