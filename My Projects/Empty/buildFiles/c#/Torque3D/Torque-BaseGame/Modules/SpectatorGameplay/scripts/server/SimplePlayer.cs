@@ -33,18 +33,19 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          SimplePlayer other = others[0];
          Random rand = new Random();
          
-         double damagePropability = SimplePlayerData.GetDamagePropability(this, other);
-
+         //double damagePropability = SimplePlayerData.GetDamagePropability(this, other);
+         double damagePropability = 1;
          if (damagePropability >= rand.NextDouble())
          {
             bool kill = other.OnDamage(int.Parse(DataBlock.getFieldValue("damage")));
             if (kill)
             {
-               DataBlock.setFieldValue("score", DataBlock.getFieldValue("killScore"));
-               int score = int.Parse(getFieldValue("score"));
-               if (score >= int.Parse(getFieldValue("winningScore")))
+               int fieldValue = int.Parse( DataBlock.getFieldValue("killScore"));
+               DataBlock.setFieldValue("score", fieldValue.ToString());
+               int score = int.Parse(DataBlock.getFieldValue("score"));
+               if (score >= int.Parse(DataBlock.getFieldValue("winningScore")))
                {
-                  Global.eval("resetMission()");
+                  Global.eval("resetMission();");
                }
             }
          }

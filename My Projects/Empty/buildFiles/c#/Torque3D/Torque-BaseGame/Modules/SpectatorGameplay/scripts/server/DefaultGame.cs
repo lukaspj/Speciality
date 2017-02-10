@@ -255,7 +255,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                return PlayerAction.TurnRight;
             }
          }
-         if (vector.ShootDelay == 0 && vector.TicksSinceObservedEnemy < 5 && vector.KillProb > 50)
+         if (vector.ShootDelay == 0)
          {
             return PlayerAction.Shoot;
          }
