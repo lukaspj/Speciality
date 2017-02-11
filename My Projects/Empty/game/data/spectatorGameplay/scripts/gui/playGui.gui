@@ -36,4 +36,15 @@ new GameTSCtrl(PlayGui) {
       hovertime = "1000";
       canSaveDynamicFields = "0";
    };
+   new GuiHealthBarHud(){
+    fillColor = "0.0 1.0 0.0 1.0"; // Fills with a solid green color
+    frameColor = "1.0 1.0 1.0 1.0"; // Solid white frame color
+    damageFillColor = "1.0 0.0 0.0 1.0"; // Fills with a solid red color
+    pulseRate = "500";
+    pulseThreshold = "0.25";
+    showFill = "true";
+    showFrame = "true";
+    displayEnergy = "false";
+    positon = "100 100";
+  };
 };

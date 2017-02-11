@@ -28,9 +28,12 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
          bord = GameBord.GetGameBord(100, 100);
          //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
-         SimGroup playersGroup = new SimGroup("Players", true);
-         Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
-
+         SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
+         if (playersGroup == null)
+         {
+            playersGroup = new SimGroup("Players", true);
+            Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
+         }
          bord.CreateBoundingBox();
          bord.GenerateRandomObstacles(50);
          int numPlayers = 2;
