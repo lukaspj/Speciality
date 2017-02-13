@@ -75,9 +75,19 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public static double GetDamagePropability(SimplePlayer obj, SimplePlayer other)
       {
          Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
-         float objZRoation = obj.GetEulerRotation().Z;
+         float objZRoation = obj.GetEulerRotation().Z > Math.PI ? obj.GetEulerRotation().Z - (float)Math.PI /2 : obj.GetEulerRotation().Z + (float) Math.PI /2;
          Point2F otherPoint = new Point2F(other.Position.X,other.Position.Y);
-         double alpha = objZRoation - Math.Atan((otherPoint.Y - objPoint.Y) / (otherPoint.X - objPoint.X));
+         double tanObjOther = (otherPoint.Y - objPoint.Y) / (otherPoint.X - objPoint.X);
+         double alpha;
+         if (tanObjOther < 0)
+         {
+            alpha = objZRoation - Math.Atan(tanObjOther);
+         }
+         else
+         {
+            alpha = Math.PI - objZRoation - Math.Atan(tanObjOther);
+         }
+
          double distance = Point2F.Distance(objPoint, otherPoint);
          double distanceFromLOS = distance * Math.Sin(alpha);
          Normal dist = new Normal(0, float.Parse(obj.DataBlock.getFieldValue("variance")));
