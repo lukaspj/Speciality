@@ -120,6 +120,7 @@ private:
    F32 mLastRot;
    F32 mLastPosX;
    F32 mLastPosY;
+   F32 mLastKillProp;
 
    F32 mLastHealth;
 
@@ -192,6 +193,7 @@ public:
    F32 mVelY;
 
    F32 mKillProb;
+   F32 mDeltaKillProp;
    F32 mDistanceToObstacle;
    F32 mHealth;
 

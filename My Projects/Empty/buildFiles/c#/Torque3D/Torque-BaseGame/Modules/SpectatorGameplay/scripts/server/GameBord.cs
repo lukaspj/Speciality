@@ -17,13 +17,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public int GameSizeY => _gameSizeY;
       private bool[,] gameBord;
       private string shape = "data/spectatorGameplay/art/GameShapes/player.dts";
-      private SimGroup obstacleGroup;
       public GameBord(int sizeX, int sizeY)
       {
-
-         obstacleGroup = new SimGroup("Obstacles", true);
-         Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
-
          _gameSizeX = sizeX % 2 == 0 ? ++sizeX : sizeX;
          _gameSizeY = sizeY % 2 == 0 ? ++sizeY : sizeY;
          gameBord = new bool[_gameSizeX, _gameSizeY];
@@ -138,6 +133,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public void CreateBoundingBox()
       {
+         SimGroup obstacleGroup = Sim.FindObject<SimGroup>("Obstacles");
          float rightWallPos = _gameSizeX / 2;
          float leftWallPos = -_gameSizeX / 2;
          float frontWallpos = _gameSizeY / 2;
@@ -186,7 +182,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public void GenerateRandomObstacles(int count)
       {
-         
+         SimGroup obstacleGroup = Sim.FindObject<SimGroup>("Obstacles");
          Random rand = new Random();
          for (int i = 0; i < count; i++)
          {

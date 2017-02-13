@@ -4,7 +4,7 @@ new GameTSCtrl(PlayGui) {
    horizSizing = "right";
    vertSizing = "bottom";
    position = "0 0";
-   extent = "1024 768";
+   extent = "2048 1536";
    minExtent = "8 8";
    canSave = "1";
    visible = "1";
@@ -20,31 +20,22 @@ new GameTSCtrl(PlayGui) {
    helpTag = "0";
    noCursor = "1";
 
-   new GuiBitmapCtrl(LagIcon) {
-      bitmap = "data/ui/art/lagIcon.png";
-      wrap = "0";
-      isContainer = "0";
-      Profile = "GuiDefaultProfile";
-      HorizSizing = "right";
-      VertSizing = "bottom";
-      position = "572 3";
-      Extent = "32 32";
-      MinExtent = "8 8";
-      canSave = "1";
-      Visible = "0";
-      tooltipprofile = "GuiToolTipProfile";
-      hovertime = "1000";
-      canSaveDynamicFields = "0";
-   };
-   new GuiHealthBarHud(){
-    fillColor = "0.0 1.0 0.0 1.0"; // Fills with a solid green color
-    frameColor = "1.0 1.0 1.0 1.0"; // Solid white frame color
-    damageFillColor = "1.0 0.0 0.0 1.0"; // Fills with a solid red color
-    pulseRate = "500";
-    pulseThreshold = "0.25";
-    showFill = "true";
-    showFrame = "true";
-    displayEnergy = "false";
-    positon = "100 100";
-  };
+
+  //  new GuiBitmapCtrl(LagIcon) {
+  //     bitmap = "data/ui/art/lagIcon.png";
+  //     wrap = "0";
+  //     isContainer = "0";
+  //     Profile = "GuiDefaultProfile";
+  //     HorizSizing = "right";
+  //     VertSizing = "bottom";
+  //     position = "572 3";
+  //     Extent = "32 32";
+  //     MinExtent = "8 8";
+  //     canSave = "1";
+  //     Visible = "0";
+  //     tooltipprofile = "GuiToolTipProfile";
+  //     hovertime = "1000";
+  //     canSaveDynamicFields = "0";
+  //  };
+
 };

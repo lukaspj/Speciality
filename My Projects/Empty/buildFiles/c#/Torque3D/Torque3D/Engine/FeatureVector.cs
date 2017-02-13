@@ -123,6 +123,12 @@ namespace Torque3D
          get { return float.Parse(getFieldValue("KillProb")); }
          set { setFieldValue("KillProb", value.ToString()); }
       }
+
+      public float DeltaKillProp
+      {
+         get { return float.Parse(getFieldValue("DeltaKillProp")); }
+         set { setFieldValue("DeltaKillProp", value.ToString()); }
+      }
       ///<summary>
       /// Distance to nearest object in front of AI Player
       /// </summary>

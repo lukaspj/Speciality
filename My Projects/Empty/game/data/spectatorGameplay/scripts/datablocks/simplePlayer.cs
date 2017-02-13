@@ -21,13 +21,14 @@ singleton Material(Pink_PlayerMaterial) {
 datablock SimplePlayerData(SPD) {
   shapeFile = "data/spectatorGameplay/art/GameShapes/player.dts";
   moveSpeed = 10;
-  turnSpeed = 0.2;
+  turnSpeed = 0.02;
   farDist = 100;
 
 
 
   cameraMaxDist = 5;
   variance = 5.0;
+  maxHealth = 20;
   Health = 20;
   damage = 1;
   killScore = 10;

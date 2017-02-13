@@ -29,6 +29,19 @@ function PlayGui::onWake(%this)
 {
    // Turn off any shell sounds...
    // sfxStop( ... );
+   for (%i = 0; %i < players.getCount(); %i++)
+   {
+     %player = players.getObject(%i);
+     %HealthGui = new GuiProgressCtrl(%player.getName() @ "health"){
+        text = " "@%player.getName();
+        extent = "200 50";
+        anchorTop = "1";
+        anchorRight = "1";
+        position = "824" SPC %i*55;
+      };
+      %HealthGui.setValue(%player.health/%player.maxHealth);
+     %this.addGuiControl(%HealthGui);
+   }
 
    $enableDirectInput = "1";
    activateDirectInput();
@@ -38,8 +51,8 @@ function PlayGui::onWake(%this)
    {
       Canvas.pushDialog( MainChatHud );
       chatHud.attach(HudMessageVector);
-   }      
-   
+   }
+
    // just update the action map here
    moveMap.push();
 
@@ -54,7 +67,7 @@ function PlayGui::onSleep(%this)
 {
    if ( isObject( MainChatHud ) )
       Canvas.popDialog( MainChatHud );
-   
+
    // pop the keymaps
    moveMap.pop();
 }

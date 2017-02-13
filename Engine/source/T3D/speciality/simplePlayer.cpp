@@ -3,6 +3,7 @@
 #include "math/mathIO.h"
 #include "materials/baseMatInstance.h"
 #include "gfx/gfxDrawUtil.h"
+#include "jmorecfg.h"
 
 IMPLEMENT_CO_NETOBJECT_V1(SimplePlayer);
 IMPLEMENT_CO_DATABLOCK_V1(SimplePlayerData);
@@ -112,6 +113,7 @@ SimplePlayer::SimplePlayer()
    mLastRot = 0.0f;
    mLastPosX = 0.0f;
    mLastPosY = 0.0f;
+   mLastKillProp = 0.0f;
 
    mLastHealth = 20.0f;
 
@@ -283,14 +285,14 @@ void SimplePlayer::processTick(const Move* move)
 
 
 ImplementEnumType(SimplePlayerActions, "")
-{ SimplePlayer::MoveLeft, "MoveLeft", "\n" },
-{ SimplePlayer::MoveRight,     "MoveRight", "\n" },
-{ SimplePlayer::MoveForward,     "MoveForward", "\n" },
-{ SimplePlayer::MoveBackward,     "MoveBackward", "\n" },
-{ SimplePlayer::TurnRight,     "TurnRight", "\n" },
-{ SimplePlayer::TurnLeft,     "TurnLeft", "\n" },
-{ SimplePlayer::Shoot,     "Shoot", "\n" },
-{ SimplePlayer::Prepare,     "Prepare", "\n" }
+   { SimplePlayer::MoveLeft, "MoveLeft", "\n" },
+   { SimplePlayer::MoveRight,     "MoveRight", "\n" },
+   { SimplePlayer::MoveForward,     "MoveForward", "\n" },
+   { SimplePlayer::MoveBackward,     "MoveBackward", "\n" },
+   { SimplePlayer::TurnRight,     "TurnRight", "\n" },
+   { SimplePlayer::TurnLeft,     "TurnLeft", "\n" },
+   { SimplePlayer::Shoot,     "Shoot", "\n" },
+   { SimplePlayer::Prepare,     "Prepare", "\n" }
 EndImplementEnumType;
 
 void SimplePlayer::doThink()
@@ -312,8 +314,9 @@ void SimplePlayer::doThink()
       for(int i = 0; i < playersGroup->size(); i++)
       {
          SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
-         if (player == this) continue;
+         if (player->getPosition() == getPosition()) continue;
          if (!canSee(player)) continue;
+         mTimeSawEnemy = mTickCount;
          killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
       }
 
@@ -327,6 +330,7 @@ void SimplePlayer::doThink()
       features->mVelY = getVelocity().y;
 
       features->mKillProb = killProb;
+      features->mDeltaKillProp = killProb - mLastKillProp;
       features->mDistanceToObstacle = getDistanceToObstacleInFront();
       features->mHealth = mHealth;
 
@@ -464,7 +468,7 @@ void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* s
       for (int i = 0; i < playersGroup->size(); i++)
       {
          SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
-         if (player == this) continue;
+         if (player->getPosition() == getPosition()) continue;
          if (!canSee(player)) continue;
          killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
 
@@ -568,6 +572,8 @@ void FeatureVector::initPersistFields()
    addField("DeltaMovedY", TypeF32, Offset(mDeltaMovedY, FeatureVector), "");
    addField("VelX", TypeF32, Offset(mVelX, FeatureVector), "");
    addField("VelY", TypeF32, Offset(mVelY, FeatureVector), "");
+
+   addField("DeltaKillProp", TypeF32, Offset(mDeltaKillProp, FeatureVector), "");
 
    addField("KillProb", TypeF32, Offset(mKillProb, FeatureVector), "");
    addField("DistanceToObstacle", TypeF32, Offset(mDistanceToObstacle, FeatureVector), "");

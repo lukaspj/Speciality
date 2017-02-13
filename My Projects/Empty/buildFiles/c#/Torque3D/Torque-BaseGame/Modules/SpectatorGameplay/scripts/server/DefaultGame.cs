@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Core;
 using Game.Modules.ClientServer.Server;
 using Torque3D;
 using Torque3D.Engine;
@@ -34,6 +35,12 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             playersGroup = new SimGroup("Players", true);
             Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
          }
+         SimGroup obstacleGroup = Sim.FindObject<SimGroup>("Obstacles");
+         if (obstacleGroup == null)
+         {
+            obstacleGroup = new SimGroup("Obstacles",true);
+            Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
+         }
          bord.CreateBoundingBox();
          bord.GenerateRandomObstacles(50);
          int numPlayers = 2;
@@ -41,16 +48,20 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          {
             Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2*i)) * (bord.GameSizeX / 4) - (bord.GameSizeX/2), (1 + (2*i)) * (bord.GameSizeY / 4) - (bord.GameSizeY/2), 1));
             //Point3F playerSpawn = new Point3F(0, 0, 1);
-            SimplePlayer player = new SimplePlayer()
+            string playerName = "player" + i;
+            SimplePlayer player = new SimplePlayer(playerName)
             {
 
                DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
                Position = playerSpawn,
-               ThinkFunction = "SPThink",
-               Rotation = new AngAxisF(0, 0, 1, 0)
+               ThinkFunction = "SPThink"+i,
+               Rotation = new AngAxisF(0, 0, 1, 0),
+               RenderFrustum = true
             };
             string skin = "blue";
+            player.setFieldValue("color", skin);
             player.setSkinName("PlayerTexture=" + skin + "_PlayerTexture");
+            Console.WriteLine(player.getSkinName());
             player.DataBlock.setFieldValue("spawn", playerSpawn.ToString());
 
             player.registerObject();
@@ -244,42 +255,47 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       }
 
       [ConsoleFunction]
-      public static PlayerAction SPThink(FeatureVector vector)
+      public static PlayerAction SPThink0(FeatureVector vector)
       {
          Random rand = new Random();
          if (vector.DistanceToObstacle < 10)
          {
+             return PlayerAction.TurnRight;
+         }
+         if (vector.TicksSinceObservedEnemy < 200)
+         {
+            if (vector.KillProb > 0.80 && vector.ShootDelay == 0)
+            {
+               return PlayerAction.Shoot;
+            }
+            if (vector.DeltaKillProp > 0)
+            {
+               if (vector.DeltaRot < 0)
+               {
+                  return PlayerAction.TurnRight;
+               }
+               return PlayerAction.TurnLeft;
+            }
+            if (vector.DeltaRot > 0)
+            {
+               return PlayerAction.TurnRight;
+            }
+            if (vector.DeltaRot < 0)
+            {
+               return PlayerAction.TurnLeft;
+            }
             if (rand.NextDouble() <= 0.5)
             {
                return PlayerAction.TurnLeft;
             }
-            else
-            {
-               return PlayerAction.TurnRight;
-            }
+            return PlayerAction.TurnRight;
          }
-         if (vector.ShootDelay == 0)
-         {
-            return PlayerAction.Shoot;
-         }
-         double next = rand.NextDouble();
-         if (next <= 0.75)
-         {
-            return PlayerAction.MoveForward;
-         }
-         if (next > 0.75 && next <= 0.8)
-         {
-            return PlayerAction.MoveBackward;
-         }
-         if (next > 0.8 && next <= 0.85)
-         {
-            return PlayerAction.MoveLeft;
-         }
-         if (next > 0.9)
-         {
-            return PlayerAction.MoveRight;
-         }
-         return PlayerAction.Prepare;
+         return PlayerAction.MoveForward;
+      }
+      [ConsoleFunction]
+      public static PlayerAction SPThink1(FeatureVector vector)
+      {
+         return PlayerAction.None;
       }
    }
 }

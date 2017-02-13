@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -14,6 +15,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
    [ConsoleClass]
    class SimplePlayer : tSimplePlayer
    {
+
+      public SimplePlayer(string name) : base(name)
+      {
+         
+      }
       public SimplePlayer(SimObject pObj) : base(pObj)
       {
       }
@@ -57,6 +63,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          float curenthealth = Health;
          float newHealth = curenthealth - val;
+         GuiProgressCtrl progress = Sim.FindObject<GuiProgressCtrl>(getName() + "health");
+         int maxHealth = int.Parse(DataBlock.getFieldValue("maxHealth"));
+         progress.setValue((newHealth/maxHealth).ToString());
          if (newHealth <= 0)
          {
             OnDeath();
@@ -68,7 +77,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       private void OnDeath()
       {
-         delete();
+         //Hidden = true;
       }
 
       private void Respawn()
