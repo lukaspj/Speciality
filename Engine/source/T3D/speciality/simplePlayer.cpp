@@ -232,7 +232,32 @@ bool SimplePlayer::canSee(SceneObject* other)
 {
    Frustum frustum;
    frustum.set(false, getDataBlock()->getFOV(), getDataBlock()->getAspectRatio(), getDataBlock()->getNearDist(), getDataBlock()->getFarDist(), getTransform());
-   return !frustum.isCulled(other->getWorldBox());
+   if (frustum.isCulled(other->getWorldBox()))
+      return false;
+
+   Point3F center = mWorldBox.getCenter();
+   VectorF extents = mObjBox.minExtents;
+   extents.z = -extents.z / 2.0f;
+
+   Point3F otherCenter = other->getWorldBox().getCenter();
+
+   Point3F startP1 = center + extents;
+   Point3F endP1 = otherCenter + extents;
+   Point3F startP2 = center - extents;
+   Point3F endP2 = otherCenter - extents;
+
+   RayInfo rInfo;
+
+   bool blocked = false;
+
+   disableCollision();
+   if (getContainer()->castRay(startP1, endP1, CollisionMoveMask, &rInfo)) {
+      if (getContainer()->castRay(startP2, endP2, CollisionMoveMask, &rInfo))
+         blocked = true;
+   }
+   enableCollision();
+
+   return !blocked;
 }
 
 bool SimplePlayer::trySetRotation(F32 rot)
