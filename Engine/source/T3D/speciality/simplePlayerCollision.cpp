@@ -100,7 +100,7 @@ bool SimplePlayerCollision::checkCollisions(const F32 travelTime, Point3F* veloc
    //of time and processing.
    //We only do the 'real' collision checks if we detect we might hit something after all when doing the early out.
    //See the checkEarlyOut function in the CollisionInterface for an explination on how it works.
-   if (checkEarlyOut(start, *velocity, travelTime, mOwner->getObjBox(), mOwner->getScale(), mConvexList->getBoundingBox(), 0xFFFFFF, mConvexList->getWorkingList()))
+   if (false && checkEarlyOut(start, *velocity, travelTime, mOwner->getObjBox(), mOwner->getScale(), mConvexList->getBoundingBox(), 0xFFFFFF, mConvexList->getWorkingList()))
       //if (checkEarlyOut(start, *velocity, travelTime, mOwner->getObjBox(), mOwner->getScale(), mConvexList->getBoundingBox(), sCollisionMoveMask, mConvexList->getWorkingList()))
       return false;
 
@@ -209,41 +209,31 @@ bool SimplePlayerCollision::checkEarlyOut(Point3F start, VectorF velocity, F32 t
    Point3F end = start + velocity * time;
    Point3F distance = end - start;
 
+   Box3F scaledBox = objectBox;
+   scaledBox.minExtents.convolve(objectScale);
+   scaledBox.maxExtents.convolve(objectScale);
+
    if (mFabs(distance.x) < objectBox.len_x() &&
       mFabs(distance.y) < objectBox.len_y() &&
       mFabs(distance.z) < objectBox.len_z())
    {
       // We can potentially early out of this.  If there are no polys in the clipped polylist at our
       //  end position, then we can bail, and just set start = end;
-Box3F scaledBox = objectBox;
-      scaledBox.minExtents.convolve(objectScale);
-      scaledBox.maxExtents.convolve(objectScale);
-
       Box3F wBox = scaledBox;
-      mOwner->getTransform().mul(wBox);
-      wBox.minExtents += distance;
-      wBox.maxExtents += distance;
+      wBox.minExtents += end;
+      wBox.maxExtents += end;
 
       static EarlyOutPolyList eaPolyList;
       eaPolyList.clear();
       eaPolyList.mNormal.set(0.0f, 0.0f, 0.0f);
       eaPolyList.mPlaneList.clear();
       eaPolyList.mPlaneList.setSize(6);
-
-      VectorF plane1 = VectorF(1.0f, 0.0f, 0.0f);
-      VectorF plane2 = VectorF(0.0f, 1.0f, 0.0f);
-      VectorF plane3 = VectorF(0.0f, 0.0f, 1.0f);
-
-      mOwner->getTransform().mulV(plane1);
-      mOwner->getTransform().mulV(plane2);
-      mOwner->getTransform().mulV(plane3);
-
-      eaPolyList.mPlaneList[0].set(wBox.minExtents, -plane1);
-      eaPolyList.mPlaneList[1].set(wBox.maxExtents, plane2);
-      eaPolyList.mPlaneList[2].set(wBox.maxExtents, plane1);
-      eaPolyList.mPlaneList[3].set(wBox.minExtents, -plane2);
-      eaPolyList.mPlaneList[4].set(wBox.minExtents, -plane3);
-      eaPolyList.mPlaneList[5].set(wBox.maxExtents, plane3);
+      eaPolyList.mPlaneList[0].set(wBox.minExtents, VectorF(-1.0f, 0.0f, 0.0f));
+      eaPolyList.mPlaneList[1].set(wBox.maxExtents, VectorF(0.0f, 1.0f, 0.0f));
+      eaPolyList.mPlaneList[2].set(wBox.maxExtents, VectorF(1.0f, 0.0f, 0.0f));
+      eaPolyList.mPlaneList[3].set(wBox.minExtents, VectorF(0.0f, -1.0f, 0.0f));
+      eaPolyList.mPlaneList[4].set(wBox.minExtents, VectorF(0.0f, 0.0f, -1.0f));
+      eaPolyList.mPlaneList[5].set(wBox.maxExtents, VectorF(0.0f, 0.0f, 1.0f));
 
       // Build list from convex states here...
       CollisionWorkingList& rList = colWorkingList;
