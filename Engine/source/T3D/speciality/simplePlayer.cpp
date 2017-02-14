@@ -232,7 +232,32 @@ bool SimplePlayer::canSee(SceneObject* other)
 {
    Frustum frustum;
    frustum.set(false, getDataBlock()->getFOV(), getDataBlock()->getAspectRatio(), getDataBlock()->getNearDist(), getDataBlock()->getFarDist(), getTransform());
-   return !frustum.isCulled(other->getWorldBox());
+   if (frustum.isCulled(other->getWorldBox()))
+      return false;
+
+   Point3F center = mWorldBox.getCenter();
+   VectorF extents = mObjBox.minExtents;
+   extents.z = -extents.z / 2.0f;
+
+   Point3F otherCenter = other->getWorldBox().getCenter();
+
+   Point3F startP1 = center + extents;
+   Point3F endP1 = otherCenter + extents;
+   Point3F startP2 = center - extents;
+   Point3F endP2 = otherCenter - extents;
+
+   RayInfo rInfo;
+
+   bool blocked = false;
+
+   disableCollision();
+   if (getContainer()->castRay(startP1, endP1, CollisionMoveMask, &rInfo)) {
+      if (getContainer()->castRay(startP2, endP2, CollisionMoveMask, &rInfo))
+         blocked = true;
+   }
+   enableCollision();
+
+   return !blocked;
 }
 
 bool SimplePlayer::trySetRotation(F32 rot)
@@ -346,6 +371,7 @@ void SimplePlayer::doThink()
       mLastPosX = getPosition().x;
       mLastPosY = getPosition().y;
       mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
+      mLastKillProp = killProb;
       if(mHealth != mLastHealth)
       {
          mTimeTookDamage = mTickCount;
@@ -382,7 +408,7 @@ void SimplePlayer::doThink()
          if (trySetRotation(mRot + mDataBlock->getTurnSpeed())) mRot += mDataBlock->getTurnSpeed();
          break;
       case TurnLeft:
-         mRot -= mDataBlock->getTurnSpeed();
+         if (trySetRotation(mRot - mDataBlock->getTurnSpeed())) mRot -= mDataBlock->getTurnSpeed();
          break;
       case Shoot:
          Shoot_callback();
@@ -473,7 +499,7 @@ void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* s
          if (!canSee(player)) continue;
          killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
 
-         ColorI color = ColorI(256 * (1 - killProb), 256 * killProb, 0);
+         ColorI color = ColorI(255 * (1 - killProb), 255 * killProb, 0);
          du->drawLine(getWorldBox().getCenter(), player->getWorldBox().getCenter(), color);
       }
    }

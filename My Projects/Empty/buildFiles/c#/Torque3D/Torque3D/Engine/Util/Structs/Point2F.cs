@@ -54,6 +54,11 @@ namespace Torque3D.Util
          return new Point2F(p1.X + p2.X, p1.Y + p2.Y);
       }
 
+      public static Point2F operator *(Point2F p1, float coeff)
+      {
+         return new Point2F(p1.X * coeff, p1.Y * coeff);
+      }
+
       public float[] ToArray()
       {
          return new[] {X,Y};
@@ -69,5 +74,11 @@ namespace Torque3D.Util
       }
 
       public static Point2F Zero = new Point2F(0, 0);
+
+      public double GetDistanceToLine(Point2F start, Point2F end)
+      {
+         return Math.Abs((end.Y - start.Y) * X - (end.X - start.X) * Y + end.X * start.Y - end.Y * start.X) /
+                Math.Sqrt((end.Y - start.Y) * (end.Y - start.Y) + (end.X - start.X) * (end.X - start.X));
+      }
    }
 }

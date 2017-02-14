@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Core;
 using Game.Modules.ClientServer.Server;
+using MathNet.Numerics.Random;
 using Torque3D;
 using Torque3D.Engine;
 using Torque3D.Engine.Util.Enums;
@@ -58,10 +59,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                Rotation = new AngAxisF(0, 0, 1, 0),
                RenderFrustum = true
             };
-            string skin = i == 0 ? "blue": "darkgreen";
+            string skins = Globals.GetString("SimplePlayerSkins");
+            int count = Global.getWordCount(skins);
+            string skin = Global.getWord(skins, i % count);
             player.setFieldValue("color", skin);
             player.setSkinName("PlayerTexture=" + skin + "_PlayerTexture");
-            Console.WriteLine(player.getSkinName());
             player.DataBlock.setFieldValue("spawn", playerSpawn.ToString());
 
             player.registerObject();
@@ -205,6 +207,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                SpawnClass = Globals.GetString("Game::DefaultCameraClass"),
                SpawnDatablock = Globals.GetString("Game::DefaultCameraDataBlock")
             };
+            spawn.registerObject();
 
             // Add it to the MissionCleanup group so that it
             // doesn't get saved to the Mission (and gets cleaned
@@ -254,43 +257,60 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          }
       }
 
+      public static PlayerAction sLastAction = PlayerAction.None;
+
       [ConsoleFunction]
       public static PlayerAction SPThink(FeatureVector vector)
       {
+         PlayerAction action = sLastAction;
          Random rand = new Random();
-         if (vector.DistanceToObstacle < 10)
+         if (vector.DistanceToObstacle < 0.5)
          {
-             return PlayerAction.TurnRight;
+            if (sLastAction == PlayerAction.TurnLeft)
+               action = PlayerAction.TurnLeft;
+            else if (sLastAction == PlayerAction.TurnRight)
+               action = PlayerAction.TurnRight;
+            else if (rand.NextBoolean()) action = PlayerAction.TurnRight;
+            else action = PlayerAction.TurnLeft;
          }
-         if (vector.TicksSinceObservedEnemy < 200)
+         else if (vector.TicksSinceObservedEnemy < 200)
          {
             if (vector.KillProb > 0.80 && vector.ShootDelay == 0)
             {
-               return PlayerAction.Shoot;
+               action = PlayerAction.Shoot;
             }
-            if (vector.DeltaKillProp > 0)
+            else if (vector.DeltaKillProp > 0)
             {
                if (vector.DeltaRot < 0)
                {
-                  return PlayerAction.TurnRight;
+                  action = PlayerAction.TurnRight;
                }
-               return PlayerAction.TurnLeft;
+               else action = PlayerAction.TurnLeft;
             }
-            if (vector.DeltaRot > 0)
+            else if (vector.DeltaRot > 0)
             {
-               return PlayerAction.TurnRight;
+               action = PlayerAction.TurnRight;
             }
-            if (vector.DeltaRot < 0)
+            else if (vector.DeltaRot < 0)
             {
-               return PlayerAction.TurnLeft;
+               action = PlayerAction.TurnLeft;
             }
-            if (rand.NextDouble() <= 0.5)
+            else if (rand.NextDouble() <= 0.5)
             {
-               return PlayerAction.TurnLeft;
+               action = PlayerAction.TurnLeft;
             }
-            return PlayerAction.TurnRight;
+            else if (sLastAction == PlayerAction.TurnLeft)
+               action = PlayerAction.TurnLeft;
+            else if (sLastAction == PlayerAction.TurnRight)
+               action = PlayerAction.TurnRight;
+            else if (rand.NextBoolean()) action = PlayerAction.TurnRight;
+            else action = PlayerAction.TurnLeft;
          }
-         return PlayerAction.MoveForward;
+         else
+            action = PlayerAction.MoveForward;
+
+         sLastAction = action;
+         return action;
       }
       [ConsoleFunction]
       public static PlayerAction SPThink1(FeatureVector vector)

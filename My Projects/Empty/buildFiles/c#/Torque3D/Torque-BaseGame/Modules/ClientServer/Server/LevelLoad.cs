@@ -181,6 +181,8 @@ namespace Game.Modules.ClientServer.Server
       {
          Global.echo("*** MISSION RESET");
 
+         SimGroup PlayersGroup = Sim.FindObject<SimGroup>("Players");
+         PlayersGroup.delete();
          SimGroup MissionCleanup = Sim.FindObject<SimGroup>("MissionCleanup");
 
          // Remove any temporary mission objects
