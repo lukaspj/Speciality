@@ -29,40 +29,8 @@ function PlayGui::onWake(%this)
 {
    // Turn off any shell sounds...
    // sfxStop( ... );
-   for (%i = 0; %i < players.getCount(); %i++)
-   {
-     %player = players.getObject(%i);
-     %HealthGui = new GuiProgressCtrl(%player.getName() @ "health"){
-        extent = "200 50";
-        anchorTop = "1";
-        anchorRight = "1";
-        position = "824" SPC %i*55;
-      };
-      %HealthGui.setValue(%player.health/%player.maxHealth);
-      %ScoreGui = new GuiTextCtrl(%player.getName()@ "score"){
-        text = "Score: 0";
-        extent = "200 50";
-        position = "624" SPC %i*55;
-        profile = new GuiControlProfile(){
-          fontSize = "60";
-          justify = "Center";
-          fontColor = %player.color;
-        };
-      };
-      %DamageGui = new GuiTextCtrl(%player.getName()@ "damage"){
-        text = "Damage%: 0";
-        extent = "400 50";
-        position = "224" SPC %i*55;
-        profile = new GuiControlProfile(){
-          fontSize = "60";
-          justify = "Center";
-          fontColor = %player.color;
-        };
-      };
-     %this.addGuiControl(%HealthGui);
-     %this.addGuiControl(%ScoreGui);
-     %this.addGuiControl(%DamageGui);
-   }
+   Canvas.pushDialog(AddPlayers);
+
 
    $enableDirectInput = "1";
    activateDirectInput();
@@ -99,6 +67,44 @@ function PlayGui::clearHud( %this )
 
    while ( %this.getCount() > 0 )
       %this.getObject( 0 ).delete();
+}
+
+function PlayGui::InitGuiElements( %this )
+{
+   for (%i = 0; %i < players.getCount(); %i++)
+   {
+     %player = players.getObject(%i);
+     %HealthGui = new GuiProgressCtrl(%player.getName() @ "health"){
+        extent = "200 55";
+        anchorTop = "1";
+        anchorRight = "1";
+        position = "824" SPC %i*60;
+      };
+      %HealthGui.setValue(%player.health/%player.maxHealth);
+      %ScoreGui = new GuiTextCtrl(%player.getName()@ "score"){
+        text = "Score: 0";
+        extent = "200 55";
+        position = "624" SPC %i*60;
+        profile = new GuiControlProfile(){
+          fontSize = "60";
+          justify = "Center";
+          fontColor = %player.color;
+        };
+      };
+      %DamageGui = new GuiTextCtrl(%player.getName()@ "damage"){
+        text = "Damage%: 0";
+        extent = "400 55";
+        position = "224" SPC %i*60;
+        profile = new GuiControlProfile(){
+          fontSize = "60";
+          justify = "Center";
+          fontColor = %player.color;
+        };
+      };
+     %this.addGuiControl(%HealthGui);
+     %this.addGuiControl(%ScoreGui);
+     %this.addGuiControl(%DamageGui);
+   }
 }
 
 //-----------------------------------------------------------------------------

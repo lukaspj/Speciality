@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Game.Core;
 using Game.Modules.ClientServer.Server;
 using MathNet.Numerics.Random;
@@ -15,9 +16,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public int duration { get; set; }
 
       public Camera camera { get; set; }
-
-      private GameBord bord;
-
+      private GameConnectionToClient client;
       //-----------------------------------------------------------------------------
       // What kind of "player" is spawned is either controlled directly by the
       // SpawnSphere or it defaults back to the values set here. This also controls
@@ -28,52 +27,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public void initGameVars()
       {
 
-         bord = GameBord.GetGameBord(100, 100);
-         //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
-         SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
-         if (playersGroup == null)
-         {
-            playersGroup = new SimGroup("Players", true);
-            Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
-         }
-         SimGroup obstacleGroup = Sim.FindObject<SimGroup>("Obstacles");
-         if (obstacleGroup == null)
-         {
-            obstacleGroup = new SimGroup("Obstacles",true);
-            Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
-         }
-         bord.CreateBoundingBox();
-         bord.GenerateRandomObstacles(50);
-         int numPlayers = 2;
-         for (int i = 0; i < numPlayers; i++)
-         {
-            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2*i)) * (bord.GameSizeX / 4) - (bord.GameSizeX/2), (1 + (2*i)) * (bord.GameSizeY / 4) - (bord.GameSizeY/2), 1));
-            //Point3F playerSpawn = new Point3F(0, 0, 1);
-            string playerName = "player" + i;
-            SimplePlayer player = new SimplePlayer(playerName)
-            {
-
-               DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
-               Position = playerSpawn,
-               ThinkFunction = "SPThink"+i,
-               Rotation = new AngAxisF(0, 0, 1, 0),
-               RenderFrustum = true
-            };
-            string skins = Globals.GetString("SimplePlayerSkins");
-            int count = Global.getWordCount(skins);
-            string skin = Global.getWord(skins, i % count);
-            player.setFieldValue("color", skin);
-            player.setSkinName("PlayerTexture=" + skin + "_PlayerTexture");
-            player.DataBlock.setFieldValue("spawn", playerSpawn.ToString());
-
-            player.registerObject();
-
-            playersGroup.add(player);
-
-         }
-
-
-         // Leave $Game::defaultPlayerClass and $Game::defaultPlayerDataBlock as empty strings ("")
+      // Leave $Game::defaultPlayerClass and $Game::defaultPlayerDataBlock as empty strings ("")
          // to spawn a the $Game::defaultCameraClass as the control object.
          Globals.SetString("Game::DefaultPlayerClass", "");
          Globals.SetString("Game::DefaultPlayerDataBlock", "");
@@ -93,6 +47,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Global movement speed that affects all Cameras
          Globals.SetInt("Camera::MovementSpeed", 30);
       }
+
+     
 
       [ConsoleFunction]
       public void ResetGame()
@@ -124,14 +80,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // core/scripts/spawn.cs. For custom spawn behaviors one can either
          // override the properties on the SpawnSphere's or directly override the
          // functions themselves.
-
+         this.client = client;
          // Find a spawn point for the camera
          var cameraSpawnPoint = pickCameraSpawnPoint(Globals.GetString("Game::DefaultCameraSpawnGroups"));
-
-         SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
-         SimplePlayer p1 = playersGroup.getRandom().As<SimplePlayer>();
-         SimplePlayerData.searchForPlayers(p1);
-         client.setFieldValue("player", p1.getId().ToString());
 
          // Spawn a camera for this client using the found %spawnPoint
 
@@ -169,6 +120,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // Called by resetMission(), after all the temporary mission objects
          // have been deleted.
          initGameVars();
+         InitGame();
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -316,6 +268,69 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public static PlayerAction SPThink1(FeatureVector vector)
       {
          return PlayerAction.None;
+      }
+
+      private static string[] players = new string[5];
+
+      [ConsoleFunction("AddPlayers")]
+      public static void AddPlayers()
+      {
+         GuiWindowCtrl window = Sim.FindObject<GuiWindowCtrl>("AddPlayers");
+         GuiTextEditCtrl guiTextEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer0");
+         players[0] = guiTextEditCtrl.Text;
+         GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
+         players[1] = textEditCtrl.Text;
+         InitGame();
+         Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
+         Canvas.GameCanvas.popDialog();
+      }
+
+      private static void InitGame()
+      {
+         GameBord bord = GameBord.GetGameBord(100, 100);
+         //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
+         SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
+         if (playersGroup == null)
+         {
+            playersGroup = new SimGroup("Players", true);
+            Sim.FindObject<SimGroup>("MissionCleanup").add(playersGroup);
+         }
+         SimGroup obstacleGroup = Sim.FindObject<SimGroup>("Obstacles");
+         if (obstacleGroup == null)
+         {
+            obstacleGroup = new SimGroup("Obstacles", true);
+            Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
+         }
+         bord.CreateBoundingBox();
+         bord.GenerateRandomObstacles(50);
+         int numPlayers = 2;
+         for (int i = 0; i < numPlayers; i++)
+         {
+            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2 * i)) * (bord.GameSizeX / 4) - (bord.GameSizeX / 2), (1 + (2 * i)) * (bord.GameSizeY / 4) - (bord.GameSizeY / 2), 1));
+            //Point3F playerSpawn = new Point3F(0, 0, 1);
+            string playerName = "player" + i;
+            SimplePlayer player = new SimplePlayer(playerName)
+            {
+
+               DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
+               Position = playerSpawn,
+               ThinkFunction = players[i] == "" ? "SPThink": players[i],
+               Rotation = new AngAxisF(0, 0, 1, 0),
+               RenderFrustum = true
+            };
+            string skins = Globals.GetString("SimplePlayerSkins");
+            int count = Global.getWordCount(skins);
+            string skin = Global.getWord(skins, i % count);
+            player.setFieldValue("color", skin);
+            player.setSkinName("PlayerTexture=" + skin + "_PlayerTexture");
+            player.DataBlock.setFieldValue("spawn", playerSpawn.ToString());
+
+            player.registerObject();
+
+            playersGroup.add(player);
+
+         }
+        
       }
    }
 }

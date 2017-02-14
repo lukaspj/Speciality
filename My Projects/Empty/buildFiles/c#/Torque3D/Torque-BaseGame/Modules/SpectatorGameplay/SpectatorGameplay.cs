@@ -71,6 +71,8 @@ namespace Game.Modules.ClientServer
 
             //guis
             Global.exec("data/SpectatorGameplay/scripts/gui/playGui.gui");
+            Global.exec("data/SpectatorGameplay/scripts/gui/Window2.gui");
+
             Global.exec("data/SpectatorGameplay/scripts/gui/playGui.cs");
          }
       }
