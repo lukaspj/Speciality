@@ -407,7 +407,7 @@ void SimplePlayer::doThink()
          if (trySetRotation(mRot + mDataBlock->getTurnSpeed())) mRot += mDataBlock->getTurnSpeed();
          break;
       case TurnLeft:
-         mRot -= mDataBlock->getTurnSpeed();
+         if (trySetRotation(mRot - mDataBlock->getTurnSpeed())) mRot -= mDataBlock->getTurnSpeed();
          break;
       case Shoot:
          Shoot_callback();

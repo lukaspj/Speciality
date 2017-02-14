@@ -264,7 +264,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          PlayerAction action = sLastAction;
          Random rand = new Random();
-         if (vector.DistanceToObstacle < 10)
+         if (vector.DistanceToObstacle < 0.5)
          {
             if (sLastAction == PlayerAction.TurnLeft)
                action = PlayerAction.TurnLeft;
