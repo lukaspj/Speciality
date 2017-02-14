@@ -283,9 +283,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          GuiWindowCtrl window = Sim.FindObject<GuiWindowCtrl>("AddPlayers");
          GuiTextEditCtrl guiTextEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer0");
-         players[0] = guiTextEditCtrl.Text;
+         players[0] = guiTextEditCtrl.getValue();
          GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
-         players[1] = textEditCtrl.Text;
+         players[1] = textEditCtrl.getValue();
          InitGame();
          Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
          Canvas.GameCanvas.popDialog();
