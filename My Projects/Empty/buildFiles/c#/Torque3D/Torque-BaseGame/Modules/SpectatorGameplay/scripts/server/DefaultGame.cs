@@ -216,16 +216,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          PlayerAction action = sLastAction;
          Random rand = new Random();
-         if (vector.DistanceToObstacle < 0.5)
-         {
-            if (sLastAction == PlayerAction.TurnLeft)
-               action = PlayerAction.TurnLeft;
-            else if (sLastAction == PlayerAction.TurnRight)
-               action = PlayerAction.TurnRight;
-            else if (rand.NextBoolean()) action = PlayerAction.TurnRight;
-            else action = PlayerAction.TurnLeft;
-         }
-         else if (vector.TicksSinceObservedEnemy < 200)
+         if (vector.TicksSinceObservedEnemy < 200)
          {
             if (vector.KillProb > 0.80 && vector.ShootDelay == 0)
             {
@@ -239,19 +230,22 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                }
                else action = PlayerAction.TurnLeft;
             }
-            else if (vector.DeltaRot > 0)
+            else if (sLastAction == PlayerAction.TurnRight)
             {
                action = PlayerAction.TurnRight;
             }
-            else if (vector.DeltaRot < 0)
-            {
-               action = PlayerAction.TurnLeft;
-            }
-            else if (rand.NextDouble() <= 0.5)
-            {
-               action = PlayerAction.TurnLeft;
-            }
             else if (sLastAction == PlayerAction.TurnLeft)
+            {
+               action = PlayerAction.TurnLeft;
+            }
+            else if (rand.NextBoolean())
+            {
+               action = PlayerAction.TurnLeft;
+            }
+         }
+         else if (vector.DistanceToObstacle < 0.5)
+         {
+            if (sLastAction == PlayerAction.TurnLeft)
                action = PlayerAction.TurnLeft;
             else if (sLastAction == PlayerAction.TurnRight)
                action = PlayerAction.TurnRight;
@@ -261,13 +255,25 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          else
             action = PlayerAction.MoveForward;
 
+         if (action == PlayerAction.TurnLeft || action == PlayerAction.TurnRight)
+         {
+            if (sLastAction == action && Math.Abs(vector.DeltaRot) < 0.0001f)
+            {
+               // Stuck in rotation
+               action = PlayerAction.MoveForward;
+            }
+         }
+
          sLastAction = action;
          return action;
       }
       [ConsoleFunction]
       public static PlayerAction SPThink1(FeatureVector vector)
       {
-         return PlayerAction.None;
+         if (vector.DistanceToObstacle < 1.0f)
+            return PlayerAction.TurnRight;
+
+         return PlayerAction.MoveForward;
       }
 
       private static string[] players = new string[5];
