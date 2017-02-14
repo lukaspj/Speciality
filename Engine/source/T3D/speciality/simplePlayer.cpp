@@ -331,6 +331,7 @@ void SimplePlayer::doThink()
 
       features->mKillProb = killProb;
       features->mDeltaKillProp = killProb - mLastKillProp;
+      mLastKillProp = killProb;
       features->mDistanceToObstacle = getDistanceToObstacleInFront();
       features->mHealth = mHealth;
 

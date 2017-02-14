@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
 using Torque3D;
@@ -39,8 +40,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          SimplePlayer other = others[0];
          Random rand = new Random();
          
-         //double damagePropability = SimplePlayerData.GetDamagePropability(this, other);
-         double damagePropability = 1;
+         double damagePropability = SimplePlayerData.GetDamagePropability(this, other);
          if (damagePropability >= rand.NextDouble())
          {
             bool kill = other.OnDamage(int.Parse(DataBlock.getFieldValue("damage")));
@@ -51,6 +51,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                int score = int.Parse(DataBlock.getFieldValue("score"));
                if (score >= int.Parse(DataBlock.getFieldValue("winningScore")))
                {
+                  GuiTextCtrl scoreText = Sim.FindObject<GuiTextCtrl>(getName() + "score");
+                  string text = scoreText.Text;
+                  Regex reg = new Regex(@"\s");
+                  int scoretxt = int.Parse(reg.Split(text)[1]) + 1;
+                  scoreText.setText("Score: " + scoretxt);
                   Global.eval("resetMission();");
                }
             }

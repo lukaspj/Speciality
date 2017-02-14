@@ -74,6 +74,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       [ConsoleFunction]
       public static double GetDamagePropability(SimplePlayer obj, SimplePlayer other)
       {
+         
          Point2F objPoint = new Point2F(obj.Position.X, obj.Position.Y);
          float objZRoation = obj.GetEulerRotation().Z > Math.PI ? obj.GetEulerRotation().Z - (float)Math.PI /2 : obj.GetEulerRotation().Z + (float) Math.PI /2;
          Point2F otherPoint = new Point2F(other.Position.X,other.Position.Y);
@@ -93,6 +94,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Normal dist = new Normal(0, float.Parse(obj.DataBlock.getFieldValue("variance")));
          double normalizingMult = 1 / dist.Density(dist.Median);
          double killProp = dist.Density(distanceFromLOS) * normalizingMult;
+         GuiTextCtrl text = Sim.FindObject<GuiTextCtrl>(obj.Name + "damage");
+         if (text != null)
+         {
+            text.setText("Damage%: " + killProp * 100);
+         }
          return killProp;
       }
    }

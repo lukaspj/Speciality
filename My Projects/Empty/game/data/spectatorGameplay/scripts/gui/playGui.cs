@@ -33,14 +33,35 @@ function PlayGui::onWake(%this)
    {
      %player = players.getObject(%i);
      %HealthGui = new GuiProgressCtrl(%player.getName() @ "health"){
-        text = " "@%player.getName();
         extent = "200 50";
         anchorTop = "1";
         anchorRight = "1";
         position = "824" SPC %i*55;
       };
       %HealthGui.setValue(%player.health/%player.maxHealth);
+      %ScoreGui = new GuiTextCtrl(%player.getName()@ "score"){
+        text = "Score: 0";
+        extent = "200 50";
+        position = "624" SPC %i*55;
+        profile = new GuiControlProfile(){
+          fontSize = "60";
+          justify = "Center";
+          fontColor = %player.color;
+        };
+      };
+      %DamageGui = new GuiTextCtrl(%player.getName()@ "damage"){
+        text = "Damage%: 0";
+        extent = "400 50";
+        position = "224" SPC %i*55;
+        profile = new GuiControlProfile(){
+          fontSize = "60";
+          justify = "Center";
+          fontColor = %player.color;
+        };
+      };
      %this.addGuiControl(%HealthGui);
+     %this.addGuiControl(%ScoreGui);
+     %this.addGuiControl(%DamageGui);
    }
 
    $enableDirectInput = "1";

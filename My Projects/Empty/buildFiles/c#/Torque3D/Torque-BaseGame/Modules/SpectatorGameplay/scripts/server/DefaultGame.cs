@@ -58,7 +58,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                Rotation = new AngAxisF(0, 0, 1, 0),
                RenderFrustum = true
             };
-            string skin = "blue";
+            string skin = i == 0 ? "blue": "darkgreen";
             player.setFieldValue("color", skin);
             player.setSkinName("PlayerTexture=" + skin + "_PlayerTexture");
             Console.WriteLine(player.getSkinName());
@@ -255,7 +255,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       }
 
       [ConsoleFunction]
-      public static PlayerAction SPThink0(FeatureVector vector)
+      public static PlayerAction SPThink(FeatureVector vector)
       {
          Random rand = new Random();
          if (vector.DistanceToObstacle < 10)
