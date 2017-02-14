@@ -497,7 +497,7 @@ void SimplePlayer::debugRenderDelegate(ObjectRenderInst* ri, SceneRenderState* s
          if (!canSee(player)) continue;
          killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
 
-         ColorI color = ColorI(256 * (1 - killProb), 256 * killProb, 0);
+         ColorI color = ColorI(255 * (1 - killProb), 255 * killProb, 0);
          du->drawLine(getWorldBox().getCenter(), player->getWorldBox().getCenter(), color);
       }
    }
