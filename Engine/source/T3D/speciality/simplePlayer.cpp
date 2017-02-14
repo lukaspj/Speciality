@@ -370,6 +370,7 @@ void SimplePlayer::doThink()
       mLastPosX = getPosition().x;
       mLastPosY = getPosition().y;
       mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
+      mLastKillProp = killProb;
       if(mHealth != mLastHealth)
       {
          mTimeTookDamage = mTickCount;
