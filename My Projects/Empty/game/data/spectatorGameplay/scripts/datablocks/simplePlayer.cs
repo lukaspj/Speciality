@@ -18,6 +18,8 @@ singleton Material(Pink_PlayerMaterial) {
    mapTo = "pink_PlayerTexture";
 };
 
+$SimplePlayerSkins = "blue darkgreen pink";
+
 datablock SimplePlayerData(SPD) {
   shapeFile = "data/spectatorGameplay/art/GameShapes/player.dts";
   moveSpeed = 10;
@@ -27,7 +29,7 @@ datablock SimplePlayerData(SPD) {
 
 
   cameraMaxDist = 5;
-  variance = 5.0;
+  variance = 1.0;
   maxHealth = 20;
   Health = 20;
   damage = 1;
@@ -44,10 +46,8 @@ function createSP() {
     ThinkFunction = "SPThink";
   };
 
-  %availableSkins = "blue red darkgreen pink";
-
-  %count = getWordCount(%availableSkins);
-  %skin = getWord(%availableSkins, getRandom(%count) - 1 );
+  %count = getWordCount($SimplePlayerSkins);
+  %skin = getWord($SimplePlayerSkins, getRandom(%count) - 1 );
   echo("PlayerTexture=" @ %skin @ "_PlayerTexture");
   SP.setSkinName("PlayerTexture=" @ %skin @ "_PlayerTexture");
 }

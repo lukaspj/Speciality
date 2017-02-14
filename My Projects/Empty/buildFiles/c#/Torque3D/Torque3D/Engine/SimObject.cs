@@ -62,16 +62,16 @@ namespace Torque3D
       }
 
       public T As<T>() where T : SimObject
-		{
-			return Activator.CreateInstance(typeof(T), this) as T;
+      {
+         return (T)SimDictionary.CreateInstance(typeof(T), this);
 		}
 
       public SimObject As(Type t)
 		{
          if (!typeof(SimObject).IsAssignableFrom(t)) return null;
-
-         return (SimObject)Activator.CreateInstance(t, this);
-		}
+         
+         return (SimObject)SimDictionary.CreateInstance(t, this);
+      }
 
 		public bool IsDead()
 		{
