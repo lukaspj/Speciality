@@ -22,8 +22,6 @@ namespace Torque3D
 
       public static void InitializeTypeDictionaries(IEnumerable<Type> types)
       {
-         EngineCallbacks.Clear();
-
          foreach (Type type in types)
          {
             IEnumerable<ConsoleClassAttribute> attributes =
