@@ -100,13 +100,14 @@ bool SimplePlayerCollision::checkCollisions(const F32 travelTime, Point3F* veloc
    //of time and processing.
    //We only do the 'real' collision checks if we detect we might hit something after all when doing the early out.
    //See the checkEarlyOut function in the CollisionInterface for an explination on how it works.
-   if (false && checkEarlyOut(start, *velocity, travelTime, mOwner->getObjBox(), mOwner->getScale(), mConvexList->getBoundingBox(), 0xFFFFFF, mConvexList->getWorkingList()))
+   if (velocity->len() > 0.005f && checkEarlyOut(start, *velocity, travelTime, mOwner->getObjBox(), mOwner->getScale(), mConvexList->getBoundingBox(), 0xFFFFFF, mConvexList->getWorkingList()))
       //if (checkEarlyOut(start, *velocity, travelTime, mOwner->getObjBox(), mOwner->getScale(), mConvexList->getBoundingBox(), sCollisionMoveMask, mConvexList->getWorkingList()))
       return false;
 
    //If we've made it this far, there's a very good chance we can actually collide with something in our working list. 
    //As such, go ahead and do our real collision update now
    bool collided = updateCollisions(travelTime, vector, *velocity);
+
 
    //Once that's been done, we proceed to handle our collision list, to notify any collidees.
    handleCollisionList(mCollisionList, *velocity);

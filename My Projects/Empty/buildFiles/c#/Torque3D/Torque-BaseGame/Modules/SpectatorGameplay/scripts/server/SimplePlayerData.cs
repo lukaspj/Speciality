@@ -94,12 +94,18 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Normal dist = new Normal(0, float.Parse(obj.DataBlock.getFieldValue("variance")));
          double normalizingMult = 1 / dist.Density(dist.Median);
          double killProp = dist.Density(distanceFromLOS) * normalizingMult;
-         GuiTextCtrl text = Sim.FindObject<GuiTextCtrl>(obj.Name + "damage");
+         SetDamageProbText(obj.Name, (float)killProp);
+         return killProp;
+      }
+
+      [ConsoleFunction]
+      public static void SetDamageProbText(string playerName, float value)
+      {
+         GuiTextCtrl text = Sim.FindObject<GuiTextCtrl>(playerName + "damage");
          if (text != null)
          {
-            text.setText("Damage%: " + killProp * 100);
+            text.setText("Damage%: " + (int)(value * 1000) / 10.0f);
          }
-         return killProp;
       }
    }
 

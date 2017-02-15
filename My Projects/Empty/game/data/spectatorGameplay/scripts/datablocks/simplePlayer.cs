@@ -23,13 +23,13 @@ $SimplePlayerSkins = "blue darkgreen pink";
 datablock SimplePlayerData(SPD) {
   shapeFile = "data/spectatorGameplay/art/GameShapes/player.dts";
   moveSpeed = 10;
-  turnSpeed = 0.02;
+  turnSpeed = 0.034906585;
   farDist = 100;
 
 
 
   cameraMaxDist = 5;
-  variance = 1.0;
+  variance = 5.0;
   maxHealth = 20;
   Health = 20;
   damage = 1;
@@ -37,6 +37,36 @@ datablock SimplePlayerData(SPD) {
   respawnTime = 3000; //ms
   winningScore = 10;
   maxDamage = 300;
+};
+
+datablock ParticleData(HitParticle : DefaultParticle)
+{
+   lifetimeMS = 1000;
+   gravityCoefficient = 0;
+   dragCoefficient = "2";
+
+   sizes[0] = 1;
+   sizes[1] = 1;
+   sizes[2] = 1;
+   sizes[3] = 1;
+   inheritedVelFactor = "0";
+};
+
+datablock ParticleEmitterData(HitEmitter : DefaultEmitter)
+{
+   particles = HitParticle;
+
+   ejectionPeriodMS = "10";
+   ejectionVelocity = "4.167";
+   ejectionOffset = "0.625";
+   thetaMax = "180";
+   softnessDistance = "1";
+   lifetimeMS = "200";
+};
+
+datablock ParticleEmitterNodeData(HitNode)
+{
+   timeMultiple = 1.0;
 };
 
 function createSP() {

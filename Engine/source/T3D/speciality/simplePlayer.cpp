@@ -236,25 +236,30 @@ bool SimplePlayer::canSee(SceneObject* other)
       return false;
 
    Point3F center = mWorldBox.getCenter();
-   VectorF extents = mObjBox.minExtents;
-   extents.z = -extents.z / 2.0f;
-
-   Point3F otherCenter = other->getWorldBox().getCenter();
-
-   Point3F startP1 = center + extents;
-   Point3F endP1 = otherCenter + extents;
-   Point3F startP2 = center - extents;
-   Point3F endP2 = otherCenter - extents;
+   
+   F32 width = other->getObjBox().maxExtents.x;
+   F32 depth = other->getObjBox().maxExtents.y;
+   F32 height = other->getObjBox().maxExtents.z;
+   MatrixF mat = other->getTransform();
+   Point3F leftFrontPoint = Point3F(-width, depth, height / 2);
+   Point3F rightFrontPoint = Point3F(width, depth, height / 2);
+   Point3F leftBackPoint = Point3F(-width, -depth, height / 2);
+   Point3F rightBackPoint = Point3F(width, -depth, height / 2);
+   mat.mulP(leftFrontPoint);
+   mat.mulP(rightFrontPoint);
+   mat.mulP(leftBackPoint);
+   mat.mulP(rightBackPoint);
 
    RayInfo rInfo;
 
    bool blocked = false;
 
    disableCollision();
-   if (getContainer()->castRay(startP1, endP1, CollisionMoveMask, &rInfo)) {
-      if (getContainer()->castRay(startP2, endP2, CollisionMoveMask, &rInfo))
+   if (  getContainer()->castRay(center, leftFrontPoint, CollisionMoveMask, &rInfo)
+      || getContainer()->castRay(center, leftBackPoint, CollisionMoveMask, &rInfo)
+      || getContainer()->castRay(center, rightFrontPoint, CollisionMoveMask, &rInfo)
+      || getContainer()->castRay(center, rightBackPoint, CollisionMoveMask, &rInfo))
          blocked = true;
-   }
    enableCollision();
 
    return !blocked;
@@ -335,6 +340,8 @@ void SimplePlayer::doThink()
 
       F32 killProb = 0.0f; // todo Support more players?
 
+      Con::executef("SetDamageProbText", getName(), killProb);
+
       SimGroup *playersGroup = static_cast<SimGroup*>(Sim::findObject("Players"));
       for(int i = 0; i < playersGroup->size(); i++)
       {
@@ -348,9 +355,9 @@ void SimplePlayer::doThink()
       FeatureVector *features = new FeatureVector();
       features->registerObject();
 
-      features->mDeltaRot = mLastRot - mRot;
-      features->mDeltaMovedX = mLastPosX - getPosition().x;
-      features->mDeltaMovedY = mLastPosY - getPosition().y;
+      features->mDeltaRot = mRot - mLastRot;
+      features->mDeltaMovedX = getPosition().x - mLastPosX;
+      features->mDeltaMovedY = getPosition().y - mLastPosY;
       features->mVelX = getVelocity().x;
       features->mVelY = getVelocity().y;
 
@@ -387,7 +394,7 @@ void SimplePlayer::doThink()
          mPrepared = false;
          doThink();
       }
-      bool collidingNow = mCollision.checkCollisions(TickMs, &mVelocity, getPosition());
+
       switch (action)
       {
       case MoveForward:
@@ -412,9 +419,9 @@ void SimplePlayer::doThink()
          break;
       case Shoot:
          if (mShootDelay == 0) {
+            mShootDelay = mDataBlock->getShootDelay();
             Shoot_callback();
          }
-         mShootDelay = mDataBlock->getShootDelay();
          break;
       case Prepare:
          mPrepared = true;

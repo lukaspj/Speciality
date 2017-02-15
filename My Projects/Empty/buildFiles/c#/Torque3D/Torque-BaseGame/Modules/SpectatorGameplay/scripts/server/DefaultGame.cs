@@ -226,9 +226,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             {
                if (vector.DeltaRot < 0)
                {
-                  action = PlayerAction.TurnRight;
+                  action = PlayerAction.TurnLeft;
                }
-               else action = PlayerAction.TurnLeft;
+               else action = PlayerAction.TurnRight;
             }
             else if (sLastAction == PlayerAction.TurnRight)
             {
@@ -243,7 +243,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                action = PlayerAction.TurnLeft;
             }
          }
-         else if (vector.DistanceToObstacle < 0.5)
+         else if (vector.DistanceToObstacle < 1.5)
          {
             if (sLastAction == PlayerAction.TurnLeft)
                action = PlayerAction.TurnLeft;
@@ -293,7 +293,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       private static void InitGame()
       {
-         GameBord bord = GameBord.GetGameBord(100, 100);
+         GameBord bord = GameBord.GetGameBord(30, 30);
          //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
          SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
          if (playersGroup == null)
@@ -308,7 +308,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
          }
          bord.CreateBoundingBox();
-         bord.GenerateRandomObstacles(50);
+         bord.GenerateRandomObstacles(5);
          int numPlayers = 2;
          for (int i = 0; i < numPlayers; i++)
          {

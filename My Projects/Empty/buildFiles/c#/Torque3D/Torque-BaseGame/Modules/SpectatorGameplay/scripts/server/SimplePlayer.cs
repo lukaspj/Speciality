@@ -66,6 +66,15 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
        */
       public bool OnDamage(int val)
       {
+         ParticleEmitterNode node = new ParticleEmitterNode()
+         {
+            DataBlock = Sim.FindObject<ParticleEmitterNodeData>("HitNode"),
+            Emitter = Sim.FindObject<ParticleEmitterData>("HitEmitter"),
+            Position = Position
+         };
+         node.registerObject();
+         node.schedule(200, "delete");
+
          float curenthealth = Health;
          float newHealth = curenthealth - val;
          GuiProgressCtrl progress = Sim.FindObject<GuiProgressCtrl>(getName() + "health");

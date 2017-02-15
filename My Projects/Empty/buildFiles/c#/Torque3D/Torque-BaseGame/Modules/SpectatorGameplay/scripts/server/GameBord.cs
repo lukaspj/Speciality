@@ -17,6 +17,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public int GameSizeY => _gameSizeY;
       private bool[,] gameBord;
       private string shape = "data/spectatorGameplay/art/GameShapes/player.dts";
+      public static float _wallHeight = 1.5f;
       public GameBord(int sizeX, int sizeY)
       {
          _gameSizeX = sizeX % 2 == 0 ? ++sizeX : sizeX;
@@ -143,28 +144,28 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             ShapeName = shape,
             Position = XYToPoint(_gameSizeX-1,(_gameSizeY-1)/2),
             CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(1, _gameSizeY, 0.7f)
+            Scale = new Point3F(1, _gameSizeY, _wallHeight)
          };
          TSStatic leftWall = new TSStatic()
          {
             ShapeName = shape,
             Position = XYToPoint(0,(_gameSizeY-1)/2),
             CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(1, GameSizeY, 0.7f)
+            Scale = new Point3F(1, GameSizeY, _wallHeight)
          };
          TSStatic frontWall = new TSStatic()
          {
             ShapeName = shape,
             Position = XYToPoint((_gameSizeX-1)/2, 0),
             CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(_gameSizeX, 1, 0.7f)
+            Scale = new Point3F(_gameSizeX, 1, _wallHeight)
          };
          TSStatic backWall = new TSStatic()
          {
             ShapeName = shape,
             Position = XYToPoint((_gameSizeX-1)/2,_gameSizeY-1),
             CollisionType = TSMeshType.Bounds,
-            Scale = new Point3F(_gameSizeX, 1, 0.7f)
+            Scale = new Point3F(_gameSizeX, 1, _wallHeight)
          };
          rightWall.registerObject();
          leftWall.registerObject();
@@ -195,7 +196,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                ShapeName = shape,
                Position = XYToPoint(xpos,ypos),
                CollisionType = TSMeshType.Bounds,
-               Scale = new Point3F(xscale, yscale, 0.7f)
+               Scale = new Point3F(xscale, yscale, _wallHeight)
             };
             obstacle.registerObject();
             AddShape(obstacle);
