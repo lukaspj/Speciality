@@ -411,7 +411,9 @@ void SimplePlayer::doThink()
          if (trySetRotation(mRot - mDataBlock->getTurnSpeed())) mRot -= mDataBlock->getTurnSpeed();
          break;
       case Shoot:
-         Shoot_callback();
+         if (mShootDelay == 0) {
+            Shoot_callback();
+         }
          mShootDelay = mDataBlock->getShootDelay();
          break;
       case Prepare:
