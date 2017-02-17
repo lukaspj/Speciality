@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Net;
+using System.Runtime.Remoting.Channels;
+using System.Text.RegularExpressions;
+using System.Timers;
 using Game.Core;
 using Game.Modules.ClientServer.Server;
 using MathNet.Numerics.Random;
@@ -17,6 +20,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public Camera camera { get; set; }
       private GameConnectionToClient client;
+      private static Timer timeUpdate;
       //-----------------------------------------------------------------------------
       // What kind of "player" is spawned is either controlled directly by the
       // SpawnSphere or it defaults back to the values set here. This also controls
@@ -121,6 +125,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // have been deleted.
          initGameVars();
          InitGame();
+         Global.schedule("1000", "0", "TimeUpdate", "");
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -289,6 +294,14 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          InitGame();
          Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
          Canvas.GameCanvas.popDialog();
+         /*timeUpdate = new Timer(1000)
+         {
+            AutoReset = true,
+         };
+         timeUpdate.Elapsed += TimeUpdate;
+         timeUpdate.Start();*/
+
+         Global.schedule("1000", "0", "TimeUpdate", "");
       }
 
       private static void InitGame()
@@ -336,7 +349,35 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             playersGroup.add(player);
 
          }
-        
+         timeUpdate?.Start();
+      }
+      [ConsoleFunction("TimeUpdate")]
+      public static void TimeUpdate(string data)
+      {
+         GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
+         if (!Regex.IsMatch(ctrl.getValue(), @"^\d+$"))
+         {
+            Console.WriteLine("hello");
+         }
+         string value = ctrl.getValue();
+
+         int time = int.Parse(value);
+         int newTime = time - 1;
+         if (time == 0)
+         {
+            timeUpdate?.Stop();
+            EndGame();
+            return;
+         }
+         ctrl.setValue(newTime.ToString());
+         Global.schedule("1000", "0", "TimeUpdate", "");
+      }
+
+      public static void EndGame()
+      {
+         GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
+         ctrl.setText(100.ToString());
+         Global.eval("resetMission();");
       }
    }
 }

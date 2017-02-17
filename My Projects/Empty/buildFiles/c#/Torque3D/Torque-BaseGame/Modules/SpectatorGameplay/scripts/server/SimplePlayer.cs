@@ -56,7 +56,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                   Regex reg = new Regex(@"\s");
                   int scoretxt = int.Parse(reg.Split(text)[1]) + 1;
                   scoreText.setText("Score: " + scoretxt);
-                  Global.eval("resetMission();");
+                  DefaultGame.EndGame();
                }
             }
          }

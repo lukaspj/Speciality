@@ -120,13 +120,21 @@ namespace Torque3D
       /// </summary>
       public float KillProb
       {
-         get { return float.Parse(getFieldValue("KillProb")); }
+         get
+         {
+            string fieldValue = getFieldValue("KillProb");
+            return float.Parse(fieldValue);
+         }
          set { setFieldValue("KillProb", value.ToString()); }
       }
 
       public float DeltaKillProp
       {
-         get { return float.Parse(getFieldValue("DeltaKillProp")); }
+         get
+         {
+            string fieldValue = getFieldValue("DeltaKillProp");
+            return float.Parse(fieldValue);
+         }
          set { setFieldValue("DeltaKillProp", value.ToString()); }
       }
       ///<summary>
@@ -134,7 +142,11 @@ namespace Torque3D
       /// </summary>
       public float DistanceToObstacle
       {
-         get { return float.Parse(getFieldValue("DistanceToObstacle")); }
+         get
+         {
+            string fieldValue = getFieldValue("DistanceToObstacle");
+            return float.Parse(fieldValue);
+         }
          set { setFieldValue("DistanceToObstacle", value.ToString()); }
       }
       /// <summary>
@@ -142,7 +154,11 @@ namespace Torque3D
       /// </summary>
       public float Health
       {
-         get { return float.Parse(getFieldValue("Health")); }
+         get
+         {
+            string fieldValue = getFieldValue("Health");
+            return float.Parse(fieldValue);
+         }
          set { setFieldValue("Health", value.ToString()); }
       }
       /// <summary>
@@ -150,7 +166,11 @@ namespace Torque3D
       /// </summary>
       public int TickCount
       {
-         get { return int.Parse(getFieldValue("TickCount")); }
+         get
+         {
+            string fieldValue = getFieldValue("TickCount");
+            return int.Parse(fieldValue);
+         }
          set { setFieldValue("TickCount", value.ToString()); }
       }
       /// <summary>
@@ -161,7 +181,11 @@ namespace Torque3D
       /// </remarks>
       public int TicksSinceObservedEnemy
       {
-        get { return int.Parse(getFieldValue("TicksSinceObservedEnemy")); }
+        get
+        {
+           string fieldValue = getFieldValue("TicksSinceObservedEnemy");
+           return int.Parse(fieldValue);
+        }
          set { setFieldValue("TicksSinceObservedEnemy", value.ToString()); }
       }
       /// <summary>
@@ -169,7 +193,11 @@ namespace Torque3D
       /// </summary>
       public int TicksSinceDamage
       {
-         get { return int.Parse(getFieldValue("TicksSinceDamage")); }
+         get
+         {
+            string fieldValue = getFieldValue("TicksSinceDamage");
+            return int.Parse(fieldValue);
+         }
          set { setFieldValue("TicksSinceDamage", value.ToString()); }
       }
       /// <summary>
@@ -177,7 +205,11 @@ namespace Torque3D
       /// </summary>
       public int ShootDelay
       {
-         get { return int.Parse(getFieldValue("ShootDelay")); }
+         get
+         {
+            string fieldValue = getFieldValue("ShootDelay");
+            return int.Parse(fieldValue);
+         }
          set { setFieldValue("ShootDelay", value.ToString()); }
       }
 

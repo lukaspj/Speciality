@@ -50,7 +50,7 @@
       profile = new GuiControlProfile( )
       {
          opaque = true;
-         bitmap = "core/art/gui/images/textEdit";
+         bitmap = "core/images/textEdit";
          hasBitmapArray = true;
          border = -2; // fix to display textEdit img
          //borderWidth = "1";  // fix to display textEdit img
@@ -99,7 +99,7 @@
       profile = new GuiControlProfile( )
       {
          opaque = true;
-         bitmap = "core/art/gui/images/textEdit";
+         bitmap = "core/images/textEdit";
          hasBitmapArray = true;
          border = -2; // fix to display textEdit img
          //borderWidth = "1";  // fix to display textEdit img
