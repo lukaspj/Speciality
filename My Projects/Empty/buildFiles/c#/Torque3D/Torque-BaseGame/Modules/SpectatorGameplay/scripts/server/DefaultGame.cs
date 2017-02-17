@@ -188,10 +188,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          {
             camera = new Camera()
             {
-               DataBlock = Sim.FindObject<Observer>("Observer")
+               DataBlock = Sim.FindObject<Observer>("Observer"),
             };
             camera.registerObject();
-
             client.setFieldValue("camera", camera.getId().ToString());
 
          }
@@ -209,8 +208,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
             if (spawnPoint != null)
             {
-               camera.setTransform(new TransformF(spawnPoint.Position + new Point3F(0, 0, 50), spawnPoint.Orientation));
+               camera.setTransform(new TransformF(new Point3F(0, 0, 50), spawnPoint.Orientation));
             }
+            camera.setRotation(new Point3F(60,0,0));
          }
       }
 
