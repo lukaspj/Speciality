@@ -615,7 +615,7 @@ void FeatureVector::initPersistFields()
    addField("VelX", TypeF32, Offset(mVelX, FeatureVector), "");
    addField("VelY", TypeF32, Offset(mVelY, FeatureVector), "");
 
-   addField("DeltaDamageProp", TypeF32, Offset(mDeltaDamageProb, FeatureVector), "");
+   addField("DeltaDamageProb", TypeF32, Offset(mDeltaDamageProb, FeatureVector), "");
 
    addField("DamageProb", TypeF32, Offset(mDamageProb, FeatureVector), "");
    addField("DistanceToObstacle", TypeF32, Offset(mDistanceToObstacle, FeatureVector), "");
