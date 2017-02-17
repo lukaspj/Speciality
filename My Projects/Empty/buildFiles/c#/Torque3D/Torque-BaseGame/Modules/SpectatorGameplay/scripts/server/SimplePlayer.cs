@@ -86,6 +86,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             return true;
          }
          Health = newHealth;
+
+         GameLogger.LogDamageEvent(this, newHealth);
+
          return false;
       }
 

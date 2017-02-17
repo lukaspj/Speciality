@@ -121,31 +121,28 @@ namespace Torque3D
       #region Properties
 
 
-      public bool MovingRight
+      public int MovingRight
          {
-         	get { return GenericMarshal.StringToBool(getFieldValue("MovingRight")); }
-         	set { setFieldValue("MovingRight", value ? "1" : "0"); }
+         	get { return int.Parse(getFieldValue("MovingRight")); }
+         	set { setFieldValue("MovingRight", value.ToString()); }
          }
-      
-      
-         public bool MovingLeft
-         {
-         	get { return GenericMarshal.StringToBool(getFieldValue("MovingLeft")); }
-         	set { setFieldValue("MovingLeft", value ? "1" : "0"); }
+
+      public int MovingLeft
+      {
+         	get { return int.Parse(getFieldValue("MovingLeft")); }
+         	set { setFieldValue("MovingLeft", value.ToString()); }
          }
-      
-      
-         public bool MovingForward
-         {
-         	get { return GenericMarshal.StringToBool(getFieldValue("MovingForward")); }
-         	set { setFieldValue("MovingForward", value ? "1" : "0"); }
+
+      public int MovingForward
+      {
+         	get { return int.Parse(getFieldValue("MovingForward")); }
+         	set { setFieldValue("MovingForward", value.ToString()); }
          }
-      
-      
-         public bool MovingBackward
-         {
-         	get { return GenericMarshal.StringToBool(getFieldValue("MovingBackward")); }
-         	set { setFieldValue("MovingBackward", value ? "1" : "0"); }
+
+      public int MovingBackward
+      {
+         	get { return int.Parse(getFieldValue("MovingBackward")); }
+         	set { setFieldValue("MovingBackward", value.ToString()); }
          }
       
       

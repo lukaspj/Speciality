@@ -21,11 +21,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          }
          if (vector.TicksSinceObservedEnemy < 10)
          {
-            if (vector.KillProb > 0.80 && vector.ShootDelay == 0)
+            if (vector.DamageProb > 0.80 && vector.ShootDelay == 0)
             {
                return PlayerAction.Shoot;
             }
-            if (vector.DeltaKillProp > 0)
+            if (vector.DeltaDamageProb > 0)
             {
                if (vector.DeltaRot < 0)
                {

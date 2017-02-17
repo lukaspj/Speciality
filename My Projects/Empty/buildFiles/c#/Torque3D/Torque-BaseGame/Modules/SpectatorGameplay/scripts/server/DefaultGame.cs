@@ -218,11 +218,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Random rand = new Random();
          if (vector.TicksSinceObservedEnemy < 200)
          {
-            if (vector.KillProb > 0.80 && vector.ShootDelay == 0)
+            if (vector.DamageProb > 0.80 && vector.ShootDelay == 0)
             {
                action = PlayerAction.Shoot;
             }
-            else if (vector.DeltaKillProp > 0)
+            else if (vector.DeltaDamageProb > 0)
             {
                if (vector.DeltaRot < 0)
                {
@@ -334,9 +334,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             player.registerObject();
 
             playersGroup.add(player);
-
          }
-        
       }
    }
 }

@@ -118,16 +118,16 @@ namespace Torque3D
       /// <summary>
       /// The propability that you damage a player with a Shoot action
       /// </summary>
-      public float KillProb
+      public float DamageProb
       {
-         get { return float.Parse(getFieldValue("KillProb")); }
-         set { setFieldValue("KillProb", value.ToString()); }
+         get { return float.Parse(getFieldValue("DamageProb")); }
+         set { setFieldValue("DamageProb", value.ToString()); }
       }
 
-      public float DeltaKillProp
+      public float DeltaDamageProb
       {
-         get { return float.Parse(getFieldValue("DeltaKillProp")); }
-         set { setFieldValue("DeltaKillProp", value.ToString()); }
+         get { return float.Parse(getFieldValue("DeltaDamageProb")); }
+         set { setFieldValue("DeltaDamageProb", value.ToString()); }
       }
       ///<summary>
       /// Distance to nearest object in front of AI Player
@@ -144,6 +144,14 @@ namespace Torque3D
       {
          get { return float.Parse(getFieldValue("Health")); }
          set { setFieldValue("Health", value.ToString()); }
+      }
+      /// <summary>
+      /// The current health of the enemy
+      /// </summary>
+      public float EnemyHealth
+      {
+         get { return float.Parse(getFieldValue("EnemyHealth")); }
+         set { setFieldValue("EnemyHealth", value.ToString()); }
       }
       /// <summary>
       /// The ammount of thicks since game start
@@ -182,5 +190,14 @@ namespace Torque3D
       }
 
       #endregion
+
+      public override string ToString()
+      {
+         return $"{{FV | dRot: {DeltaRot}, dMovX: {DeltaMovedX}, dMovY: {DeltaMovedY}, " +
+                $"vX: {VelX}, vY: {VelY}, DP: {DamageProb}, dDP: {DeltaDamageProb}, " +
+                $"distObst: {DistanceToObstacle}, HP: {Health}, TC: {TickCount}, " +
+                $"TE: {TicksSinceObservedEnemy}, TD: {TicksSinceDamage}, " +
+                $"SD: {ShootDelay}}}";
+      }
    }
 }

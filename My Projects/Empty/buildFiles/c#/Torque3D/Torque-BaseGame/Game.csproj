@@ -109,6 +109,7 @@
     <Compile Include="Modules\ClientServer\Server\Server.cs" />
     <Compile Include="Modules\SpectatorGameplay\scripts\server\AIPlayer.cs" />
     <Compile Include="Modules\SpectatorGameplay\scripts\server\GameBord.cs" />
+    <Compile Include="Modules\SpectatorGameplay\scripts\server\GameLogger.cs" />
     <Compile Include="Modules\SpectatorGameplay\scripts\server\Observer.cs" />
     <Compile Include="Modules\SpectatorGameplay\scripts\server\DefaultGame.cs" />
     <Compile Include="Modules\SpectatorGameplay\scripts\server\ObstacleData.cs" />

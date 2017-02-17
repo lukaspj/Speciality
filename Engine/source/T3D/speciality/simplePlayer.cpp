@@ -101,10 +101,10 @@ SimplePlayer::SimplePlayer()
    mTypeMask |= PlayerObjectType;
 
    mVelocity = VectorF(0, 0, 0);
-   mMovingLeft = false;
-   mMovingRight = false;
-   mMovingForward = false;
-   mMovingBackward = false;
+   mMovingLeft = 0;
+   mMovingRight = 0;
+   mMovingForward = 0;
+   mMovingBackward = 0;
 
    mRot = 0.0f;
    mHealth = 20.0f;
@@ -113,7 +113,7 @@ SimplePlayer::SimplePlayer()
    mLastRot = 0.0f;
    mLastPosX = 0.0f;
    mLastPosY = 0.0f;
-   mLastKillProp = 0.0f;
+   mLastDamageProb = 0.0f;
 
    mLastHealth = 20.0f;
 
@@ -139,13 +139,13 @@ SimplePlayer::~SimplePlayer()
 
 void SimplePlayer::initPersistFields()
 {
-   addField("MovingForward", TYPEID< bool >(), Offset(mMovingForward, SimplePlayer),
+   addField("MovingForward", TYPEID< S32 >(), Offset(mMovingForward, SimplePlayer),
             "");
-   addField("MovingBackward", TYPEID< bool >(), Offset(mMovingBackward, SimplePlayer),
+   addField("MovingBackward", TYPEID< S32 >(), Offset(mMovingBackward, SimplePlayer),
             "");
-   addField("MovingRight", TYPEID< bool >(), Offset(mMovingRight, SimplePlayer),
+   addField("MovingRight", TYPEID< S32 >(), Offset(mMovingRight, SimplePlayer),
             "");
-   addField("MovingLeft", TYPEID< bool >(), Offset(mMovingLeft, SimplePlayer),
+   addField("MovingLeft", TYPEID< S32 >(), Offset(mMovingLeft, SimplePlayer),
             "");
    addField("RenderFrustum", TYPEID< bool >(), Offset(mRenderFrustum, SimplePlayer),
             "");
@@ -338,18 +338,22 @@ void SimplePlayer::doThink()
          mLastHealth = mHealth;
       }
 
-      F32 killProb = 0.0f; // todo Support more players?
+      F32 damageProb = 0.0f; // todo Support more players?
+      F32 enemyHealth = 0.0f;
 
-      Con::executef("SetDamageProbText", getName(), killProb);
+      Con::executef("SetDamageProbText", getName(), damageProb);
 
       SimGroup *playersGroup = static_cast<SimGroup*>(Sim::findObject("Players"));
       for(int i = 0; i < playersGroup->size(); i++)
       {
          SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
-         if (player->getPosition() == getPosition()) continue;
+         if (player->getId() == getId()) continue;
+         
+         enemyHealth = player->mHealth;
+         
          if (!canSee(player)) continue;
          mTimeSawEnemy = mTickCount;
-         killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
+         damageProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
       }
 
       FeatureVector *features = new FeatureVector();
@@ -361,34 +365,36 @@ void SimplePlayer::doThink()
       features->mVelX = getVelocity().x;
       features->mVelY = getVelocity().y;
 
-      features->mKillProb = killProb;
-      features->mDeltaKillProp = killProb - mLastKillProp;
-      mLastKillProp = killProb;
+      features->mDamageProb = damageProb;
+      features->mDeltaDamageProb = damageProb - mLastDamageProb;
+      mLastDamageProb = damageProb;
       features->mDistanceToObstacle = getDistanceToObstacleInFront();
       features->mHealth = mHealth;
+      features->mEnemyHealth = enemyHealth;
 
       features->mTickCount = ++mTickCount;
       features->mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
       features->mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
       features->mShootDelay = mShootDelay;
       Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
+      Con::executef("LogPlayerAction", this, features, action);
       features->safeDeleteObject();
 
       mLastRot = mRot;
       mLastPosX = getPosition().x;
       mLastPosY = getPosition().y;
       mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
-      mLastKillProp = killProb;
+      mLastDamageProb = damageProb;
       if(mHealth != mLastHealth)
       {
          mTimeTookDamage = mTickCount;
       }
       mLastHealth = mHealth;
 
-      mMovingLeft = false;
-      mMovingRight = false;
-      mMovingForward = false;
-      mMovingBackward = false;
+      mMovingLeft = 0;
+      mMovingRight = 0;
+      mMovingForward = 0;
+      mMovingBackward = 0;
       if (mPrepared)
       {
          mPrepared = false;
@@ -398,16 +404,16 @@ void SimplePlayer::doThink()
       switch (action)
       {
       case MoveForward:
-         mMovingForward = true;
+         mMovingForward++;
          break;
       case MoveBackward:
-         mMovingBackward = true;
+         mMovingBackward++;
          break;
       case MoveLeft:
-         mMovingLeft = true;
+         mMovingLeft++;
          break;
       case MoveRight:
-         mMovingRight = true;
+         mMovingRight++;
          break;
       case TurnRight:
          //bool collidingNow = mCollision.checkCollisions(TickMs, &mVelocity, getPosition());
@@ -609,11 +615,12 @@ void FeatureVector::initPersistFields()
    addField("VelX", TypeF32, Offset(mVelX, FeatureVector), "");
    addField("VelY", TypeF32, Offset(mVelY, FeatureVector), "");
 
-   addField("DeltaKillProp", TypeF32, Offset(mDeltaKillProp, FeatureVector), "");
+   addField("DeltaDamageProp", TypeF32, Offset(mDeltaDamageProb, FeatureVector), "");
 
-   addField("KillProb", TypeF32, Offset(mKillProb, FeatureVector), "");
+   addField("DamageProb", TypeF32, Offset(mDamageProb, FeatureVector), "");
    addField("DistanceToObstacle", TypeF32, Offset(mDistanceToObstacle, FeatureVector), "");
    addField("Health", TypeF32, Offset(mHealth, FeatureVector), "");
+   addField("EnemyHealth", TypeF32, Offset(mEnemyHealth, FeatureVector), "");
 
    addField("TickCount", TypeS32, Offset(mTickCount, FeatureVector), "");
    addField("TicksSinceObservedEnemy", TypeS32, Offset(mTicksSinceObservedEnemy, FeatureVector), "");
