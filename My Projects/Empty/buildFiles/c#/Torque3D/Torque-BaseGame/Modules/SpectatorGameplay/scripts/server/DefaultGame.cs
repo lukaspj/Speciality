@@ -282,6 +282,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       }
 
       private static string[] players = new string[5];
+      private static int gameSize;
+      private static int num_obstacles;
 
       [ConsoleFunction("AddPlayers")]
       public static void AddPlayers()
@@ -291,22 +293,21 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          players[0] = guiTextEditCtrl.getValue();
          GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
          players[1] = textEditCtrl.getValue();
+         GuiTextEditCtrl gamesize = Sim.FindObject<GuiTextEditCtrl>("GameSizeGUI");
+         gameSize = int.Parse(gamesize.getValue());
+         GuiTextEditCtrl obstacles = Sim.FindObject<GuiTextEditCtrl>("ObstaclesGUI");
+         num_obstacles = int.Parse(obstacles.getValue());
          InitGame();
          Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
          Canvas.GameCanvas.popDialog();
-         /*timeUpdate = new Timer(1000)
-         {
-            AutoReset = true,
-         };
-         timeUpdate.Elapsed += TimeUpdate;
-         timeUpdate.Start();*/
+ 
 
          Global.schedule("1000", "0", "TimeUpdate", "");
       }
 
       private static void InitGame()
       {
-         GameBord bord = GameBord.GetGameBord(30, 30);
+         GameBord bord = GameBord.GetGameBord(gameSize, gameSize);
          //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
          SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
          if (playersGroup == null)
@@ -321,7 +322,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
          }
          bord.CreateBoundingBox();
-         bord.GenerateRandomObstacles(5);
+         bord.GenerateRandomObstacles(num_obstacles);
          int numPlayers = 2;
          for (int i = 0; i < numPlayers; i++)
          {
@@ -349,7 +350,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             playersGroup.add(player);
 
          }
-         timeUpdate?.Start();
       }
       [ConsoleFunction("TimeUpdate")]
       public static void TimeUpdate(string data)
