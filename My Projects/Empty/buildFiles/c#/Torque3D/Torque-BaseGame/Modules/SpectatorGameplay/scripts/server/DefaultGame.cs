@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Net;
+using System.Runtime.Remoting.Channels;
+using System.Text.RegularExpressions;
+using System.Timers;
 using Game.Core;
 using Game.Modules.ClientServer.Server;
 using MathNet.Numerics.Random;
@@ -17,6 +20,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public Camera camera { get; set; }
       private GameConnectionToClient client;
+      private static Timer timeUpdate;
       //-----------------------------------------------------------------------------
       // What kind of "player" is spawned is either controlled directly by the
       // SpawnSphere or it defaults back to the values set here. This also controls
@@ -121,6 +125,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // have been deleted.
          initGameVars();
          InitGame();
+         Global.call("ResetPlayerHealth","");
+         Global.schedule("1000", "0", "TimeUpdate", "");
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -183,10 +189,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          {
             camera = new Camera()
             {
-               DataBlock = Sim.FindObject<Observer>("Observer")
+               DataBlock = Sim.FindObject<Observer>("Observer"),
             };
             camera.registerObject();
-
             client.setFieldValue("camera", camera.getId().ToString());
 
          }
@@ -204,8 +209,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
             if (spawnPoint != null)
             {
-               camera.setTransform(new TransformF(spawnPoint.Position + new Point3F(0, 0, 50), spawnPoint.Orientation));
+               camera.setTransform(new TransformF(new Point3F(0, 0, 50), spawnPoint.Orientation));
             }
+            camera.setRotation(new Point3F(60,0,0));
          }
       }
 
@@ -277,6 +283,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       }
 
       private static string[] players = new string[5];
+      private static int gameSize;
+      private static int num_obstacles;
 
       [ConsoleFunction("AddPlayers")]
       public static void AddPlayers()
@@ -286,14 +294,21 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          players[0] = guiTextEditCtrl.getValue();
          GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
          players[1] = textEditCtrl.getValue();
+         GuiTextEditCtrl gamesize = Sim.FindObject<GuiTextEditCtrl>("GameSizeGUI");
+         gameSize = int.Parse(gamesize.getValue());
+         GuiTextEditCtrl obstacles = Sim.FindObject<GuiTextEditCtrl>("ObstaclesGUI");
+         num_obstacles = int.Parse(obstacles.getValue());
          InitGame();
          Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
          Canvas.GameCanvas.popDialog();
+ 
+
+         Global.schedule("1000", "0", "TimeUpdate", "");
       }
 
       private static void InitGame()
       {
-         GameBord bord = GameBord.GetGameBord(30, 30);
+         GameBord bord = GameBord.GetGameBord(gameSize, gameSize);
          //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
          SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
          if (playersGroup == null)
@@ -308,7 +323,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
          }
          bord.CreateBoundingBox();
-         bord.GenerateRandomObstacles(5);
+         bord.GenerateRandomObstacles(num_obstacles);
          int numPlayers = 2;
          for (int i = 0; i < numPlayers; i++)
          {
@@ -335,6 +350,34 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
             playersGroup.add(player);
          }
+      }
+      [ConsoleFunction("TimeUpdate")]
+      public static void TimeUpdate(string data)
+      {
+         GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
+         if (!Regex.IsMatch(ctrl.getValue(), @"^\d+$"))
+         {
+            Console.WriteLine("hello");
+         }
+         string value = ctrl.getValue();
+
+         int time = int.Parse(value);
+         int newTime = time - 1;
+         if (time == 0)
+         {
+            timeUpdate?.Stop();
+            EndGame();
+            return;
+         }
+         ctrl.setValue(newTime.ToString());
+         Global.schedule("1000", "0", "TimeUpdate", "");
+      }
+
+      public static void EndGame()
+      {
+         GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
+         ctrl.setText(100.ToString());
+         Global.eval("resetMission();");
       }
    }
 }

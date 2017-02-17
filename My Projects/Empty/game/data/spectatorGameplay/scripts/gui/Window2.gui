@@ -42,15 +42,15 @@
       anchorBottom = "0";
       anchorLeft = "1";
       anchorRight = "0";
-      position = "400 150";
-      extent = "400 70";
+      position = "400 50";
+      extent = "400 110";
       minExtent = "8 2";
       horizSizing = "right";
       vertSizing = "bottom";
       profile = new GuiControlProfile( )
       {
          opaque = true;
-         bitmap = "core/art/gui/images/textEdit";
+         bitmap = "core/images/textEdit";
          hasBitmapArray = true;
          border = -2; // fix to display textEdit img
          //borderWidth = "1";  // fix to display textEdit img
@@ -91,7 +91,7 @@
       anchorBottom = "0";
       anchorLeft = "1";
       anchorRight = "0";
-      position = "400 320";
+      position = "400 130";
       extent = "400 70";
       minExtent = "8 2";
       horizSizing = "right";
@@ -99,7 +99,107 @@
       profile = new GuiControlProfile( )
       {
          opaque = true;
-         bitmap = "core/art/gui/images/textEdit";
+         bitmap = "core/images/textEdit";
+         hasBitmapArray = true;
+         border = -2; // fix to display textEdit img
+         //borderWidth = "1";  // fix to display textEdit img
+         //borderColor = "100 100 100";
+         fontSize = "60";
+         fillColor = "242 241 240 0";
+         fillColorHL = "255 255 255";
+         fontColor = "0 0 0";
+         fontColorHL = "255 255 255";
+         fontColorSEL = "98 100 137";
+         fontColorNA = "200 200 200";
+         textOffset = "4 2";
+         autoSizeWidth = false;
+         autoSizeHeight = true;
+         justify = "left";
+         tab = true;
+         canKeyFocus = true;
+         category = "Core";
+      };
+      visible = "1";
+      active = "1";
+      tooltipProfile = "GuiToolTipProfile";
+      hovertime = "1000";
+      isContainer = "1";
+      canSave = "1";
+      canSaveDynamicFields = "0";
+   };
+   new GuiTextEditCtrl(GameSizeGUI) {
+     text = "30";
+      historySize = "5";
+      tabComplete = "1";
+      sinkAllKeyEvents = "0";
+      password = "0";
+      passwordMask = "*";
+      maxLength = "1024";
+      margin = "0 0 0 0";
+      padding = "0 0 0 0";
+      anchorTop = "1";
+      anchorBottom = "0";
+      anchorLeft = "1";
+      anchorRight = "0";
+      position = "400 210";
+      extent = "400 70";
+      minExtent = "8 2";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      profile = new GuiControlProfile( )
+      {
+         opaque = true;
+         bitmap = "core/images/textEdit";
+         hasBitmapArray = true;
+         border = -2; // fix to display textEdit img
+         //borderWidth = "1";  // fix to display textEdit img
+         //borderColor = "100 100 100";
+         fontSize = "60";
+         fillColor = "242 241 240 0";
+         fillColorHL = "255 255 255";
+         fontColor = "0 0 0";
+         fontColorHL = "255 255 255";
+         fontColorSEL = "98 100 137";
+         fontColorNA = "200 200 200";
+         textOffset = "4 2";
+         autoSizeWidth = false;
+         autoSizeHeight = true;
+         justify = "left";
+         tab = true;
+         canKeyFocus = true;
+         category = "Core";
+      };
+      visible = "1";
+      active = "1";
+      tooltipProfile = "GuiToolTipProfile";
+      hovertime = "1000";
+      isContainer = "1";
+      canSave = "1";
+      canSaveDynamicFields = "0";
+   };
+   new GuiTextEditCtrl(ObstaclesGUI) {
+     text = "5";
+      historySize = "5";
+      tabComplete = "1";
+      sinkAllKeyEvents = "0";
+      password = "0";
+      passwordMask = "*";
+      maxLength = "1024";
+      margin = "0 0 0 0";
+      padding = "0 0 0 0";
+      anchorTop = "1";
+      anchorBottom = "0";
+      anchorLeft = "1";
+      anchorRight = "0";
+      position = "400 290";
+      extent = "400 70";
+      minExtent = "8 2";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      profile = new GuiControlProfile( )
+      {
+         opaque = true;
+         bitmap = "core/images/textEdit";
          hasBitmapArray = true;
          border = -2; // fix to display textEdit img
          //borderWidth = "1";  // fix to display textEdit img
@@ -137,7 +237,21 @@
       minExtent = "8 2";
       horizSizing = "right";
       vertSizing = "bottom";
-      profile = "GuiButtonProfile";
+      profile = new GuiControlProfile()
+      {
+         opaque = true;
+         border = true;
+         fontColor = "50 50 50";
+         fontColorHL = "0 0 0";
+         fontColorNA = "200 200 200";
+         fixedExtent = false;
+         justify = "center";
+         fontSize = 60;
+         canKeyFocus = false;
+      	bitmap = "core/images/button";
+         hasBitmapArray = false;
+         category = "Tools";
+      };
       visible = "1";
       active = "1";
       command = "AddPlayers();";
@@ -156,8 +270,8 @@
       anchorBottom = "0";
       anchorLeft = "1";
       anchorRight = "0";
-      position = "189 150";
-      extent = "200 70";
+      position = "140 50";
+      extent = "250 70";
       minExtent = "8 2";
       horizSizing = "right";
       vertSizing = "bottom";
@@ -167,6 +281,8 @@
          fontsize = "60";
          fontColor = "20 20 20";
          category = "Core";
+
+         autoSizeHeight = true;
       };
       visible = "1";
       active = "1";
@@ -185,8 +301,8 @@
       anchorBottom = "0";
       anchorLeft = "1";
       anchorRight = "0";
-      position = "189 320";
-      extent = "200 70";
+      position = "140 130";
+      extent = "250 70";
       minExtent = "8 2";
       horizSizing = "right";
       vertSizing = "bottom";
@@ -196,6 +312,70 @@
          fontsize = "60";
          fontColor = "20 20 20";
          category = "Core";
+
+         autoSizeHeight = true;
+      };
+      visible = "1";
+      active = "1";
+      tooltipProfile = "GuiToolTipProfile";
+      hovertime = "1000";
+      isContainer = "1";
+      canSave = "1";
+      canSaveDynamicFields = "0";
+   };
+   new GuiTextCtrl() {
+      text = "GameSize";
+      maxLength = "1024";
+      margin = "0 0 0 0";
+      padding = "0 0 0 0";
+      anchorTop = "1";
+      anchorBottom = "0";
+      anchorLeft = "1";
+      anchorRight = "0";
+      position = "140 210";
+      extent = "250 70";
+      minExtent = "8 2";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      profile = new GuiControlProfile ()
+      {
+         justify = "center";
+         fontsize = "60";
+         fontColor = "20 20 20";
+         category = "Core";
+
+         autoSizeHeight = true;
+      };
+      visible = "1";
+      active = "1";
+      tooltipProfile = "GuiToolTipProfile";
+      hovertime = "1000";
+      isContainer = "1";
+      canSave = "1";
+      canSaveDynamicFields = "0";
+   };
+   new GuiTextCtrl() {
+      text = "Obstacles";
+      maxLength = "1024";
+      margin = "0 0 0 0";
+      padding = "0 0 0 0";
+      anchorTop = "1";
+      anchorBottom = "0";
+      anchorLeft = "1";
+      anchorRight = "0";
+      position = "140 290";
+      extent = "250 70";
+      minExtent = "8 2";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      profile = new GuiControlProfile ()
+      {
+         justify = "center";
+         fontsize = "60";
+         fontColor = "20 20 20";
+         category = "Core";
+
+         autoSizeHeight = true;
       };
       visible = "1";
       active = "1";
