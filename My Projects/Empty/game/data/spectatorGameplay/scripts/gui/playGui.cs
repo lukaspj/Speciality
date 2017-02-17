@@ -68,7 +68,13 @@ function PlayGui::clearHud( %this )
    while ( %this.getCount() > 0 )
       %this.getObject( 0 ).delete();
 }
-
+function ResetPlayerHealth(){
+  for (%i = 0; %i < players.getCount(); %i++)
+  {
+    %player = players.getObject(%i);
+    (%player.getName() @ "health").setValue(%player.health/%player.maxHealth);
+  }
+}
 function PlayGui::InitGuiElements( %this )
 {
    for (%i = 0; %i < players.getCount(); %i++)

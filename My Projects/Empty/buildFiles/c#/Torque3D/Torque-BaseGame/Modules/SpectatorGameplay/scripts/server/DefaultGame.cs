@@ -125,6 +125,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // have been deleted.
          initGameVars();
          InitGame();
+         Global.call("ResetPlayerHealth","");
          Global.schedule("1000", "0", "TimeUpdate", "");
          Globals.SetInt("Game::Duration", duration);
       }
