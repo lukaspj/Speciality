@@ -111,14 +111,13 @@ namespace Game.Modules.ClientServer.Client
 
       [ConsoleFunction]
       public static void disconnectedCleanup()
-      {// End mission, if it's running.
-
+      {
+         // End mission, if it's running.
          if (Globals.GetBool("Client::missionRunning"))
             LevelLoad.clientEndMission();
       
          // Disable mission lighting if it's going, this is here
          // in case we're disconnected while the mission is loading.
-   
          Globals.SetBool("lightingMission", false);
          Globals.SetBool("sceneLighting::terminateLighting", true);
 
