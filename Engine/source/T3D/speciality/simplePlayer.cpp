@@ -416,8 +416,6 @@ void SimplePlayer::doThink()
          mMovingRight++;
          break;
       case TurnRight:
-         //bool collidingNow = mCollision.checkCollisions(TickMs, &mVelocity, getPosition());
-         
          if (trySetRotation(mRot + mDataBlock->getTurnSpeed())) mRot += mDataBlock->getTurnSpeed();
          break;
       case TurnLeft:
