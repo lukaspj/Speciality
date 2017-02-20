@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Torque3D;
 using Torque3D.Engine.Util.Enums;
+using Torque3D.Util;
 
 namespace Game.Modules.SpectatorGameplay.scripts.server
 {

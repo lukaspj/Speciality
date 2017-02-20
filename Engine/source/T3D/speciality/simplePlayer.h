@@ -174,17 +174,11 @@ typedef SimplePlayer::Actions SimplePlayerActions;
 
 DefineEnumType(SimplePlayerActions);
 
-class FeatureVector : public SimObject {
-
-	typedef SimObject Parent;
+class FeatureVector {
 
 public:
-   DECLARE_CONOBJECT(FeatureVector);
-
    FeatureVector();
    ~FeatureVector();
-
-   static void initPersistFields();
 
    F32 mDeltaRot;
    F32 mDeltaMovedX;
@@ -203,5 +197,8 @@ public:
    S32 mTicksSinceDamage;
    S32 mShootDelay;
 };
+
+DECLARE_STRUCT(FeatureVector);
+DefineConsoleType(TypeFeatureVector, FeatureVector);
 
 #endif // _SIMPLEPLAYER_H_

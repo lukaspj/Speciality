@@ -23,13 +23,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          _gameSizeX = sizeX % 2 == 0 ? ++sizeX : sizeX;
          _gameSizeY = sizeY % 2 == 0 ? ++sizeY : sizeY;
          gameBord = new bool[_gameSizeX, _gameSizeY];
-         for (int x = 0; x < _gameSizeX; x++)
-         {
-            for (int y = 0; y < _gameSizeY; y++)
-            {
-               gameBord[x, y] = false;
-            }
-         }
+         Reset();
       }
 
       private static GameBord _gameBord = null;
@@ -40,6 +34,17 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             _gameBord = new GameBord(sizeX,sizeY);
          }
          return _gameBord;
+      }
+
+      public void Reset()
+      {
+         for (int x = 0; x < _gameSizeX; x++)
+         {
+            for (int y = 0; y < _gameSizeY; y++)
+            {
+               gameBord[x, y] = false;
+            }
+         }
       }
 
       private int PointToX(Point3F point)

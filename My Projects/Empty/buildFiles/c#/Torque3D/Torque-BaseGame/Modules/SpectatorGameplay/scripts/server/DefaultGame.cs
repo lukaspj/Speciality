@@ -124,6 +124,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          // Called by resetMission(), after all the temporary mission objects
          // have been deleted.
+         GameBord.GetGameBord().Reset();
          initGameVars();
          InitGame();
          Global.call("ResetPlayerHealth","");

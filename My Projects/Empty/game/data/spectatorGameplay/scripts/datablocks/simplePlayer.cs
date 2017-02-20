@@ -29,14 +29,12 @@ datablock SimplePlayerData(SPD) {
 
 
   cameraMaxDist = 5;
-  variance = 5.0;
+  variance = 1.0; // Actually stddev
   maxHealth = 20;
   Health = 20;
   damage = 1;
   killScore = 10;
-  respawnTime = 3000; //ms
   winningScore = 10;
-  maxDamage = 300;
 };
 
 datablock ParticleData(HitParticle : DefaultParticle)

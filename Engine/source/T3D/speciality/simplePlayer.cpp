@@ -7,7 +7,6 @@
 
 IMPLEMENT_CO_NETOBJECT_V1(SimplePlayer);
 IMPLEMENT_CO_DATABLOCK_V1(SimplePlayerData);
-IMPLEMENT_CONOBJECT(FeatureVector);
 
 SimplePlayerData::SimplePlayerData()
 {
@@ -153,6 +152,7 @@ void SimplePlayer::initPersistFields()
             "");
    addField("ThinkFunction", TypeCaseString, Offset(mThinkFunction, SimplePlayer), "");
    addField("Health", TypeF32, Offset(mHealth, SimplePlayer), "");
+   addField("Rot", TypeF32, Offset(mRot, SimplePlayer), "");
 
    Parent::initPersistFields();
 }
@@ -356,29 +356,27 @@ void SimplePlayer::doThink()
          damageProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
       }
 
-      FeatureVector *features = new FeatureVector();
-      features->registerObject();
+      FeatureVector features;
 
-      features->mDeltaRot = mRot - mLastRot;
-      features->mDeltaMovedX = getPosition().x - mLastPosX;
-      features->mDeltaMovedY = getPosition().y - mLastPosY;
-      features->mVelX = getVelocity().x;
-      features->mVelY = getVelocity().y;
+      features.mDeltaRot = mRot - mLastRot;
+      features.mDeltaMovedX = getPosition().x - mLastPosX;
+      features.mDeltaMovedY = getPosition().y - mLastPosY;
+      features.mVelX = getVelocity().x;
+      features.mVelY = getVelocity().y;
 
-      features->mDamageProb = damageProb;
-      features->mDeltaDamageProb = damageProb - mLastDamageProb;
+      features.mDamageProb = damageProb;
+      features.mDeltaDamageProb = damageProb - mLastDamageProb;
       mLastDamageProb = damageProb;
-      features->mDistanceToObstacle = getDistanceToObstacleInFront();
-      features->mHealth = mHealth;
-      features->mEnemyHealth = enemyHealth;
+      features.mDistanceToObstacle = getDistanceToObstacleInFront();
+      features.mHealth = mHealth;
+      features.mEnemyHealth = enemyHealth;
 
-      features->mTickCount = ++mTickCount;
-      features->mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
-      features->mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
-      features->mShootDelay = mShootDelay;
+      features.mTickCount = ++mTickCount;
+      features.mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
+      features.mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
+      features.mShootDelay = mShootDelay;
       Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
       Con::executef("LogPlayerAction", this, features, action);
-      features->safeDeleteObject();
 
       mLastRot = mRot;
       mLastPosX = getPosition().x;
@@ -605,27 +603,67 @@ FeatureVector::~FeatureVector()
 {
 }
 
-void FeatureVector::initPersistFields()
+
+IMPLEMENT_STRUCT(FeatureVector,
+   FeatureVector, MathTypes,
+   "")
+END_IMPLEMENT_STRUCT;
+
+
+
+//-----------------------------------------------------------------------------
+// TypePoint3F
+//-----------------------------------------------------------------------------
+ConsoleType(FeatureVector, TypeFeatureVector, FeatureVector, "")
+ImplementConsoleTypeCasters(TypeFeatureVector, FeatureVector)
+
+ConsoleGetType(TypeFeatureVector)
 {
-   addField("DeltaRot", TypeF32, Offset(mDeltaRot, FeatureVector), "");
-   addField("DeltaMovedX", TypeF32, Offset(mDeltaMovedX, FeatureVector), "");
-   addField("DeltaMovedY", TypeF32, Offset(mDeltaMovedY, FeatureVector), "");
-   addField("VelX", TypeF32, Offset(mVelX, FeatureVector), "");
-   addField("VelY", TypeF32, Offset(mVelY, FeatureVector), "");
+   FeatureVector *v = (FeatureVector *)dptr;
+   static const U32 bufSize = 256;
+   char* returnBuffer = Con::getReturnBuffer(bufSize);
+   dSprintf(returnBuffer, bufSize, 
+      "%g %g %g %g %g %g %g %g %g %g %d %d %d %d", 
+      v->mDeltaRot, v->mDeltaMovedX, v->mDeltaMovedY,
+      v->mVelX, v->mVelY, v->mDamageProb, v->mDeltaDamageProb,
+      v->mDistanceToObstacle, v->mHealth, v->mEnemyHealth,
+      v->mTickCount, v->mTicksSinceObservedEnemy, v->mTicksSinceDamage,
+      v->mShootDelay);
+   return returnBuffer;
+}
 
-   addField("DeltaDamageProb", TypeF32, Offset(mDeltaDamageProb, FeatureVector), "");
-
-   addField("DamageProb", TypeF32, Offset(mDamageProb, FeatureVector), "");
-   addField("DistanceToObstacle", TypeF32, Offset(mDistanceToObstacle, FeatureVector), "");
-   addField("Health", TypeF32, Offset(mHealth, FeatureVector), "");
-   addField("EnemyHealth", TypeF32, Offset(mEnemyHealth, FeatureVector), "");
-
-   addField("TickCount", TypeS32, Offset(mTickCount, FeatureVector), "");
-   addField("TicksSinceObservedEnemy", TypeS32, Offset(mTicksSinceObservedEnemy, FeatureVector), "");
-   addField("TicksSinceDamage", TypeS32, Offset(mTicksSinceDamage, FeatureVector), "");
-   addField("ShootDelay", TypeS32, Offset(mShootDelay, FeatureVector), "");
-
-   Parent::initPersistFields();
+ConsoleSetType(TypeFeatureVector)
+{
+   FeatureVector *v = ((FeatureVector *)dptr);
+   if (argc == 1)
+      dSscanf(argv[0],
+         "%g %g %g %g %g %g %g %g %g %g %d %d %d %d",
+         &v->mDeltaRot, &v->mDeltaMovedX, &v->mDeltaMovedY,
+         &v->mVelX, &v->mVelY, &v->mDamageProb, &v->mDeltaDamageProb,
+         &v->mDistanceToObstacle, &v->mHealth, &v->mEnemyHealth,
+         &v->mTickCount, &v->mTicksSinceObservedEnemy, &v->mTicksSinceDamage,
+         &v->mShootDelay);
+   else if (argc == 14)
+   {
+      FeatureVector vector;
+      vector.mDeltaRot = dAtof(argv[0]);
+      vector.mDeltaMovedX = dAtof(argv[1]);
+      vector.mDeltaMovedY = dAtof(argv[2]);
+      vector.mVelX = dAtof(argv[3]);
+      vector.mVelY = dAtof(argv[4]);
+      vector.mDamageProb = dAtof(argv[5]);
+      vector.mDeltaDamageProb = dAtof(argv[6]);
+      vector.mDistanceToObstacle = dAtof(argv[7]);
+      vector.mHealth = dAtof(argv[8]);
+      vector.mEnemyHealth = dAtof(argv[9]);
+      vector.mTickCount = dAtoi(argv[10]);
+      vector.mTicksSinceObservedEnemy = dAtoi(argv[11]);
+      vector.mTicksSinceDamage = dAtoi(argv[12]);
+      vector.mShootDelay = dAtoi(argv[13]);
+      *v = vector;
+   }
+   else
+      Con::printf("FeatureVector must be set as { ..14.. } or \"..14..\"");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
