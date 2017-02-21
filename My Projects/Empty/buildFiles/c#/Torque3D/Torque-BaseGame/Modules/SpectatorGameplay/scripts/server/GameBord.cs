@@ -191,6 +191,28 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             int ypos = rand.Next(0, _gameSizeY-1);
             int xscale = rand.Next(1, 10);
             int yscale =  rand.Next(1, 10);
+            if (xpos + xscale / 2 > _gameSizeX - 1)
+            {
+               xscale = (_gameSizeX - 1 - xpos) * 2;
+            }
+            if (xpos - xscale / 2 < 0)
+            {
+               xscale = xpos / 2;
+            }
+            if (ypos + yscale / 2 > _gameSizeY - 1)
+            {
+               yscale = (_gameSizeY - 1 - ypos) * 2;
+            }
+            if (ypos - yscale / 2 < 0)
+            {
+               yscale = ypos / 2;
+            }
+            if (xscale == 0 || yscale == 0)
+            {
+               //dont add the obstacle and try to add another one instead if the scale is 0.
+               i--;
+               continue;
+            }
             TSStatic obstacle = new TSStatic()
             {
                ShapeName = shape,
