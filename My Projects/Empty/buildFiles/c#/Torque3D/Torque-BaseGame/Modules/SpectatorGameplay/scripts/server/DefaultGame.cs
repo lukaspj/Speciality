@@ -20,7 +20,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public Camera camera { get; set; }
       private GameConnectionToClient client;
-      private static Timer timeUpdate;
+      private static GameTimer _gameTimer;
+
       //-----------------------------------------------------------------------------
       // What kind of "player" is spawned is either controlled directly by the
       // SpawnSphere or it defaults back to the values set here. This also controls
@@ -123,10 +124,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          // Called by resetMission(), after all the temporary mission objects
          // have been deleted.
+         GameBord.GetGameBord().Reset();
          initGameVars();
          InitGame();
          Global.call("ResetPlayerHealth","");
-         Global.schedule("1000", "0", "TimeUpdate", "");
+         _gameTimer.start();
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -224,11 +226,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Random rand = new Random();
          if (vector.TicksSinceObservedEnemy < 200)
          {
-            if (vector.KillProb > 0.80 && vector.ShootDelay == 0)
+            if (vector.DamageProb > 0.80 && vector.ShootDelay == 0)
             {
                action = PlayerAction.Shoot;
             }
-            else if (vector.DeltaKillProp > 0)
+            else if (vector.DeltaDamageProb > 0)
             {
                if (vector.DeltaRot < 0)
                {
@@ -302,12 +304,15 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
          Canvas.GameCanvas.popDialog();
  
-
-         Global.schedule("1000", "0", "TimeUpdate", "");
+         _gameTimer.start();
       }
 
       private static void InitGame()
       {
+         if (_gameTimer == null)
+         {
+            _gameTimer = new GameTimer("TimeUpdate", 3200, true);
+         }
          GameBord bord = GameBord.GetGameBord(gameSize, gameSize);
          //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
          SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
@@ -325,6 +330,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          bord.CreateBoundingBox();
          bord.GenerateRandomObstacles(num_obstacles);
          int numPlayers = 2;
+         SimplePlayer[] playerArray = new SimplePlayer[numPlayers];
          for (int i = 0; i < numPlayers; i++)
          {
             Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2 * i)) * (bord.GameSizeX / 4) - (bord.GameSizeX / 2), (1 + (2 * i)) * (bord.GameSizeY / 4) - (bord.GameSizeY / 2), 1));
@@ -349,29 +355,27 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             player.registerObject();
 
             playersGroup.add(player);
-
+            playerArray[i] = player;
          }
+         GameLogger.LogGameStart(playerArray);
       }
       [ConsoleFunction("TimeUpdate")]
-      public static void TimeUpdate(string data)
+      public static void TimeUpdate(int tickCount)
       {
          GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
          if (!Regex.IsMatch(ctrl.getValue(), @"^\d+$"))
          {
             Console.WriteLine("hello");
          }
-         string value = ctrl.getValue();
-
-         int time = int.Parse(value);
-         int newTime = time - 1;
-         if (time == 0)
+         
+         if (tickCount == 0)
          {
-            timeUpdate?.Stop();
+            _gameTimer.stop();
+            GameLogger.LogGameResult(null);
             EndGame();
             return;
          }
-         ctrl.setValue(newTime.ToString());
-         Global.schedule("1000", "0", "TimeUpdate", "");
+         ctrl.setValue(tickCount.ToString());
       }
 
       public static void EndGame()

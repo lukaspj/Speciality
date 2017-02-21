@@ -109,10 +109,10 @@ public:
 
 private:
    VectorF mVelocity;
-   bool mMovingLeft;
-   bool mMovingRight;
-   bool mMovingForward;
-   bool mMovingBackward;
+   S32 mMovingLeft;
+   S32 mMovingRight;
+   S32 mMovingForward;
+   S32 mMovingBackward;
    F32 mRot;
    F32 mHealth;
 
@@ -120,7 +120,7 @@ private:
    F32 mLastRot;
    F32 mLastPosX;
    F32 mLastPosY;
-   F32 mLastKillProp;
+   F32 mLastDamageProb;
 
    F32 mLastHealth;
 
@@ -174,17 +174,11 @@ typedef SimplePlayer::Actions SimplePlayerActions;
 
 DefineEnumType(SimplePlayerActions);
 
-class FeatureVector : public SimObject {
-
-	typedef SimObject Parent;
+class FeatureVector {
 
 public:
-   DECLARE_CONOBJECT(FeatureVector);
-
    FeatureVector();
    ~FeatureVector();
-
-   static void initPersistFields();
 
    F32 mDeltaRot;
    F32 mDeltaMovedX;
@@ -192,15 +186,19 @@ public:
    F32 mVelX;
    F32 mVelY;
 
-   F32 mKillProb;
-   F32 mDeltaKillProp;
+   F32 mDamageProb;
+   F32 mDeltaDamageProb;
    F32 mDistanceToObstacle;
    F32 mHealth;
+   F32 mEnemyHealth;
 
    S32 mTickCount;
    S32 mTicksSinceObservedEnemy;
    S32 mTicksSinceDamage;
    S32 mShootDelay;
 };
+
+DECLARE_STRUCT(FeatureVector);
+DefineConsoleType(TypeFeatureVector, FeatureVector);
 
 #endif // _SIMPLEPLAYER_H_

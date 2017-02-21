@@ -85,7 +85,6 @@ function PlayGui::InitGuiElements( %this )
         anchorTop = "1";
         anchorRight = "1";
         anchorLeft = "0";
-        vertSizing = "top";
         horizSizing = "left";
         position = "824" SPC %i*60;
       };
@@ -96,7 +95,6 @@ function PlayGui::InitGuiElements( %this )
         anchorTop = "1";
         anchorRight = "1";
         anchorLeft = "0";
-        vertSizing = "top";
         horizSizing = "left";
         position = "624" SPC %i*60;
         profile = new GuiControlProfile(){
@@ -112,7 +110,6 @@ function PlayGui::InitGuiElements( %this )
         anchorTop = "1";
         anchorRight = "1";
         anchorLeft ="0";
-        vertSizing = "top";
         horizSizing = "left";
         profile = new GuiControlProfile(){
           fontSize = "60";
@@ -131,7 +128,6 @@ function PlayGui::InitGuiElements( %this )
      anchorTop = "1";
      anchorRight = "1";
      anchorLeft = "0";
-     vertSizing = "top";
      horizSizing = "left";
      profile = new GuiControlProfile(){
        fontSize = "60";
@@ -146,7 +142,6 @@ function PlayGui::InitGuiElements( %this )
      anchorTop = "1";
      anchorRight = "1";
      anchorLeft = "0";
-     vertSizing = "top";
      horizSizing = "left";
      profile = new GuiControlProfile(){
        fontSize = "60";
