@@ -86,7 +86,7 @@ public:
    void onRemove() override;
 
    void advanceTime(F32 dt) override;
-   F32 getDistanceToObstacleInFront();
+   F32 getDistanceToObstacleInFront(F32& lDist, F32& rDist);
    bool canSee(SceneObject* other);
    bool trySetRotation(F32 rot);
    void doThink();
@@ -188,7 +188,8 @@ public:
 
    F32 mDamageProb;
    F32 mDeltaDamageProb;
-   F32 mDistanceToObstacle;
+   F32 mDistanceToObstacleLeft;
+   F32 mDistanceToObstacleRight;
    F32 mHealth;
    F32 mEnemyHealth;
 

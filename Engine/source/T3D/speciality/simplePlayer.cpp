@@ -202,7 +202,7 @@ void SimplePlayer::advanceTime(F32 dt)
 {
 }
 
-F32 SimplePlayer::getDistanceToObstacleInFront()
+F32 SimplePlayer::getDistanceToObstacleInFront(F32& lDist, F32& rDist)
 {
    F32 width = mObjBox.maxExtents.x;
    F32 depth = mObjBox.maxExtents.y;
@@ -216,16 +216,17 @@ F32 SimplePlayer::getDistanceToObstacleInFront()
    Point3F dir = getTransform().getForwardVector();
    RayInfo rInfo;
 
-   F32 dist1 = 0.0f, dist2 = 0.0f;
+   lDist = 0.0f; 
+   rDist = 0.0f;
 
    disableCollision();
    if (getContainer()->castRay(leftPoint, leftPoint + (dir * 100), CollisionMoveMask, &rInfo))
-      dist1 = rInfo.distance;
+      lDist = rInfo.distance;
    if (getContainer()->castRay(rightPoint, rightPoint + (dir * 100), CollisionMoveMask, &rInfo))
-      dist2 = rInfo.distance;
+      rDist = rInfo.distance;
    enableCollision();
 
-   return dist1 > dist2 ? dist2 : dist1;
+   return lDist > rDist ? lDist : rDist;
 }
 
 bool SimplePlayer::canSee(SceneObject* other)
@@ -256,9 +257,9 @@ bool SimplePlayer::canSee(SceneObject* other)
 
    disableCollision();
    if (  getContainer()->castRay(center, leftFrontPoint, CollisionMoveMask, &rInfo)
-      || getContainer()->castRay(center, leftBackPoint, CollisionMoveMask, &rInfo)
-      || getContainer()->castRay(center, rightFrontPoint, CollisionMoveMask, &rInfo)
-      || getContainer()->castRay(center, rightBackPoint, CollisionMoveMask, &rInfo))
+      && getContainer()->castRay(center, leftBackPoint, CollisionMoveMask, &rInfo)
+      && getContainer()->castRay(center, rightFrontPoint, CollisionMoveMask, &rInfo)
+      && getContainer()->castRay(center, rightBackPoint, CollisionMoveMask, &rInfo))
          blocked = true;
    enableCollision();
 
@@ -270,9 +271,11 @@ bool SimplePlayer::trySetRotation(F32 rot)
    MatrixF oldTrans = getTransform();
    MatrixF trans = getTransform();
    MatrixF mat;
-   AngAxisF::RotateZ(rot, &mat);
-   trans.mul(mat);
-   setTransform(trans);
+   mat.set(EulerF(0.0f, 0.0f, rot));
+   mat.setPosition(getPosition());
+   //AngAxisF::RotateZ(rot, &mat);
+   //trans.mul(mat);
+   setTransform(mat);
    Point3F vel = Point3F::Zero;
    bool collidingAfter = mCollision.checkCollisions(TickMs, &vel, getPosition());
    if (collidingAfter)
@@ -290,12 +293,12 @@ void SimplePlayer::processTick(const Move* move)
 
    Point3F moveAcceleration = Point3F(mMovingRight - mMovingLeft, mMovingForward - mMovingBackward, 0) * mDataBlock->getMoveSpeed();
 
-   MatrixF trans = getTransform();
+   //MatrixF trans = getTransform();
    MatrixF mat;
    AngAxisF::RotateZ(mRot, &mat);
    mat.mulV(moveAcceleration);
-   trans.mul(mat);
-   setTransform(trans);
+   //trans.mul(mat);
+   //setTransform(trans);
 
    VectorF acceleration = moveAcceleration + force;
 
@@ -338,6 +341,19 @@ void SimplePlayer::doThink()
          mLastHealth = mHealth;
       }
 
+      mMovingLeft = 0;
+      mMovingRight = 0;
+      mMovingForward = 0;
+      mMovingBackward = 0;
+
+      if (mPrepared)
+      {
+         mPrepared = false;
+         doThink();
+         --mTickCount; // Subtract the prepared tick
+         if (isDeleted()) return;
+      }
+
       F32 damageProb = 0.0f; // todo Support more players?
       F32 enemyHealth = 0.0f;
 
@@ -366,15 +382,15 @@ void SimplePlayer::doThink()
 
       features.mDamageProb = damageProb;
       features.mDeltaDamageProb = damageProb - mLastDamageProb;
-      mLastDamageProb = damageProb;
-      features.mDistanceToObstacle = getDistanceToObstacleInFront();
+      getDistanceToObstacleInFront(features.mDistanceToObstacleLeft, features.mDistanceToObstacleRight);
       features.mHealth = mHealth;
       features.mEnemyHealth = enemyHealth;
 
-      features.mTickCount = ++mTickCount;
       features.mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
       features.mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
       features.mShootDelay = mShootDelay;
+      features.mTickCount = ++mTickCount;
+
       Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
       Con::executef("LogPlayerAction", this, features, action);
 
@@ -383,21 +399,11 @@ void SimplePlayer::doThink()
       mLastPosY = getPosition().y;
       mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
       mLastDamageProb = damageProb;
-      if(mHealth != mLastHealth)
+      if (mHealth != mLastHealth)
       {
          mTimeTookDamage = mTickCount;
       }
       mLastHealth = mHealth;
-
-      mMovingLeft = 0;
-      mMovingRight = 0;
-      mMovingForward = 0;
-      mMovingBackward = 0;
-      if (mPrepared)
-      {
-         mPrepared = false;
-         doThink();
-      }
 
       switch (action)
       {
@@ -623,10 +629,10 @@ ConsoleGetType(TypeFeatureVector)
    static const U32 bufSize = 256;
    char* returnBuffer = Con::getReturnBuffer(bufSize);
    dSprintf(returnBuffer, bufSize, 
-      "%g %g %g %g %g %g %g %g %g %g %d %d %d %d", 
+      "%g %g %g %g %g %g %g %g %g %g %g %d %d %d %d", 
       v->mDeltaRot, v->mDeltaMovedX, v->mDeltaMovedY,
       v->mVelX, v->mVelY, v->mDamageProb, v->mDeltaDamageProb,
-      v->mDistanceToObstacle, v->mHealth, v->mEnemyHealth,
+      v->mDistanceToObstacleLeft, v->mDistanceToObstacleRight, v->mHealth, v->mEnemyHealth,
       v->mTickCount, v->mTicksSinceObservedEnemy, v->mTicksSinceDamage,
       v->mShootDelay);
    return returnBuffer;
@@ -637,13 +643,13 @@ ConsoleSetType(TypeFeatureVector)
    FeatureVector *v = ((FeatureVector *)dptr);
    if (argc == 1)
       dSscanf(argv[0],
-         "%g %g %g %g %g %g %g %g %g %g %d %d %d %d",
+         "%g %g %g %g %g %g %g %g %g %g %g %d %d %d %d",
          &v->mDeltaRot, &v->mDeltaMovedX, &v->mDeltaMovedY,
          &v->mVelX, &v->mVelY, &v->mDamageProb, &v->mDeltaDamageProb,
-         &v->mDistanceToObstacle, &v->mHealth, &v->mEnemyHealth,
+         &v->mDistanceToObstacleLeft, v->mDistanceToObstacleRight, &v->mHealth, &v->mEnemyHealth,
          &v->mTickCount, &v->mTicksSinceObservedEnemy, &v->mTicksSinceDamage,
          &v->mShootDelay);
-   else if (argc == 14)
+   else if (argc == 15)
    {
       FeatureVector vector;
       vector.mDeltaRot = dAtof(argv[0]);
@@ -653,13 +659,14 @@ ConsoleSetType(TypeFeatureVector)
       vector.mVelY = dAtof(argv[4]);
       vector.mDamageProb = dAtof(argv[5]);
       vector.mDeltaDamageProb = dAtof(argv[6]);
-      vector.mDistanceToObstacle = dAtof(argv[7]);
-      vector.mHealth = dAtof(argv[8]);
-      vector.mEnemyHealth = dAtof(argv[9]);
-      vector.mTickCount = dAtoi(argv[10]);
-      vector.mTicksSinceObservedEnemy = dAtoi(argv[11]);
-      vector.mTicksSinceDamage = dAtoi(argv[12]);
-      vector.mShootDelay = dAtoi(argv[13]);
+      vector.mDistanceToObstacleLeft = dAtof(argv[7]);
+      vector.mDistanceToObstacleRight = dAtof(argv[8]);
+      vector.mHealth = dAtof(argv[9]);
+      vector.mEnemyHealth = dAtof(argv[10]);
+      vector.mTickCount = dAtoi(argv[11]);
+      vector.mTicksSinceObservedEnemy = dAtoi(argv[12]);
+      vector.mTicksSinceDamage = dAtoi(argv[13]);
+      vector.mShootDelay = dAtoi(argv[14]);
       *v = vector;
    }
    else

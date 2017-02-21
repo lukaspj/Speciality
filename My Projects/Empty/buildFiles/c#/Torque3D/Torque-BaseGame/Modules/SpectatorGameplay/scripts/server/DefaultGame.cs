@@ -251,7 +251,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                action = PlayerAction.TurnLeft;
             }
          }
-         else if (vector.DistanceToObstacle < 1.5)
+         else if (vector.DistanceToObstacleLeft < 1.5 || vector.DistanceToObstacleRight < 1.5)
          {
             if (sLastAction == PlayerAction.TurnLeft)
                action = PlayerAction.TurnLeft;
@@ -278,7 +278,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       [ConsoleFunction]
       public static PlayerAction SPThink1(FeatureVector vector)
       {
-         if (vector.DistanceToObstacle < 1.0f)
+         if (vector.DistanceToObstacleLeft < 1 || vector.DistanceToObstacleRight < 1)
             return PlayerAction.TurnRight;
 
          return PlayerAction.MoveForward;

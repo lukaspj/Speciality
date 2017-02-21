@@ -16,7 +16,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public static PlayerAction SPThink0(FeatureVector vector)
       {
          Random rand = new Random();
-         if (vector.DistanceToObstacle < 5)
+         if (vector.DistanceToObstacleLeft < 5 || vector.DistanceToObstacleRight < 5)
          {
             return PlayerAction.TurnRight;
          }

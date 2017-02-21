@@ -14,7 +14,8 @@ namespace Torque3D.Util
 
       public float damageProb;
       public float deltaDamageProb;
-      public float distanceToObstacle;
+      public float distanceToObstacleLeft;
+      public float distanceToObstacleRight;
       public float health;
       public float enemyHealth;
 
@@ -34,7 +35,8 @@ namespace Torque3D.Util
 
       public float DamageProb { get; set; }
       public float DeltaDamageProb { get; set; }
-      public float DistanceToObstacle { get; set; }
+      public float DistanceToObstacleLeft { get; set; }
+      public float DistanceToObstacleRight { get; set; }
       public float Health { get; set; }
       public float EnemyHealth { get; set; }
 
@@ -46,30 +48,32 @@ namespace Torque3D.Util
       public FeatureVector(string data)
       {
          string[] split = data.Split(' ');
-         if (split.Length != 14) throw new ArgumentException("FeatureVector always takes exactly 14 parameters");
-         DeltaRot = float.Parse(split[0]);
-         DeltaMovedX = float.Parse(split[1]);
-         DeltaMovedY = float.Parse(split[2]);
-         VelX = float.Parse(split[3]);
-         VelY = float.Parse(split[4]);
+         if (split.Length != 15) throw new ArgumentException("FeatureVector always takes exactly 15 parameters");
+         int i = 0;
+         DeltaRot = float.Parse(split[i++]);
+         DeltaMovedX = float.Parse(split[i++]);
+         DeltaMovedY = float.Parse(split[i++]);
+         VelX = float.Parse(split[i++]);
+         VelY = float.Parse(split[i++]);
 
-         DamageProb = float.Parse(split[5]);
-         DeltaDamageProb = float.Parse(split[6]);
-         DistanceToObstacle = float.Parse(split[7]);
-         Health = float.Parse(split[8]);
-         EnemyHealth = float.Parse(split[9]);
+         DamageProb = float.Parse(split[i++]);
+         DeltaDamageProb = float.Parse(split[i++]);
+         DistanceToObstacleLeft = float.Parse(split[i++]);
+         DistanceToObstacleRight = float.Parse(split[i++]);
+         Health = float.Parse(split[i++]);
+         EnemyHealth = float.Parse(split[i++]);
 
-         TickCount = int.Parse(split[10]);
-         TicksSinceObservedEnemy = int.Parse(split[11]);
-         TicksSinceDamage = int.Parse(split[12]);
-         ShootDelay = int.Parse(split[13]);
+         TickCount = int.Parse(split[i++]);
+         TicksSinceObservedEnemy = int.Parse(split[i++]);
+         TicksSinceDamage = int.Parse(split[i++]);
+         ShootDelay = int.Parse(split[i++]);
       }
       
       public string ToString()
       {
          return $"{DeltaRot} {DeltaMovedX} {DeltaMovedY} {VelX} {VelY} " +
-                $"{DamageProb} {DeltaDamageProb} {DistanceToObstacle} {Health} " +
-                $"{EnemyHealth} {TickCount} {TicksSinceObservedEnemy} " +
+                $"{DamageProb} {DeltaDamageProb} {DistanceToObstacleLeft} {DistanceToObstacleRight}" +
+                $" {Health} {EnemyHealth} {TickCount} {TicksSinceObservedEnemy} " +
                 $"{TicksSinceDamage} {ShootDelay}";
       }
    }
