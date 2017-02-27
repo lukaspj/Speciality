@@ -341,17 +341,15 @@ void SimplePlayer::doThink()
          mLastHealth = mHealth;
       }
 
-      mMovingLeft = 0;
-      mMovingRight = 0;
-      mMovingForward = 0;
-      mMovingBackward = 0;
-
       if (mPrepared)
       {
          mPrepared = false;
          doThink();
-         --mTickCount; // Subtract the prepared tick
          if (isDeleted()) return;
+      } else
+      {
+         mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
+         mTickCount++;
       }
 
       F32 damageProb = 0.0f; // todo Support more players?
@@ -380,30 +378,30 @@ void SimplePlayer::doThink()
       features.mVelX = getVelocity().x;
       features.mVelY = getVelocity().y;
 
+      mLastRot = mRot;
+      mLastPosX = getPosition().x;
+      mLastPosY = getPosition().y;
+
       features.mDamageProb = damageProb;
       features.mDeltaDamageProb = damageProb - mLastDamageProb;
       getDistanceToObstacleInFront(features.mDistanceToObstacleLeft, features.mDistanceToObstacleRight);
       features.mHealth = mHealth;
       features.mEnemyHealth = enemyHealth;
 
-      features.mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
-      features.mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
-      features.mShootDelay = mShootDelay;
-      features.mTickCount = ++mTickCount;
-
-      Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
-      Con::executef("LogPlayerAction", this, features, action);
-
-      mLastRot = mRot;
-      mLastPosX = getPosition().x;
-      mLastPosY = getPosition().y;
-      mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
       mLastDamageProb = damageProb;
       if (mHealth != mLastHealth)
       {
          mTimeTookDamage = mTickCount;
       }
       mLastHealth = mHealth;
+
+      features.mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
+      features.mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
+      features.mShootDelay = mShootDelay;
+      features.mTickCount = mTickCount;
+
+      Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
+      Con::executef("LogPlayerAction", this, features, action);
 
       switch (action)
       {
@@ -437,6 +435,27 @@ void SimplePlayer::doThink()
       default:
          break;
       }
+
+      Point3F moveAcceleration = Point3F(mMovingRight - mMovingLeft, mMovingForward - mMovingBackward, 0) * mDataBlock->getMoveSpeed();
+
+      MatrixF mat;
+      AngAxisF::RotateZ(mRot, &mat);
+      mat.mulV(moveAcceleration);
+      
+      mVelocity += moveAcceleration * TickSec - mVelocity * mDataBlock->getFriction();
+
+      if (standingOnGround())
+      {
+         mVelocity.z = 0.0f;
+      }
+
+      mCollision.update();
+      updatePosition(TickSec);
+
+      mMovingLeft = 0;
+      mMovingRight = 0;
+      mMovingForward = 0;
+      mMovingBackward = 0;
    }
 }
 

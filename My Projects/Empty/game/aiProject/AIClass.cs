@@ -14,7 +14,7 @@ namespace GameAI {
       private static SimplePlayerData a;
 
       [ConsoleFunction]
-      public static PlayerAction AIThink1(FeatureVector vector) {
+      public static PlayerAction TestAI(FeatureVector vector) {
          PlayerAction action;
 
          enemySpotted.Update(vector);
@@ -48,7 +48,7 @@ namespace GameAI {
             }
          }
          else {
-            int dec = (vector.TickCount / 32) % 4;
+            int dec = vector.TickCount / 32;
             Random tmpRandom = new Random(dec);
             double r = tmpRandom.NextDouble();
             if (r < 0.5) {

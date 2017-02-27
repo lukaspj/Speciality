@@ -128,7 +128,7 @@
       canSaveDynamicFields = "0";
    };
    new GuiTextEditCtrl(GameSizeGUI) {
-     text = "30";
+     text = "50";
       historySize = "5";
       tabComplete = "1";
       sinkAllKeyEvents = "0";
@@ -178,7 +178,7 @@
       canSaveDynamicFields = "0";
    };
    new GuiTextEditCtrl(ObstaclesGUI) {
-     text = "5";
+     text = "12";
       historySize = "5";
       tabComplete = "1";
       sinkAllKeyEvents = "0";

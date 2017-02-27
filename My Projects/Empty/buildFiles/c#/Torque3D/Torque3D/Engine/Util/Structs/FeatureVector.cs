@@ -27,22 +27,67 @@ namespace Torque3D.Util
 
    public class FeatureVector
    {
+      /// <summary>
+      /// Difference in Rotation of the player since last frame
+      /// </summary>
       public float DeltaRot { get; set; }
+      /// <summary>
+      /// Difference in movement in the X direction since last tick
+      /// </summary>
       public float DeltaMovedX { get; set; }
+      /// <summary>
+      /// Difference in movement in the Y direction since last tick
+      /// </summary>
       public float DeltaMovedY { get; set; }
+      /// <summary>
+      /// The current velocity in the X direction
+      /// </summary>
       public float VelX { get; set; }
+      /// <summary>
+      /// The current velocity in the Y direction
+      /// </summary>
       public float VelY { get; set; }
 
+      /// <summary>
+      /// The propability that you damage a player with a Shoot action
+      /// </summary>
       public float DamageProb { get; set; }
       public float DeltaDamageProb { get; set; }
+      ///<summary>
+      /// Distance to nearest object in front of AI Player's left side
+      /// </summary>
       public float DistanceToObstacleLeft { get; set; }
+      ///<summary>
+      /// Distance to nearest object in front of AI Player's right side
+      /// </summary>
       public float DistanceToObstacleRight { get; set; }
+      /// <summary>
+      /// The AI Players current Health
+      /// </summary>
       public float Health { get; set; }
+      /// <summary>
+      /// The current health of the enemy
+      /// </summary>
       public float EnemyHealth { get; set; }
 
+      /// <summary>
+      /// The ammount of thicks since game start
+      /// </summary>
       public int TickCount { get; set; }
+      /// <summary>
+      /// Ticks since the AI player observed an Enemy
+      /// </summary>
+      /// <remarks>
+      /// If no players has been observed then this field is <c>int.MaxValue</c>
+      /// </remarks>
       public int TicksSinceObservedEnemy { get; set; }
+      /// <summary>
+      /// Ticks since the AI player took damage
+      /// </summary>
       public int TicksSinceDamage { get; set; }
+      /// <summary>
+      /// Delay in ticks untill the AI Player is able to Shoot again
+      /// </summary>
       public int ShootDelay { get; set; }
 
       public FeatureVector(string data)
