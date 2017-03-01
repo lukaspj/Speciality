@@ -144,6 +144,12 @@ namespace Torque3D
          	get { return int.Parse(getFieldValue("MovingBackward")); }
          	set { setFieldValue("MovingBackward", value.ToString()); }
          }
+
+      public float Rot
+      {
+         	get { return float.Parse(getFieldValue("Rot")); }
+         	set { setFieldValue("Rot", value.ToString()); }
+         }
       
       
          public bool RenderFrustum
