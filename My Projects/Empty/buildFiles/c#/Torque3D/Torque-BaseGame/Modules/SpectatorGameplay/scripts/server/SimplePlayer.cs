@@ -51,12 +51,14 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                int score = int.Parse(DataBlock.getFieldValue("score"));
                if (score >= int.Parse(DataBlock.getFieldValue("winningScore")))
                {
+                  GameLogger.LogGameResult(this);
+
                   GuiTextCtrl scoreText = Sim.FindObject<GuiTextCtrl>(getName() + "score");
                   string text = scoreText.Text;
                   Regex reg = new Regex(@"\s");
                   int scoretxt = int.Parse(reg.Split(text)[1]) + 1;
                   scoreText.setText("Score: " + scoretxt);
-                  Global.eval("resetMission();");
+                  DefaultGame.EndGame();
                }
             }
          }
@@ -77,6 +79,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
          float curenthealth = Health;
          float newHealth = curenthealth - val;
+
+         GameLogger.LogDamageEvent(this, newHealth);
+
          GuiProgressCtrl progress = Sim.FindObject<GuiProgressCtrl>(getName() + "health");
          int maxHealth = int.Parse(DataBlock.getFieldValue("maxHealth"));
          progress.setValue((newHealth/maxHealth).ToString());
@@ -86,6 +91,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             return true;
          }
          Health = newHealth;
+
          return false;
       }
 

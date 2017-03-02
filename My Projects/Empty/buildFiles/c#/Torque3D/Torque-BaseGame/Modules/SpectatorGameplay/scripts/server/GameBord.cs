@@ -23,13 +23,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          _gameSizeX = sizeX % 2 == 0 ? ++sizeX : sizeX;
          _gameSizeY = sizeY % 2 == 0 ? ++sizeY : sizeY;
          gameBord = new bool[_gameSizeX, _gameSizeY];
-         for (int x = 0; x < _gameSizeX; x++)
-         {
-            for (int y = 0; y < _gameSizeY; y++)
-            {
-               gameBord[x, y] = false;
-            }
-         }
+         Reset();
       }
 
       private static GameBord _gameBord = null;
@@ -40,6 +34,17 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             _gameBord = new GameBord(sizeX,sizeY);
          }
          return _gameBord;
+      }
+
+      public void Reset()
+      {
+         for (int x = 0; x < _gameSizeX; x++)
+         {
+            for (int y = 0; y < _gameSizeY; y++)
+            {
+               gameBord[x, y] = false;
+            }
+         }
       }
 
       private int PointToX(Point3F point)
@@ -193,6 +198,28 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             int yscale =  rand.Next(1, 10);
             int mirrorx = _gameSizeX - 1 - xpos;
             int mirrory = _gameSizeY - 1 - ypos;
+            if (xpos + xscale / 2 > _gameSizeX - 1)
+            {
+               xscale = (_gameSizeX - 1 - xpos) * 2;
+            }
+            if (xpos - xscale / 2 < 0)
+            {
+               xscale = xpos / 2;
+            }
+            if (ypos + yscale / 2 > _gameSizeY - 1)
+            {
+               yscale = (_gameSizeY - 1 - ypos) * 2;
+            }
+            if (ypos - yscale / 2 < 0)
+            {
+               yscale = ypos / 2;
+            }
+            if (xscale == 0 || yscale == 0)
+            {
+               //dont add the obstacle and try to add another one instead if the scale is 0.
+               i--;
+               continue;
+            }
             TSStatic obstacle = new TSStatic()
             {
                ShapeName = shape,

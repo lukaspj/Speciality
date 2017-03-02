@@ -4,7 +4,7 @@ new GameTSCtrl(PlayGui) {
    horizSizing = "right";
    vertSizing = "bottom";
    position = "0 0";
-   extent = "2048 1536";
+   extent = "1024 768";
    minExtent = "8 8";
    canSave = "1";
    visible = "1";
@@ -12,8 +12,8 @@ new GameTSCtrl(PlayGui) {
    padding = "0 0 0 0";
    anchorTop = "1";
    anchorBottom = "0";
-   anchorLeft = "1";
-   anchorRight = "0";
+   anchorLeft = "0";
+   anchorRight = "1";
    cameraZRot = "0";
    forceFOV = "0";
    enabled = "1";

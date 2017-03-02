@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Game.Modules.ClientServer;
 using Torque3D;
 using Torque3D.Engine;
 using Path = System.IO.Path;
@@ -66,7 +67,7 @@ namespace Game
          ModuleDatabase.setModuleExtension("module");
          ModuleDatabase.scanModules("data", false);
          ModuleDatabase.loadGroup("Game");
-
+         
          if (!Globals.GetBool("isDedicated"))
          {
             // Start rendering and stuff.
@@ -88,6 +89,8 @@ namespace Game
                //todo GraphicsMenu.Autodetect()
                Global.eval("GraphicsMenu.AutoDetect");
             }
+
+            ClientServer.StartGame("data/spectatorGameplay/levels/Empty_Room.mis");
 
             Global.closeSplashWindow();
 

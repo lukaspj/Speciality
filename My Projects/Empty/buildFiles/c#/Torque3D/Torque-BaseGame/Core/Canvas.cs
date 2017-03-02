@@ -110,7 +110,11 @@ namespace Game.Core
                   string[] testResSplit = testRes.Split(' ');
                   uint testResX = uint.Parse(testResSplit[0]);
                   uint testResY = uint.Parse(testResSplit[1]);
-                  uint testBPP = uint.Parse(testResSplit[2]);
+                  uint testBPP;
+                  Global.echo(testRes);
+                  if (string.IsNullOrEmpty(testResSplit[2])) testBPP = 0;
+                  else if (testResSplit[2].Trim().ToLower().Equals("false")) testBPP = 0;
+                  else testBPP = uint.Parse(testResSplit[2]);
 
                   if (testBPP != bpp)
                      continue;

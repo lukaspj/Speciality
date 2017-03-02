@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Net;
+using System.Runtime.Remoting.Channels;
+using System.Text.RegularExpressions;
+using System.Timers;
 using Game.Core;
 using Game.Modules.ClientServer.Server;
 using MathNet.Numerics.Random;
@@ -17,6 +20,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public Camera camera { get; set; }
       private GameConnectionToClient client;
+      private static GameTimer _gameTimer;
+
       //-----------------------------------------------------------------------------
       // What kind of "player" is spawned is either controlled directly by the
       // SpawnSphere or it defaults back to the values set here. This also controls
@@ -119,8 +124,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          // Called by resetMission(), after all the temporary mission objects
          // have been deleted.
+         GameBord.GetGameBord().Reset();
          initGameVars();
          InitGame();
+         Global.call("ResetPlayerHealth","");
+         _gameTimer.start();
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -183,10 +191,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          {
             camera = new Camera()
             {
-               DataBlock = Sim.FindObject<Observer>("Observer")
+               DataBlock = Sim.FindObject<Observer>("Observer"),
             };
             camera.registerObject();
-
             client.setFieldValue("camera", camera.getId().ToString());
 
          }
@@ -204,8 +211,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
             if (spawnPoint != null)
             {
-               camera.setTransform(new TransformF(spawnPoint.Position + new Point3F(0, 0, 50), spawnPoint.Orientation));
+               camera.setTransform(new TransformF(new Point3F(0, 0, 50), spawnPoint.Orientation));
             }
+            camera.setRotation(new Point3F(60,0,0));
          }
       }
 
@@ -218,11 +226,11 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          Random rand = new Random();
          if (vector.TicksSinceObservedEnemy < 200)
          {
-            if (vector.KillProb > 0.80 && vector.ShootDelay == 0)
+            if (vector.DamageProb > 0.80 && vector.ShootDelay == 0)
             {
                action = PlayerAction.Shoot;
             }
-            else if (vector.DeltaKillProp > 0)
+            else if (vector.DeltaDamageProb > 0)
             {
                if (vector.DeltaRot < 0)
                {
@@ -243,7 +251,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                action = PlayerAction.TurnLeft;
             }
          }
-         else if (vector.DistanceToObstacle < 1.5)
+         else if (vector.DistanceToObstacleLeft < 1.5 || vector.DistanceToObstacleRight < 1.5)
          {
             if (sLastAction == PlayerAction.TurnLeft)
                action = PlayerAction.TurnLeft;
@@ -270,13 +278,15 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       [ConsoleFunction]
       public static PlayerAction SPThink1(FeatureVector vector)
       {
-         if (vector.DistanceToObstacle < 1.0f)
+         if (vector.DistanceToObstacleLeft < 1 || vector.DistanceToObstacleRight < 1)
             return PlayerAction.TurnRight;
 
          return PlayerAction.MoveForward;
       }
 
       private static string[] players = new string[5];
+      private static int gameSize;
+      private static int num_obstacles;
 
       [ConsoleFunction("AddPlayers")]
       public static void AddPlayers()
@@ -286,14 +296,24 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          players[0] = guiTextEditCtrl.getValue();
          GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
          players[1] = textEditCtrl.getValue();
+         GuiTextEditCtrl gamesize = Sim.FindObject<GuiTextEditCtrl>("GameSizeGUI");
+         gameSize = int.Parse(gamesize.getValue());
+         GuiTextEditCtrl obstacles = Sim.FindObject<GuiTextEditCtrl>("ObstaclesGUI");
+         num_obstacles = int.Parse(obstacles.getValue());
          InitGame();
          Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
          Canvas.GameCanvas.popDialog();
+ 
+         _gameTimer.start();
       }
 
       private static void InitGame()
       {
-         GameBord bord = GameBord.GetGameBord(30, 30);
+         if (_gameTimer == null)
+         {
+            _gameTimer = new GameTimer("TimeUpdate", 3200, true);
+         }
+         GameBord bord = GameBord.GetGameBord(gameSize, gameSize);
          //Players simGroup Does not get propperly deleted when MissionCleanup is deleted??
          SimGroup playersGroup = Sim.FindObject<SimGroup>("Players");
          if (playersGroup == null)
@@ -308,8 +328,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             Sim.FindObject<SimGroup>("MissionCleanup").add(obstacleGroup);
          }
          bord.CreateBoundingBox();
-         bord.GenerateRandomObstacles(5);
+         bord.GenerateRandomObstacles(num_obstacles);
          int numPlayers = 2;
+         SimplePlayer[] playerArray = new SimplePlayer[numPlayers];
          for (int i = 0; i < numPlayers; i++)
          {
             Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2 * i)) * (bord.GameSizeX / 4) - (bord.GameSizeX / 2), (1 + (2 * i)) * (bord.GameSizeY / 4) - (bord.GameSizeY / 2), 1));
@@ -321,7 +342,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
                Position = playerSpawn,
                ThinkFunction = players[i] == "" ? "SPThink": players[i],
-               Rotation = new AngAxisF(0, 0, 1, i == 0 ? 0 : 180),
+               Rot = (float) ((float)i/numPlayers * Math.PI*2),
                RenderFrustum = true
             };
             string skins = Globals.GetString("SimplePlayerSkins");
@@ -334,9 +355,34 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             player.registerObject();
 
             playersGroup.add(player);
-
+            playerArray[i] = player;
          }
-        
+         GameLogger.LogGameStart(playerArray);
+      }
+      [ConsoleFunction("TimeUpdate")]
+      public static void TimeUpdate(int tickCount)
+      {
+         GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
+         if (!Regex.IsMatch(ctrl.getValue(), @"^\d+$"))
+         {
+            Console.WriteLine("hello");
+         }
+         
+         if (tickCount == 0)
+         {
+            _gameTimer.stop();
+            GameLogger.LogGameResult(null);
+            EndGame();
+            return;
+         }
+         ctrl.setValue(tickCount.ToString());
+      }
+
+      public static void EndGame()
+      {
+         GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
+         ctrl.setText(100.ToString());
+         Global.eval("resetMission();");
       }
    }
 }

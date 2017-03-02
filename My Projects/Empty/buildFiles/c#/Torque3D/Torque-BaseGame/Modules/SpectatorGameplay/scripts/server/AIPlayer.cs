@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Torque3D;
 using Torque3D.Engine.Util.Enums;
+using Torque3D.Util;
 
 namespace Game.Modules.SpectatorGameplay.scripts.server
 {
@@ -15,17 +16,17 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public static PlayerAction SPThink0(FeatureVector vector)
       {
          Random rand = new Random();
-         if (vector.DistanceToObstacle < 5)
+         if (vector.DistanceToObstacleLeft < 5 || vector.DistanceToObstacleRight < 5)
          {
             return PlayerAction.TurnRight;
          }
          if (vector.TicksSinceObservedEnemy < 10)
          {
-            if (vector.KillProb > 0.80 && vector.ShootDelay == 0)
+            if (vector.DamageProb > 0.80 && vector.ShootDelay == 0)
             {
                return PlayerAction.Shoot;
             }
-            if (vector.DeltaKillProp > 0)
+            if (vector.DeltaDamageProb > 0)
             {
                if (vector.DeltaRot < 0)
                {

@@ -26,8 +26,8 @@ namespace Game
 
          Torque3D.Torque3D.Libraries libraries = new Torque3D.Torque3D.Libraries
          {
-            Windows32bit = "Empty_DEBUG.dll",
-            Windows64bit = "Empty_DEBUG.dll"
+            Windows32bit = "Empty.dll",
+            Windows64bit = "Empty.dll"
          };
 
          Torque3D.Torque3D.Initialize(args, libraries);

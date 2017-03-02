@@ -7,7 +7,6 @@
 
 IMPLEMENT_CO_NETOBJECT_V1(SimplePlayer);
 IMPLEMENT_CO_DATABLOCK_V1(SimplePlayerData);
-IMPLEMENT_CONOBJECT(FeatureVector);
 
 SimplePlayerData::SimplePlayerData()
 {
@@ -101,10 +100,10 @@ SimplePlayer::SimplePlayer()
    mTypeMask |= PlayerObjectType;
 
    mVelocity = VectorF(0, 0, 0);
-   mMovingLeft = false;
-   mMovingRight = false;
-   mMovingForward = false;
-   mMovingBackward = false;
+   mMovingLeft = 0;
+   mMovingRight = 0;
+   mMovingForward = 0;
+   mMovingBackward = 0;
 
    mRot = 0.0f;
    mHealth = 20.0f;
@@ -113,7 +112,7 @@ SimplePlayer::SimplePlayer()
    mLastRot = 0.0f;
    mLastPosX = 0.0f;
    mLastPosY = 0.0f;
-   mLastKillProp = 0.0f;
+   mLastDamageProb = 0.0f;
 
    mLastHealth = 20.0f;
 
@@ -139,13 +138,13 @@ SimplePlayer::~SimplePlayer()
 
 void SimplePlayer::initPersistFields()
 {
-   addField("MovingForward", TYPEID< bool >(), Offset(mMovingForward, SimplePlayer),
+   addField("MovingForward", TYPEID< S32 >(), Offset(mMovingForward, SimplePlayer),
             "");
-   addField("MovingBackward", TYPEID< bool >(), Offset(mMovingBackward, SimplePlayer),
+   addField("MovingBackward", TYPEID< S32 >(), Offset(mMovingBackward, SimplePlayer),
             "");
-   addField("MovingRight", TYPEID< bool >(), Offset(mMovingRight, SimplePlayer),
+   addField("MovingRight", TYPEID< S32 >(), Offset(mMovingRight, SimplePlayer),
             "");
-   addField("MovingLeft", TYPEID< bool >(), Offset(mMovingLeft, SimplePlayer),
+   addField("MovingLeft", TYPEID< S32 >(), Offset(mMovingLeft, SimplePlayer),
             "");
    addField("RenderFrustum", TYPEID< bool >(), Offset(mRenderFrustum, SimplePlayer),
             "");
@@ -153,6 +152,7 @@ void SimplePlayer::initPersistFields()
             "");
    addField("ThinkFunction", TypeCaseString, Offset(mThinkFunction, SimplePlayer), "");
    addField("Health", TypeF32, Offset(mHealth, SimplePlayer), "");
+   addField("Rot", TypeF32, Offset(mRot, SimplePlayer), "");
 
    Parent::initPersistFields();
 }
@@ -202,7 +202,7 @@ void SimplePlayer::advanceTime(F32 dt)
 {
 }
 
-F32 SimplePlayer::getDistanceToObstacleInFront()
+F32 SimplePlayer::getDistanceToObstacleInFront(F32& lDist, F32& rDist)
 {
    F32 width = mObjBox.maxExtents.x;
    F32 depth = mObjBox.maxExtents.y;
@@ -216,16 +216,17 @@ F32 SimplePlayer::getDistanceToObstacleInFront()
    Point3F dir = getTransform().getForwardVector();
    RayInfo rInfo;
 
-   F32 dist1 = 0.0f, dist2 = 0.0f;
+   lDist = 0.0f; 
+   rDist = 0.0f;
 
    disableCollision();
    if (getContainer()->castRay(leftPoint, leftPoint + (dir * 100), CollisionMoveMask, &rInfo))
-      dist1 = rInfo.distance;
+      lDist = rInfo.distance;
    if (getContainer()->castRay(rightPoint, rightPoint + (dir * 100), CollisionMoveMask, &rInfo))
-      dist2 = rInfo.distance;
+      rDist = rInfo.distance;
    enableCollision();
 
-   return dist1 > dist2 ? dist2 : dist1;
+   return lDist > rDist ? lDist : rDist;
 }
 
 bool SimplePlayer::canSee(SceneObject* other)
@@ -256,9 +257,9 @@ bool SimplePlayer::canSee(SceneObject* other)
 
    disableCollision();
    if (  getContainer()->castRay(center, leftFrontPoint, CollisionMoveMask, &rInfo)
-      || getContainer()->castRay(center, leftBackPoint, CollisionMoveMask, &rInfo)
-      || getContainer()->castRay(center, rightFrontPoint, CollisionMoveMask, &rInfo)
-      || getContainer()->castRay(center, rightBackPoint, CollisionMoveMask, &rInfo))
+      && getContainer()->castRay(center, leftBackPoint, CollisionMoveMask, &rInfo)
+      && getContainer()->castRay(center, rightFrontPoint, CollisionMoveMask, &rInfo)
+      && getContainer()->castRay(center, rightBackPoint, CollisionMoveMask, &rInfo))
          blocked = true;
    enableCollision();
 
@@ -270,9 +271,11 @@ bool SimplePlayer::trySetRotation(F32 rot)
    MatrixF oldTrans = getTransform();
    MatrixF trans = getTransform();
    MatrixF mat;
-   AngAxisF::RotateZ(rot, &mat);
-   trans.mul(mat);
-   setTransform(trans);
+   mat.set(EulerF(0.0f, 0.0f, rot));
+   mat.setPosition(getPosition());
+   //AngAxisF::RotateZ(rot, &mat);
+   //trans.mul(mat);
+   setTransform(mat);
    Point3F vel = Point3F::Zero;
    bool collidingAfter = mCollision.checkCollisions(TickMs, &vel, getPosition());
    if (collidingAfter)
@@ -290,12 +293,12 @@ void SimplePlayer::processTick(const Move* move)
 
    Point3F moveAcceleration = Point3F(mMovingRight - mMovingLeft, mMovingForward - mMovingBackward, 0) * mDataBlock->getMoveSpeed();
 
-   MatrixF trans = getTransform();
+   //MatrixF trans = getTransform();
    MatrixF mat;
    AngAxisF::RotateZ(mRot, &mat);
    mat.mulV(moveAcceleration);
-   trans.mul(mat);
-   setTransform(trans);
+   //trans.mul(mat);
+   //setTransform(trans);
 
    VectorF acceleration = moveAcceleration + force;
 
@@ -338,80 +341,83 @@ void SimplePlayer::doThink()
          mLastHealth = mHealth;
       }
 
-      F32 killProb = 0.0f; // todo Support more players?
+      if (mPrepared)
+      {
+         mPrepared = false;
+         doThink();
+         if (isDeleted()) return;
+      } else
+      {
+         mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
+         mTickCount++;
+      }
 
-      Con::executef("SetDamageProbText", getName(), killProb);
+      F32 damageProb = 0.0f; // todo Support more players?
+      F32 enemyHealth = 0.0f;
+
+      Con::executef("SetDamageProbText", getName(), damageProb);
 
       SimGroup *playersGroup = static_cast<SimGroup*>(Sim::findObject("Players"));
       for(int i = 0; i < playersGroup->size(); i++)
       {
          SimplePlayer *player = static_cast<SimplePlayer*>((*playersGroup)[i]);
-         if (player->getPosition() == getPosition()) continue;
+         if (player->getId() == getId()) continue;
+         
+         enemyHealth = player->mHealth;
+         
          if (!canSee(player)) continue;
          mTimeSawEnemy = mTickCount;
-         killProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
+         damageProb = Con::executef("GetDamagePropability", this, player).getFloatValue();
       }
 
-      FeatureVector *features = new FeatureVector();
-      features->registerObject();
+      FeatureVector features;
 
-      features->mDeltaRot = mRot - mLastRot;
-      features->mDeltaMovedX = getPosition().x - mLastPosX;
-      features->mDeltaMovedY = getPosition().y - mLastPosY;
-      features->mVelX = getVelocity().x;
-      features->mVelY = getVelocity().y;
-
-      features->mKillProb = killProb;
-      features->mDeltaKillProp = killProb - mLastKillProp;
-      mLastKillProp = killProb;
-      features->mDistanceToObstacle = getDistanceToObstacleInFront();
-      features->mHealth = mHealth;
-
-      features->mTickCount = ++mTickCount;
-      features->mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
-      features->mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
-      features->mShootDelay = mShootDelay;
-      Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
-      features->safeDeleteObject();
+      features.mDeltaRot = mRot - mLastRot;
+      features.mDeltaMovedX = getPosition().x - mLastPosX;
+      features.mDeltaMovedY = getPosition().y - mLastPosY;
+      features.mVelX = getVelocity().x;
+      features.mVelY = getVelocity().y;
 
       mLastRot = mRot;
       mLastPosX = getPosition().x;
       mLastPosY = getPosition().y;
-      mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
-      mLastKillProp = killProb;
-      if(mHealth != mLastHealth)
+
+      features.mDamageProb = damageProb;
+      features.mDeltaDamageProb = damageProb - mLastDamageProb;
+      getDistanceToObstacleInFront(features.mDistanceToObstacleLeft, features.mDistanceToObstacleRight);
+      features.mHealth = mHealth;
+      features.mEnemyHealth = enemyHealth;
+
+      mLastDamageProb = damageProb;
+      if (mHealth != mLastHealth)
       {
          mTimeTookDamage = mTickCount;
       }
       mLastHealth = mHealth;
 
-      mMovingLeft = false;
-      mMovingRight = false;
-      mMovingForward = false;
-      mMovingBackward = false;
-      if (mPrepared)
-      {
-         mPrepared = false;
-         doThink();
-      }
+      features.mTicksSinceDamage = mTimeTookDamage == S32_MAX ? S32_MAX : mTickCount - mTimeTookDamage;
+      features.mTicksSinceObservedEnemy = mTimeSawEnemy == S32_MAX ? S32_MAX : mTickCount - mTimeSawEnemy;
+      features.mShootDelay = mShootDelay;
+      features.mTickCount = mTickCount;
+
+      Actions action = EngineUnmarshallData< SimplePlayerActions >()(Con::executef(mThinkFunction, features).getStringValue());
+      Con::executef("LogPlayerAction", this, features, action);
 
       switch (action)
       {
       case MoveForward:
-         mMovingForward = true;
+         mMovingForward++;
          break;
       case MoveBackward:
-         mMovingBackward = true;
+         mMovingBackward++;
          break;
       case MoveLeft:
-         mMovingLeft = true;
+         mMovingLeft++;
          break;
       case MoveRight:
-         mMovingRight = true;
+         mMovingRight++;
          break;
       case TurnRight:
-         //bool collidingNow = mCollision.checkCollisions(TickMs, &mVelocity, getPosition());
-         
          if (trySetRotation(mRot + mDataBlock->getTurnSpeed())) mRot += mDataBlock->getTurnSpeed();
          break;
       case TurnLeft:
@@ -429,6 +435,27 @@ void SimplePlayer::doThink()
       default:
          break;
       }
+
+      Point3F moveAcceleration = Point3F(mMovingRight - mMovingLeft, mMovingForward - mMovingBackward, 0) * mDataBlock->getMoveSpeed();
+
+      MatrixF mat;
+      AngAxisF::RotateZ(mRot, &mat);
+      mat.mulV(moveAcceleration);
+      
+      mVelocity += moveAcceleration * TickSec - mVelocity * mDataBlock->getFriction();
+
+      if (standingOnGround())
+      {
+         mVelocity.z = 0.0f;
+      }
+
+      mCollision.update();
+      updatePosition(TickSec);
+
+      mMovingLeft = 0;
+      mMovingRight = 0;
+      mMovingForward = 0;
+      mMovingBackward = 0;
    }
 }
 
@@ -601,26 +628,68 @@ FeatureVector::~FeatureVector()
 {
 }
 
-void FeatureVector::initPersistFields()
+
+IMPLEMENT_STRUCT(FeatureVector,
+   FeatureVector, MathTypes,
+   "")
+END_IMPLEMENT_STRUCT;
+
+
+
+//-----------------------------------------------------------------------------
+// TypePoint3F
+//-----------------------------------------------------------------------------
+ConsoleType(FeatureVector, TypeFeatureVector, FeatureVector, "")
+ImplementConsoleTypeCasters(TypeFeatureVector, FeatureVector)
+
+ConsoleGetType(TypeFeatureVector)
 {
-   addField("DeltaRot", TypeF32, Offset(mDeltaRot, FeatureVector), "");
-   addField("DeltaMovedX", TypeF32, Offset(mDeltaMovedX, FeatureVector), "");
-   addField("DeltaMovedY", TypeF32, Offset(mDeltaMovedY, FeatureVector), "");
-   addField("VelX", TypeF32, Offset(mVelX, FeatureVector), "");
-   addField("VelY", TypeF32, Offset(mVelY, FeatureVector), "");
+   FeatureVector *v = (FeatureVector *)dptr;
+   static const U32 bufSize = 256;
+   char* returnBuffer = Con::getReturnBuffer(bufSize);
+   dSprintf(returnBuffer, bufSize, 
+      "%g %g %g %g %g %g %g %g %g %g %g %d %d %d %d", 
+      v->mDeltaRot, v->mDeltaMovedX, v->mDeltaMovedY,
+      v->mVelX, v->mVelY, v->mDamageProb, v->mDeltaDamageProb,
+      v->mDistanceToObstacleLeft, v->mDistanceToObstacleRight, v->mHealth, v->mEnemyHealth,
+      v->mTickCount, v->mTicksSinceObservedEnemy, v->mTicksSinceDamage,
+      v->mShootDelay);
+   return returnBuffer;
+}
 
-   addField("DeltaKillProp", TypeF32, Offset(mDeltaKillProp, FeatureVector), "");
-
-   addField("KillProb", TypeF32, Offset(mKillProb, FeatureVector), "");
-   addField("DistanceToObstacle", TypeF32, Offset(mDistanceToObstacle, FeatureVector), "");
-   addField("Health", TypeF32, Offset(mHealth, FeatureVector), "");
-
-   addField("TickCount", TypeS32, Offset(mTickCount, FeatureVector), "");
-   addField("TicksSinceObservedEnemy", TypeS32, Offset(mTicksSinceObservedEnemy, FeatureVector), "");
-   addField("TicksSinceDamage", TypeS32, Offset(mTicksSinceDamage, FeatureVector), "");
-   addField("ShootDelay", TypeS32, Offset(mShootDelay, FeatureVector), "");
-
-   Parent::initPersistFields();
+ConsoleSetType(TypeFeatureVector)
+{
+   FeatureVector *v = ((FeatureVector *)dptr);
+   if (argc == 1)
+      dSscanf(argv[0],
+         "%g %g %g %g %g %g %g %g %g %g %g %d %d %d %d",
+         &v->mDeltaRot, &v->mDeltaMovedX, &v->mDeltaMovedY,
+         &v->mVelX, &v->mVelY, &v->mDamageProb, &v->mDeltaDamageProb,
+         &v->mDistanceToObstacleLeft, v->mDistanceToObstacleRight, &v->mHealth, &v->mEnemyHealth,
+         &v->mTickCount, &v->mTicksSinceObservedEnemy, &v->mTicksSinceDamage,
+         &v->mShootDelay);
+   else if (argc == 15)
+   {
+      FeatureVector vector;
+      vector.mDeltaRot = dAtof(argv[0]);
+      vector.mDeltaMovedX = dAtof(argv[1]);
+      vector.mDeltaMovedY = dAtof(argv[2]);
+      vector.mVelX = dAtof(argv[3]);
+      vector.mVelY = dAtof(argv[4]);
+      vector.mDamageProb = dAtof(argv[5]);
+      vector.mDeltaDamageProb = dAtof(argv[6]);
+      vector.mDistanceToObstacleLeft = dAtof(argv[7]);
+      vector.mDistanceToObstacleRight = dAtof(argv[8]);
+      vector.mHealth = dAtof(argv[9]);
+      vector.mEnemyHealth = dAtof(argv[10]);
+      vector.mTickCount = dAtoi(argv[11]);
+      vector.mTicksSinceObservedEnemy = dAtoi(argv[12]);
+      vector.mTicksSinceDamage = dAtoi(argv[13]);
+      vector.mShootDelay = dAtoi(argv[14]);
+      *v = vector;
+   }
+   else
+      Con::printf("FeatureVector must be set as { ..14.. } or \"..14..\"");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

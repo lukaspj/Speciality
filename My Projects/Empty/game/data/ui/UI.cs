@@ -16,17 +16,17 @@ function UI::create( %this )
 {
    if ($Server::Dedicated)
       return;
-   
+
    // Use our prefs to configure our Canvas/Window
    configureCanvas();
-   
+
    //Load UI stuff
    //we need to load this because some of the menu profiles use the sounds here
    exec("./scripts/datablocks/guiSounds.cs");
-   
+
    //Profiles
    exec("./scripts/profiles.cs");
-   
+
    //Now gui files
    exec("./scripts/guis/mainMenu.gui");
    exec("./scripts/guis/chooseLevelDlg.gui");
@@ -36,9 +36,9 @@ function UI::create( %this )
    exec("./scripts/guis/pauseMenu.gui");
    exec("./scripts/guis/remapDlg.gui");
    exec("./scripts/guis/remapConfirmDlg.gui");
-   
+
    exec("./scripts/guis/profiler.gui");
-   
+
    //Load gui companion scripts
    exec("./scripts/chooseLevelDlg.cs");
    exec("./scripts/optionsList.cs");
@@ -49,13 +49,13 @@ function UI::create( %this )
    exec("./scripts/mainMenu.cs");
    exec("./scripts/joinServerMenu.cs");
    exec("./scripts/pauseMenu.cs");
-   
+
    %dbList = new ArrayObject(LevelFilesList);
-   
-   Canvas.pushDialog(MainMenuGui);
+
+   //Canvas.pushDialog(MainMenuGui);
 }
 
 function Game::destroy( %this )
 {
-   
+
 }

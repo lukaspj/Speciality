@@ -68,7 +68,13 @@ function PlayGui::clearHud( %this )
    while ( %this.getCount() > 0 )
       %this.getObject( 0 ).delete();
 }
-
+function ResetPlayerHealth(){
+  for (%i = 0; %i < players.getCount(); %i++)
+  {
+    %player = players.getObject(%i);
+    (%player.getName() @ "health").setValue(%player.health/%player.maxHealth);
+  }
+}
 function PlayGui::InitGuiElements( %this )
 {
    for (%i = 0; %i < players.getCount(); %i++)
@@ -78,16 +84,22 @@ function PlayGui::InitGuiElements( %this )
         extent = "200 55";
         anchorTop = "1";
         anchorRight = "1";
+        anchorLeft = "0";
+        horizSizing = "left";
         position = "824" SPC %i*60;
       };
       %HealthGui.setValue(%player.health/%player.maxHealth);
       %ScoreGui = new GuiTextCtrl(%player.getName()@ "score"){
         text = "Score: 0";
         extent = "200 55";
+        anchorTop = "1";
+        anchorRight = "1";
+        anchorLeft = "0";
+        horizSizing = "left";
         position = "624" SPC %i*60;
         profile = new GuiControlProfile(){
           fontSize = "60";
-          justify = "Center";
+          justify = "left";
           fontColor = %player.color;
         };
       };
@@ -95,9 +107,13 @@ function PlayGui::InitGuiElements( %this )
         text = "Damage%: 0";
         extent = "400 55";
         position = "224" SPC %i*60;
+        anchorTop = "1";
+        anchorRight = "1";
+        anchorLeft ="0";
+        horizSizing = "left";
         profile = new GuiControlProfile(){
           fontSize = "60";
-          justify = "Center";
+          justify = "left";
           fontColor = %player.color;
         };
       };
@@ -105,6 +121,36 @@ function PlayGui::InitGuiElements( %this )
      %this.addGuiControl(%ScoreGui);
      %this.addGuiControl(%DamageGui);
    }
+   %TimerGui = new GuiTextCtrl(Timertext){
+     text = "TimeLeft:";
+     extent = "210 55";
+     position = "0" SPC 0;
+     anchorTop = "1";
+     anchorRight = "1";
+     anchorLeft = "0";
+     horizSizing = "left";
+     profile = new GuiControlProfile(){
+       fontSize = "60";
+       justify = "left";
+       fontColor = "Black";
+     };
+   };
+   %TimerNumberGui = new GuiTextCtrl(Timer){
+     text = "100";
+     extent = "210 55";
+     position = "0" SPC 60;
+     anchorTop = "1";
+     anchorRight = "1";
+     anchorLeft = "0";
+     horizSizing = "left";
+     profile = new GuiControlProfile(){
+       fontSize = "60";
+       justify = "center";
+       fontColor = "Black";
+     };
+   };
+   %this.addGuiControl(%TimerGui);
+   %this.addGuiControl(%TimerNumberGui);
 }
 
 //-----------------------------------------------------------------------------
