@@ -185,12 +185,14 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          SimGroup obstacleGroup = Sim.FindObject<SimGroup>("Obstacles");
          Random rand = new Random();
-         for (int i = 0; i < count; i++)
+         for (int i = 0; i < count/2; i++)
          {
-            int xpos = rand.Next(0, _gameSizeX-1);
-            int ypos = rand.Next(0, _gameSizeY-1);
+            int xpos = rand.Next(0, _gameSizeX/2);
+            int ypos = rand.Next(0, _gameSizeY/2);
             int xscale = rand.Next(1, 10);
             int yscale =  rand.Next(1, 10);
+            int mirrorx = _gameSizeX - 1 - xpos;
+            int mirrory = _gameSizeY - 1 - ypos;
             TSStatic obstacle = new TSStatic()
             {
                ShapeName = shape,
@@ -198,9 +200,19 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                CollisionType = TSMeshType.Bounds,
                Scale = new Point3F(xscale, yscale, _wallHeight)
             };
+            TSStatic mirrorObstacle = new TSStatic()
+            {
+               ShapeName = shape,
+               Position = XYToPoint(mirrorx,mirrory),
+               CollisionType = TSMeshType.Bounds,
+               Scale = new Point3F(xscale, yscale, _wallHeight)
+            };
             obstacle.registerObject();
             AddShape(obstacle);
             obstacleGroup.add(obstacle);
+            mirrorObstacle.registerObject();
+            AddShape(mirrorObstacle);
+            obstacleGroup.add(mirrorObstacle);
          }
       }
 

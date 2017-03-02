@@ -321,7 +321,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                DataBlock = Sim.FindObject<SimplePlayerData>("SPD"),
                Position = playerSpawn,
                ThinkFunction = players[i] == "" ? "SPThink": players[i],
-               Rotation = new AngAxisF(0, 0, 1, 0),
+               Rotation = new AngAxisF(0, 0, 1, i == 0 ? 0 : 180),
                RenderFrustum = true
             };
             string skins = Globals.GetString("SimplePlayerSkins");
