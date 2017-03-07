@@ -71,7 +71,7 @@ namespace Game
          ModuleDatabase.scanModules("data", false);
          ModuleDatabase.loadGroup("Game");
          
-         if (!Globals.GetBool("isDedicated") && !Globals.GetBool("SShooter::QuickRun"))
+         if (!Globals.GetBool("isDedicated"))
          {
             // Start rendering and stuff.
             Core.RenderManager.initRenderManager();

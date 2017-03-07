@@ -127,7 +127,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          GameBord.GetGameBord().Reset();
          initGameVars();
          InitGame();
-         if (Global.isDefined("ResetPlayerHealth")) {
+         if (Global.isFunction("ResetPlayerHealth")) {
             Global.call("ResetPlayerHealth","");
          }
          _gameTimer.start();

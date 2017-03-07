@@ -30,7 +30,7 @@ namespace Game.Core
 
             switch (arg)
             {
-               case "-dedicated":
+               case "-commandLine":
                   Globals.SetString("userDirs", Globals.GetString("defaultGame"));
                   Globals.SetInt("dirCount", 1);
                   Globals.SetBool("isDedicated", true);
@@ -330,20 +330,21 @@ namespace Game.Core
                   }
                   Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
-               case "-quickRun":
-                  Globals.SetString("userDirs", Globals.GetString("defaultGame"));
-                  Globals.SetInt("dirCount", 1);
-                  Globals.SetBool("isDedicated", true);
-                  Globals.SetBool("Server::Dedicated", true);
-                  Global.enableWinConsole(true);
-
-                  Globals.SetBool("SShooter::QuickRun", true);
+               case "-speed":
+                  if (hasNextArg) {
+                     Globals.SetInt("SShooter::TickSpeed", int.Parse(nextArg));
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
+                     i++;
+                  }
                   Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-ai1":
                   if (hasNextArg)
                   {
                      Globals.SetString("SShooter::Ai1", nextArg);
+                     if (!string.IsNullOrEmpty(Globals.GetString("SShooter::Ai2"))) {
+                        Globals.SetBool("SShooter::QuickRun", true);
+                     }
                      Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
@@ -352,6 +353,9 @@ namespace Game.Core
                case "-ai2":
                   if (hasNextArg) {
                      Globals.SetString("SShooter::Ai2", nextArg);
+                     if (!string.IsNullOrEmpty(Globals.GetString("SShooter::Ai1"))) {
+                        Globals.SetBool("SShooter::QuickRun", true);
+                     }
                      Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }

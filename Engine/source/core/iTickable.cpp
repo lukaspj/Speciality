@@ -21,6 +21,7 @@
 //-----------------------------------------------------------------------------
 
 #include "core/iTickable.h"
+#include "console/console.h"
 
 // The statics
 U32 ITickable::smLastTick = 0;
@@ -80,7 +81,10 @@ Vector<ITickable *>& ITickable::getProcessList()
 
 bool ITickable::advanceTime( U32 timeDelta )
 {
-   U32 targetTime = smLastTime + timeDelta;
+   U32 extraTime = 0;
+   extraTime += Con::getIntVariable("$SShooter::TickSpeed")*32;
+
+   U32 targetTime = smLastTime + timeDelta + extraTime;
    U32 targetTick = ( targetTime + smTickMask ) & ~smTickMask;
    U32 tickCount = ( targetTick - smLastTick ) >> smTickShift;
 

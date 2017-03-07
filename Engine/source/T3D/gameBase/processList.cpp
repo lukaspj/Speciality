@@ -229,10 +229,7 @@ bool ProcessList::advanceTime(SimTime timeDelta)
       orderList();
 
    SimTime extraTime = 0;
-   if(Con::getBoolVariable("$SShooter::QuickRun"))
-   {
-      extraTime += 10 * TickMs;
-   }
+   extraTime += Con::getIntVariable("$SShooter::TickSpeed")*TickMs;
 
    SimTime targetTime = mLastTime + timeDelta + extraTime;
    SimTime targetTick = targetTime - (targetTime % TickMs);
