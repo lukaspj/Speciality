@@ -346,7 +346,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          SimplePlayer[] playerArray = new SimplePlayer[numPlayers];
          for (int i = 0; i < numPlayers; i++)
          {
-            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2 * i)) * (bord.GameSizeX / 4) - (bord.GameSizeX / 2), (1 + (2 * i)) * (bord.GameSizeY / 4) - (bord.GameSizeY / 2), 1));
+            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2 * i)) * (bord.GameSizeX / 4.0f) - (bord.GameSizeX / 2.0f), 
+               (1 + (2 * i)) * (bord.GameSizeY / 4.0f) - (bord.GameSizeY / 2.0f), 1));
             //Point3F playerSpawn = new Point3F(0, 0, 1);
             string playerName = "player" + i;
             SimplePlayer player = new SimplePlayer(playerName)

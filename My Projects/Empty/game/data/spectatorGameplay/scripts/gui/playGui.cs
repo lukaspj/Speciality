@@ -29,10 +29,7 @@ function PlayGui::onWake(%this)
 {
    // Turn off any shell sounds...
    // sfxStop( ... );
-   if ($SShooter::QuickRun)
-     Canvas.pushDialog(AddPlayers);
-   else
-     AddPlayers();
+   Canvas.pushDialog(AddPlayers);
 
    $enableDirectInput = "1";
    activateDirectInput();
