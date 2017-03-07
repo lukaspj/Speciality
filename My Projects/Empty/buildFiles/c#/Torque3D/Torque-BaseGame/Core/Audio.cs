@@ -208,7 +208,7 @@ namespace Game.Core
 
          for (int index = 0; index < AudioChannels.Count; index++)
          {
-            sfxSetChannelVolume(index, Globals.GetFloat($"pref::SFX::channelVolume[{index}]"));
+            sfxSetChannelVolume(index, Globals.GetFloat($"pref::SFX::channelVolume{index}"));
          }
 
          return true;
@@ -223,7 +223,7 @@ namespace Game.Core
 
          for (int channel = 0; channel <= 8; channel++)
          {
-            Globals.SetFloat($"pref::SFX::channelVolume[{channel}]", sfxGetChannelVolume(channel));
+            Globals.SetFloat($"pref::SFX::channelVolume{channel}", sfxGetChannelVolume(channel));
          }
 
          // We're assuming here that a null info 

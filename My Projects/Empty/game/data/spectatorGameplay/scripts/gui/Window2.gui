@@ -30,6 +30,7 @@
    canSaveDynamicFields = "1";
 
    new GuiTextEditCtrl(GuiPlayer0) {
+      text = $SShooter::Ai1;
       historySize = "5";
       tabComplete = "1";
       sinkAllKeyEvents = "0";
@@ -79,6 +80,7 @@
       canSaveDynamicFields = "0";
    };
    new GuiTextEditCtrl(GuiPlayer1) {
+      text = $SShooter::Ai2;
       historySize = "5";
       tabComplete = "1";
       sinkAllKeyEvents = "0";

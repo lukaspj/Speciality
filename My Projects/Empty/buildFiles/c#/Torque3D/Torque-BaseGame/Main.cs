@@ -1,5 +1,8 @@
-﻿using System.Reflection;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using Game.Modules.ClientServer;
+using Game.Modules.SpectatorGameplay.scripts.server;
 using Torque3D;
 using Torque3D.Engine;
 using Path = System.IO.Path;
@@ -68,7 +71,7 @@ namespace Game
          ModuleDatabase.scanModules("data", false);
          ModuleDatabase.loadGroup("Game");
          
-         if (!Globals.GetBool("isDedicated"))
+         if (!Globals.GetBool("isDedicated") && !Globals.GetBool("SShooter::QuickRun"))
          {
             // Start rendering and stuff.
             Core.RenderManager.initRenderManager();
@@ -99,8 +102,10 @@ namespace Game
             // This keeps things looking nice, instead of having a blank window
             Core.Canvas.GameCanvas.showWindow();
          }
-         else
-         {
+         else {
+            Console.SetOut(TextWriter.Null);
+            ClientServer.StartGame("data/spectatorGameplay/levels/Empty_Room.mis");
+            DefaultGame.AddPlayers();
             Global.closeSplashWindow();
          }
       }

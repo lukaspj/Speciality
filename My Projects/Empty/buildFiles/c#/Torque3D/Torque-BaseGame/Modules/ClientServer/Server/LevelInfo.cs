@@ -83,8 +83,8 @@ namespace Game.Modules.ClientServer.Server
          Global.echo("Level Name: " + theLevelInfo.Name);
          Global.echo("Level Description:");
 
-         for (int i = 0; !string.IsNullOrEmpty(theLevelInfo.getFieldValue($"desc[{i}]")); i++ )
-            Global.echo("   " + theLevelInfo.getFieldValue($"desc[{i}]"));
+         for (int i = 0; !string.IsNullOrEmpty(theLevelInfo.getFieldValue($"desc{i}")); i++ )
+            Global.echo("   " + theLevelInfo.getFieldValue($"desc{i}"));
       }
 
       /// <summary>
@@ -96,9 +96,9 @@ namespace Game.Modules.ClientServer.Server
          Torque3D.LevelInfo theLevelInfo = Sim.FindObject<Torque3D.LevelInfo>("theLevelInfo");
          Message.messageClient(client, Global.addTaggedString("MsgLoadInfo"), "", theLevelInfo.getFieldValue("levelName"));
 
-         for (int i = 0; !string.IsNullOrEmpty(theLevelInfo.getFieldValue($"desc[{i}]")); i++)
+         for (int i = 0; !string.IsNullOrEmpty(theLevelInfo.getFieldValue($"desc{i}")); i++)
             Message.messageClient(client, Global.addTaggedString("MsgLoadDescription"), "", theLevelInfo.getFieldValue(
-               $"desc[{i}]"));
+               $"desc{i}"));
 
          Message.messageClient(client, Global.addTaggedString("MsgLoadInfoDone"), "");
       }

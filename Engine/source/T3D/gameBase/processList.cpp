@@ -228,7 +228,13 @@ bool ProcessList::advanceTime(SimTime timeDelta)
    if (mDirty) 
       orderList();
 
-   SimTime targetTime = mLastTime + timeDelta;
+   SimTime extraTime = 0;
+   if(Con::getBoolVariable("$SShooter::QuickRun"))
+   {
+      extraTime += 10 * TickMs;
+   }
+
+   SimTime targetTime = mLastTime + timeDelta + extraTime;
    SimTime targetTick = targetTime - (targetTime % TickMs);
    SimTime tickDelta = targetTick - mLastTick;
    bool tickPass = mLastTick != targetTick;

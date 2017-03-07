@@ -127,7 +127,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          GameBord.GetGameBord().Reset();
          initGameVars();
          InitGame();
-         Global.call("ResetPlayerHealth","");
+         if (Global.isDefined("ResetPlayerHealth")) {
+            Global.call("ResetPlayerHealth","");
+         }
          _gameTimer.start();
          Globals.SetInt("Game::Duration", duration);
       }
@@ -291,6 +293,16 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       [ConsoleFunction("AddPlayers")]
       public static void AddPlayers()
       {
+         if (Globals.GetBool("isDedicated")) {
+            players[0] = Globals.GetString("SShooter::Ai1");
+            players[1] = Globals.GetString("SShooter::Ai2");
+            gameSize = 50;
+            num_obstacles = 12;
+            InitGame();
+            _gameTimer.start();
+            return;
+         }
+
          GuiWindowCtrl window = Sim.FindObject<GuiWindowCtrl>("AddPlayers");
          GuiTextEditCtrl guiTextEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer0");
          players[0] = guiTextEditCtrl.getValue();
@@ -309,6 +321,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       private static void InitGame()
       {
+         Globals.SetBool("SShooter::GameRunning", true);
          if (_gameTimer == null)
          {
             _gameTimer = new GameTimer("TimeUpdate", 3200, true);
@@ -363,25 +376,22 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       public static void TimeUpdate(int tickCount)
       {
          GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
-         if (!Regex.IsMatch(ctrl.getValue(), @"^\d+$"))
-         {
-            Console.WriteLine("hello");
-         }
          
          if (tickCount == 0)
          {
             _gameTimer.stop();
             GameLogger.LogGameResult(null);
+            Global.echo("No-one won");
             EndGame();
             return;
          }
-         ctrl.setValue(tickCount.ToString());
+         ctrl?.setValue(tickCount.ToString());
       }
 
       public static void EndGame()
       {
          GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
-         ctrl.setText(100.ToString());
+         ctrl?.setText(100.ToString());
          Global.eval("resetMission();");
       }
    }

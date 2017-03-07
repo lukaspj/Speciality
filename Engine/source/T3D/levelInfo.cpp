@@ -335,7 +335,7 @@ void LevelInfo::_updateSceneGraph()
    // enable it via the appropriate light manager
    // (Basic lighting doesn't do anything different right now)
 #ifndef TORQUE_DEDICATED
-   if(isClientObject())
+   if(!Con::getBoolVariable("$isDedicated") && isClientObject())
       _onLMActivate(LIGHTMGR->getId(), true);
 #endif
 
@@ -347,6 +347,7 @@ void LevelInfo::_updateSceneGraph()
 
 void LevelInfo::_onLMActivate(const char *lm, bool enable)
 {
+   if (Con::getBoolVariable("$isDedicated")) return;
 #ifndef TORQUE_DEDICATED
    // Advanced light manager
    if(enable && String(lm) == String("ADVLM"))

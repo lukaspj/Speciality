@@ -30,12 +30,12 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          
       }
 
-      public void Shoot()
+      public bool Shoot()
       {
          List<SimplePlayer> others = SimplePlayerData.searchForPlayers(this);
          if (others.Count == 0)
          {
-            return;
+            return false;
          }
          SimplePlayer other = others[0];
          Random rand = new Random();
@@ -54,14 +54,20 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                   GameLogger.LogGameResult(this);
 
                   GuiTextCtrl scoreText = Sim.FindObject<GuiTextCtrl>(getName() + "score");
-                  string text = scoreText.Text;
-                  Regex reg = new Regex(@"\s");
-                  int scoretxt = int.Parse(reg.Split(text)[1]) + 1;
-                  scoreText.setText("Score: " + scoretxt);
+                  if (scoreText != null) {
+                     string text = scoreText.Text;
+                     Regex reg = new Regex(@"\s");
+                     int scoretxt = int.Parse(reg.Split(text)[1]) + 1;
+                     scoreText.setText("Score: " + scoretxt);
+                  } else {
+                     Global.echo($"{ThinkFunction} Won!");
+                  }
                   DefaultGame.EndGame();
+                  return true;
                }
             }
          }
+         return false;
       }
       /**
        * returns true if target is killed false otherwise
@@ -80,11 +86,15 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          float curenthealth = Health;
          float newHealth = curenthealth - val;
 
-         GameLogger.LogDamageEvent(this, newHealth);
+         GameLogger.LogDamageEvent(this, val);
 
          GuiProgressCtrl progress = Sim.FindObject<GuiProgressCtrl>(getName() + "health");
          int maxHealth = int.Parse(DataBlock.getFieldValue("maxHealth"));
-         progress.setValue((newHealth/maxHealth).ToString());
+         if (progress != null) {
+            progress.setValue((newHealth / maxHealth).ToString());
+         } else {
+            Global.echo(ThinkFunction + "'s health was reduced to: " + newHealth);
+         }
          if (newHealth <= 0)
          {
             OnDeath();
