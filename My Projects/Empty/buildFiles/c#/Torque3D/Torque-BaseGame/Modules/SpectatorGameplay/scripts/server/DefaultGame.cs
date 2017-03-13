@@ -6,6 +6,7 @@ using System.Timers;
 using Game.Core;
 using Game.Modules.ClientServer.Server;
 using MathNet.Numerics.Random;
+using Newtonsoft.Json.Linq;
 using Torque3D;
 using Torque3D.Engine;
 using Torque3D.Engine.Util.Enums;
@@ -126,11 +127,10 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // have been deleted.
          GameBord.GetGameBord().Reset();
          initGameVars();
-         InitGame();
+         StandBy();
          if (Global.isFunction("ResetPlayerHealth")) {
             Global.call("ResetPlayerHealth","");
          }
-         _gameTimer.start();
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -298,29 +298,32 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             players[1] = Globals.GetString("SShooter::Ai2");
             gameSize = 50;
             num_obstacles = 12;
-            InitGame();
-            _gameTimer.start();
-            return;
+         } else {
+            GuiTextEditCtrl guiTextEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer0");
+            GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
+            GuiTextEditCtrl gamesize = Sim.FindObject<GuiTextEditCtrl>("GameSizeGUI");
+            GuiTextEditCtrl obstacles = Sim.FindObject<GuiTextEditCtrl>("ObstaclesGUI");
+            Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
+            Canvas.GameCanvas.popDialog();
+
+            players[0] = guiTextEditCtrl.getValue();
+            players[1] = textEditCtrl.getValue();
+            gameSize = int.Parse(gamesize.getValue());
+            num_obstacles = int.Parse(obstacles.getValue());
          }
 
-         GuiWindowCtrl window = Sim.FindObject<GuiWindowCtrl>("AddPlayers");
-         GuiTextEditCtrl guiTextEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer0");
-         players[0] = guiTextEditCtrl.getValue();
-         GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
-         players[1] = textEditCtrl.getValue();
-         GuiTextEditCtrl gamesize = Sim.FindObject<GuiTextEditCtrl>("GameSizeGUI");
-         gameSize = int.Parse(gamesize.getValue());
-         GuiTextEditCtrl obstacles = Sim.FindObject<GuiTextEditCtrl>("ObstaclesGUI");
-         num_obstacles = int.Parse(obstacles.getValue());
-         InitGame();
-         Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
-         Canvas.GameCanvas.popDialog();
- 
-         _gameTimer.start();
+         if (Globals.GetBool("SShooter::AIClient")) {
+            players[0] = "RL_AIClient_Think";
+         }
+
+         StandBy();
       }
 
-      private static void InitGame()
-      {
+      private static void InitGame() {
+         if (Globals.GetBool("SShooter::AIClient")) {
+            AIClient.SendMessage("event", "game_start");
+         }
+
          Globals.SetBool("SShooter::GameRunning", true);
          if (_gameTimer == null)
          {
@@ -372,6 +375,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             playerArray[i] = player;
          }
          GameLogger.LogGameStart(playerArray);
+         _gameTimer.start();
       }
       [ConsoleFunction("TimeUpdate")]
       public static void TimeUpdate(int tickCount)
@@ -383,6 +387,9 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             _gameTimer.stop();
             GameLogger.LogGameResult(null);
             Global.echo("No-one won");
+            if (Globals.GetBool("SShooter::AIClient")) {
+               AIClient.SendMessage("result", "draw");
+            }
             EndGame();
             return;
          }
@@ -393,7 +400,26 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       {
          GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
          ctrl?.setText(100.ToString());
+
          Global.eval("resetMission();");
+      }
+
+      private static void StandBy() {
+         if (!Globals.GetBool("SShooter::AIClient")) {
+            InitGame();
+            return;
+         }
+         JObject instruction = AIClient.WaitForInstructions();
+
+         if (instruction["type"].ToString() != "instruction") {
+            return;
+         }
+
+         switch (instruction["command"].ToString()) {
+            case "resetMission":
+               InitGame();
+               break;
+         }
       }
    }
 }

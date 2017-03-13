@@ -361,6 +361,16 @@ namespace Game.Core
                   }
                   Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
+               case "-aiClient":
+                  if (hasNextArg) {
+                     Globals.SetString("SShooter::AIPort", nextArg);
+                     Globals.SetBool("SShooter::QuickRun", true);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
+                     i++;
+                  }
+                  Globals.SetBool("SShooter::AIClient", true);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
+                  break;
                default:
                   Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if(string.IsNullOrEmpty(Globals.GetString("userDirs")))
