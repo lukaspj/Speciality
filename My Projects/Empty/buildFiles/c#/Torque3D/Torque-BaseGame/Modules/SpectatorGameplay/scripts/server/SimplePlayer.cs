@@ -63,7 +63,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                      Global.echo($"{ThinkFunction} Won!");
                   }
                   if (Globals.GetBool("SShooter::AIClient")) {
-                     AIClient.SendMessage("result", $"{getName()}:{ThinkFunction}");
+                     AIClient.SendResult($"{getName()}:{ThinkFunction}");
                   }
                   DefaultGame.EndGame();
                   return true;

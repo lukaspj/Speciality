@@ -18,6 +18,17 @@ namespace Game.Modules.SpectatorGameplay.scripts.server {
          socket.ReceiveFrame();
       }
 
+      public static JObject SendResult(string result) {
+         if (socket == null)
+            Connect();
+         socket.Send(new ZFrame(new JObject {
+            ["type"] = "event",
+            ["message"] = "game_end",
+            ["result"] = result
+         }.ToString(Formatting.None)));
+         return JObject.Parse(socket.ReceiveFrame().ReadString());
+      }
+
       public static JObject SendMessage(string type, string message) {
          if (socket == null)
             Connect();

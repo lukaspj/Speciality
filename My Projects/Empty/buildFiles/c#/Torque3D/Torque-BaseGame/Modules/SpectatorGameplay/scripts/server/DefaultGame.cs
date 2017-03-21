@@ -388,7 +388,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             GameLogger.LogGameResult(null);
             Global.echo("No-one won");
             if (Globals.GetBool("SShooter::AIClient")) {
-               AIClient.SendMessage("result", "draw");
+               AIClient.SendResult("draw");
             }
             EndGame();
             return;
