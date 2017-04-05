@@ -396,8 +396,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          ctrl?.setValue(tickCount.ToString());
       }
 
-      public static void EndGame()
-      {
+      public static void EndGame() {
+         Globals.Increment("SShooter::GamesPlayed");
          GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
          ctrl?.setText(100.ToString());
 
@@ -406,7 +406,15 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       private static void StandBy() {
          if (!Globals.GetBool("SShooter::AIClient")) {
-            InitGame();
+            if (Globals.GetInt("SShooter::NumberOfGames") > 0 && 
+               Globals.GetInt("SShooter::GamesPlayed") < Globals.GetInt("SShooter::NumberOfGames")) {
+               InitGame();
+            } else {
+               int player1Score = Globals.GetInt("SShooter::Score[player0]");
+               int player2Score = Globals.GetInt("SShooter::Score[player1]");
+               Global.log($"Score: {player1Score} - {player2Score}");
+               Console.ReadKey();
+            }
             return;
          }
          JObject instruction = AIClient.WaitForInstructions();

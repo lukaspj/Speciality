@@ -371,6 +371,14 @@ namespace Game.Core
                   Globals.SetBool("SShooter::AIClient", true);
                   Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
+               case "-numberOfGames":
+                  if (hasNextArg) {
+                     Globals.SetString("SShooter::NumberOfGames", nextArg);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
+                     i++;
+                  }
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
+                  break;
                default:
                   Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if(string.IsNullOrEmpty(Globals.GetString("userDirs")))

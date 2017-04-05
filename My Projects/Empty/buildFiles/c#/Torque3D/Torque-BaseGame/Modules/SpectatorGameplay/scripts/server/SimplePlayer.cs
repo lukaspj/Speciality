@@ -52,6 +52,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
                if (score >= int.Parse(DataBlock.getFieldValue("winningScore")))
                {
                   GameLogger.LogGameResult(this);
+                  Globals.Increment($"SShooter::Score[{getName()}]");
 
                   GuiTextCtrl scoreText = Sim.FindObject<GuiTextCtrl>(getName() + "score");
                   if (scoreText != null) {
