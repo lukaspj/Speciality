@@ -6,6 +6,8 @@
 #include "gfx/gl/tGL/tWGL.h"
 #endif
 
+#include "gfx/gl/gfxGLUtils.h"
+
 namespace PlatformGL
 {
 
@@ -65,15 +67,13 @@ namespace PlatformGL
            Con::printf( err );
            AssertFatal(0, err );
        }
-
-       #ifdef TORQUE_OS_WIN
-		    // JTH: Update the internals of epoxy on windows.
-		    epoxy_handle_external_wglMakeCurrent();
-       #endif
    }
 
    void setVSync(const int i)
    {
+      PRESERVE_FRAMEBUFFER();
+      // Nvidia needs to have the default framebuffer bound or the vsync calls fail
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
        if( i == 1 || i == -1 )
        {
            int ret = SDL_GL_SetSwapInterval(-1);
@@ -83,6 +83,7 @@ namespace PlatformGL
        }
        else
            SDL_GL_SetSwapInterval(0);
+
    }
 
 }

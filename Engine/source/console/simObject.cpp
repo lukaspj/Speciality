@@ -82,7 +82,7 @@ SimObject::SimObject()
    mFlags.set( ModStaticFields | ModDynamicFields );
 
    mFieldDictionary = NULL;
-   mCanSaveFieldDictionary	=	true;
+   mCanSaveFieldDictionary =  true;
 
    mClassName = NULL;
    mSuperClassName = NULL;
@@ -593,7 +593,7 @@ void SimObject::setDeclarationLine(U32 lineNumber)
 bool SimObject::registerObject()
 {
    AssertFatal( !mFlags.test( Added ), "reigsterObject - Object already registered!");
-	mFlags.clear(Deleted | Removed);
+   mFlags.clear(Deleted | Removed);
 
    if(smForceId)
    {
@@ -610,11 +610,11 @@ bool SimObject::registerObject()
    AssertFatal(Sim::gIdDictionary && Sim::gNameDictionary, 
       "SimObject::registerObject - tried to register an object before Sim::init()!");
 
-   Sim::gIdDictionary->insert(this);	
+   Sim::gIdDictionary->insert(this);   
 
    Sim::gNameDictionary->insert(this);
 
-	// Notify object
+   // Notify object
    bool ret = onAdd();
 
    if(!ret)
@@ -662,10 +662,10 @@ void SimObject::deleteObject()
 
 void SimObject::_destroySelf()
 {
-	AssertFatal( !isDeleted(), "SimObject::destroySelf - Object has already been deleted" );
-	AssertFatal( !isRemoved(), "SimObject::destroySelf - Object in the process of being removed" );
+   AssertFatal( !isDeleted(), "SimObject::destroySelf - Object has already been deleted" );
+   AssertFatal( !isRemoved(), "SimObject::destroySelf - Object in the process of being removed" );
 
-	mFlags.set( Deleted );
+   mFlags.set( Deleted );
 
    if( mFlags.test( Added ) )
       unregisterObject();
@@ -1312,7 +1312,7 @@ void SimObject::dumpClassHierarchy()
    while(pRep)
    {
       Con::warnf("%s ->", pRep->getClassName());
-      pRep	=	pRep->getParentClass();
+      pRep  =  pRep->getParentClass();
    }
 }
 
@@ -1380,7 +1380,7 @@ bool SimObject::isChildOfGroup(SimGroup* pGroup)
    if(pGroup == dynamic_cast<SimGroup*>(this))
       return true;
 
-   SimGroup* temp	=	mGroup;
+   SimGroup* temp =  mGroup;
    while(temp)
    {
       if(temp == pGroup)
@@ -2720,11 +2720,25 @@ DefineConsoleMethod( SimObject, isField, bool, ( const char* fieldName ),,
 
 //-----------------------------------------------------------------------------
 
-DefineConsoleMethod( SimObject, getFieldValue, const char*, ( const char* fieldName, S32 index ), ( -1 ),
-   "Return the value of the given field on this object.\n"
-   "@param fieldName The name of the field.  If it includes a field index, the index is parsed out.\n"
-   "@param index Optional parameter to specify the index of an array field separately.\n"
-   "@return The value of the given field or \"\" if undefined." )
+struct _SimObjectgetFieldValueframe
+{
+   typedef SimObject ObjectType; SimObject* object; inline const char* _exec ( const char* fieldName, S32 index ) const;
+}; 
+TORQUE_API EngineTypeTraits< const char* >::ReturnValueType fnSimObject_getFieldValue ( SimObject* object, const char* a1, S32 a2, std::tuple<const char*, S32> a )
+{
+   _CHECK_ENGINE_INITIALIZED( SimObject::getFieldValue, const char* ); 
+   return EngineTypeTraits< const char* >::ReturnValue( _EngineMethodTrampoline< _SimObjectgetFieldValueframe, const char* ( const char* fieldName, S32 index ) >::jmp( object, a ) );
+}; 
+static _EngineFunctionDefaultArguments< _EngineMethodTrampoline< _SimObjectgetFieldValueframe, void ( const char* fieldName, S32 index ) >::FunctionType > _fnSimObjectgetFieldValueDefaultArgs ( -1 ); 
+static _EngineConsoleThunkType< const char* >::ReturnType _SimObjectgetFieldValuecaster( SimObject* object, S32 argc, ConsoleValueRef *argv )
+{
+   _SimObjectgetFieldValueframe frame; 
+   frame.object = static_cast< SimObject* >( object ); 
+   return _EngineConsoleThunkType< const char* >::ReturnType( _EngineConsoleThunk< 2, const char* ( const char* fieldName, S32 index ) >::thunk( argc, argv, &_SimObjectgetFieldValueframe::_exec, &frame, _fnSimObjectgetFieldValueDefaultArgs ) );
+} 
+static ConsoleFunctionHeader _SimObjectgetFieldValueheader ( "const char*", "( const char* fieldName, S32 index )", "( -1 )" ); 
+static ConsoleConstructor SimObjectgetFieldValueobj( "SimObject", "getFieldValue", _EngineConsoleThunkType< const char* >::CallbackType( _SimObjectgetFieldValuecaster ), "Return the value of the given field on this object.\n" "@param fieldName The name of the field.  If it includes a field index, the index is parsed out.\n" "@param index Optional parameter to specify the index of an array field separately.\n" "@return The value of the given field or \"\" if undefined.", _EngineConsoleThunk< 2, const char* ( const char* fieldName, S32 index ) >::NUM_ARGS - _EngineConsoleThunkCountArgs() ( -1 ), _EngineConsoleThunk< 2, const char* ( const char* fieldName, S32 index ) >::NUM_ARGS, false, &_SimObjectgetFieldValueheader ); 
+const char* _SimObjectgetFieldValueframe::_exec ( const char* fieldName, S32 index ) const
 {
    char fieldNameBuffer[ 1024 ];
    char arrayIndexBuffer[ 64 ];
@@ -2888,7 +2902,7 @@ DefineConsoleMethod( SimObject, isMemberOfClass, bool, ( const char* className )
          return true;
       }
 
-      pRep	=	pRep->getParentClass();
+      pRep  =  pRep->getParentClass();
    }
 
    return false;

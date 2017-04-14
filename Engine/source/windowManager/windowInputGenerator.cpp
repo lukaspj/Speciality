@@ -39,7 +39,8 @@ WindowInputGenerator::WindowInputGenerator( PlatformWindow *window ) :
                                              mLastCursorPos(0,0),
                                              mClampToWindow(true),
                                              mFocused(false),
-                                             mPixelsPerMickey(1.0f)
+                                             mPixelsPerMickey(1.0f),
+                                             mLastPressWasGlobalActionMap(false)
 {
    AssertFatal(mWindow, "NULL PlatformWindow on WindowInputGenerator creation");
 
@@ -82,6 +83,9 @@ WindowInputGenerator::~WindowInputGenerator()
 //-----------------------------------------------------------------------------
 void WindowInputGenerator::generateInputEvent( InputEventInfo &inputEvent )
 {
+   // Reset last press being global
+   mLastPressWasGlobalActionMap = false;
+
    if (!mInputController)// || !mFocused)
       return;
 
@@ -91,7 +95,7 @@ void WindowInputGenerator::generateInputEvent( InputEventInfo &inputEvent )
       {
          const AccKeyMap &acc = mAcceleratorMap[i];
          if (!mWindow->getKeyboardTranslation() &&
-            (acc.modifier & inputEvent.modifier || (acc.modifier == 0 && inputEvent.modifier == 0))
+            ((acc.modifier == inputEvent.modifier && acc.modifier != 0) || (acc.modifier == 0 && inputEvent.modifier == 0))
             && acc.keyCode == inputEvent.objInst)
          {
             Con::evaluatef(acc.cmd);
@@ -102,7 +106,10 @@ void WindowInputGenerator::generateInputEvent( InputEventInfo &inputEvent )
 
    // Give the ActionMap first shot.
    if (ActionMap::handleEventGlobal(&inputEvent))
+   {
+      mLastPressWasGlobalActionMap = true;
       return;
+   }
 
    if (mInputController->processInputEvent(inputEvent))
       return;
@@ -138,7 +145,11 @@ void WindowInputGenerator::handleMouseMove( WindowId did, U32 modifier, S32 x, S
    event.deviceType = MouseDeviceType;
    event.deviceInst = 0;
    event.objType    = SI_AXIS;
-   event.modifier   = convertModifierBits(modifier);
+#ifdef TORQUE_SDL
+   event.modifier = modifier;
+#else
+   event.modifier = convertModifierBits(modifier);
+#endif
    event.ascii      = 0;
 
    // Generate delta movement along each axis
@@ -224,7 +235,11 @@ void WindowInputGenerator::handleMouseButton( WindowId did, U32 modifiers, U32 a
    event.deviceInst = 0;
    event.objType    = SI_BUTTON;
    event.objInst    = (InputObjectInstances)(KEY_BUTTON0 + button);
-   event.modifier   = convertModifierBits(modifiers);
+#ifdef TORQUE_SDL
+   event.modifier = modifiers;
+#else
+   event.modifier = convertModifierBits(modifiers);
+#endif
    event.ascii      = 0;
    event.action     = (action==IA_MAKE) ? SI_MAKE : SI_BREAK;
    event.fValue     = (action==IA_MAKE) ? 1.0 : 0.0;
@@ -241,7 +256,11 @@ void WindowInputGenerator::handleMouseWheel( WindowId did, U32 modifiers, S32 wh
    event.deviceType = MouseDeviceType;
    event.deviceInst = 0;
    event.objType    = SI_AXIS;
-   event.modifier   = convertModifierBits(modifiers);
+#ifdef TORQUE_SDL
+   event.modifier = modifiers;
+#else
+   event.modifier = convertModifierBits(modifiers);
+#endif
    event.ascii      = 0;
    event.action     = SI_MOVE;
 
@@ -274,7 +293,11 @@ void WindowInputGenerator::handleCharInput( WindowId did, U32 modifier, U16 key 
    event.deviceInst  = 0;
    event.objType     = SI_KEY;
    event.objInst     = KEY_NULL;
-   event.modifier    = convertModifierBits(modifier);
+#ifdef TORQUE_SDL
+   event.modifier = modifier;
+#else
+   event.modifier = convertModifierBits(modifier);
+#endif
    event.ascii       = key;
    event.action      = SI_MAKE;
    event.fValue      = 1.0;
@@ -296,7 +319,11 @@ void WindowInputGenerator::handleKeyboard( WindowId did, U32 modifier, U32 actio
    event.deviceInst  = 0;
    event.objType     = SI_KEY;
    event.objInst     = (InputObjectInstances)key;
-   event.modifier    = convertModifierBits(modifier);
+#ifdef TORQUE_SDL
+   event.modifier    = modifier;
+#else
+   event.modifier = convertModifierBits(modifier);
+#endif
    event.ascii       = 0;
 
    switch(action)

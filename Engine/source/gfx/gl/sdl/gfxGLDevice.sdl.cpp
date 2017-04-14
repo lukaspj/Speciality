@@ -106,6 +106,10 @@ void GFXGLDevice::enumerateAdapters( Vector<GFXAdapter*> &adapterList )
        AssertFatal(0, err );
    }
 
+   // Init GL
+   loadGLCore();
+   loadGLExtensions(tempContext);
+
    //check minimun Opengl 3.2
    int major, minor;
    glGetIntegerv(GL_MAJOR_VERSION, &major);
@@ -114,8 +118,6 @@ void GFXGLDevice::enumerateAdapters( Vector<GFXAdapter*> &adapterList )
    {
       return;
    }
-
-   loadGLCore();
     
    GFXAdapter *toAdd = new GFXAdapter;
    toAdd->mIndex = 0;
@@ -163,7 +165,7 @@ void GFXGLDevice::init( const GFXVideoMode &mode, PlatformWindow *window )
     PlatformGL::MakeCurrentGL( sdlWindow, mContext );
         
     loadGLCore();
-    loadGLExtensions(0);
+    loadGLExtensions(mContext);
     
     // It is very important that extensions be loaded before we call initGLState()
     initGLState();
@@ -189,19 +191,21 @@ U32 GFXGLDevice::getTotalVideoMemory()
 
 GFXWindowTarget *GFXGLDevice::allocWindowTarget( PlatformWindow *window )
 {
-    AssertFatal(!mContext, "This GFXGLDevice is already assigned to a window");
-    
-    GFXGLWindowTarget* ggwt = 0;
-    if( !mContext )
-    {
-        // no context, init the device now
-        init(window->getVideoMode(), window);
-        ggwt = new GFXGLWindowTarget(window, this);
-        ggwt->registerResourceWithDevice(this);
-        ggwt->mContext = mContext;
-    }
+   GFXGLWindowTarget* ggwt = new GFXGLWindowTarget(window, this);
 
-    return ggwt;
+   //first window
+   if (!mContext)
+   {
+      init(window->getVideoMode(), window);
+      ggwt->mSecondaryWindow = false;
+   }
+   else
+      ggwt->mSecondaryWindow = true;
+
+   ggwt->registerResourceWithDevice(this);
+   ggwt->mContext = mContext;
+
+   return ggwt;
 }
 
 GFXFence* GFXGLDevice::_createPlatformSpecificFence()

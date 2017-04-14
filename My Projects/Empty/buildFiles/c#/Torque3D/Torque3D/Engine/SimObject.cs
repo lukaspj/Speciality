@@ -618,9 +618,9 @@ namespace Torque3D
          }
       
          [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-         private delegate IntPtr _getFieldValue(IntPtr thisPtr, [MarshalAs(UnmanagedType.LPWStr)]string fieldName, int index);
+         private delegate IntPtr _getFieldValue(IntPtr thisPtr, [MarshalAs(UnmanagedType.LPStr)]string fieldName, int index);
          private static _getFieldValue _getFieldValueFunc;
-         internal static IntPtr getFieldValue(IntPtr thisPtr, [MarshalAs(UnmanagedType.LPWStr)]string fieldName, int index)
+         internal static IntPtr getFieldValue(IntPtr thisPtr, [MarshalAs(UnmanagedType.LPStr)]string fieldName, int index)
          {
          	if (_getFieldValueFunc == null)
          	{
