@@ -15,8 +15,8 @@ namespace Game.Core
          int argc = Globals.GetInt("Game::argc");
          for (int i = 0; i < argc; i++)
          {
-            string arg = Globals.GetString($"Game::argv[{i}]");
-            string nextArg = Globals.GetString($"Game::argv[{i+1}]");
+            string arg = Globals.GetString($"Game::argv{i}");
+            string nextArg = Globals.GetString($"Game::argv{i+1}");
             bool hasNextArg = argc - i > 1;
             bool logModeSpecified = false;
 
@@ -30,20 +30,20 @@ namespace Game.Core
 
             switch (arg)
             {
-               case "-dedicated":
+               case "-commandLine":
                   Globals.SetString("userDirs", Globals.GetString("defaultGame"));
                   Globals.SetInt("dirCount", 1);
                   Globals.SetBool("isDedicated", true);
                   Globals.SetBool("Server::Dedicated", true);
                   Global.enableWinConsole(true);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-mission":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Globals.SetString("missionArg", nextArg);
-                     Globals.SetInt($"argUsed[{i+1}]", Globals.GetInt($"argUsed[{i+1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -52,11 +52,11 @@ namespace Game.Core
                   }
                   break;
                case "-connect":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Globals.SetString("JoinGameAddress", nextArg);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -65,7 +65,7 @@ namespace Game.Core
                   }
                   break;
                case "-log":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      int logMode = int.Parse(nextArg);
@@ -77,7 +77,7 @@ namespace Game.Core
                      }
                      Global.setLogMode(logMode);
                      logModeSpecified = true;
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -86,14 +86,14 @@ namespace Game.Core
                   }
                   break;
                case "-dir":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      // Append the mod to the end of the current list
                      string userDirs = Globals.GetString("userDirs").Replace(nextArg, "") + ";" + nextArg;
                      Globals.SetString("userDirs", userDirs);
 
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      Globals.SetInt("dirCount", Globals.GetInt("dirCount") + 1);
                      i++;
                   }
@@ -106,7 +106,7 @@ namespace Game.Core
                // defaults to ONLY loading the game, not tools 
                // default auto-run already loads in tools --SRZ 11/29/07
                case "-game":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      // Set the selected dir --NOTE: we no longer allow tools with this argument
@@ -124,7 +124,7 @@ namespace Game.Core
                      */
                      Globals.SetString("userDirs", nextArg);
                      Globals.SetInt("dirCount", 1);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -133,16 +133,16 @@ namespace Game.Core
                   }
                   break;
                case "-console":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   Global.enableWinConsole(true);
                   break;
                case "-jSave":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Global.echo("Saving event log to journal: " + nextArg);
                      Global.saveJournal(nextArg);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -151,11 +151,11 @@ namespace Game.Core
                   }
                   break;
                case "-jPlay":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Global.playJournal(nextArg);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -164,12 +164,12 @@ namespace Game.Core
                   }
                   break;
                case "-jPlayToVideo":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Globals.SetString("VideoCapture::journalName", nextArg);
                      Globals.SetBool("captureFromJournal", true);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -178,11 +178,11 @@ namespace Game.Core
                   }
                   break;
                case "-vidCapFile":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Globals.SetString("VideoCapture::fileName", nextArg);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -191,11 +191,11 @@ namespace Game.Core
                   }
                   break;
                case "-vidCapFPS":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Globals.SetString("VideoCapture::fps", nextArg);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -204,11 +204,11 @@ namespace Game.Core
                   }
                   break;
                case "-vidCapEncoder":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Globals.SetString("VideoCapture::encoder", nextArg);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -217,11 +217,11 @@ namespace Game.Core
                   }
                   break;
                case "-vidCapWidth":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Globals.SetString("VideoCapture::width", nextArg);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -230,11 +230,11 @@ namespace Game.Core
                   }
                   break;
                case "-vidCapHeight":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      Globals.SetString("VideoCapture::height", nextArg);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -243,7 +243,7 @@ namespace Game.Core
                   }
                   break;
                case "-level":
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if (hasNextArg)
                   {
                      int hasExt = nextArg.IndexOf(".mis");
@@ -253,7 +253,7 @@ namespace Game.Core
                         levelToLoad = nextArg + " ";
                         for (i = i + 2; i < argc; i++)
                         {
-                           arg = Globals.GetString($"Game::argv[{i}]");
+                           arg = Globals.GetString($"Game::argv{i}");
                            hasExt = arg.IndexOf(".mis");
 
                            if (hasExt == -1)
@@ -269,7 +269,7 @@ namespace Game.Core
                      }
                      else
                         levelToLoad = nextArg;
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
                   else
@@ -279,59 +279,108 @@ namespace Game.Core
                   break;
                case "-worldeditor":
                   Globals.SetBool("startWorldEditor", true);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-guiEditor":
                   Globals.SetBool("startGUIEditor", true);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-help":
                   Globals.SetBool("displayHelp", true);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-compileAll":
                   Globals.SetBool("compileAll", true);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-compileTools":
                   Globals.SetBool("compileTools", true);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-genScript":
                   Globals.SetBool("genScript", true);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-fullscreen":
                   Globals.SetBool("cliFullscreen", true);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-windowed":
                   Globals.SetBool("cliFullscreen", false);
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-openGL":
                   Globals.SetString("pref::Video::displayDevice", "OpenGL");
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-directX":
                   Globals.SetString("pref::Video::displayDevice", "D3D");
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-autoVideo":
                   Globals.SetString("pref::Video::displayDevice", "");
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                case "-prefs":
                   if (hasNextArg)
                   {
                      Global.exec(nextArg, true, true);
-                     Globals.SetInt($"argUsed[{i + 1}]", Globals.GetInt($"argUsed[{i + 1}]") + 1);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
                      i++;
                   }
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
+                  break;
+               case "-speed":
+                  if (hasNextArg) {
+                     Globals.SetInt("SShooter::TickSpeed", int.Parse(nextArg));
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
+                     i++;
+                  }
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
+                  break;
+               case "-ai1":
+                  if (hasNextArg)
+                  {
+                     Globals.SetString("SShooter::Ai1", nextArg);
+                     if (!string.IsNullOrEmpty(Globals.GetString("SShooter::Ai2"))) {
+                        Globals.SetBool("SShooter::QuickRun", true);
+                     }
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
+                     i++;
+                  }
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
+                  break;
+               case "-ai2":
+                  if (hasNextArg) {
+                     Globals.SetString("SShooter::Ai2", nextArg);
+                     if (!string.IsNullOrEmpty(Globals.GetString("SShooter::Ai1"))) {
+                        Globals.SetBool("SShooter::QuickRun", true);
+                     }
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
+                     i++;
+                  }
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
+                  break;
+               case "-aiClient":
+                  if (hasNextArg) {
+                     Globals.SetString("SShooter::AIPort", nextArg);
+                     Globals.SetBool("SShooter::QuickRun", true);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
+                     i++;
+                  }
+                  Globals.SetBool("SShooter::AIClient", true);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
+                  break;
+               case "-numberOfGames":
+                  if (hasNextArg) {
+                     Globals.SetString("SShooter::NumberOfGames", nextArg);
+                     Globals.SetInt($"argUsed{i + 1}", Globals.GetInt($"argUsed{i + 1}") + 1);
+                     i++;
+                  }
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   break;
                default:
-                  Globals.SetInt($"argUsed[{i}]", Globals.GetInt($"argUsed[{i}]") + 1);
+                  Globals.SetInt($"argUsed{i}", Globals.GetInt($"argUsed{i}") + 1);
                   if(string.IsNullOrEmpty(Globals.GetString("userDirs")))
                      Globals.SetString("userDirs", arg);
                   break;

@@ -24,7 +24,7 @@ namespace Game.Core
       {
          if (Globals.GetBool("isDedicated"))
          {
-            Global.call("GFXInit::createNullDevice");
+            Global.eval("GFXInit::createNullDevice();");
             return true;
          }
 

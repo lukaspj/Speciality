@@ -114,11 +114,11 @@ namespace Torque3D.Util
          ShootDelay = int.Parse(split[i++]);
       }
       
-      public string ToString()
+      public override string ToString()
       {
          return $"{DeltaRot} {DeltaMovedX} {DeltaMovedY} {VelX} {VelY} " +
-                $"{DamageProb} {DeltaDamageProb} {DistanceToObstacleLeft} {DistanceToObstacleRight}" +
-                $" {Health} {EnemyHealth} {TickCount} {TicksSinceObservedEnemy} " +
+                $"{DamageProb} {DeltaDamageProb} {DistanceToObstacleLeft} {DistanceToObstacleRight} " +
+                $"{Health} {EnemyHealth} {TickCount} {TicksSinceObservedEnemy} " +
                 $"{TicksSinceDamage} {ShootDelay}";
       }
    }

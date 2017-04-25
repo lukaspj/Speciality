@@ -89,7 +89,7 @@ public:
    F32 getDistanceToObstacleInFront(F32& lDist, F32& rDist);
    bool canSee(SceneObject* other);
    bool trySetRotation(F32 rot);
-   void doThink();
+   bool doThink();
    void updatePosition(const F32 travelTime);
    void processTick(const Move* move) override;
 
@@ -158,7 +158,7 @@ public:
       Prepare
    };
 
-   DECLARE_CALLBACK(void, Shoot, ());
+   DECLARE_CALLBACK(bool, Shoot, ());
 
    // Collision
 private:

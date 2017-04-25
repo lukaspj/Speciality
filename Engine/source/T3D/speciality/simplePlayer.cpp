@@ -255,11 +255,13 @@ bool SimplePlayer::canSee(SceneObject* other)
 
    bool blocked = false;
 
+   U32 mask = CollisionMoveMask & ~PlayerObjectType;
+
    disableCollision();
-   if (  getContainer()->castRay(center, leftFrontPoint, CollisionMoveMask, &rInfo)
-      && getContainer()->castRay(center, leftBackPoint, CollisionMoveMask, &rInfo)
-      && getContainer()->castRay(center, rightFrontPoint, CollisionMoveMask, &rInfo)
-      && getContainer()->castRay(center, rightBackPoint, CollisionMoveMask, &rInfo))
+   if (  getContainer()->castRay(center, leftFrontPoint, mask, &rInfo)
+      && getContainer()->castRay(center, leftBackPoint, mask, &rInfo)
+      && getContainer()->castRay(center, rightFrontPoint, mask, &rInfo)
+      && getContainer()->castRay(center, rightBackPoint, mask, &rInfo))
          blocked = true;
    enableCollision();
 
@@ -328,8 +330,9 @@ ImplementEnumType(SimplePlayerActions, "")
    { SimplePlayer::Prepare,     "Prepare", "\n" }
 EndImplementEnumType;
 
-void SimplePlayer::doThink()
+bool SimplePlayer::doThink()
 {
+   if (isDeleted()) return false;
    if (isServerObject() && mThinkFunction)
    {
       if (!mHasThoughtOnce)
@@ -344,8 +347,10 @@ void SimplePlayer::doThink()
       if (mPrepared)
       {
          mPrepared = false;
-         doThink();
-         if (isDeleted()) return;
+         if(doThink())
+         {
+            return true;
+         }
       } else
       {
          mShootDelay = mShootDelay <= 0 ? 0 : --mShootDelay;
@@ -426,7 +431,10 @@ void SimplePlayer::doThink()
       case Shoot:
          if (mShootDelay == 0) {
             mShootDelay = mDataBlock->getShootDelay();
-            Shoot_callback();
+            if(Shoot_callback())
+            {
+               return true;
+            }
          }
          break;
       case Prepare:
@@ -457,9 +465,10 @@ void SimplePlayer::doThink()
       mMovingForward = 0;
       mMovingBackward = 0;
    }
+   return false;
 }
 
-IMPLEMENT_CALLBACK(SimplePlayer, Shoot, void, (), (),
+IMPLEMENT_CALLBACK(SimplePlayer, Shoot, bool, (), (),
    "");
 
 void SimplePlayer::updatePosition(const F32 travelTime)

@@ -101,7 +101,6 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
 
       public Point3F PickPlayerSpawn(Point3F point)
       {
-
          int x = PointToX(point);
          int y = PointToY(point);
          int i_step = 1;
@@ -193,7 +192,7 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          for (int i = 0; i < count/2; i++)
          {
             int xpos = rand.Next(0, _gameSizeX/2);
-            int ypos = rand.Next(0, _gameSizeY/2);
+            int ypos = rand.Next(0, _gameSizeY);
             int xscale = rand.Next(1, 10);
             int yscale =  rand.Next(1, 10);
             int mirrorx = _gameSizeX - 1 - xpos;

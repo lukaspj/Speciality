@@ -588,7 +588,7 @@ namespace Torque3D
       
          public Point3F Position
          {
-         	get { return new Point3F(getFieldValue("Position")); }
+            get { return getPosition(); }
          	set { setFieldValue("Position", value.ToString()); }
          }
       

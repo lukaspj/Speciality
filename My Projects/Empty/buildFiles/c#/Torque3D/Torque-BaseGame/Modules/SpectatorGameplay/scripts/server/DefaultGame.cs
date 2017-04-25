@@ -6,6 +6,7 @@ using System.Timers;
 using Game.Core;
 using Game.Modules.ClientServer.Server;
 using MathNet.Numerics.Random;
+using Newtonsoft.Json.Linq;
 using Torque3D;
 using Torque3D.Engine;
 using Torque3D.Engine.Util.Enums;
@@ -126,9 +127,10 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          // have been deleted.
          GameBord.GetGameBord().Reset();
          initGameVars();
-         InitGame();
-         Global.call("ResetPlayerHealth","");
-         _gameTimer.start();
+         StandBy();
+         if (Global.isFunction("ResetPlayerHealth")) {
+            Global.call("ResetPlayerHealth","");
+         }
          Globals.SetInt("Game::Duration", duration);
       }
 
@@ -291,24 +293,38 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
       [ConsoleFunction("AddPlayers")]
       public static void AddPlayers()
       {
-         GuiWindowCtrl window = Sim.FindObject<GuiWindowCtrl>("AddPlayers");
-         GuiTextEditCtrl guiTextEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer0");
-         players[0] = guiTextEditCtrl.getValue();
-         GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
-         players[1] = textEditCtrl.getValue();
-         GuiTextEditCtrl gamesize = Sim.FindObject<GuiTextEditCtrl>("GameSizeGUI");
-         gameSize = int.Parse(gamesize.getValue());
-         GuiTextEditCtrl obstacles = Sim.FindObject<GuiTextEditCtrl>("ObstaclesGUI");
-         num_obstacles = int.Parse(obstacles.getValue());
-         InitGame();
-         Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
-         Canvas.GameCanvas.popDialog();
- 
-         _gameTimer.start();
+         if (Globals.GetBool("isDedicated")) {
+            players[0] = Globals.GetString("SShooter::Ai1");
+            players[1] = Globals.GetString("SShooter::Ai2");
+            gameSize = 50;
+            num_obstacles = 12;
+         } else {
+            GuiTextEditCtrl guiTextEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer0");
+            GuiTextEditCtrl textEditCtrl = Sim.FindObject<GuiTextEditCtrl>("GuiPlayer1");
+            GuiTextEditCtrl gamesize = Sim.FindObject<GuiTextEditCtrl>("GameSizeGUI");
+            GuiTextEditCtrl obstacles = Sim.FindObject<GuiTextEditCtrl>("ObstaclesGUI");
+            Sim.FindObject<GuiTSCtrl>("PlayGui").call("InitGuiElements");
+            Canvas.GameCanvas.popDialog();
+
+            players[0] = guiTextEditCtrl.getValue();
+            players[1] = textEditCtrl.getValue();
+            gameSize = int.Parse(gamesize.getValue());
+            num_obstacles = int.Parse(obstacles.getValue());
+         }
+
+         if (Globals.GetBool("SShooter::AIClient")) {
+            players[0] = "RL_AIClient_Think";
+         }
+
+         StandBy();
       }
 
-      private static void InitGame()
-      {
+      private static void InitGame() {
+         if (Globals.GetBool("SShooter::AIClient")) {
+            AIClient.SendMessage("event", "game_start");
+         }
+
+         Globals.SetBool("SShooter::GameRunning", true);
          if (_gameTimer == null)
          {
             _gameTimer = new GameTimer("TimeUpdate", 3200, true);
@@ -333,7 +349,8 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
          SimplePlayer[] playerArray = new SimplePlayer[numPlayers];
          for (int i = 0; i < numPlayers; i++)
          {
-            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2 * i)) * (bord.GameSizeX / 4) - (bord.GameSizeX / 2), (1 + (2 * i)) * (bord.GameSizeY / 4) - (bord.GameSizeY / 2), 1));
+            Point3F playerSpawn = bord.PickPlayerSpawn(new Point3F((1 + (2 * i)) * (bord.GameSizeX / 4.0f) - (bord.GameSizeX / 2.0f), 
+               (1 + (2 * i)) * (bord.GameSizeY / 4.0f) - (bord.GameSizeY / 2.0f), 1));
             //Point3F playerSpawn = new Point3F(0, 0, 1);
             string playerName = "player" + i;
             SimplePlayer player = new SimplePlayer(playerName)
@@ -358,31 +375,59 @@ namespace Game.Modules.SpectatorGameplay.scripts.server
             playerArray[i] = player;
          }
          GameLogger.LogGameStart(playerArray);
+         _gameTimer.start();
       }
       [ConsoleFunction("TimeUpdate")]
       public static void TimeUpdate(int tickCount)
       {
          GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
-         if (!Regex.IsMatch(ctrl.getValue(), @"^\d+$"))
-         {
-            Console.WriteLine("hello");
-         }
          
          if (tickCount == 0)
          {
             _gameTimer.stop();
             GameLogger.LogGameResult(null);
+            Global.echo("No-one won");
+            if (Globals.GetBool("SShooter::AIClient")) {
+               AIClient.SendResult("draw");
+            }
             EndGame();
             return;
          }
-         ctrl.setValue(tickCount.ToString());
+         ctrl?.setValue(tickCount.ToString());
       }
 
-      public static void EndGame()
-      {
+      public static void EndGame() {
+         Globals.Increment("SShooter::GamesPlayed");
          GuiTextCtrl ctrl = Sim.FindObject<GuiTextCtrl>("Timer");
-         ctrl.setText(100.ToString());
+         ctrl?.setText(100.ToString());
+
          Global.eval("resetMission();");
+      }
+
+      private static void StandBy() {
+         if (!Globals.GetBool("SShooter::AIClient")) {
+            if (Globals.GetInt("SShooter::NumberOfGames") > 0 && 
+               Globals.GetInt("SShooter::GamesPlayed") < Globals.GetInt("SShooter::NumberOfGames")) {
+               InitGame();
+            } else {
+               int player1Score = Globals.GetInt("SShooter::Score[player0]");
+               int player2Score = Globals.GetInt("SShooter::Score[player1]");
+               Global.log($"Score: {player1Score} - {player2Score}");
+               Console.ReadKey();
+            }
+            return;
+         }
+         JObject instruction = AIClient.WaitForInstructions();
+
+         if (instruction["type"].ToString() != "instruction") {
+            return;
+         }
+
+         switch (instruction["command"].ToString()) {
+            case "resetMission":
+               InitGame();
+               break;
+         }
       }
    }
 }
