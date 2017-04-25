@@ -1,0 +1,1 @@
+Game.exe -commandLine -speed 1000 -ai1 BAI -ai2 ScottSteiner

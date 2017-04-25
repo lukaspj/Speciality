@@ -1,0 +1,1 @@
+Game.exe -aiClient 5542 -ai2 BAI

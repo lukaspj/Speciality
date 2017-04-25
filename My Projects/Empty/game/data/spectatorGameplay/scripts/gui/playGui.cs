@@ -31,6 +31,8 @@ function PlayGui::onWake(%this)
    // sfxStop( ... );
    Canvas.pushDialog(AddPlayers);
 
+   if ($SShooter::QuickRun)
+     AddPlayers();
 
    $enableDirectInput = "1";
    activateDirectInput();
@@ -69,9 +71,9 @@ function PlayGui::clearHud( %this )
       %this.getObject( 0 ).delete();
 }
 function ResetPlayerHealth(){
-  for (%i = 0; %i < players.getCount(); %i++)
+  for (%i = 0; %i < Players.getCount(); %i++)
   {
-    %player = players.getObject(%i);
+    %player = Players.getObject(%i);
     (%player.getName() @ "health").setValue(%player.health/%player.maxHealth);
   }
 }

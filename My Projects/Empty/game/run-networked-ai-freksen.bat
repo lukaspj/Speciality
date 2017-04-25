@@ -1,0 +1,1 @@
+Game.exe -commandLine -aiClient 5542 -ai2 FreksenThink -speed 1000
